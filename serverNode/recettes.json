@@ -1,0 +1,64 @@
+[
+    {
+        "type": "entree",
+        "titre": "recette 0",
+        "description": "bla bla",
+        "ingredients": [
+            {
+                "nom": "pomme",
+                "quantite": "8",
+                "unite": null
+            }
+        ],
+        "realisation": "description de la recette"
+    },
+    {
+        "type": "plat",
+        "titre": "recette 1",
+        "description": "bla bla",
+        "ingredients": [
+            {
+                "nom": "pomme",
+                "quantite": "8",
+                "unite": null
+            }
+        ],
+        "realisation": "description de la recette"
+    },
+    {
+        "type": "dessert",
+        "titre": "recette 2",
+        "description": "bla bla",
+        "ingredients": [
+            {
+                "nom": "pomme",
+                "quantite": "8",
+                "unite": null
+            }
+        ],
+        "realisation": "description de la recette"
+    },
+    {
+        "type": "dessert",
+        "titre": "tarte aux pommes",
+        "description": "dessert traditionnel avec des pommes",
+        "ingredients": [
+            {
+                "nom": "pomme",
+                "quantite": "8",
+                "unite": null
+            },
+            {
+                "nom": "pate à tarte",
+                "quantite": "1",
+                "unite": null
+            },
+            {
+                "nom": "sucre",
+                "quantite": "20",
+                "unite": "gramme"
+            }
+        ],
+        "realisation": "etaler la pate dans le plat a tarte, couper les pommes en lamelles, repartir les pommes sur la pate, saupoudrer de sucre, mettre au four epndant 30mn"
+    }
+]
