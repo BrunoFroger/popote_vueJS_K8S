@@ -3,7 +3,7 @@ export default {
       data: function () {
         return {
           currentDateTime: '',
-          login : null,
+          auteur : null,
           titre : null,
           description : null,
           realisation : null,
@@ -25,6 +25,8 @@ export default {
           <p>Nous somme le {{currentDateTime}}</p>\
           <p>Cette page permet de visualiser l\'ensemble des recettes disponibles sur ce site ....</p>\
           <p>Recette numéro : <button @click="decrementeIndex">précédente</button>  {{index}}  <button @click="incrementeIndex">suivante</button></p>\
+          <p></p>\
+          <p v-if="auteur">Cette recette est proposée par {{auteur}}</p>\
           <p></p>\
           <div>\
             <table>\
@@ -85,6 +87,7 @@ export default {
             console.log("chargement de la recette " + indexRecette + ' depuis le serveur');
             console.log('titre : ' + response.titre);
             this.titre = response.titre;
+            this.auteur = response.auteur
             this.description = response.description;
             this.realisation = response.realisation
             this.ingredients = response.ingredients

@@ -1,6 +1,7 @@
 [
     {
         "type": "entree",
+        "auteur":null,
         "titre": "recette 0",
         "description": "bla bla",
         "ingredients": [
@@ -14,6 +15,7 @@
     },
     {
         "type": "plat",
+        "auteur":null,
         "titre": "recette 1",
         "description": "bla bla",
         "ingredients": [
@@ -27,6 +29,7 @@
     },
     {
         "type": "dessert",
+        "auteur":"toto",
         "titre": "recette 2",
         "description": "bla bla",
         "ingredients": [
@@ -40,6 +43,7 @@
     },
     {
         "type": "dessert",
+        "auteur":"toto",
         "titre": "tarte aux pommes",
         "description": "dessert traditionnel avec des pommes",
         "ingredients": [
