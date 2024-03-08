@@ -3,5 +3,10 @@
         "nom":"toto",
         "password":"toto",
         "email":"toto@orange.com"
+    },
+    {
+        "nom":"titi",
+        "password":"titi",
+        "email":"titi@orange.com"
     }
 ]

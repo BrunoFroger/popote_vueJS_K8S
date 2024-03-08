@@ -162,6 +162,11 @@ git clone git@github.com:BrunoFroger/popote-vueJS
 en choisissant le mode manuel
 
 ### 2.3.2 Developpement de l'application Popote
+le projet popote repose actuellement sur un frontend en Vue JS et un backend (provisoire) en NodeJS)
+
+les dev du frontend sont dans le repertoire popote
+
+les dev du backend sont dans le repertoire serverNode
 
 ### 2.3.3 Conteneurisation de popote
 

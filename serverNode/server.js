@@ -15,10 +15,16 @@ var localMessage='';
 var passPhrase = 'sldjreioenos,soa';
 var tmpUser=null
 
+//=====================================================
+//
+//      http.createServer
+//
+//=====================================================
 const server = http.createServer((req, res) => {
     //console.log('requete = ' + req.url);
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
     //res.setHeader('Access-Control-Allow-Header', 'content-type');
+    console.log("serveur => url = " + req.url);
     if (req.url === '/'){
         res.statusCode = 200;
         res.setHeader('Content-Type', 'text/plain; charset=utf-8');
@@ -31,14 +37,20 @@ const server = http.createServer((req, res) => {
         //console.log('serveur => ' + maRecette);
         res.end(JSON.stringify(maRecette));
     } else if (req.url.startsWith('/getNbRecettes')){
-        console.log('requete getNbRecettes ');
+        //console.log('requete getNbRecettes ');
         res.setHeader('Content-Type', 'text/json; charset=utf-8');
         const stuff ={
             "nbRecettes": nbRecettes,
         };
         res.end(JSON.stringify(stuff));
+    } else if (req.url.startsWith('/getListeRecettes')){
+        console.log('serveur => requete getListeRecettes ');
+        debut = url.parse(req.url,true).query.index
+        nb = url.parse(req.url,true).query.nb
+        res.setHeader('Content-Type', 'text/json; charset=utf-8');
+        listTmp = getListRecettes(debut, nb)
+        res.end(JSON.stringify(listTmp));
     } else if (req.url.startsWith('/requeteUser')){
-        console.log("serveur => url = " + req.url);
         let body = '';
         req.on('data', chunk => {
             body += chunk.toString();
@@ -48,28 +60,28 @@ const server = http.createServer((req, res) => {
             console.log(body);
             let user = JSON.parse(body)
             let typeRequette = user.type
-            console.log(typeRequette)
+            //console.log(typeRequette)
             stuff ={
                 "status": localStatus,
                 "message": localMessage,
                 "user": null
             };
             if (typeRequette === "connexion"){
-                console.log("serveur => traitement de la requete " + typeRequette)
+                //console.log("serveur => traitement de la requete " + typeRequette)
                 let tmp = checkConnect(user)
-                console.log('serveur => valeur retour checkConnect : ' + tmp)
+                //console.log('serveur => valeur retour checkConnect : ' + tmp)
                 stuff.user = tmp
-                console.log("serveur => localStatus=" + localStatus + ", localMessage=" + localMessage + ', user=' + stuff.user)
+                //console.log("serveur => localStatus=" + localStatus + ", localMessage=" + localMessage + ', user=' + stuff.user)
                 //res.end(resultat)
-            } else if (typeRequette === "deconnexion"){
-                console.log("serveur => traitement de la requete " + typeRequette)
+            //} else if (typeRequette === "deconnexion"){
+                //console.log("serveur => traitement de la requete " + typeRequette)
             } else {
                 console.log("serveur => requete inconnue " + typeRequette)
             }
             res.setHeader('Content-Type', 'text/json; charset=utf-8');
             stuff.status = localStatus
             stuff.message =localMessage
-            console.log("serveur => reponse envoyée : " + JSON.stringify(stuff))
+            //console.log("serveur => reponse envoyée : " + JSON.stringify(stuff))
             res.end(JSON.stringify(stuff));
         });
         //console.log('requete requeteUser ');
@@ -79,6 +91,11 @@ const server = http.createServer((req, res) => {
     }   
 });
 
+//=====================================================
+//
+//      server.listen
+//
+//=====================================================
 server.listen(port, hostname, () => {
     console.log(`serveur => Server running at http://${hostname}:${port}/`);
     fs.readFile("recettes.json","utf-8",(err,data)=>{
@@ -108,7 +125,7 @@ server.listen(port, hostname, () => {
             recettes = JSON.stringify(stuff);
             //res.end(jsonContent);
         } else {
-            console.log('serveur => lecture du fichier contenant les recettes');
+            console.log('serveur => lecture du fichier contenant les users');
             users = JSON.parse(data);
             nbUsers = 0;
             users.forEach ((item) =>{
@@ -120,8 +137,36 @@ server.listen(port, hostname, () => {
   });
 
 
+//=====================================================
+//
+//      function getListRecettes
+//
+//=====================================================
+function getListRecettes(debut, nb){
+    var liste = []
+    let index = 0;
+    let cpt=0
+    console.log("server => lecture de " + nb + " recettes a partir de " + debut)
+    for (let i = 0 ; i <  nb ; i++){
+        let idx = Number(i) + Number(debut);
+        console.log("lecture recette " + idx)
+        item = recettes[idx]
+        if (!item){
+            break
+        }
+        liste.push(item)
+        console.log("ajout recette " + idx + " : " + item.titre)
+    }
+    return liste
+}
+
+//=====================================================
+//
+//      function checkConnect
+//
+//=====================================================
   function checkConnect(user){
-    console.log("serveur => fonction checkConnect")
+    //console.log("serveur => fonction checkConnect")
     localStatus = 'KO'
     localMessage = 'Utilisateur inconnu'
     users.forEach((item) =>{
@@ -130,7 +175,7 @@ server.listen(port, hostname, () => {
                 tmpUser = item
                 localStatus = 'OK'
                 localMessage = 'connexion OK'
-                console.log("serveur => user trouvé : " + tmpUser)
+                //console.log("serveur => user trouvé : " + tmpUser)
                 return tmpUser
             } else {
                 localMessage = 'mauvais mot de passe'
