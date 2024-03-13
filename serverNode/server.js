@@ -47,8 +47,10 @@ const server = http.createServer((req, res) => {
         console.log('serveur => requete getListeRecettes ');
         debut = url.parse(req.url,true).query.index
         nb = url.parse(req.url,true).query.nb
+        auteur = url.parse(req.url,true).query.auteur
+        prive = url.parse(req.url,true).query.prive
         res.setHeader('Content-Type', 'text/json; charset=utf-8');
-        listTmp = getListRecettes(debut, nb)
+        listTmp = getListRecettes(debut, nb, auteur, prive)
         res.end(JSON.stringify(listTmp));
     } else if (req.url.startsWith('/requeteUser')){
         let body = '';
@@ -142,7 +144,7 @@ server.listen(port, hostname, () => {
 //      function getListRecettes
 //
 //=====================================================
-function getListRecettes(debut, nb){
+function getListRecettes(debut, nb, auteur, prive){
     var liste = []
     let index = 0;
     let cpt=0
@@ -154,8 +156,10 @@ function getListRecettes(debut, nb){
         if (!item){
             break
         }
-        liste.push(item)
-        console.log("ajout recette " + idx + " : " + item.titre)
+        if (auteur == null || (prive && auteur == item.nom)){
+            liste.push(item)
+            console.log("ajout recette " + idx + " : " + item.titre)
+        }
     }
     return liste
 }

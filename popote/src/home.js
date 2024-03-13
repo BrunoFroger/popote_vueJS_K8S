@@ -16,10 +16,9 @@ export default {
           <p>Ce site permet de consulter des recettes de cuisine et enregistrer vos propres recettes</p>\
           <p>Le bandeau en haut de cette page permet d\'acceder aux différetes pages de ce site : </p>\
           <ul>\
-          <li>page d\'acceuil : cette page (présentation du site)</li>\
-          <li>recettes : accès a l\'ensemble des recettes disponibles</li>\
-          <li>mes recettes : accès a vos recettes personnelles (création / modification)</li>\
-          <li>mon compte : gestion de votre conpte (connexion / deconnexion / données personnelles</li>\
+          <li>Acceuil : cette page (présentation du site)</li>\
+          <li>Recettes : accès a l\'ensemble des recettes disponibles</li>\
+          <li>Mon compte : gestion de votre conpte (connexion / deconnexion / données personnelles</li>\
           </ul>\
         </div>\
       ',

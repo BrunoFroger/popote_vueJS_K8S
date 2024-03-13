@@ -1,5 +1,8 @@
 const CryptoJS = require("crypto-js")
 
+var userConnected=false;
+var globalUser=null;
+
 export default {
     props: [], 
       data: function () {
@@ -17,8 +20,8 @@ export default {
           repetPassword:'', 
           newMailAddress:'',
           adresseMail:'',
-          user:null,
-          connected:false
+          user:globalUser,
+          connected:userConnected,
         };
       },
       mounted() {
@@ -32,9 +35,9 @@ export default {
           <p>Cette page permet de gérer votre compte : \
             <button @click="changeMode(\'creeCompte\')">création de compte</button> / \
             <span v-if="connected"> <button @click="changeMode(\'suppCompte\')">suppression de compte</button> / </span>\
-            <button @click="changeMode(\'connexion\')">connexion</button> / \
+            <button @click="changeMode(\'connexion\')">connexion</button>\
             <span v-if="connected"> \
-              <button @click="changeMode(\'deconnexion\')">déconnexion</button> / \
+              <button @click="changeMode(\'deconnexion\')"> / déconnexion</button> / \
               <button @click="changeMode(\'infosPerso\')">infos personnelles</button>\
             </span>\
           </p>\
@@ -106,36 +109,78 @@ export default {
         </div>\
       ',
       methods: {
+        //---------------------------------
+        //
+        //  UpdateTime
+        //
+        //---------------------------------
         updateDateTime() {
           const now = new Date();
           this.currentDateTime = now.toLocaleString();
         },
+        //---------------------------------
+        //
+        //  changeMode
+        //
+        //---------------------------------
         changeMode(mode){
           console.log("changement de mode : " + mode);
           this.modePageCompte = mode;
         },
+        //---------------------------------
+        //
+        //  creeCompte
+        //
+        //---------------------------------
         creeCompte(login, pwd, mail){
           console.log("création d'un compte");
           this.requeteUser("creation", this.newLogin, this.newPassword, this.repetPassword, this.newMailAddress);
         },
+        //---------------------------------
+        //
+        //  suppCompte
+        //
+        //---------------------------------
         suppCompte(){
           console.log("suppression du compte");
           this.requeteUser("suppCompte", null , this.newPassword, '', '');
         },
+        //---------------------------------
+        //
+        //  deconnecte
+        //
+        //---------------------------------
         deconnecte(){
           console.log("deconexion du compte");
+          globalUser=null;
           this.user=null;
+          userConnected=false;
           this.connected=false;
         },
+        //---------------------------------
+        //
+        //  connecte
+        //
+        //---------------------------------
         connecte(){
           console.log("conexion au compte " + this.newLogin);
           this.requeteUser("connexion", this.newLogin, this.newPassword, '', '');
         },
+        //---------------------------------
+        //
+        //  encrypt
+        //
+        //---------------------------------
         encrypt (src) {
           const passphrase = this.passPhrase
           //return CryptoJS.AES.encrypt(src, passphrase).toString()
           return src
         },
+        //---------------------------------
+        //
+        //  decrypt
+        //
+        //---------------------------------
         decrypt (src) {
           const passphrase = this.passPhrase
           const bytes = CryptoJS.AES.decrypt(src, passphrase)
@@ -143,6 +188,11 @@ export default {
           //return originalText
           return src
         },
+        //---------------------------------
+        //
+        //  requeteUser
+        //
+        //---------------------------------
         requeteUser(typeRequete, login, pwd, pwdVerif, email) {
           console.log('envoi requete ' + typeRequete);
           console.log('user='+login+', pwd='+pwd+', verif='+pwdVerif+', email='+email)
@@ -166,14 +216,25 @@ export default {
             console.log('compte.js => status = ' + status)
             let message = response.message
             console.log('compte.js => message = ' + message)
-            this.user = response.user
-            console.log('compte.js => user = ' + JSON.stringify(this.user))
-            this.connected = true
+            globalUser = response.user
+            this.user=globalUser
+            console.log('compte.js => user = ' + JSON.stringify(globalUser))
+            userConnected = true
             console.log ("compte.js => Utilisateur " + this.user.nom + " connecté")
           })
           .catch(error => {
             console.error(error);
           });
         },
+        //---------------------------------
+        //
+        //  isConnected
+        //
+        //---------------------------------
+        isConnected(){
+          console.log(" compte.js => isConnected : " + userConnected)
+          return userConnected;
+        }
       }
 }
+

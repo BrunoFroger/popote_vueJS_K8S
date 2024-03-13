@@ -2,13 +2,13 @@ const { createApp } = Vue;
 
 import Home from './home.js';
 import Recettes from './recettes.js';
-import MesRecettes from './mesRecettes.js';
 import Compte from './compte.js';
 
 const app = createApp({
     data() {
         return {
 	    page: 'home',
+      connected: false,
 	    copyright: 'Bruno Froger (c) depuis 2024',
         }
     },
@@ -18,10 +18,9 @@ const app = createApp({
         <div class="entete">\
           <table>\
             <tr>\
-              <td><a href="#" @click.prevent="page=\'home\'">page d\'acceuil</a></td>\
-              <td><a href="#" @click.prevent="page=\'recettes\'">recettes</a></td>\
-              <td><a href="#" @click.prevent="page=\'mesRecettes\'">mes recettes</a></td>\
-              <td><a href="#" @click.prevent="page=\'compte\'">mon compte</a></td>\
+              <td><a href="#" @click.prevent="page=\'home\'">Acceuil</a></td>\
+              <td><a href="#" @click.prevent="page=\'recettes\'">Recettes</a></td>\
+              <td><a href="#" @click.prevent="page=\'compte\'">Mon compte</a></td>\
             </tr>\
           </table>\
         </div>\
@@ -38,6 +37,5 @@ const app = createApp({
 
 app.component('home', Home);
 app.component('recettes', Recettes);
-app.component('mesRecettes', MesRecettes);
 app.component('compte', Compte);
 app.mount('#app');
