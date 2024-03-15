@@ -1,7 +1,7 @@
 [
     {
         "type": "entree",
-        "auteur":null,
+        "auteur": "titi",
         "titre": "recette 0",
         "description": "bla bla",
         "ingredients": [
@@ -15,7 +15,7 @@
     },
     {
         "type": "plat",
-        "auteur":null,
+        "auteur":"titi",
         "titre": "recette 1",
         "description": "bla bla",
         "ingredients": [
@@ -71,7 +71,7 @@
     },
     {
         "type": "dessert",
-        "auteur":"toto",
+        "auteur":"titi",
         "titre": "recette 5",
         "description": "bla bla",
         "ingredients": [
@@ -141,7 +141,7 @@
     },
     {
         "type": "dessert",
-        "auteur":"toto",
+        "auteur":"titi",
         "titre": "recette 10",
         "description": "bla bla",
         "ingredients": [

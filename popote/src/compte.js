@@ -232,8 +232,10 @@ export default {
         //
         //---------------------------------
         isConnected(){
-          console.log(" compte.js => isConnected : " + userConnected)
-          return userConnected;
+          if (globalUser){
+            console.log(" compte.js => isConnected : " + userConnected + ', username = ' + globalUser.nom)
+          }
+          return globalUser;
         }
       }
 }

@@ -1,5 +1,6 @@
 import Compte from './compte.js'
-import Main from './main.js'
+
+//var priveSelected = false;
 
 export default {
   props: [], 
@@ -19,25 +20,26 @@ export default {
         idxDebutListeRecettes:0,
         listeRecettes:[],
         recettesPrivees:false,
+        userName:null,
         userConnected:false,
       };
     },
     mounted() {
+      this.updateConnected();
       this.updateDateTime();
       setInterval(this.updateDateTime, 1000);
       //this.loadRecette(this.index);
       this.loadListeRecettes();
       this.getNbRecettes();
-      this.updateConnected();
     },
     template: '\
       <div>\
         <h1>Recettes</h1>\
         <p>Nous somme le {{currentDateTime}}</p>\
+        <p>Cette page permet de visualiser l\'ensemble des {{nbRecettes}} recettes disponibles sur ce site ....</p>\
         <span v-if="userConnected" >\
-          <input @click="loadListeRecettes" type="checkbox" v-model="recettesPrivees" value="mes recettes"> Mes recettes\
+          <input @change="loadListeRecettes" type="checkbox" v-model="recettesPrivees"> Mes recettes (visualisation de vos créations)\
         </span>\
-        <p>Cette page permet de visualiser l\'ensemble des recettes disponibles sur ce site ....</p>\
         \
         <span v-if="modeListe">\
         <p>Liste des recettes</p>\
@@ -167,8 +169,18 @@ export default {
       //
       //---------------------------------
       loadListeRecettes() {
-        fetch('http://localhost:3000/getListeRecettes?index=' + this.idxDebutListeRecettes + '&nb=' + this.nbRecettesParPage + '&user=' + this.auteur + '&prive=' + this.recettesPrivees).then(r => r.json()).then(response => {
-          console.log("chargement de la liste de " + this.nbRecettesParPage + " a partir de  " + this.idxDebutListeRecettes);
+        var prive = this.recettesPrivees;
+        var index = this.idxDebutListeRecettes;
+        var nb = this.nbRecettesParPage;
+        var auteur = this.userName;
+        var url = 'http://localhost:3000/getListeRecettes?index=' + index + '&nb=' + nb + '&user=' + auteur + '&prive=' + prive;
+        console.log('recettes.js => loadListeRecettes : ');
+        console.log('   index      : ' + index)
+        console.log('   nbRecettes : ' + nb)
+        console.log('   auteur     : ' + auteur)
+        console.log('   prive      : ' + prive)
+        fetch(url).then(r => r.json()).then(response => {
+          //console.log("chargement de " + nb + " recettes a partir de  " + index);
           this.listeRecettes = response
         })
         .catch(error => {
@@ -221,8 +233,16 @@ export default {
       //
       //---------------------------------
       updateConnected() {
-        console.log("recettes.js => test si a user is connected .... ")
-        this.userConnected = Compte.methods.isConnected();
+        console.log("recettes.js (updateConnected) => test si a user is connected .... ")
+        var connectedUser = Compte.methods.isConnected()
+        if (connectedUser != null){
+          this.userName = connectedUser.nom;
+          this.userConnected = true;
+          //this.recettesPrivees = priveSelected;
+          console.log('recettes.js (updateConnected) => userConnected = ' + this.userName)
+        } else {
+          console.log('recettes.js (updateConnected) => pas de user connecte ')
+        }
       },
     }
 }

@@ -47,7 +47,7 @@ const server = http.createServer((req, res) => {
         console.log('serveur => requete getListeRecettes ');
         debut = url.parse(req.url,true).query.index
         nb = url.parse(req.url,true).query.nb
-        auteur = url.parse(req.url,true).query.auteur
+        auteur = url.parse(req.url,true).query.user
         prive = url.parse(req.url,true).query.prive
         res.setHeader('Content-Type', 'text/json; charset=utf-8');
         listTmp = getListRecettes(debut, nb, auteur, prive)
@@ -148,17 +148,37 @@ function getListRecettes(debut, nb, auteur, prive){
     var liste = []
     let index = 0;
     let cpt=0
-    console.log("server => lecture de " + nb + " recettes a partir de " + debut)
-    for (let i = 0 ; i <  nb ; i++){
-        let idx = Number(i) + Number(debut);
-        console.log("lecture recette " + idx)
+    console.log("server.js => lecture de " + nb + " recettes a partir de " + debut)
+    console.log("server.js => auteur = " + auteur + ", prive =  " + prive)  
+    if (auteur == 'null'){
+        console.log('auteur non defini')
+    } else {
+        console.log('auteur = ' +auteur)
+    }
+    if (prive == 'false'){
+        console.log('liste de toutes les recettes') 
+    } 
+    else {
+        console.log('liste des recettes de ' + auteur) 
+    }
+    while (cpt < nb){
+        let idx = Number(index++) + Number(debut);
+        console.log("server.js => lecture recette " + idx)
         item = recettes[idx]
         if (!item){
+            console.log('server.js => fin de la liste des recettes')
             break
         }
-        if (auteur == null || (prive && auteur == item.nom)){
+        if (prive == 'false' || (prive == 'true' && auteur == item.auteur)){
             liste.push(item)
-            console.log("ajout recette " + idx + " : " + item.titre)
+            cpt++
+            console.log("server.js => ajout recette " + idx + " : " + item.titre)
+        } else {
+            console.log('server.js => cette recette ne correspond pas aux criteres de selection')
+            console.log ('      auteur      =  ' + auteur)
+            console.log ('      prive       =  ' + prive)
+            console.log ('      item.nom    =  ' + item.nom)
+            console.log ('      item.auteur =  ' + item.auteur)
         }
     }
     return liste
