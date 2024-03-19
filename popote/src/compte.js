@@ -142,7 +142,7 @@ export default {
         //
         //---------------------------------
         suppCompte(){
-          console.log("suppression du compte");
+          console.log("suppression du compte " + this.user);
           this.requeteUser("suppCompte", null , this.newPassword, '', '');
         },
         //---------------------------------
@@ -151,7 +151,7 @@ export default {
         //
         //---------------------------------
         deconnecte(){
-          console.log("deconexion du compte");
+          console.log("deconexion du compte " + this.user);
           globalUser=null;
           this.user=null;
           userConnected=false;

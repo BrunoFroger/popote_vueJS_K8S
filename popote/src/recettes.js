@@ -48,12 +48,12 @@ export default {
         <div>\
         <table>\
         <tr>\
-        <th>numero</th>\
+        <!--th>numero</th-->\
         <th>titre</th>\
         <th>description</th>\
         </tr>\
         <tr v-for="(item, index) in listeRecettes">\
-        <td>{{item.index}}</td>\
+        <!--td>{{item.index}}</td-->\
         <td @click="loadRecette(item)">{{item.titre}}</td>\
         <td>{{item.description}}</td>\
         </tr>\
@@ -76,10 +76,10 @@ export default {
         <p></p>\
         <div>\
           <table>\
-          <tr>\
+          <!--tr>\
             <td>index</td>\
             <td>{{indexRecette}}</td>\
-          </tr>\
+          </tr-->\
           <tr>\
             <td>titre</td>\
             <td>{{titre}}</td>\
@@ -215,8 +215,8 @@ export default {
         //if (this.modeListe) indexRecette += this.idxDebutListeRecettes;
         this.modeListe= false
         fetch('http://localhost:3000/getRecette?index=' + this.indexRecette).then(r => r.json()).then(response => {
-          console.log("recettes.js (loadRecette) => chargement de la recette " + this.indexRecette + ' depuis le serveur');
-          console.log('     titre : ' + response.titre);
+          //console.log("recettes.js (loadRecette) => chargement de la recette " + this.indexRecette + ' depuis le serveur');
+          //console.log('     titre : ' + response.titre);
           this.titre = response.titre;
           this.auteur = response.auteur
           this.description = response.description;

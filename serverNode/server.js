@@ -164,7 +164,7 @@ server.listen(port, hostname, () => {
             recettes = JSON.parse(data);
             nbRecettes = 0;
             recettes.forEach ((item) =>{
-                item.idx = nbRecettes;
+                item.index = nbRecettes;
                 nbRecettes++;
             });
             console.log('serveur => nombre de recetes : ' + nbRecettes);
@@ -203,7 +203,6 @@ function getListRecettes(debut, nb, auteur, prive){
             break
         }
         if (prive == 'false' || (prive == 'true' && auteur == item.auteur)){
-            item.index=idx
             liste.push(item)
             cpt++
             //console.log("server.js => ajout recette " + idx + " : " + item.titre)
