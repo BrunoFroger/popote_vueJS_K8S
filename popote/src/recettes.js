@@ -10,6 +10,7 @@ export default {
         indexRecette:0,
         auteur : null,
         titre : null,
+        typeRecette:null,
         description : null,
         realisation : null,
         ingredients : null,
@@ -24,6 +25,7 @@ export default {
         recettesPrivees:false,
         userName:null,
         userConnected:false,
+        typeRecetteSelected:'Tout',
       };
     },
     mounted() {
@@ -44,17 +46,27 @@ export default {
         </span>\
         \
         <span v-if="modeListe">\
-        <p>Liste des recettes</p>\
+        <p>\
+          Liste des recettes : type de recette \
+          <select @change="changeTypeSelect($event)" name= "typeRecetteSelected" id="typeRecetteSelected">\
+            <option value="tout">Tout</option>\
+            <option value="Entree">Entrée</option>\
+            <option value="Plat">Plat</option>\
+            <option value="Dessert">Dessert</option>\
+          </select>\
+        </p>\
         <div>\
         <table>\
         <tr>\
         <!--th>numero</th-->\
         <th>titre</th>\
+        <th>type</th>\
         <th>description</th>\
         </tr>\
         <tr v-for="(item, index) in listeRecettes">\
         <!--td>{{item.index}}</td-->\
         <td @click="loadRecette(item)">{{item.titre}}</td>\
+        <td>{{item.type}}</td>\
         <td>{{item.description}}</td>\
         </tr>\
         </table>\
@@ -83,6 +95,10 @@ export default {
           <tr>\
             <td>titre</td>\
             <td>{{titre}}</td>\
+          </tr>\
+          <tr>\
+            <td>type</td>\
+            <td>{{typeRecette}}</td>\
           </tr>\
             <tr>\
               <td>description</td>\
@@ -190,7 +206,10 @@ export default {
         var index = this.idxDebutListeRecettes;
         var nb = this.nbRecettesParPage;
         var auteur = this.userName;
-        var url = 'http://localhost:3000/getListeRecettes?index=' + index + '&nb=' + nb + '&user=' + auteur + '&prive=' + prive;
+        var type = this.typeRecetteSelected;
+        var url = 'http://localhost:3000/getListeRecettes?index=' + index 
+                  + '&nb=' + nb + '&user=' + auteur 
+                  + '&prive=' + prive + '&type=' + type;
         //console.log('recettes.js => loadListeRecettes : ');
         //console.log('   index      : ' + index)
         //console.log('   nbRecettes : ' + nb)
@@ -218,6 +237,7 @@ export default {
           //console.log("recettes.js (loadRecette) => chargement de la recette " + this.indexRecette + ' depuis le serveur');
           //console.log('     titre : ' + response.titre);
           this.titre = response.titre;
+          this .typeRecette = response.type;
           this.auteur = response.auteur
           this.description = response.description;
           this.realisation = response.realisation
@@ -268,7 +288,7 @@ export default {
       //
       //---------------------------------
       switchModeEdition() {
-        console.log("recettes.js (switchModeEdition) =>")
+        //console.log("recettes.js (switchModeEdition) =>")
         this.modeEdition = !this.modeEdition
       },
       //---------------------------------
@@ -279,6 +299,17 @@ export default {
       updateRecette() {
         console.log("recettes.js (updateRecette) => TODO")
         this.switchModeEdition()
+      },
+      //---------------------------------
+      //
+      //  changeTypeSelect
+      //
+      //---------------------------------
+      changeTypeSelect(event) {
+        console.log("recettes.js (changeTypeSelect) => TODO")
+        this.typeRecetteSelected = event.target.value
+        console.log("type selectionné : " + this.typeRecetteSelected)
+        this.loadListeRecettes();
       },
     }
 }

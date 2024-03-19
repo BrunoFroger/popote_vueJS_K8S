@@ -54,8 +54,9 @@ const server = http.createServer((req, res) => {
         nb = url.parse(req.url,true).query.nb
         auteur = url.parse(req.url,true).query.user
         prive = url.parse(req.url,true).query.prive
+        typeRecette = url.parse(req.url,true).query.type
         res.setHeader('Content-Type', 'text/json; charset=utf-8');
-        listTmp = getListRecettes(debut, nb, auteur, prive)
+        listTmp = getListRecettes(debut, nb, auteur, prive, typeRecette)
         res.end(JSON.stringify(listTmp));
     } else if (req.url.startsWith('/requeteUser')){
         let body = '';
@@ -177,7 +178,7 @@ server.listen(port, hostname, () => {
 //      function getListRecettes
 //
 //=====================================================
-function getListRecettes(debut, nb, auteur, prive){
+function getListRecettes(debut, nb, auteur, prive, type){
     var liste = []
     let index = 0;
     let cpt=0
@@ -203,8 +204,10 @@ function getListRecettes(debut, nb, auteur, prive){
             break
         }
         if (prive == 'false' || (prive == 'true' && auteur == item.auteur)){
-            liste.push(item)
-            cpt++
+            if ((type == 'Tout') || (type == item.type)){
+                liste.push(item)
+                cpt++
+            }
             //console.log("server.js => ajout recette " + idx + " : " + item.titre)
         } else {
             //console.log('server.js => cette recette ne correspond pas aux criteres de selection')
@@ -214,6 +217,7 @@ function getListRecettes(debut, nb, auteur, prive){
             //console.log ('      item.auteur =  ' + item.auteur)
         }
     }
+    console.log (cpt + ' recettes trouvées')
     return liste
 }
 

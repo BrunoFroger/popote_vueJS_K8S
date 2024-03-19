@@ -1,6 +1,6 @@
 [
     {
-        "type": "entree",
+        "type": "Entree",
         "auteur": "titi",
         "titre": "recette 0",
         "description": "bla bla",
@@ -19,7 +19,7 @@
         "realisation": "description de la recette, description de la recette, description de la recette, description de la recette, description de la recette, description de la recette, description de la recette, description de la recette, description de la recette, description de la recette, description de la recette, "
     },
     {
-        "type": "plat",
+        "type": "Plat",
         "auteur":"titi",
         "titre": "recette 1",
         "description": "bla bla",
@@ -33,7 +33,7 @@
         "realisation": "description de la recette"
     },
     {
-        "type": "dessert",
+        "type": "Dessert",
         "auteur":"toto",
         "titre": "recette 2",
         "description": "bla bla",
@@ -47,7 +47,7 @@
         "realisation": "description de la recette, description de la recette, description de la recette, description de la recette, description de la recette, description de la recette, description de la recette, description de la recette, description de la recette, description de la recette, description de la recette, description de la recette, description de la recette, description de la recette, description de la recette, description de la recette, "
     },
     {
-        "type": "dessert",
+        "type": "Dessert",
         "auteur":"toto",
         "titre": "recette 3",
         "description": "bla bla",
@@ -61,7 +61,7 @@
         "realisation": "description de la recette"
     },
     {
-        "type": "dessert",
+        "type": "Entree",
         "auteur":"toto",
         "titre": "recette 4",
         "description": "bla bla",
@@ -75,7 +75,7 @@
         "realisation": "description de la recette"
     },
     {
-        "type": "dessert",
+        "type": "Dessert",
         "auteur":"titi",
         "titre": "recette 5",
         "description": "bla bla",
@@ -89,7 +89,7 @@
         "realisation": "description de la recette"
     },
     {
-        "type": "dessert",
+        "type": "Plat",
         "auteur":"toto",
         "titre": "recette 6",
         "description": "bla bla",
@@ -103,7 +103,7 @@
         "realisation": "description de la recette"
     },
     {
-        "type": "dessert",
+        "type": "Entree",
         "auteur":"toto",
         "titre": "recette 7",
         "description": "bla bla",
@@ -117,7 +117,7 @@
         "realisation": "description de la recette"
     },
     {
-        "type": "dessert",
+        "type": "Dessert",
         "auteur":"toto",
         "titre": "recette 8",
         "description": "bla bla",
@@ -131,7 +131,7 @@
         "realisation": "description de la recette"
     },
     {
-        "type": "dessert",
+        "type": "Entree",
         "auteur":"toto",
         "titre": "recette 9",
         "description": "bla bla",
@@ -145,7 +145,7 @@
         "realisation": "description de la recette"
     },
     {
-        "type": "dessert",
+        "type": "Plat",
         "auteur":"titi",
         "titre": "recette 10",
         "description": "bla bla",
@@ -159,7 +159,7 @@
         "realisation": "description de la recette"
     },
     {
-        "type": "dessert",
+        "type": "Dessert",
         "auteur":"toto",
         "titre": "recette 11",
         "description": "bla bla",
@@ -173,7 +173,7 @@
         "realisation": "description de la recette"
     },
     {
-        "type": "dessert",
+        "type": "Entree",
         "auteur":"toto",
         "titre": "recette 12",
         "description": "bla bla",
@@ -187,7 +187,7 @@
         "realisation": "description de la recette"
     },
     {
-        "type": "dessert",
+        "type": "Dessert",
         "auteur":"toto",
         "titre": "recette 13",
         "description": "bla bla",
@@ -201,7 +201,7 @@
         "realisation": "description de la recette"
     },
     {
-        "type": "dessert",
+        "type": "Dessert",
         "auteur":"toto",
         "titre": "tarte aux pommes",
         "description": "dessert traditionnel avec des pommes",
