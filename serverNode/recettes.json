@@ -9,9 +9,14 @@
                 "nom": "pomme",
                 "quantite": "8",
                 "unite": null
+            },
+            {
+                "nom": "sucre",
+                "quantite": "30",
+                "unite": "grammes"
             }
         ],
-        "realisation": "description de la recette"
+        "realisation": "description de la recette, description de la recette, description de la recette, description de la recette, description de la recette, description de la recette, description de la recette, description de la recette, description de la recette, description de la recette, description de la recette, "
     },
     {
         "type": "plat",
@@ -39,7 +44,7 @@
                 "unite": null
             }
         ],
-        "realisation": "description de la recette"
+        "realisation": "description de la recette, description de la recette, description de la recette, description de la recette, description de la recette, description de la recette, description de la recette, description de la recette, description de la recette, description de la recette, description de la recette, description de la recette, description de la recette, description de la recette, description de la recette, description de la recette, "
     },
     {
         "type": "dessert",

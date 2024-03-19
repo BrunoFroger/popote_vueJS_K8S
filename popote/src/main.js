@@ -2,6 +2,7 @@ const { createApp } = Vue;
 
 import Home from './home.js';
 import Recettes from './recettes.js';
+import EditRecette from './editRecette.js';
 import Compte from './compte.js';
 
 const app = createApp({
@@ -37,5 +38,6 @@ const app = createApp({
 
 app.component('home', Home);
 app.component('recettes', Recettes);
+app.component('editRecette', EditRecette);
 app.component('compte', Compte);
 app.mount('#app');

@@ -7,6 +7,7 @@ export default {
     data: function () {
       return {
         currentDateTime: '',
+        indexRecette:0,
         auteur : null,
         titre : null,
         description : null,
@@ -16,6 +17,7 @@ export default {
         index : 0,
         nbRecettes : 0,
         modeListe:true,
+        modeEdition:false,
         nbRecettesParPage:10,
         idxDebutListeRecettes:0,
         listeRecettes:[],
@@ -46,11 +48,13 @@ export default {
         <div>\
         <table>\
         <tr>\
+        <th>numero</th>\
         <th>titre</th>\
         <th>description</th>\
         </tr>\
         <tr v-for="(item, index) in listeRecettes">\
-        <td @click="loadRecette(index)">{{item.titre}}</td>\
+        <td>{{item.index}}</td>\
+        <td @click="loadRecette(item)">{{item.titre}}</td>\
         <td>{{item.description}}</td>\
         </tr>\
         </table>\
@@ -63,14 +67,23 @@ export default {
         <p><button @click="setModeListe">Retour à la liste de recettes</button></p>\
         <p>Recette numéro : <button @click="decrementeIndex">précédente</button>  {{index}}  <button @click="incrementeIndex">suivante</button></p>\
         <p></p>\
-        <p v-if="auteur">Cette recette est proposée par {{auteur}}</p>\
+        <p v-if="auteur">Cette recette est proposée par {{auteur}}\
+          <span v-if="recettesPrivees"> \
+            <button @click="switchModeEdition">Editer</button>\
+            <span v-if="modeEdition"> Edition en cours .... </span>\
+            </span>\
+        </p>\
         <p></p>\
         <div>\
           <table>\
-            <tr>\
-              <td>titre</td>\
-              <td>{{titre}}</td>\
-            </tr>\
+          <tr>\
+            <td>index</td>\
+            <td>{{indexRecette}}</td>\
+          </tr>\
+          <tr>\
+            <td>titre</td>\
+            <td>{{titre}}</td>\
+          </tr>\
             <tr>\
               <td>description</td>\
               <td>{{description}}</td>\
@@ -101,6 +114,10 @@ export default {
               <td>{{realisation}}</td>\
             </tr>\
           </table>\
+          <span v-if="modeEdition">\
+            <button @click="updateRecette">Mise a jour</button>\
+            <button @click="switchModeEdition">Annuler</button>\
+          </span>\
         </div>\
         </span>\
       </div>\
@@ -174,11 +191,11 @@ export default {
         var nb = this.nbRecettesParPage;
         var auteur = this.userName;
         var url = 'http://localhost:3000/getListeRecettes?index=' + index + '&nb=' + nb + '&user=' + auteur + '&prive=' + prive;
-        console.log('recettes.js => loadListeRecettes : ');
-        console.log('   index      : ' + index)
-        console.log('   nbRecettes : ' + nb)
-        console.log('   auteur     : ' + auteur)
-        console.log('   prive      : ' + prive)
+        //console.log('recettes.js => loadListeRecettes : ');
+        //console.log('   index      : ' + index)
+        //console.log('   nbRecettes : ' + nb)
+        //console.log('   auteur     : ' + auteur)
+        //console.log('   prive      : ' + prive)
         fetch(url).then(r => r.json()).then(response => {
           //console.log("chargement de " + nb + " recettes a partir de  " + index);
           this.listeRecettes = response
@@ -193,12 +210,13 @@ export default {
       //  loadRecette
       //
       //---------------------------------
-      loadRecette(indexRecette) {
-        if (this.modeListe) indexRecette += this.idxDebutListeRecettes;
+      loadRecette(item) {
+        this.indexRecette = item.index
+        //if (this.modeListe) indexRecette += this.idxDebutListeRecettes;
         this.modeListe= false
-        fetch('http://localhost:3000/getRecette?index=' + indexRecette).then(r => r.json()).then(response => {
-          console.log("chargement de la recette " + indexRecette + ' depuis le serveur');
-          console.log('titre : ' + response.titre);
+        fetch('http://localhost:3000/getRecette?index=' + this.indexRecette).then(r => r.json()).then(response => {
+          console.log("recettes.js (loadRecette) => chargement de la recette " + this.indexRecette + ' depuis le serveur');
+          console.log('     titre : ' + response.titre);
           this.titre = response.titre;
           this.auteur = response.auteur
           this.description = response.description;
@@ -207,9 +225,9 @@ export default {
         })
         .catch(error => {
           console.error(error);
-          indexRecette--;
-          console.log("chargement de la recette bidon " + indexRecette);
-          this.titre = 'fausse recette numero ' + indexRecette
+          this.indexRecette--;
+          console.log("chargement de la recette bidon " + this.indexRecette);
+          this.titre = 'fausse recette numero ' + this.indexRecette
           this.description = 'bla bla bla';
         });
       },
@@ -221,7 +239,7 @@ export default {
       getNbRecettes() {
         fetch('http://localhost:3000/getNbRecettes').then(r => r.json()).then(response => {
           this.nbRecettes = response.nbRecettes;
-          console.log("recuperation du nombre de recettes " + this.nbRecettes);
+          //console.log("recuperation du nombre de recettes " + this.nbRecettes);
         })
         .catch(error => {
           console.error(error);
@@ -233,16 +251,34 @@ export default {
       //
       //---------------------------------
       updateConnected() {
-        console.log("recettes.js (updateConnected) => test si a user is connected .... ")
+        //console.log("recettes.js (updateConnected) => test si a user is connected .... ")
         var connectedUser = Compte.methods.isConnected()
         if (connectedUser != null){
           this.userName = connectedUser.nom;
           this.userConnected = true;
           //this.recettesPrivees = priveSelected;
-          console.log('recettes.js (updateConnected) => userConnected = ' + this.userName)
-        } else {
-          console.log('recettes.js (updateConnected) => pas de user connecte ')
+        //   console.log('recettes.js (updateConnected) => userConnected = ' + this.userName)
+        // } else {
+        //   console.log('recettes.js (updateConnected) => pas de user connecte ')
         }
+      },
+      //---------------------------------
+      //
+      //  switchModeEdition
+      //
+      //---------------------------------
+      switchModeEdition() {
+        console.log("recettes.js (switchModeEdition) =>")
+        this.modeEdition = !this.modeEdition
+      },
+      //---------------------------------
+      //
+      //  updateRecette
+      //
+      //---------------------------------
+      updateRecette() {
+        console.log("recettes.js (updateRecette) => TODO")
+        this.switchModeEdition()
       },
     }
 }

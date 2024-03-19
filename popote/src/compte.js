@@ -36,8 +36,8 @@ export default {
             <button @click="changeMode(\'creeCompte\')">création de compte</button> / \
             <span v-if="connected"> <button @click="changeMode(\'suppCompte\')">suppression de compte</button> / </span>\
             <button @click="changeMode(\'connexion\')">connexion</button>\
-            <span v-if="connected"> \
-              <button @click="changeMode(\'deconnexion\')"> / déconnexion</button> / \
+            <span v-if="connected"> / \
+              <button @click="changeMode(\'deconnexion\')"> déconnexion</button> / \
               <button @click="changeMode(\'infosPerso\')">infos personnelles</button>\
             </span>\
           </p>\
@@ -194,8 +194,8 @@ export default {
         //
         //---------------------------------
         requeteUser(typeRequete, login, pwd, pwdVerif, email) {
-          console.log('envoi requete ' + typeRequete);
-          console.log('user='+login+', pwd='+pwd+', verif='+pwdVerif+', email='+email)
+          //console.log('envoi requete ' + typeRequete);
+          //console.log('user='+login+', pwd='+pwd+', verif='+pwdVerif+', email='+email)
           const stuff ={
             "type":typeRequete,
             "user": login,
@@ -208,19 +208,20 @@ export default {
             //headers: { "Content-Type": "application/json" },
             body: JSON.stringify(stuff)
           };
-          console.log(stuff);
-          console.log(requestOptions.body);
+          //console.log(stuff);
+          //console.log(requestOptions.body);
           fetch('http://localhost:3000/requeteUser', requestOptions).then(r => r.json()).then(response => {
-            console.log("compte.js => recuperation status commande update user ");
+            //console.log("compte.js => recuperation status commande update user ");
             let status = response.status
             console.log('compte.js => status = ' + status)
             let message = response.message
-            console.log('compte.js => message = ' + message)
+            //console.log('compte.js => message = ' + message)
             globalUser = response.user
             this.user=globalUser
-            console.log('compte.js => user = ' + JSON.stringify(globalUser))
+            //console.log('compte.js => user = ' + JSON.stringify(globalUser))
             userConnected = true
-            console.log ("compte.js => Utilisateur " + this.user.nom + " connecté")
+            this.connected = true
+            //console.log ("compte.js => Utilisateur " + this.user.nom + " connecté")
           })
           .catch(error => {
             console.error(error);
@@ -232,9 +233,9 @@ export default {
         //
         //---------------------------------
         isConnected(){
-          if (globalUser){
-            console.log(" compte.js => isConnected : " + userConnected + ', username = ' + globalUser.nom)
-          }
+          // if (globalUser){
+          //   console.log(" compte.js => isConnected : " + userConnected + ', username = ' + globalUser.nom)
+          // }
           return globalUser;
         }
       }
