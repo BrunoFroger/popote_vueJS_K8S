@@ -1,4 +1,4 @@
-const CryptoJS = require("crypto-js")
+//const CryptoJS = require("crypto-js")
 
 var userConnected=false;
 var globalUser=null;
@@ -12,6 +12,7 @@ export default {
           modePageCompte:"connexion",
           login: 'non connecté',
           passPhrase: 'sldjreioenos,soa',
+          typeUser:'',
           password:'',
           repetPassword:'',
           newLogin:'', 
@@ -214,14 +215,22 @@ export default {
             //console.log("compte.js => recuperation status commande update user ");
             let status = response.status
             console.log('compte.js => status = ' + status)
-            let message = response.message
-            //console.log('compte.js => message = ' + message)
-            globalUser = response.user
-            this.user=globalUser
-            //console.log('compte.js => user = ' + JSON.stringify(globalUser))
-            userConnected = true
-            this.connected = true
-            //console.log ("compte.js => Utilisateur " + this.user.nom + " connecté")
+            if (status == 'OK'){
+              let message = response.message
+              //console.log('compte.js => message = ' + message)
+              globalUser = response.user
+              this.typeUser=globalUser.role
+              this.user=globalUser
+              //console.log('compte.js => user = ' + JSON.stringify(globalUser))
+              userConnected = true
+              this.connected = true
+              //console.log ("compte.js => Utilisateur " + this.user.nom + " connecté")
+              if (this.typeUser == 'administrateur'){
+                console.log("administarteur connecté")
+              }
+            } else {
+              console.log("echec de la connexion de " + login)
+            }
           })
           .catch(error => {
             console.error(error);
@@ -237,6 +246,15 @@ export default {
           //   console.log(" compte.js => isConnected : " + userConnected + ', username = ' + globalUser.nom)
           // }
           return globalUser;
+        },
+        //---------------------------------
+        //
+        //  isAdmin
+        //
+        //---------------------------------
+        isAdmin(){
+          // if (globalUser){
+          return (this.typeUser == 'administrateur');
         }
       }
 }

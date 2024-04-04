@@ -1,0 +1,20 @@
+Bug a resoudre :
+- sur visualisation des recettes les boutons precedente et suivante calcul de l'index eronné
+
+Fonctions a réaliser :
+- popote :
+  - edition d'une recette
+  - suppression d'une recette
+  - ajout d'une recette
+  - dockerisation
+  - creer un mode admin
+    - gestion des users
+    - reset des mots de passe
+
+- nginx : 
+  - mise en place
+  - dockerisation
+
+- Base de données :
+  - mise en place en remplacement du serveur nodeJS
+  - dockerisation

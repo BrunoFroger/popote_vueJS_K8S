@@ -1,12 +1,20 @@
 [
     {
+        "nom":"admin",
+        "password":"nimda",
+        "email":"bruno.froger93@gmail.com",
+        "role":"administrateur"
+    },
+    {
         "nom":"toto",
         "password":"toto",
-        "email":"toto@orange.com"
+        "email":"toto@orange.com",
+        "role":"utilisateur"
     },
     {
         "nom":"titi",
         "password":"titi",
-        "email":"titi@orange.com"
+        "email":"titi@orange.com",
+        "role":"utilisateur"
     }
 ]

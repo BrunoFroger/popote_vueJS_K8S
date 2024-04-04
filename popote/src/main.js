@@ -2,18 +2,26 @@ const { createApp } = Vue;
 
 import Home from './home.js';
 import Recettes from './recettes.js';
-import EditRecette from './editRecette.js';
 import Compte from './compte.js';
+import ListeRecettes from './listeRecettes.js'
+import AfficheRecette from './afficheRecette.js'
+import EditeRecette from './editeRecette.js'
+import CreationRecette from './creationRecette.js'
 
 const app = createApp({
     data() {
         return {
-	    page: 'home',
-      connected: false,
-	    copyright: 'Bruno Froger (c) depuis 2024',
+          page: 'home',
+          connected: false,
+          copyright: 'Bruno Froger (c) depuis 2024',
+          isAdmin: false,
+          currentDateTime: '',
         }
     },
     mounted() {
+      this.updateTypeUser();
+      this.updateDateTime();
+      setInterval(this.updateDateTime, 1000);
     },
     template: '\
         <div class="entete">\
@@ -22,10 +30,13 @@ const app = createApp({
               <td><a href="#" @click.prevent="page=\'home\'">Acceuil</a></td>\
               <td><a href="#" @click.prevent="page=\'recettes\'">Recettes</a></td>\
               <td><a href="#" @click.prevent="page=\'compte\'">Mon compte</a></td>\
+              <td v-if="isAdmin"><a href="#" @click.prevent="page=\'admin\'">Admin</a></td>\
+              <td>{{currentDateTime}}</td>\
             </tr>\
           </table>\
         </div>\
         <div>\
+        <span @load="updateTypeUser"></span>\
           <component v-bind:is="page"></component>\
         </div>\
         <div class="piedPage">\
@@ -33,11 +44,27 @@ const app = createApp({
         </div>\
       ',
     methods: {
+      updateTypeUser(){
+        this.isAdmin = Compte.methods.isAdmin();
+        console.log('isAdmin : ' + this.isAdmin)
+      },
+      //---------------------------------
+      //
+      //  updateDateTime
+      //
+      //---------------------------------
+      updateDateTime() {
+        const now = new Date();
+        this.currentDateTime = now.toLocaleString();
+      },
     }
 });
 
 app.component('home', Home);
 app.component('recettes', Recettes);
-app.component('editRecette', EditRecette);
 app.component('compte', Compte);
+app.component('listeRecettes', ListeRecettes);
+app.component('afficheRecette', AfficheRecette);
+app.component('editeRecette', EditeRecette);
+app.component('creationRecette', CreationRecette);
 app.mount('#app');
