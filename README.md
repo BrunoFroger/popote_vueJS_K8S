@@ -1,33 +1,36 @@
-# Popote en VUE JS sur Kuberbetes
-Ce projet decrit le mode opératoire du developpement en VueJS et du déploiement de l'application popote (serveur de recettes de cuisine) sur une architecture Kubernetes en utilisant Docker pour la production des contener.
+# Popote en VUE JS sur Kubernetes
+Ce projet décrit le mode opératoire du développement en VueJS et du déploiement de l'application popote (serveur de recettes de cuisine) sur une architecture Kubernetes en utilisant Docker pour la production des conteneur.
 
 en option un serveur NodeJS est proposé dans des fin de tests des dev VueJS
 
 # 1. Installation
 
 Pour procéder à cette installation, il est nécessaire de disposer des éléments suivants :
+
 - 1 ou plusieurs machines capables d'exécuter Linux
 - 1 connexion à internet (via une routeur de type Livebox par exemple)
-- 1 switch, pour connecter entre elle toutes les machines et les raccorder au routeur d'accès a internet
+- 1 switch, pour connecter entre elles toutes les machines et les raccorder au routeur d'accès a internet
 
 ## 1.1 Installation de Linux 
 
 Télécharger [ici](https://www.ubuntu-fr.org/download/) la dernière version de Linux (ici exemple avec Ubuntu)
 
 Suivre ensuite les recommandations proposées pour installer l'OS sur votre machine :
+
 - flasher clé USB avec la distribution
 - brancher la machine cible sur le secteur
 - raccorder 1 câble réseau sur le switch
 - sélectionner boot sur clé USB dans le setup de la machine au démarrage
 - lancer l'installation
 
-paramètres a renseigner pour l'installation de linux :
+paramètres à renseigner pour l'installation de linux :
+
 - sélectionner la langue (français)
 - sélectionner installer Ubuntu
 - valider clavier français (continuer)
 - pas de connexion réseau sans fil
 - mise à jour et autres logiciels : sélectionner installation minimale, avec téléchargement des mise à jour en cours d'installation
-- si une autre version était déjà installer la remplacer par la nouvelle
+- si une autre version était déjà installée la remplacer par la nouvelle
 - si demande changement sur les disques, valider
 - valider fuseau horaire sur Paris
 - renseignement "qui êtes-vous"
@@ -39,21 +42,25 @@ paramètres a renseigner pour l'installation de linux :
 
 **Post installation :**
 
+L'ensemble de ces opérations sont a faire sur la ou les machines du cluster.
+
 Pour pouvoir utiliser les commandes de manipulation réseau : 
 
 - ifconfig : ``sudo apt install net-tools``
 - curl : ``sudo apt install curl``
 - server ssh : ``sudo apt-get install openssh-server``
-- optionnel mobaxterm : cette application Windows nécessite l'installation de wine ``sudo apt install wine`` puis copier le téléchargement de l'application [mobaxterm.exe](https://mobaxterm.mobatek.net/download-home-edition.html) localement sur la machine ; vous pourrez alors lancer son exécution avec la commande ``wine mobaxterm.exe``
+- optionnel Mobaxterm : 
+	- sur Windows, [télécharger](https://mobaxterm.mobatek.net/download-home-edition.html) et installer Mobaxterm nativement
+	- sur Mac ou Linux, cette application Windows nécessite l'installation de [wine](https://www.winehq.org/) ``sudo apt install wine`` puis copier le téléchargement de l'application [mobaxterm.exe](https://mobaxterm.mobatek.net/download-home-edition.html) localement sur la machine ; vous pourrez alors lancer son exécution avec la commande ``wine mobaxterm.exe``
 
-Suite a toutes ces manipulation, le système proposera sans doute des mises a jours, il faut les accepter, et si un redémarrage est demander l'accepter aussi.
+Suite a toutes ces manipulation, le système proposera sans doute des mises à jour, il faut les accepter, et si un redémarrage est demandé l'accepter aussi.
 
 ## 1.2 Installation de Kubernetes
 
-pour l'installation de kubernetes ; 2 possibilités (minikube ou satndard)
+Pour l'installation de Kubernetes ; 2 possibilités (Minikube ou standard)
 
 ### 1.2.1 Minikube (configuration simplifiée)
-Pour l'installation et la configuration de minikube se referer a la documentation en ligne [ici](https://minikube.sigs.k8s.io/docs/)
+Pour l'installation et la configuration de Minikube se référer a la documentation en ligne [ici](https://minikube.sigs.k8s.io/docs/)
 
 ci dessus les commandes pour une installation de minikube sur Linux :
 ```
@@ -61,7 +68,7 @@ curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-
 sudo install minikube-linux-amd64 /usr/local/bin/minikube
 ```
 
-Vérification que Minikube est bien installé : ``minikube start`` aucunmessage d'erreur doit s'afficher
+Vérification que Minikube est bien installé : ``minikube start`` aucun message d'erreur ne doit s'afficher
 
 ### 1.2.2 Installation standard
 
