@@ -141,7 +141,7 @@ export default {
       //
       //---------------------------------
       loadListeRecettes() {
-        console.log("recettes.js (loadListeRecettes) =>")
+        console.log('recettes.js => loadListeRecettes : ');
         var prive = this.recettesPrivees;
         var index = this.idxDebutListeRecettes;
         var nb = this.nbRecettesParPage;
@@ -150,7 +150,6 @@ export default {
         var url = 'http://localhost:3000/getListeRecettes?index=' + index 
                   + '&nb=' + nb + '&user=' + auteur 
                   + '&prive=' + prive + '&type=' + type;
-        console.log('recettes.js => loadListeRecettes : ');
         //console.log('   index      : ' + index)
         //console.log('   nbRecettes : ' + nb)
         //console.log('   auteur     : ' + auteur)

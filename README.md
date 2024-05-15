@@ -236,6 +236,42 @@ La visualisation du rendu se fait en se connectant en local sur [http://localhos
 
 # 4. Execution dans Docker
 
+## 4.1 Projet Vue (frontend)
+
+Créer un fichier **Dockerfile** avec le modèle suivant  :
+
+```
+FROM node:lts-alpine
+
+# installe un simple serveur http pour servir un contenu statique
+RUN npm install -g http-server
+
+# définit le dossier 'app' comme dossier de travail
+WORKDIR /app
+
+# copie 'package.json' et 'package-lock.json' (si disponible)
+COPY package*.json ./
+
+# installe les dépendances du projet
+RUN npm install
+
+# copie les fichiers et dossiers du projet dans le dossier de travail (par exemple : le dossier 'app')
+COPY dist /app/
+
+# construit l'app pour la production en la minifiant
+RUN npm run prod
+
+EXPOSE 8080
+CMD [ "http-server", "dist" ]
+```
+
+Construire le conteneur avec la commande : ``docker build -t popote/frontend .``
+
+Executer le conteneur en local ``docker run -it -p 8080:8080 --rm --name popote-frontend-1 popote/frontend``
+
+Tester le en accédant avec votre browser web à l'adresse [http://localhost:8080](http://localhost:8080)
+
+
 # 99. Quelques commandes Kubernetes Usuelles 
 ``kubectl version`` : affiche version de kubernetes  
 ``kubectl config view`` : affiche la configuration  
