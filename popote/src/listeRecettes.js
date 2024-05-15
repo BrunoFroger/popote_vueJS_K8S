@@ -32,7 +32,7 @@ export default {
     <h1>Liste des recettes</h1>\
     <p>Parcourez la liste des recettes disponibles et selectionnez celle que vous voulez préparer</p>\
     <span v-if="userConnected" >\
-      <input @change="$parent.loadListeRecettes" type="checkbox" v-model="recettesPrivees"> Mes recettes (visualisation de vos créations)\
+      <input @change="loadListeRecettes" type="checkbox" v-model="recettesPrivees"> Mes recettes (visualisation de vos créations)\
     </span>\
     \
       <p>\
@@ -52,7 +52,7 @@ export default {
             <th>description</th>\
           </tr>\
           <tr v-for="(item, index) in $parent.listeRecettes">\
-            <td @click="loadRecette(item)">{{item.titre}}</td>\
+            <td @click="loadRecette(item.index)">{{item.titre}}</td>\
             <td>{{item.type}}</td>\
             <td>{{item.description}}</td>\
           </tr>\
@@ -116,8 +116,19 @@ export default {
       //
       //---------------------------------
       loadRecette(index) {
-        console.log('listeRecette.js => loadRecette')
+        console.log('listeRecette.js : listeRecette.js => loadRecette')
         this.$parent.loadRecette(index)
+      },
+      //---------------------------------
+      //
+      //  loadListeRecette
+      //
+      //---------------------------------
+      loadListeRecette() {
+        console.log('listeRecette.js : loadListeRecette.js => loadListeRecette')
+        this.$parent.recettesPrivees = this.recettesPrivees
+        this.$parent.auteur = this.auteur
+        this.$parent.loadListeRecette(index)
       },
     }
 }

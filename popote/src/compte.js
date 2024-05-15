@@ -23,6 +23,7 @@ export default {
           adresseMail:'',
           user:globalUser,
           connected:userConnected,
+          message:"",
         };
       },
       mounted() {
@@ -88,6 +89,9 @@ export default {
               </tr>\
             </table>\
             <button @click="connecte()">Valider</button>\
+            <div>\
+              {{message}}\
+            </div>\
           </div>\
           <div v-else-if="modePageCompte === \'deconnexion\'">\
             <h2> deconnexion a votre compte </h2>\
@@ -231,6 +235,7 @@ export default {
             } else {
               console.log("echec de la connexion de " + login)
             }
+            this.message = response.message
           })
           .catch(error => {
             console.error(error);

@@ -1,10 +1,10 @@
 
 export default {
-  props: {
-    recetteAffichee:{
-      required: true,
-    },
-  }, 
+  // props: {
+  //   recetteAffichee:{
+  //     required: true,
+  //   },
+  // }, 
     data: function () {
       return {
         // auteur : null,
@@ -15,7 +15,8 @@ export default {
         // ingredients : null,
         // ingredient : "{[null]}",
         // //index : 0,
-        // modeEdition:false,
+        recette:{},
+        modeEdition:false,
       };
     },
     mounted() {
@@ -24,9 +25,9 @@ export default {
     template: '\
       <h1>Recette</h1>\
       <p><button @click="setModeListe(\'listeRecettes\')">Retour à la liste de recettes</button></p>\
-      <p>Recette numéro : <button @click="$parent.decrementeIndex">précédente</button>  {{$parent.index}}  <button @click="$parent.incrementeIndex">suivante</button></p>\
+      <p>Recette numéro : <button @click="decrementeIndex">précédente</button>  {{$parent.index}}  <button @click="incrementeIndex">suivante</button></p>\
       <p></p>\
-      <p v-if="auteur">Cette recette est proposée par {{auteur}}\
+      <p v-if="$parent.recette.auteur">Cette recette est proposée par {{$parent.recette.auteur}}\
         <span v-if="$parent.recettesPrivees"> \
           <button @click="switchModeEdition">Editer</button>\
           <span v-if="modeEdition"> Edition en cours .... </span>\
@@ -41,15 +42,15 @@ export default {
         </tr-->\
         <tr>\
           <td>titre</td>\
-          <td>{{recette.titre}}</td>\
+          <td>{{$parent.recette.titre}}</td>\
         </tr>\
         <tr>\
           <td>type</td>\
-          <td>{{recette.typeRecette}}</td>\
+          <td>{{$parent.recette.typeRecette}}</td>\
         </tr>\
           <tr>\
             <td>description</td>\
-            <td>{{recette.description}}</td>\
+            <td>{{$parent.recette.description}}</td>\
           </tr>\
           <tr>\
             <td >ingredients</td>\
@@ -59,7 +60,7 @@ export default {
                 <th>quantité</th>\
                 <th>unité</th>\
               </thead>\
-                <tr v-for="ingredient in recette.ingredients">\
+                <tr v-for="ingredient in $parent.recette.ingredients">\
                   <td>\
                     {{ingredient.nom}}\
                   </td>\
@@ -74,7 +75,7 @@ export default {
           </tr>\
           <tr>\
             <td>realisation</td>\
-            <td>{{recette.realisation}}</td>\
+            <td>{{$parent.recette.realisation}}</td>\
           </tr>\
         </table>\
         <span v-if="modeEdition">\
@@ -141,5 +142,23 @@ export default {
         this.$parent.loadRecette(index)
         return this.$parent.recette
       },
-    }
+      //---------------------------------
+      //
+      //  incrementeIndex
+      //
+      //---------------------------------
+      incrementeIndex() {
+        this.$parent.incrementeIndex()
+        this.recette = this.$parent.recette
+      },
+      //---------------------------------
+      //
+      //  decrementeIndex
+      //
+      //---------------------------------
+      decrementeIndex() {
+        this.$parent.decrementeIndex()
+        this.recette = this.$parent.recette
+      },
+    },
 }

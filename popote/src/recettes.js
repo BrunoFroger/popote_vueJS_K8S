@@ -39,7 +39,7 @@ export default {
           <listeRecettes/>\
         </span>\
         <span v-if="modeAffichage == \'afficheRecette\'">\
-          <afficheRecette :recetteAffichee="this.recette"/>\
+          <afficheRecette/>\
         </span>\
         <span v-if="modeAffichage == \'editeRecette\'">\
           <editeRecette/>\
@@ -78,6 +78,7 @@ export default {
         this.index++;
         if (this.index >= this.nbRecettes) this.index = this.nbRecettes - 1;
         this.loadRecette(this.index);
+        console.log("recette.js : incrementeIndex : " + this.index)
       },
       //---------------------------------
       //
@@ -88,6 +89,7 @@ export default {
         this.index--;
         if (this.index <= 0) this.index = 0;
         this.loadRecette(this.index);
+        console.log("recette.js : decrementeIndex : " + this.index)
       },
       //---------------------------------
       //
@@ -119,7 +121,7 @@ export default {
       //
       //---------------------------------
       updateRecette() {
-        console.log("recettes.js (updateRecette) => TODO")
+        console.log("recettes.js : updateRecette => TODO")
         this.switchModeEdition()
       },
       //---------------------------------
@@ -139,6 +141,7 @@ export default {
       //
       //---------------------------------
       loadListeRecettes() {
+        console.log("recettes.js (loadListeRecettes) =>")
         var prive = this.recettesPrivees;
         var index = this.idxDebutListeRecettes;
         var nb = this.nbRecettesParPage;
@@ -166,11 +169,11 @@ export default {
       //  loadRecette
       //
       //---------------------------------
-      loadRecette(item) {
-        this.indexRecette = item.index
-        console.log('recette.js => loadRecette ' + item.index)
+      loadRecette(index) {
+        //this.indexRecette = item.index
+        console.log('recette.js => loadRecette ' + index)
         //if (this.modeListe) indexRecette += this.idxDebutListeRecettes;
-        fetch('http://localhost:3000/getRecette?index=' + this.indexRecette).then(r => r.json()).then(response => {
+        fetch('http://localhost:3000/getRecette?index=' + index).then(r => r.json()).then(response => {
           //console.log("recettes.js (loadRecette) => chargement de la recette " + this.indexRecette + ' depuis le serveur');
           //console.log('     titre : ' + response.titre);
           this.recette = response
