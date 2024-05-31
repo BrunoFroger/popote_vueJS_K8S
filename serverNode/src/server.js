@@ -3,7 +3,7 @@ const url=require("url")
 const fs=require("fs")
 const { parse } = require('querystring');
 
-const hostname = 'localhost';
+const hostname = '127.0.0.1';
 const port = 3000;
 var idRecette;
 var nbRecettes = 0;
@@ -21,7 +21,7 @@ var tmpUser=null
 //
 //=====================================================
 const server = http.createServer((req, res) => {
-    //console.log('requete = ' + req.url);
+    console.log('requete = ' + req.url);
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
     //res.setHeader('Access-Control-Allow-Header', 'content-type');
     console.log("serveur => url = " + req.url);
@@ -105,6 +105,7 @@ const server = http.createServer((req, res) => {
 //
 //=====================================================
 server.listen(port, hostname, () => {
+    console.log('Serveur NodeJS pour popote');
     console.log(`serveur => Server running at http://${hostname}:${port}/`);
     chargeRecettes();
     chargeUsers()
@@ -116,7 +117,9 @@ server.listen(port, hostname, () => {
   //
   //=====================================================
   function chargeUsers(){
-    fs.readFile("users.json","utf-8",(err,data)=>{
+    console.log("Chargement des users")
+    nbUsers = 0;
+    fs.readFile("src/users.json","utf-8",(err,data)=>{
         if(err){
             const stuff ={
                 titre: 'impossible de lire le fichier de users',
@@ -127,12 +130,11 @@ server.listen(port, hostname, () => {
         } else {
             console.log('serveur => lecture du fichier contenant les users');
             users = JSON.parse(data);
-            nbUsers = 0;
             users.forEach ((item) =>{
                 nbUsers++;
             });
-            console.log('serveur => nombre de Users : ' + nbUsers);
         }
+        console.log('serveur => nombre de Users : ' + nbUsers);
     });
   }
 
@@ -152,7 +154,9 @@ server.listen(port, hostname, () => {
   //
   //=====================================================
   function chargeRecettes(){
-    fs.readFile("recettes.json","utf-8",(err,data)=>{
+    console.log("Chargement des recettes")
+    nbRecettes = 0;
+    fs.readFile("src/recettes.json","utf-8",(err,data)=>{
         if(err){
             const stuff ={
                 titre: 'impossible de lire le fichier de recettes',
@@ -163,13 +167,12 @@ server.listen(port, hostname, () => {
         } else {
             console.log('serveur => lecture du fichier contenant les recettes');
             recettes = JSON.parse(data);
-            nbRecettes = 0;
             recettes.forEach ((item) =>{
                 item.index = nbRecettes;
                 nbRecettes++;
             });
-            console.log('serveur => nombre de recetes : ' + nbRecettes);
         }
+        console.log('serveur => nombre de recetes : ' + nbRecettes);
     });
   }
 

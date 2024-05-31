@@ -197,9 +197,94 @@ Arret du conteneur : ``docker stop mariadb-popote``
 
 ## 2.3 Installer conteneur NodeJS (backend popote)
 
+
+
+Créer un fichier **Dockerfile** avec le modèle suivant  :
+
+```
+# syntax=docker/dockerfile:1
+
+# Comments are provided throughout this file to help you get started.
+# If you need more help, visit the Dockerfile reference guide at
+# https://docs.docker.com/go/dockerfile-reference/
+
+# Want to help us make this template better? Share your feedback here: https://forms.gle/ybq9Krt8jtBL3iCk7
+
+ARG NODE_VERSION=18.0.0
+
+#FROM node:lts-alpine
+FROM node:current-bullseye
+
+RUN echo "==========================="; \
+    echo "|                         |"; \
+    echo "|       BACKEND           |"; \
+    echo "|                         |"; \
+    echo "==========================="
+
+#install ssh server
+RUN apt-get update && apt-get install -y openssh-server
+RUN mkdir /var/run/sshd
+RUN echo 'root:root123' | chpasswd
+RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+RUN mkdir .ssh
+RUN ssh-keygen -A
+RUN touch .ssh/hostkeys
+
+EXPOSE 22
+
+# Use production node environment by default.
+ENV NODE_ENV production
+
+WORKDIR /usr/src/app
+
+# copie 'package.json' et 'package-lock.json' (si disponible)
+COPY ./package*.json ./
+
+# Download dependencies as a separate step to take advantage of Docker's caching.
+# Leverage a cache mount to /root/.npm to speed up subsequent builds.
+# Leverage a bind mounts to package.json and package-lock.json to avoid having to copy them into
+# into this layer.
+RUN --mount=type=bind,source=package.json,target=package.json \
+    --mount=type=bind,source=package-lock.json,target=package-lock.json \
+    --mount=type=cache,target=/root/.npm \
+    npm ci --omit=dev
+
+RUN npm install
+
+# Run the application as a non-root user.
+USER node
+
+# Copy the rest of the source files into the image.
+COPY ./src ./src
+
+# Expose the port that the application listens on.
+EXPOSE 3000
+
+# Run the application.
+CMD ["/bin/bash", "-c", "/usr/sbin/sshd -D ; node src/server"]
+```
+
+Construire le conteneur : 
+
+``docker build -q -t popote_backend .``
+
+Executer le conteneur : 
+
+``docker run --rm -it --name=popote_backend -p 3000:3000 -p 2222:22 docker_popote``
+
+Construire et exécuter le conteneur : 
+
+``docker run --rm -it --name=popote_backend -p 3000:3000 -p 2222:22 $(docker build -q .)``
+
+pour se connecter sur le conteneur 2 solutions :
+
+``docker exec -it popote_backend /bin/bash`` 
+
+``ssh root@127.0.0.1:2222` à valider (ne fonctionne pas avec le dockerfile actuel)
+
 ##2.4 Installer conteneur VueJS (frontend popote)
 
-## 2.5 developpement Popote
+## 2.5 développement Popote
 
 Le développement du projet popote en vue JS est disponible [ici](https://github.com/BrunoFroger/chaudiere_vueJs_K8S) sur github.  
 Vous pouvez utiliser [Visual studio code](https://code.visualstudio.com/download) pour faire les développements.  
@@ -243,36 +328,69 @@ Créer un fichier **Dockerfile** avec le modèle suivant  :
 ```
 FROM node:lts-alpine
 
+RUN echo "==========================="; \
+    echo "|                         |"; \
+    echo "|       FRONTEND          |"; \
+    echo "|                         |"; \
+    echo "==========================="
+
 # installe un simple serveur http pour servir un contenu statique
-RUN npm install -g http-server
+RUN npm install -g http-server 
+#RUN npm install --save-dev webpack
+RUN npm install -g webpack
 
 # définit le dossier 'app' comme dossier de travail
 WORKDIR /app
 
 # copie 'package.json' et 'package-lock.json' (si disponible)
-COPY package*.json ./
+COPY ./package*.json ./
+COPY ./webpack.config.js ./
 
 # installe les dépendances du projet
 RUN npm install
 
 # copie les fichiers et dossiers du projet dans le dossier de travail (par exemple : le dossier 'app')
-COPY dist /app/
+COPY ./src ./src
 
 # construit l'app pour la production en la minifiant
-RUN npm run prod
+RUN npm run build
 
 EXPOSE 8080
 CMD [ "http-server", "dist" ]
 ```
 
-Construire le conteneur avec la commande : ``docker build -t popote/frontend .``
+construire et executer le conteneur : 
 
-Executer le conteneur en local ``docker run -it -p 8080:8080 --rm --name popote-frontend-1 popote/frontend``
+``docker run --rm -it --name=popote_frontend $(docker build -q .)``
+
 
 Tester le en accédant avec votre browser web à l'adresse [http://localhost:8080](http://localhost:8080)
 
+# 9. Informations diverses
 
-# 99. Quelques commandes Kubernetes Usuelles 
+## 91. Déploiement automatique avec github
+
+voir doc sur [gitHub](https://docs.github.com/fr/actions/deployment/about-deployments/about-continuous-deployment)
+
+# 98. Quelques commandes Docker usuelles
+
+``docker build [options] path`` : construit un container en fonction du dockerfile dans le répertoire path
+
+Principales options :
+	- -t nomImage : génère une image nommée
+
+``docker run [options] IMAGE [commande] [ARGS]``
+
+Principales options :
+
+- -d : execute la commande en arrière plan
+- --rm : détruit le container après l'execution
+- -it : ouvre un pseudo tty pour visualiser le stdout du container
+- -p portHost:portContainer : mapping d'un port sur machine hote vers port du container (ce paramètre peut être répété)
+
+``docker ps -a`` : liste des container
+
+# 99. Quelques commandes Kubernetes usuelles 
 ``kubectl version`` : affiche version de kubernetes  
 ``kubectl config view`` : affiche la configuration  
 ``kubectl config use-context <nom du context>`` : ???  
