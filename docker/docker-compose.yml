@@ -1,5 +1,5 @@
-version: '3.5'
-name: popote
+#version: '3.5'
+#name: 'popote'
 
 # Services
 services:
@@ -7,47 +7,15 @@ services:
   # backend Service : serveur node
   backend:
     container_name: popote_backend
-    build:
-      dockerfile: dockerfile-backend
+    build: 
       context: .
-    volumes:
-      - '../:/var/www/html'
-      - './php-logging.conf:/usr/local/etc/php-fpm.d/zz-log.conf'
-    depends_on:
-      - mariadb
+      dockerfile: ../serverNode/dockerfile
+    ports:
+      - 3000:3000
 
   # frontend Service : VueJS
   frontend:
     container_name: popote_frontend
-    build:
-      dockerfile: popote/dockerfile-frontend
-      context: .
-    #image: 
-    #build:
-    #volumes: 
-
-  # Nginx Service
-  nginx:
-    container_name: popote_nginx
-    image: nginx:latest
+    build: ../popote/dockerfile
     ports:
-      - 8080:80
-    #links:
-      #- 'php'
-    #volumes:
-    depends_on:
-      - backend
-      - frontend
-
-  # MariaDB Service
-  mariadb:
-    container_name: popote_maiadb
-    image: mariadb:latest
-    environment:
-      MYSQL_ROOT_PASSWORD: YOURPASSWORDHERE
-    volumes:
-      - './mysqldata:/var/lib/mysql'
-
-# Volumes
-volumes:
-  mysqldata:
+      - 8080:8080

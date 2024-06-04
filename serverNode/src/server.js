@@ -3,7 +3,7 @@ const url=require("url")
 const fs=require("fs")
 const { parse } = require('querystring');
 
-const hostname = '127.0.0.1';
+const hostname = '';
 const port = 3000;
 var idRecette;
 var nbRecettes = 0;
@@ -104,8 +104,9 @@ const server = http.createServer((req, res) => {
 //      server.listen
 //
 //=====================================================
-server.listen(port, hostname, () => {
+server.listen(port, () => {
     console.log('Serveur NodeJS pour popote');
+    console.log('server address = ' + server.address().address)
     console.log(`serveur => Server running at http://${hostname}:${port}/`);
     chargeRecettes();
     chargeUsers()

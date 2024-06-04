@@ -97,10 +97,12 @@ export default {
       //
       //---------------------------------
       getNbRecettes() {
+        console.log("requete : getNbRecette ....")
+        let adresse = this.$parent.serverNodeAdress + '/getNbRecettes'
         // todo : retourner nb de recettes dans listeRecettes plutot que le nombre de recettes en base
-        fetch('http://localhost:3000/getNbRecettes').then(r => r.json()).then(response => {
+        fetch(adresse).then(r => r.json()).then(response => {
           this.nbRecettes = response.nbRecettes;
-          //console.log("recuperation du nombre de recettes " + this.nbRecettes);
+          console.log("recuperation du nombre de recettes " + this.nbRecettes);
         })
         .catch(error => {
           console.error(error);
@@ -141,15 +143,19 @@ export default {
       //
       //---------------------------------
       loadListeRecettes() {
-        console.log('recettes.js => loadListeRecettes : ');
+        console.log('loadListeRecettes .....')
         var prive = this.recettesPrivees;
         var index = this.idxDebutListeRecettes;
         var nb = this.nbRecettesParPage;
         var auteur = this.userName;
         var type = this.typeRecetteSelected;
-        var url = 'http://localhost:3000/getListeRecettes?index=' + index 
-                  + '&nb=' + nb + '&user=' + auteur 
-                  + '&prive=' + prive + '&type=' + type;
+        var url = this.$parent.serverNodeAdress + '/getListeRecettes?index=' + index 
+            + '&nb=' + nb + '&user=' + auteur 
+            + '&prive=' + prive + '&type=' + type;
+        console.log('recettes.js => loadListeRecettes : ' + url);
+        //var url = 'http://localhost:3000/getListeRecettes?index=' + index 
+        //          + '&nb=' + nb + '&user=' + auteur 
+        //          + '&prive=' + prive + '&type=' + type;
         //console.log('   index      : ' + index)
         //console.log('   nbRecettes : ' + nb)
         //console.log('   auteur     : ' + auteur)
@@ -170,9 +176,10 @@ export default {
       //---------------------------------
       loadRecette(index) {
         //this.indexRecette = item.index
-        console.log('recette.js => loadRecette ' + index)
         //if (this.modeListe) indexRecette += this.idxDebutListeRecettes;
-        fetch('http://localhost:3000/getRecette?index=' + index).then(r => r.json()).then(response => {
+        var url = this.$parent.serverNodeAdress + 'getRecette?index=' + index
+        console.log('recette.js => loadRecette : ' + url)
+        fetch(url).then(r => r.json()).then(response => {
           //console.log("recettes.js (loadRecette) => chargement de la recette " + this.indexRecette + ' depuis le serveur');
           //console.log('     titre : ' + response.titre);
           this.recette = response

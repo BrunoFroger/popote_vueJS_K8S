@@ -1,0 +1,17 @@
+
+# Pull the mariadb latest image
+FROM mariadb:latest
+
+WORKDIR /sql
+
+ENV MYSQL_ROOT_PASSWORD test123
+ENV MYSQL_DATABASE popote
+ENV MYSQL_USER toto
+ENV MYSQL_PASSWORD test123
+
+COPY . .
+
+RUN chmod +x *bash
+EXPOSE 3306
+
+CMD ["mysqld"]

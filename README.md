@@ -197,8 +197,6 @@ Arret du conteneur : ``docker stop mariadb-popote``
 
 ## 2.3 Installer conteneur NodeJS (backend popote)
 
-
-
 Créer un fichier **Dockerfile** avec le modèle suivant  :
 
 ```
@@ -221,21 +219,28 @@ RUN echo "==========================="; \
     echo "|                         |"; \
     echo "==========================="
 
+RUN apt-get update 
+
+#install net-tools (ifconfig) optionnel
+RUN apt-get install -y net-tools
+
 #install ssh server
-RUN apt-get update && apt-get install -y openssh-server
+RUN apt-get install -y openssh-server
 RUN mkdir /var/run/sshd
 RUN echo 'root:root123' | chpasswd
 RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
-RUN mkdir .ssh
-RUN ssh-keygen -A
-RUN touch .ssh/hostkeys
+RUN touch /etc/ssh/sshd_config
+RUN echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
+
+#RUN /usr/sbin/sshd -D &
+RUN echo root123 | su -c "/etc/init.d/ssh start" 
 
 EXPOSE 22
 
 # Use production node environment by default.
 ENV NODE_ENV production
 
-WORKDIR /usr/src/app
+WORKDIR /home/node
 
 # copie 'package.json' et 'package-lock.json' (si disponible)
 COPY ./package*.json ./
@@ -251,17 +256,22 @@ RUN --mount=type=bind,source=package.json,target=package.json \
 
 RUN npm install
 
-# Run the application as a non-root user.
-USER node
-
 # Copy the rest of the source files into the image.
 COPY ./src ./src
+
+# Run the application as a non-root user.
+USER node
 
 # Expose the port that the application listens on.
 EXPOSE 3000
 
 # Run the application.
-CMD ["/bin/bash", "-c", "/usr/sbin/sshd -D ; node src/server"]
+#CMD ["/bin/bash", "-c", "/usr/sbin/sshd -D ; node src/server"]
+#CMD ["/bin/bash", "-c", "/etc/init.d/ssh start ; node src/server"]
+RUN cd src
+
+# execute fichier bash de post traitement (lancement des applications et demons)
+CMD src/docker_cmd.bash
 ```
 
 Construire le conteneur : 
@@ -374,10 +384,15 @@ voir doc sur [gitHub](https://docs.github.com/fr/actions/deployment/about-deploy
 
 # 98. Quelques commandes Docker usuelles
 
+## Construction d'un container
+
 ``docker build [options] path`` : construit un container en fonction du dockerfile dans le répertoire path
 
 Principales options :
 	- -t nomImage : génère une image nommée
+	- -q : quiet mode (mode silencieux ; pas de log de la construction)
+
+## Execution d'un container
 
 ``docker run [options] IMAGE [commande] [ARGS]``
 
@@ -386,9 +401,17 @@ Principales options :
 - -d : execute la commande en arrière plan
 - --rm : détruit le container après l'execution
 - -it : ouvre un pseudo tty pour visualiser le stdout du container
-- -p portHost:portContainer : mapping d'un port sur machine hote vers port du container (ce paramètre peut être répété)
+- -p portHost:portContainer : mapping d'un port sur machine hôte vers port du container (ce paramètre peut être répété)
+- --name nom : nom du container
 
+Combinaison build + run : ``docker run [options] $(docker build -q .)``
+
+## Manipulation des container :
 ``docker ps -a`` : liste des container
+
+``docker exec -it nomContainer /bin/bash`` : lancement d'un shel sur le container 
+
+``ssh root@127.0.0.1:2222`` : à valider (ne fonctionne pas avec le dockerfile actuel)
 
 # 99. Quelques commandes Kubernetes usuelles 
 ``kubectl version`` : affiche version de kubernetes  

@@ -23,22 +23,22 @@ RUN apt-get update
 RUN apt-get install -y net-tools
 
 #install ssh server
-RUN apt-get install -y openssh-server
-RUN mkdir /var/run/sshd
-RUN echo 'root:root123' | chpasswd
+#RUN apt-get install -y openssh-server
+#RUN mkdir /var/run/sshd
+#RUN echo 'root:root123' | chpasswd
 #RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
-RUN touch /etc/ssh/sshd_config
-RUN echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
+#RUN touch /etc/ssh/sshd_config
+#RUN echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
 
-#RUN /usr/sbin/sshd -D
+#RUN /usr/sbin/sshd -D &
 #RUN echo root123 | su -c "/etc/init.d/ssh start" 
 
-EXPOSE 22
+#EXPOSE 22
 
 # Use production node environment by default.
 ENV NODE_ENV production
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
 # copie 'package.json' et 'package-lock.json' (si disponible)
 COPY ./package*.json ./
@@ -54,11 +54,11 @@ RUN --mount=type=bind,source=package.json,target=package.json \
 
 RUN npm install
 
+# Copy the rest of the source files into the image.
+COPY ./ ./
+
 # Run the application as a non-root user.
 USER node
-
-# Copy the rest of the source files into the image.
-COPY ./src ./src
 
 # Expose the port that the application listens on.
 EXPOSE 3000
@@ -66,6 +66,7 @@ EXPOSE 3000
 # Run the application.
 #CMD ["/bin/bash", "-c", "/usr/sbin/sshd -D ; node src/server"]
 #CMD ["/bin/bash", "-c", "/etc/init.d/ssh start ; node src/server"]
-RUN cd src
+#RUN cd src
 
-CMD node src/server
+# execute fichier bash de post traitement (lancement des applications et demons)
+CMD src/docker_cmd.bash

@@ -16,6 +16,7 @@ const app = createApp({
           copyright: 'Bruno Froger (c) depuis 2024',
           isAdmin: false,
           currentDateTime: '',
+          serverNodeAdress: 'http://127.0.0.1:3000',
         }
     },
     mounted() {
