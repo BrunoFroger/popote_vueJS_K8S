@@ -1,0 +1,47 @@
+#version: '3.5'
+#name: 'popote'
+
+# Services
+services:
+
+  # base de donnee Service :
+  mariadb:
+    container_name: popote_mariadb
+    build: 
+      context: .
+      dockerfile: mariadb/dockerfile
+    ports:
+      - 3306:3306
+    networks:
+      - popote_network
+
+  # backend Service : serveur node
+  backend:
+    container_name: popote_backend
+    build: 
+      context: .
+      dockerfile: serverNode/dockerfile
+    ports:
+      - 3000:3000
+    depends_on:
+      - mariadb
+    networks:
+      - popote_network
+
+  # frontend Service : VueJS
+  frontend:
+    container_name: popote_frontend
+    build: 
+      context: .
+      dockerfile: popote/dockerfile
+    ports:
+      - 8080:8080
+    depends_on:
+      - backend
+    networks:
+      - popote_network
+
+# configuration reseau
+networks:
+  popote_network:
+    driver: bridge

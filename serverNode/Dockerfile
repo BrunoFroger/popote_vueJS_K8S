@@ -19,13 +19,15 @@ RUN echo "==========================="; \
 
 RUN apt-get update 
 
-#install net-tools (ifconfig) optionnel
+#install optionnels
 RUN apt-get install -y net-tools
+RUN apt-get install -y default-mysql-client
+RUN apt-get install -y iputils-ping
 
 #install ssh server
 #RUN apt-get install -y openssh-server
 #RUN mkdir /var/run/sshd
-#RUN echo 'root:root123' | chpasswd
+RUN echo 'root:root123' | chpasswd
 #RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 #RUN touch /etc/ssh/sshd_config
 #RUN echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
@@ -40,8 +42,8 @@ ENV NODE_ENV production
 
 WORKDIR /app
 
-# copie 'package.json' et 'package-lock.json' (si disponible)
-COPY ./package*.json ./
+# copie files
+COPY serverNode/ ./
 
 # Download dependencies as a separate step to take advantage of Docker's caching.
 # Leverage a cache mount to /root/.npm to speed up subsequent builds.
@@ -52,10 +54,9 @@ RUN --mount=type=bind,source=package.json,target=package.json \
     --mount=type=cache,target=/root/.npm \
     npm ci --omit=dev
 
-RUN npm install
+RUN npm install mysql
 
-# Copy the rest of the source files into the image.
-COPY ./ ./
+RUN npm install
 
 # Run the application as a non-root user.
 USER node

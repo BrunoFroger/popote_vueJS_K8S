@@ -2,16 +2,37 @@
 # Pull the mariadb latest image
 FROM mariadb:latest
 
+RUN echo "==========================="; \
+    echo "|                         |"; \
+    echo "|       MARIADB           |"; \
+    echo "|                         |"; \
+    echo "==========================="
+RUN apt-get update
+
+#install optionnels
+RUN apt-get install -y net-tools
+RUN apt-get install -y iputils-ping
+RUN apt-get install nano
+
 WORKDIR /sql
 
-ENV MYSQL_ROOT_PASSWORD test123
-ENV MYSQL_DATABASE popote
-ENV MYSQL_USER toto
-ENV MYSQL_PASSWORD test123
+ENV MYSQL_ROOT_PASSWORD root123
+ENV MYSQL_DATABASE Popote
+ENV MYSQL_USER popote
+ENV MYSQL_PASSWORD popote123
 
-COPY . .
+COPY mariadb/ /sql/
+COPY mariadb/.profile /sql/
 
-RUN chmod +x *bash
 EXPOSE 3306
 
+RUN cd /sql
+
+RUN chmod +x *bash
+
+RUN echo $SHELL
+
 CMD ["mysqld"]
+#CMD ["mysqld &", ";", "./docker_cmd.bash"]
+#CMD ["./docker_cmd.bash"]
+#CMD mysqld ; sleep 10 ; ./initDb.bash

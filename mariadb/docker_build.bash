@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker build -t popote_mariadb .
+docker build -t popote_mariadb mariadb

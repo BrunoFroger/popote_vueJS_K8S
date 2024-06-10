@@ -8,8 +8,9 @@ RUN echo "==========================="; \
 
 #RUN apt-get update 
 
-#install net-tools (ifconfig) optionnel
+#install optionnels
 #RUN apt-get install -y net-tools
+#RUN apt-get install -y iputils-ping
 
 #install ssh server
 #RUN apt-get install -y openssh-server
@@ -33,15 +34,18 @@ RUN npm install -g serve
 # définit le dossier 'app' comme dossier de travail
 WORKDIR /app
 
+# copy files
+COPY popote/ ./
+
 # copie 'package.json' et 'package-lock.json' (si disponible)
-COPY ./package*.json ./
-COPY ./webpack.config.js ./
+#COPY ./package*.json ./
+#COPY ./webpack.config.js ./
 
 # installe les dépendances du projet
 RUN npm install
 
 # copie les fichiers et dossiers du projet dans le dossier de travail (par exemple : le dossier 'app')
-COPY ./ ./
+#COPY ./ ./
 
 # construit l'app pour la production en la minifiant
 RUN npm run build
