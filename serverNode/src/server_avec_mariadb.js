@@ -31,7 +31,9 @@ const db = mysql.createConnection({
 //=====================================================
 const server = http.createServer((req, res) => {
     console.log('requete = ' + req.url);
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
+    //res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
+    //res.setHeader('Access-Control-Allow-Origin', 'http://popote_frontend:8080');
+    res.setHeader('Access-Control-Allow-Origin', '*');
     //res.setHeader('Access-Control-Allow-Header', 'content-type');
     console.log("serveur => url = " + req.url);
     if (req.url === '/'){
@@ -48,10 +50,8 @@ const server = http.createServer((req, res) => {
     } else if (req.url.startsWith('/getNbRecettes')){
         //console.log('requete getNbRecettes ');
         res.setHeader('Content-Type', 'text/json; charset=utf-8');
-        const stuff ={
-            "nbRecettes": getNbRecettes(),
-        };
-        res.end(JSON.stringify(stuff));
+        var sql = 'SELECT COUNT (*) FROM Recettes'
+        execRequete(sql, callback_getNbRecettes, res)
     } else if (req.url.startsWith('/updateDatas')){
         //console.log('requete updateDatas ');
         updateDatas();
@@ -65,8 +65,9 @@ const server = http.createServer((req, res) => {
         prive = url.parse(req.url,true).query.prive
         typeRecette = url.parse(req.url,true).query.type
         res.setHeader('Content-Type', 'text/json; charset=utf-8');
-        listTmp = getListRecettes(debut, nb, auteur, prive, typeRecette)
-        res.end(JSON.stringify(listTmp));
+        var sql = 'SELECT * FROM Recettes'
+        execRequete(sql, callback_getListeRecettes, res)
+        // listTmp = getListRecettes(debut, nb, auteur, prive, typeRecette)
     } else if (req.url.startsWith('/requeteUser')){
         let body = '';
         req.on('data', chunk => {
@@ -119,37 +120,96 @@ server.listen(port, () => {
     console.log(`serveur => Server running at http://${hostname}:${port}/`);
     //chargeRecettes();
     //chargeUsers()
-    // db.connect(function(err) {
-    //     if (err) {
-    //         console.log(" /!\ erreur tentative de connexion sur base Popote")
-    //         throw err;
-    //     } else {
-    //         console.log("connexion OK")
-    //     }
-    //     console.log("Connecté à la base de données MySQL popote !");
-    // });
-    
-});
-
-//=====================================================
-//
-//      function getNbRecettes
-//
-//=====================================================
-function getNbRecettes(){
-    var sql = 'SELECT COUNT (*) FROM Recettes'
     db.connect(function(err) {
         if (err) {
             console.log(" /!\ erreur tentative de connexion sur base Popote")
             throw err;
+        } else {
+            console.log("connexion OK")
         }
-        console.log("Connecté à la base de données MySQL popote !");    
-        db.query(sql, function (err, result) {
-            if (err) throw err;
-            console.log("Result: " + result);
-        });
+        console.log("Connecté à la base de données MySQL Popote !");
     });
+    
+});
 
+
+
+//=====================================================
+//
+//      function execRequete
+//
+//=====================================================
+function execRequete(requeteSql, callback, res){
+    var resultat={}
+    console.log("execRequete => debut")
+
+    console.log("execRequete => tentative de connexion ......")
+    // db.connect((err) => {
+    //     if (err) {
+    //         console.log("execRequete =>  /!\\ erreur tentative de connexion sur base Popote")
+    //         throw err;
+    //     } else {
+    //         console.log("execRequete => Connecté à la base de données MySQL popote !");
+    //         console.log("execRequete => envoi de la requete => ", requeteSql)
+            db.query(requeteSql, (err, result) => {
+                if (err) {
+                    throw err;
+                } else {
+                    resultat=JSON.stringify(result)
+                    console.log("execRequete => requete : OK => resultat = ", resultat);
+                    callback(resultat, res)
+                }
+            });
+    //         console.log("execRequete => on ferme la connexion")
+    //         db.close((err) => {
+    //             if (err) {
+    //                 console.log("execRequete =>  /!\\ erreur tentative de fermeture sur base Popote")
+    //                 throw err;
+    //             } else {
+    //                 console.log("execRequete => connexion fermee")
+    //             }
+    //         });
+    //     }
+    // });
+    
+
+    console.log("execRequete => fin")
+}
+
+//=====================================================
+//
+//      function callback_getNbRecettes
+//
+//=====================================================
+function callback_getNbRecettes(result, res){
+    console.log("callback_getNbRecettes => debut")
+    console.log("callback_getNbRecettes => parametre passe (result) = ", result)
+    var resultat = JSON.parse(result)[0]
+    console.log("callback_getNbRecettes => resultat getNbRecettes = ", resultat)
+    var nbRecettes = resultat["COUNT (*)"]
+    console.log("nbRecettes = " + nbRecettes)
+    const stuff ={
+        nbRecettes: nbRecettes,
+    };
+    console.log("callback_getNbRecettes => " + JSON.stringify(stuff))
+    res.end(JSON.stringify(stuff))
+    console.log("callback_getNbRecettes => fin")
+}
+
+//=====================================================
+//
+//      function callback_getListeRecettes
+//
+//=====================================================
+function callback_getListeRecettes(result, res){
+    console.log("callback_getListeRecettes => debut")
+    console.log("callback_getListeRecettes => parametre passe (result) = ", result)
+    var resultat = JSON.parse(result)
+    console.log("callback_getListeRecettes => resultat listRecettes = ", resultat)
+    const stuff ={
+    };
+    res.end(JSON.stringify(resultat))
+    console.log("callback_getListeRecettes => fin")
 }
 
 //=====================================================

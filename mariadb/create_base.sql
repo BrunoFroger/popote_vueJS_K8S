@@ -1,4 +1,6 @@
 
+DROP DATABASE Popote;
+
 CREATE DATABASE IF NOT EXISTs Popote;
 
 USE Popote;
@@ -10,6 +12,8 @@ CREATE TABLE IF NOT EXISTS Users(
     email VARCHAR(100),
     idRole BIGINT NOT NULL
 );
+
+DELETE FROM Users;
 
 INSERT INTO Users (nom, pwd, email, idRole) VALUES 
     ("admin", "nimda", "bruno.froger93@gmail.com", 0),
@@ -30,6 +34,8 @@ CREATE TABLE IF NOT EXISTS TypePlats(
     nom VARCHAR(20)
 );
 
+DELETE FROM TypePlats;
+
 INSERT INTO TypePlats (nom) VALUES
     ("entrée"),
     ("plat"),
@@ -40,6 +46,8 @@ CREATE TABLE IF NOT EXISTS Roles(
     id BIGINT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     nom VARCHAR(20)
 );
+
+DELETE FROM Roles;
 
 INSERT INTO Roles (nom) VALUES
     ("Administrateur"),
@@ -54,6 +62,8 @@ CREATE TABLE IF NOT EXISTS Recettes(
     description VARCHAR(300),
     realisation VARCHAR(5000)
 );
+
+DELETE FROM Recettes;
 
 INSERT INTO Recettes (type, auteur, titre, description, realisation) VALUES
     (2, 1, "tarte aux pommes", "dessert traditionnel avec des pommes", "etaler la pate dans le plat a tarte, couper les pommes en lamelles, repartir les pommes sur la pate, saupoudrer de sucre, mettre au four pendant 30mn");

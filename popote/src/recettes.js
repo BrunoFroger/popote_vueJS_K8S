@@ -29,9 +29,9 @@ export default {
       };
     },
     mounted() {
+      this.getNbRecettes();
       this.updateDateTime();
       setInterval(this.updateDateTime, 1000);
-      this.getNbRecettes();
     },
     template: '\
       <div>\
@@ -97,14 +97,13 @@ export default {
       //
       //---------------------------------
       getNbRecettes() {
-        console.log("requete : getNbRecette ....")
         let adresse = this.$parent.serverNodeAdress + '/getNbRecettes'
+        console.log("recette.js => : getNbRecette => " + adresse)
         // todo : retourner nb de recettes dans listeRecettes plutot que le nombre de recettes en base
         fetch(adresse).then(r => r.json()).then(response => {
           this.nbRecettes = response.nbRecettes;
           console.log("recuperation du nombre de recettes " + this.nbRecettes);
-        })
-        .catch(error => {
+        }).catch(error => {
           console.error(error);
         });
       },
@@ -177,7 +176,7 @@ export default {
       loadRecette(index) {
         //this.indexRecette = item.index
         //if (this.modeListe) indexRecette += this.idxDebutListeRecettes;
-        var url = this.$parent.serverNodeAdress + 'getRecette?index=' + index
+        var url = this.$parent.serverNodeAdress + '/getRecette?index=' + index
         console.log('recette.js => loadRecette : ' + url)
         fetch(url).then(r => r.json()).then(response => {
           //console.log("recettes.js (loadRecette) => chargement de la recette " + this.indexRecette + ' depuis le serveur');

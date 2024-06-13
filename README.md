@@ -382,7 +382,7 @@ Tester le en accédant avec votre browser web à l'adresse [http://localhost:808
 
 voir doc sur [gitHub](https://docs.github.com/fr/actions/deployment/about-deployments/about-continuous-deployment)
 
-# 98. Quelques commandes Docker usuelles
+# 95. Quelques commandes Docker usuelles
 
 ## Construction d'un container
 
@@ -412,6 +412,25 @@ Combinaison build + run : ``docker run [options] $(docker build -q .)``
 ``docker exec -it nomContainer /bin/bash`` : lancement d'un shel sur le container 
 
 ``ssh root@127.0.0.1:2222`` : à valider (ne fonctionne pas avec le dockerfile actuel)
+
+# 96 Commandes docker-compose
+
+``docker-compose up --build`` : construit et execute le contenu du fichier docker-compose.yml
+``docker-compose exec <nom du service> /bin/bash`` : lance un shel dans le conteneur défini par le service du docker-compose
+
+# 97 Commande mysql
+
+pour accéder a une base distante, voici un exemple de commande :
+
+``mysql -h mariadb -u popote -ppopote123 -D Popote -e "select count(*) from Recettes"``
+
+Explication des paramètres :
+
+	-h <machine> : nom ou adresse IP de la machine hôte hébergeant la base de données
+	-u <user> : nom de l'utilisateur dans la base de données
+	-p<passwd> : mot de passe du user ci dessus dans la base de données
+	-D <base> : nom de la base de données
+	-e <requête> : execute la requête SQL 
 
 # 99. Quelques commandes Kubernetes usuelles 
 ``kubectl version`` : affiche version de kubernetes  

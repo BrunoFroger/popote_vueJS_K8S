@@ -39,20 +39,22 @@ export default {
         Liste des recettes : type de recette \
         <select @change="$parent.changeTypeSelect($event)" name= "typeRecetteSelected" id="typeRecetteSelected">\
           <option value="tout">Tout</option>\
-          <option value="Entree">Entrée</option>\
-          <option value="Plat">Plat</option>\
-          <option value="Dessert">Dessert</option>\
+          <option value="Entree">Entrée : 0</option>\
+          <option value="Plat">Plat : 1</option>\
+          <option value="Dessert">Dessert : 2</option>\
         </select>\
       </p>\
       <div>\
         <table>\
           <tr>\
-            <th>titre</th>\
+            <th>id</th>\
+            <th>type</th>\
             <th>type</th>\
             <th>description</th>\
           </tr>\
-          <tr v-for="(item, index) in $parent.listeRecettes">\
-            <td @click="loadRecette(item.index)">{{item.titre}}</td>\
+          <tr v-for="(item, id) in $parent.listeRecettes">\
+            <td>{{item.id}}</td>\
+            <td @click="loadRecette(item.id)">{{item.titre}}</td>\
             <td>{{item.type}}</td>\
             <td>{{item.description}}</td>\
           </tr>\
