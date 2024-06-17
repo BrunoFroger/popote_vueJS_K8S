@@ -13,6 +13,9 @@ jobs:
     runs-on: ubuntu-ubuntu-latest
     environment: development
     steps: 
-      - name: deploy
-        # etapes du deploiement
-        
+      - name: stop execution container
+        run: ssh bruno@popote.zapto.org 'docker-compose stop
+      - name: charger le deploiement
+        run: ssh bruno@popote.zapto.org 'cd /home/bruno/popote_vueJS_K8S && git pull origin main'
+      - name: executer le deploiement
+        run: docker-compose up --build

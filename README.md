@@ -415,7 +415,8 @@ Combinaison build + run : ``docker run [options] $(docker build -q .)``
 
 # 96 Commandes docker-compose
 
-``docker-compose up --build`` : construit et execute le contenu du fichier docker-compose.yml
+``docker-compose up --build`` : construit et execute le contenu du fichier docker-compose.yml en local
+
 ``docker-compose exec <nom du service> /bin/bash`` : lance un shel dans le conteneur défini par le service du docker-compose
 
 # 97 Commande mysql
