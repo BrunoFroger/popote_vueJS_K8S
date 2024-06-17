@@ -14,8 +14,8 @@ jobs:
     environment: development
     steps: 
       - name: stop execution container
-        run: ssh bruno@popote.zapto.org 'docker-compose stop
+        run: ssh -p 443 bruno@popote.zapto.org 'cd /home/bruno/popote_vueJS_K8S && docker-compose stop'
       - name: charger le deploiement
-        run: ssh bruno@popote.zapto.org 'cd /home/bruno/popote_vueJS_K8S && git pull origin main'
+        run: ssh -p 443 bruno@popote.zapto.org 'cd /home/bruno/popote_vueJS_K8S && git pull origin main'
       - name: executer le deploiement
-        run: docker-compose up --build
+        run: ssh -p 443 bruno@popote.zapto.org 'cd /home/bruno/popote_vueJS_K8S && docker-compose up --build'

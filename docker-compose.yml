@@ -20,7 +20,7 @@ services:
     container_name: popote_backend
     build: 
       context: .
-      dockerfile: serverNode/dockerfile
+      dockerfile: serverNode/Dockerfile
     ports:
       - 3000:3000
     depends_on:
@@ -33,7 +33,7 @@ services:
     container_name: popote_frontend
     build: 
       context: .
-      dockerfile: popote/dockerfile
+      dockerfile: popote/Dockerfile
     ports:
       - 8080:8080
     depends_on:
