@@ -21,14 +21,16 @@ export default {
         nbRecettesParPage:10,
         idxDebutListeRecettes:0,
         listeRecettes:[],
-        recette:"{[null]}",
+        recette:[],
         recettesPrivees:false,
         userName:null,
         userConnected:false,
+        typesRecettes:{},
         typeRecetteSelected:'Tout',
       };
     },
     mounted() {
+      this.getTypesRecettes();
       this.getNbRecettes();
       this.updateDateTime();
       setInterval(this.updateDateTime, 1000);
@@ -76,7 +78,7 @@ export default {
       //---------------------------------
       incrementeIndex() {
         this.index++;
-        if (this.index >= this.nbRecettes) this.index = this.nbRecettes - 1;
+        if (this.index >= this.nbRecettes) this.index = this.nbRecettes;
         this.loadRecette(this.index);
         console.log("recette.js : incrementeIndex : " + this.index)
       },
@@ -87,7 +89,7 @@ export default {
       //---------------------------------
       decrementeIndex() {
         this.index--;
-        if (this.index <= 0) this.index = 0;
+        if (this.index <= 0) this.index = 1;
         this.loadRecette(this.index);
         console.log("recette.js : decrementeIndex : " + this.index)
       },
@@ -103,6 +105,21 @@ export default {
         fetch(adresse).then(r => r.json()).then(response => {
           this.nbRecettes = response.nbRecettes;
           console.log("recuperation du nombre de recettes " + this.nbRecettes);
+        }).catch(error => {
+          console.error(error);
+        });
+      },
+      //---------------------------------
+      //
+      //  getNbRecettes
+      //
+      //---------------------------------
+      getTypesRecettes() {
+        let adresse = this.$parent.serverNodeAdress + '/getTypesRecettes'
+        console.log("recette.js => : getTypesRecettes => " + adresse)
+        fetch(adresse).then(r => r.json()).then(response => {
+          this.typesRecettes = response;
+          console.log("recuperation des types de recettes " + JSON.stringify(this.typesRecettes));
         }).catch(error => {
           console.error(error);
         });
@@ -162,6 +179,7 @@ export default {
         fetch(url).then(r => r.json()).then(response => {
           //console.log("chargement de " + nb + " recettes a partir de  " + index);
           this.listeRecettes = response
+          console.log("listeRecettes => " + response)
         })
         .catch(error => {
           console.error(error);

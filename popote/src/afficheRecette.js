@@ -14,8 +14,8 @@ export default {
         // realisation : null,
         // ingredients : null,
         // ingredient : "{[null]}",
-        // //index : 0,
-        recette:{},
+        //index : 0,
+        recette:[{}],
         modeEdition:false,
       };
     },
@@ -25,7 +25,7 @@ export default {
     template: '\
       <h1>Recette</h1>\
       <p><button @click="setModeListe(\'listeRecettes\')">Retour à la liste de recettes</button></p>\
-      <p>Recette numéro : <button @click="decrementeIndex">précédente</button>  {{$parent.index}}  <button @click="incrementeIndex">suivante</button></p>\
+      <p>Recette numéro : <button @click="decrementeIndex">précédente</button>  {{$parent.recette.id}}  <button @click="incrementeIndex">suivante</button></p>\
       <p></p>\
       <p v-if="$parent.recette.auteur">Cette recette est proposée par {{$parent.recette.auteur}}\
         <span v-if="$parent.recettesPrivees"> \
@@ -38,7 +38,7 @@ export default {
         <table>\
         <!--tr>\
           <td>index</td>\
-          <td>{{indexRecette}}</td>\
+          <td>{{$parent.recette.id}}</td>\
         </tr-->\
         <tr>\
           <td>titre</td>\
@@ -46,7 +46,7 @@ export default {
         </tr>\
         <tr>\
           <td>type</td>\
-          <td>{{$parent.recette.typeRecette}}</td>\
+          <td>{{$parent.recette.type}}</td>\
         </tr>\
           <tr>\
             <td>description</td>\
@@ -123,6 +123,8 @@ export default {
         console.log('afficheRecette.js => loadDatas')
         this.recette = this.$parent.recette
         this.index = this.$parent.index
+        var recetteJson = JSON.stringify(this.recette)
+        console.log("afficheRecette.js => loadDatas : recette locale = " + JSON.stringify(this.recette))
         // this.auteur = this.$parent.auteur
         // this.titre = this.$parent.titre
         // this.typeRecette = this.$parent.typeRecette
@@ -130,7 +132,10 @@ export default {
         // this.realisation = this.$parent.realisation
         // this.ingredients = this.$parent.ingredients
         // this.ingredient = this.$parent.ingredient
-        console.log('afficheRecette => loadDatas : recette (' + this.recette.titre + ') recupérée')
+        console.log('afficheRecette.js => loadDatas : recette (' + recetteJson.titre + ') recupérée')
+        console.log('afficheRecette.js => loadDatas : recette (' + this.recette['titre'] + ') recupérée')
+        console.log('afficheRecette.js => loadDatas : recette (' + this.recette.titre + ') recupérée')
+        console.log('afficheRecette.js => loadDatas : recette (' + this.$parent.recette.titre + ') recupérée')
       },
       //---------------------------------
       //

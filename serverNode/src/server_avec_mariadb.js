@@ -35,39 +35,72 @@ const server = http.createServer((req, res) => {
     //res.setHeader('Access-Control-Allow-Origin', 'http://popote_frontend:8080');
     res.setHeader('Access-Control-Allow-Origin', '*');
     //res.setHeader('Access-Control-Allow-Header', 'content-type');
+
     console.log("serveur => url = " + req.url);
     if (req.url === '/'){
         res.statusCode = 200;
         res.setHeader('Content-Type', 'text/plain; charset=utf-8');
         res.end('Hello Popote\n');
+
     } else if (req.url.startsWith('/getRecette')){
         idRecette = url.parse(req.url,true).query.index 
-        let maRecette = recettes[idRecette];
-        res.setHeader('Content-Type', 'text/json');
+        // let maRecette = recettes[idRecette];
+        res.setHeader('Content-Type', 'text/json; charset=utf-8');
+        var sql = 'SELECT R.id, titre, description, realisation, \
+            coalesce(U.nom, R.auteur) as auteur, \
+            coalesce(T.nom, R.type) as type \
+            FROM Recettes R \
+            INNER JOIN Users U ON R.auteur = U.id  \
+            INNER JOIN TypePlats T ON R.type = T.id \
+            WHERE R.id = "' + idRecette + '"'
+        execRequete(sql, callback_getRecettes, res)
         //console.log('serveur => requete getRecette ' + idRecette);
         //console.log('serveur => ' + JSON.stringify(maRecette));
-        res.end(JSON.stringify(maRecette));
+        // res.end(JSON.stringify(maRecette));
+
     } else if (req.url.startsWith('/getNbRecettes')){
         //console.log('requete getNbRecettes ');
         res.setHeader('Content-Type', 'text/json; charset=utf-8');
         var sql = 'SELECT COUNT (*) FROM Recettes'
         execRequete(sql, callback_getNbRecettes, res)
+
+    } else if (req.url.startsWith('/getTypesRecettes')){
+        res.setHeader('Content-Type', 'text/json; charset=utf-8');
+        var sql = 'SELECT * FROM TypePlats'
+        execRequete(sql, callback_getTypesRecettes, res)
+
     } else if (req.url.startsWith('/updateDatas')){
         //console.log('requete updateDatas ');
         updateDatas();
         res.setHeader('Content-Type', 'text/plain; charset=utf-8');
         res.end("OK");
+
     } else if (req.url.startsWith('/getListeRecettes')){
         //console.log('serveur => requete getListeRecettes ');
+        var selectAuteur = ''
+        var selectType = ''
         debut = url.parse(req.url,true).query.index
         nb = url.parse(req.url,true).query.nb
         auteur = url.parse(req.url,true).query.user
+        if (auteur != 'null') selectAuteur = " AND U.nom = '" + auteur + "' "
         prive = url.parse(req.url,true).query.prive
         typeRecette = url.parse(req.url,true).query.type
+        console.log("type de recette demandée : " + typeRecette)
+        if (typeRecette != 'Tout') selectType = " AND T.nom = '" + typeRecette + "' "
         res.setHeader('Content-Type', 'text/json; charset=utf-8');
-        var sql = 'SELECT * FROM Recettes'
+        var sql = 'SELECT R.id, titre, description, \
+            coalesce(U.nom, R.auteur) as auteur, \
+            coalesce(T.nom, R.type) as type \
+            FROM Recettes R \
+            INNER JOIN Users U ON R.auteur = U.id ' + selectAuteur + ' \
+            INNER JOIN TypePlats T ON R.type = T.id ' + selectType + ' \
+            ORDER BY R.id \
+            LIMIT ' + nb + '\
+            OFFSET ' + debut + '\
+            ;'
         execRequete(sql, callback_getListeRecettes, res)
         // listTmp = getListRecettes(debut, nb, auteur, prive, typeRecette)
+
     } else if (req.url.startsWith('/requeteUser')){
         let body = '';
         req.on('data', chunk => {
@@ -86,23 +119,31 @@ const server = http.createServer((req, res) => {
             };
             if (typeRequette === "connexion"){
                 //console.log("serveur => traitement de la requete " + typeRequette)
-                let tmp = checkConnect(user)
+                var sql = 'SELECT nom, email, idRole FROM Users \
+                    WHERE nom = "' + user.user + '" \
+                    AND pwd = "' + user.pwd + '"'
+                execRequete(sql, callback_checkUser,res)
+                // let tmp = checkConnect(user)
                 //console.log('serveur => valeur retour checkConnect : ' + tmp)
-                stuff.user = tmp
+                // stuff.user = tmp
                 //console.log("serveur => localStatus=" + localStatus + ", localMessage=" + localMessage + ', user=' + stuff.user)
                 //res.end(resultat)
             //} else if (typeRequette === "deconnexion"){
                 //console.log("serveur => traitement de la requete " + typeRequette)
             } else {
                 console.log("serveur => requete inconnue " + typeRequette)
+                stuff.status = 'KO'
+                stuff.message = 'requete inconnue'
+                res.end(JSON.stringify(stuff));
             }
-            res.setHeader('Content-Type', 'text/json; charset=utf-8');
-            stuff.status = localStatus
-            stuff.message =localMessage
-            //console.log("serveur => reponse envoyée : " + JSON.stringify(stuff))
-            res.end(JSON.stringify(stuff));
+            // res.setHeader('Content-Type', 'text/json; charset=utf-8');
+            // stuff.status = localStatus
+            // stuff.message =localMessage
+            // //console.log("serveur => reponse envoyée : " + JSON.stringify(stuff))
+            // res.end(JSON.stringify(stuff));
         });
         //console.log('requete requeteUser ');
+
     } else {
         res.setHeader('Content-Type', 'text/plain; charset=utf-8');
         res.end('page not found')
@@ -141,7 +182,7 @@ server.listen(port, () => {
 //=====================================================
 function execRequete(requeteSql, callback, res){
     var resultat={}
-    console.log("execRequete => debut")
+    console.log("execRequete => debut : " + requeteSql)
 
     console.log("execRequete => tentative de connexion ......")
     // db.connect((err) => {
@@ -178,6 +219,34 @@ function execRequete(requeteSql, callback, res){
 
 //=====================================================
 //
+//      function callback_checkUser
+//
+//=====================================================
+function callback_checkUser(result, res){
+    console.log("callback_checkUser => debut")
+    console.log("callback_checkUser => parametre passe (result) = ", result)
+    var stuff
+    if (result == undefined){
+        stuff ={
+            status: 'KO',
+            message: 'Utilisateur inconnu ou mauvais mot de passe',
+        };
+    } else {
+        var resultat = JSON.parse(result)[0]
+        console.log("callback_checkUser => resultat = ", JSON.stringify(resultat))
+        stuff = {
+            status: 'OK',
+            message: 'Utilisateur connecte',
+            user: resultat,
+        }
+    }
+    console.log("callback_checkUser => " + JSON.stringify(stuff))
+    res.end(JSON.stringify(stuff))
+    console.log("callback_checkUser => fin")
+}
+
+//=====================================================
+//
 //      function callback_getNbRecettes
 //
 //=====================================================
@@ -206,10 +275,36 @@ function callback_getListeRecettes(result, res){
     console.log("callback_getListeRecettes => parametre passe (result) = ", result)
     var resultat = JSON.parse(result)
     console.log("callback_getListeRecettes => resultat listRecettes = ", resultat)
-    const stuff ={
-    };
     res.end(JSON.stringify(resultat))
     console.log("callback_getListeRecettes => fin")
+}
+
+//=====================================================
+//
+//      function callback_getTypesRecettes
+//
+//=====================================================
+function callback_getTypesRecettes(result, res){
+    console.log("callback_getTypesRecettes => debut")
+    console.log("callback_getTypesRecettes => parametre passe (result) = ", result)
+    var resultat = JSON.parse(result)
+    console.log("callback_getTypesRecettes => resultat typesRecettes = ", resultat)
+    res.end(JSON.stringify(resultat))
+    console.log("callback_getTypesRecettes => fin")
+}
+
+//=====================================================
+//
+//      function callback_getRecettes
+//
+//=====================================================
+function callback_getRecettes(result, res){
+    console.log("callback_getRecettes => debut")
+    console.log("callback_getRecettes => parametre passe (result) = ", result)
+    var resultat = JSON.parse(result)[0]
+    console.log("callback_getRecettes => resultat recettes = ", resultat)
+    res.end(JSON.stringify(resultat))
+    console.log("callback_getRecettes => fin")
 }
 
 //=====================================================
@@ -335,21 +430,21 @@ function getListRecettes(debut, nb, auteur, prive, type){
     console.log("serveur => checkConnect : user = " + JSON.stringify(user))
     localStatus = 'KO'
     localMessage = 'Utilisateur inconnu'
-    users.forEach((item) =>{
-        if (item.nom === user.user){
-            console.log("user " + item.nom + " existe")
-            if (item.password === user.pwd){
-                tmpUser = item
-                localStatus = 'OK'
-                localMessage = 'connexion OK'
-                console.log("serveur => passwd ok : ")
-            } else {
-                localMessage = 'mauvais mot de passe'
-                console.log("serveur => mauvais mot de passe")
-            }
-            return tmpUser
-        }
-    });
+    // users.forEach((item) =>{
+    //     if (item.nom === user.user){
+    //         console.log("user " + item.nom + " existe")
+    //         if (item.password === user.pwd){
+    //             tmpUser = item
+    //             localStatus = 'OK'
+    //             localMessage = 'connexion OK'
+    //             console.log("serveur => passwd ok : ")
+    //         } else {
+    //             localMessage = 'mauvais mot de passe'
+    //             console.log("serveur => mauvais mot de passe")
+    //         }
+    //         return tmpUser
+    //     }
+    // });
     console.log("serveur => user non trouvé : " + user.user)
     return tmpUser
   }

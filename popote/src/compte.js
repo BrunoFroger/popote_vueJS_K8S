@@ -9,7 +9,6 @@ export default {
         return {
           currentDateTime: '',
           login : null,
-          modePageCompte:"connexion",
           login: 'non connecté',
           passPhrase: 'sldjreioenos,soa',
           typeUser:'',
@@ -20,10 +19,12 @@ export default {
           passwordCrypte:'',
           repetPassword:'', 
           newMailAddress:'',
+          modePageCompte: "connexion",
           adresseMail:'',
           user:globalUser,
           connected:userConnected,
           message:"",
+          adminUser:false,
         };
       },
       mounted() {
@@ -34,6 +35,7 @@ export default {
         <div>\
           <h1>Gestion de votre compte</h1>\
           <p><span v-if="connected">Bonjour {{user.nom}}.</span> Nous somme le {{currentDateTime}}</p>\
+          <p><span v-if="adminUser">Vous etes Administrateur de ce site</span></p>\
           <p>Cette page permet de gérer votre compte : \
             <button @click="changeMode(\'creeCompte\')">création de compte</button> / \
             <span v-if="connected"> <button @click="changeMode(\'suppCompte\')">suppression de compte</button> / </span>\
@@ -76,23 +78,6 @@ export default {
             </table>\
             <button @click="suppCompte()">Supprimer le compte</button>\
           </div>\
-          <div v-else-if="modePageCompte === \'connexion\'">\
-            <h2> Connexion a votre compte </h2>\
-            <table>\
-              <tr>\
-                <td>Nom d\'utilisateur</td>\
-                <td> <input v-model="newLogin"> </td>\
-              </tr>\
-              <tr>\
-                <td>Mot de passe</td>\
-                <td> <input v-model="newPassword" type=\"password\"> </td>\
-              </tr>\
-            </table>\
-            <button @click="connecte()">Valider</button>\
-            <div>\
-              {{message}}\
-            </div>\
-          </div>\
           <div v-else-if="modePageCompte === \'deconnexion\'">\
             <h2> deconnexion a votre compte </h2>\
             <p>Souhaitez vous vraiment vous deconnecter ?</p>\
@@ -110,6 +95,23 @@ export default {
                 <td>{{user.email}}</td>\
               </tr>\
             </table>\
+          </div>\
+          <div v-else-if="modePageCompte === \'connexion\'">\
+            <h2> Connexion a votre compte </h2>\
+            <table>\
+              <tr>\
+                <td>Nom d\'utilisateur</td>\
+                <td> <input v-model="newLogin"> </td>\
+              </tr>\
+              <tr>\
+                <td>Mot de passe</td>\
+                <td> <input v-model="newPassword" type=\"password\"> </td>\
+              </tr>\
+            </table>\
+            <button @click="connecte()">Valider</button>\
+            <div>\
+              {{message}}\
+            </div>\
           </div>\
         </div>\
       ',
@@ -220,17 +222,22 @@ export default {
             let status = response.status
             console.log('compte.js => status = ' + status)
             if (status == 'OK'){
-              let message = response.message
-              //console.log('compte.js => message = ' + message)
+              this.message = response.message
+              console.log('compte.js => message = ' + this.message)
               globalUser = response.user
-              this.typeUser=globalUser.role
+              this.typeUser=globalUser.idRole
               this.user=globalUser
-              //console.log('compte.js => user = ' + JSON.stringify(globalUser))
+              console.log('compte.js => user = ' + JSON.stringify(globalUser))
+              console.log('compte.js => idRole = ' + this.typeUser)
               userConnected = true
               this.connected = true
-              //console.log ("compte.js => Utilisateur " + this.user.nom + " connecté")
-              if (this.typeUser == 'administrateur'){
+              console.log ("compte.js => Utilisateur " + this.user.nom + " connecté")
+              if (this.typeUser == 0){
                 console.log("administarteur connecté")
+                this.adminUser=true
+              } else {
+                console.log("utilisateur connecté")
+                this.adminUser=false
               }
             } else {
               console.log("echec de la connexion de " + login)
@@ -254,12 +261,13 @@ export default {
         },
         //---------------------------------
         //
-        //  isAdmin
+        //  isAdminUser
         //
         //---------------------------------
-        isAdmin(){
+        isAdminUser(){
           // if (globalUser){
-          return (this.typeUser == 'administrateur');
+          console.log(" compte.js => est ce que l'utilisateur est adminUser : " + this.adminUser )
+          return this.adminUser;
         }
       }
 }

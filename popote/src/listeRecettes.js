@@ -21,10 +21,11 @@ export default {
         recettesPrivees:false,
         //userName:null,
         userConnected:false,
-        typeRecetteSelected:'Tout',
+        typeRecetteSelected:null,
       };
     },
     mounted() {
+      this.$parent.getTypesRecettes();
       this.$parent.loadListeRecettes();
       this.updateConnected();
     },
@@ -36,27 +37,31 @@ export default {
     </span>\
     \
       <p>\
-        Liste des recettes : type de recette \
-        <select @change="$parent.changeTypeSelect($event)" name= "typeRecetteSelected" id="typeRecetteSelected">\
-          <option value="tout">Tout</option>\
-          <option value="Entree">Entrée : 0</option>\
-          <option value="Plat">Plat : 1</option>\
-          <option value="Dessert">Dessert : 2</option>\
+        Type de recette affichées : \
+        <select @change="$parent.changeTypeSelect($event)" name="typeRecetteSelected">\
+        <!--select @change="$parent.changeTypeSelect($event)" name= "typeRecetteSelected" id="typeRecetteSelected">\
+          <option value="Tout">Tout</option>\
+          <option value="Entree">Entrée</option>\
+          <option value="Plat">Plat</option>\
+          <option value="Dessert">Dessert</option!-->\
+          <option v-for="typeRec in $parent.typesRecettes" :value="typeRec.nom">{{typeRec.nom}}</option>\
         </select>\
       </p>\
       <div>\
         <table>\
           <tr>\
             <th>id</th>\
-            <th>type</th>\
+            <th>titre</th>\
+            <th>auteur</th>\
             <th>type</th>\
             <th>description</th>\
           </tr>\
           <tr v-for="(item, id) in $parent.listeRecettes">\
-            <td>{{item.id}}</td>\
+            <td @click="loadRecette(item.id)">{{item.id}}</td>\
             <td @click="loadRecette(item.id)">{{item.titre}}</td>\
-            <td>{{item.type}}</td>\
-            <td>{{item.description}}</td>\
+            <td @click="loadRecette(item.id)">{{item.auteur}}</td>\
+            <td @click="loadRecette(item.id)">{{item.type}}</td>\
+            <td @click="loadRecette(item.id)">{{item.description}}</td>\
           </tr>\
         </table>\
         <button @click="pagePrecedente">recettes précédentes</button>\
