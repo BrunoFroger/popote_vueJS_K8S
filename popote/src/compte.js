@@ -24,7 +24,7 @@ export default {
           user:globalUser,
           connected:userConnected,
           message:"",
-          adminUser:false,
+          adminUser: false,
         };
       },
       mounted() {
@@ -266,7 +266,7 @@ export default {
         //---------------------------------
         isAdminUser(){
           // if (globalUser){
-          console.log(" compte.js => est ce que l'utilisateur est adminUser : " + this.adminUser )
+          console.log(" compte.js => isAdminUser : est ce que l'utilisateur est adminUser : " + this.adminUser )
           return this.adminUser;
         }
       }
