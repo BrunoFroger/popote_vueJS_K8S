@@ -10,7 +10,7 @@ on:
 
 jobs:
   deployment:
-    runs-on: ubuntu-ubuntu-latest
+    runs-on: self-hosted
     environment: development
     steps: 
       - name: stop execution container

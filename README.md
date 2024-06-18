@@ -382,6 +382,41 @@ Tester le en accédant avec votre browser web à l'adresse [http://localhost:808
 
 voir doc sur [gitHub](https://docs.github.com/fr/actions/deployment/about-deployments/about-continuous-deployment)
 
+Crer le fichier de déploiement .github/
+
+### 91.1installation d'un runner sur la machine cible
+Download
+
+```
+# Create a folder
+$ mkdir actions-runner && cd actions-runner
+Copied!
+# Download the latest runner package
+$ curl -o actions-runner-linux-x64-2.317.0.tar.gz -L https://github.com/actions/runner/releases/download/v2.317.0/actions-runner-linux-x64-2.317.0.tar.gz
+Copied!
+# Optional: Validate the hash
+$ echo "9e883d210df8c6028aff475475a457d380353f9d01877d51cc01a17b2a91161d  actions-runner-linux-x64-2.317.0.tar.gz" | shasum -a 256 -c
+# Extract the installer
+$ tar xzf ./actions-runner-linux-x64-2.317.0.tar.gz
+
+```
+
+Configure
+
+```
+# Create the runner and start the configuration experience
+$ ./config.sh --url https://github.com/BrunoFroger/popote_vueJS_K8S --token AFZAAFIQRY54XGM5KU6TEYLGOFASQ
+# Last step, run it!
+$ ./run.sh
+```
+
+Using your self-hosted runner
+
+```
+# Use this YAML in your workflow file for each job
+runs-on: self-hosted
+```
+
 # 95. Quelques commandes Docker usuelles
 
 ## Construction d'un container
