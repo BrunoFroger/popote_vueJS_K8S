@@ -410,12 +410,45 @@ $ ./config.sh --url https://github.com/BrunoFroger/popote_vueJS_K8S --token AFZA
 $ ./run.sh
 ```
 
+au lieu de lancer le runner manuellement avec ``./run.sh`` , vous pouvez automatiser son lancement automatique avec la commande 
+
+```
+sudo ./svc.sh install && sudo ./svc.sh start
+```
+
 Using your self-hosted runner
 
 ```
 # Use this YAML in your workflow file for each job
 runs-on: self-hosted
 ```
+
+exemple de fichier de déploiement (à localiser dans le répertoire .github/workflow de votre application)
+
+```
+name: Deployment_popote_dev
+
+concurrency: development
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deployment:
+    runs-on: self-hosted
+    environment: development
+    steps: 
+      - name: stop containers (docker-compose stop)
+        run: ssh -p 443 bruno@popote.zapto.org 'cd /home/bruno/popote_vueJS_K8S && docker-compose stop'
+      - name: update software (git pull)
+        run: ssh -p 443 bruno@popote.zapto.org 'cd /home/bruno/popote_vueJS_K8S && git pull origin main'
+      - name: restart containers (docker-compose up --build)
+        run: ssh -p 443 bruno@popote.zapto.org 'cd /home/bruno/popote_vueJS_K8S && docker-compose up --build'
+
+```
+
 
 # 95. Quelques commandes Docker usuelles
 
