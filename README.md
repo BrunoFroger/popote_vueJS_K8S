@@ -177,11 +177,18 @@ Pour permettre d'accéder a votre application depuis internet, vous devez config
 
 - Se connecter sur votre livebox en mode administrateur
 - Aller dans l'onglet "configuration avancée"
-- Dans "dhcp" forcer l'ip fixe pour la machine qui sert de point d'entrée a l'application Popote
-- Dans l'onglet DynDNS créer un service DNS dynamique en utilisant un des fournisseurs proposés (dtdns pour l'exemple), aller ensuite sur ce site pour créer l'entrée DNS correspondant à votre livebox (port)
+- Dans "dhcp" forcer l'ip fixe pour la machine qui sert de point d'entrée à l'application Popote
+- Dans l'onglet DynDNS créer un service DNS dynamique en utilisant un des fournisseurs proposés (zapto.org pour l'exemple), aller ensuite sur ce site pour créer l'entrée DNS correspondant à votre livebox (port)
+- configurer l'accès à votre serveur en http et en ssh, via l'onglet NAT/PAT  :
+	- pour ssh : ajouter une entrèe permettant de router les accès entre le port externe et interne de votre livebox, le port interne est le port 22 (port par defaut de ssh) vous pouvez specifier n'importe quel port en externe, sauf que dans ce cas vous devrez le specifier lorsque que vous chercher a vous connecter sur votre machine depuis l'extérieur (vous pouvez prévoir de faire un échange de clé ssh pour ne plus avoir à taper le mot de passe)
+	- Pour HTTP : vous devez ouvrir le port 80 (externe) vers le port 8080 (interne)  
+
+voici un exemple de commande permettant de se connecter en ssh depuis une machine distante :
+``ssh -p xxx bruno@popote.zapto.org`` ou xxx est le numéro de port que vous avez configuré ci-dessus
 
 
-# 2. Developpements
+
+# 2. Développements
 
 ## 2.1 Installer conteneur Ngnix
 
