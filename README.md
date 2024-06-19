@@ -384,7 +384,7 @@ voir doc sur [gitHub](https://docs.github.com/fr/actions/deployment/about-deploy
 
 Crer le fichier de déploiement .github/
 
-### 91.1installation d'un runner sur la machine cible
+### 91.1installation d'un self-hosted runner sur la machine cible
 Download
 
 ```

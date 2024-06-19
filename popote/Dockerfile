@@ -26,7 +26,7 @@ RUN echo "==========================="; \
 #EXPOSE 22
     
 # installe un simple serveur http pour servir un contenu statique
-RUN npm install -g http-server 
+#RUN npm install -g http-server 
 #RUN npm install --save-dev webpack
 RUN npm install -g webpack
 RUN npm install -g serve
