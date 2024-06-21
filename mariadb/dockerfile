@@ -10,11 +10,13 @@ RUN echo "==========================="; \
 RUN apt-get update
 
 #install optionnels
-# RUN apt-get install -y net-tools
-# RUN apt-get install -y iputils-ping
-# RUN apt-get install nano
+RUN apt-get install -y net-tools
+RUN apt-get install -y iputils-ping
+RUN apt-get install nano
 
 WORKDIR /home/mysql/
+
+RUN echo 'root:root123' | chpasswd
 
 ENV MYSQL_ROOT_PASSWORD root123
 ENV MYSQL_DATABASE Popote
