@@ -43,6 +43,7 @@ services:
       - backend
     networks:
       - popote_network
+      - host
 
 # configuration reseau
 networks:
