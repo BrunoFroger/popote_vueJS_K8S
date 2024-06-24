@@ -7,6 +7,7 @@ services:
   # base de donnee Service :
   mariadb:
     container_name: popote_mariadb
+    restart: on-failure
     build: 
       context: .
       dockerfile: mariadb/dockerfile
@@ -18,6 +19,7 @@ services:
   # backend Service : serveur node
   backend:
     container_name: popote_backend
+    restart: on-failure
     build: 
       context: .
       dockerfile: serverNode/Dockerfile
@@ -31,6 +33,7 @@ services:
   # frontend Service : VueJS
   frontend:
     container_name: popote_frontend
+    restart: on-failure
     build: 
       context: .
       dockerfile: popote/Dockerfile
