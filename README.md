@@ -507,7 +507,8 @@ Explication des paramètres :
 	-p<passwd> : mot de passe du user ci dessus dans la base de données
 	-D <base> : nom de la base de données
 	-e <requête> : execute la requête SQL 
-
+	
+Pour visualiser les données de votre BDD vous pouvez installer [DbVisualizer](www.dbvis.com)
 # 99. Quelques commandes Kubernetes usuelles 
 ``kubectl version`` : affiche version de kubernetes  
 ``kubectl config view`` : affiche la configuration  
