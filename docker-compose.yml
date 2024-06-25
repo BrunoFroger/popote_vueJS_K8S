@@ -14,7 +14,7 @@ services:
     ports:
       - 3306:3306
     networks:
-      - popote_mariadb
+      - popote_mariadb_network
 
   # backend Service : serveur node
   backend:
@@ -28,8 +28,8 @@ services:
     depends_on:
       - mariadb
     networks:
-      - popote_backend
-      - popote_mariadb
+      - popote_backend_network
+      - popote_mariadb_network
 
   # frontend Service : VueJS
   frontend:
@@ -43,14 +43,14 @@ services:
     depends_on:
       - backend
     networks:
-      - popote_backend
-      - popote_frontend
+      - popote_backend_network
+      - popote_frontend_network
 
 # configuration reseau
 networks:
-  popote_mariadb:
+  popote_mariadb_network:
     driver: bridge
-  popote_backend:
+  popote_backend_network:
     driver: bridge
-  popote_frontend:
+  popote_frontend_network:
     external: true
