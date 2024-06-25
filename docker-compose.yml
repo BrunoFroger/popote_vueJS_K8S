@@ -50,4 +50,5 @@ networks:
   popote_network:
     driver: bridge
   popote_extern:
+    driver: bridge
     external: true
