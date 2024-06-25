@@ -53,4 +53,5 @@ networks:
   popote_backend_network:
     driver: bridge
   popote_frontend_network:
+    driver: bridge
     external: true
