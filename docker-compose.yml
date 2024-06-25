@@ -1,5 +1,5 @@
-#version: '3.5'
-#name: 'popote'
+version: '3.5'
+name: 'popote'
 
 # Services
 services:
@@ -54,4 +54,4 @@ networks:
     driver: bridge
   popote_frontend_network:
     driver: bridge
-    external: true
+    #external: true
