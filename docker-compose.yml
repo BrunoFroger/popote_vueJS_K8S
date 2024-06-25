@@ -43,11 +43,11 @@ services:
       - backend
     networks:
       - popote_network
-      - popote_external
+      - popote_extern
 
 # configuration reseau
 networks:
   popote_network:
     driver: bridge
-  popote_external:
-    driver: host
+  popote_extern:
+    external: true
