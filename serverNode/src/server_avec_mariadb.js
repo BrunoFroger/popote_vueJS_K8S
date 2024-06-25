@@ -163,7 +163,7 @@ server.listen(port, () => {
     //chargeUsers()
     db.connect(function(err) {
         if (err) {
-            console.log(" /!\ erreur tentative de connexion sur base Popote")
+            console.log(" /!\\ erreur lors de la tentative de connexion sur base Popote")
             throw err;
         } else {
             console.log("connexion OK")

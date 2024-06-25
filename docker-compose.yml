@@ -13,8 +13,8 @@ services:
       dockerfile: mariadb/dockerfile
     ports:
       - 3306:3306
-    #networks:
-      #- popote_network
+    networks:
+      - popote_network
 
   # backend Service : serveur node
   backend:
@@ -27,8 +27,8 @@ services:
       - 3000:3000
     depends_on:
       - mariadb
-    #networks:
-      #- popote_network
+    networks:
+      - popote_network
 
   # frontend Service : VueJS
   frontend:
@@ -41,11 +41,11 @@ services:
       - 8080:8080
     depends_on:
       - backend
-    #networks:
-      #- popote_network
-      #- host
+    networks:
+      - popote_network
+      - bridge
 
 # configuration reseau
-#networks:
-  #popote_network:
-    #driver: bridge
+networks:
+  popote_network:
+    driver: bridge
