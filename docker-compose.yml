@@ -1,5 +1,5 @@
-version: '3.5'
-name: 'popote'
+#version: '3.5'
+#name: 'popote'
 
 # Services
 services:
