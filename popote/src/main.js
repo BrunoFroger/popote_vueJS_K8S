@@ -16,7 +16,9 @@ const app = createApp({
           copyright: 'Bruno Froger (c) depuis 2024',
           isAdmin: false,
           currentDateTime: '',
-          serverNodeAdress: 'http://localhost:3000',
+          //serverNodeAdress: 'http://localhost:3000',
+          //serverNodeAdress: 'http://backend.local:3000',
+          serverNodeAdress: 'http://popote.zapto.org:3000',
         }
     },
     mounted() {
