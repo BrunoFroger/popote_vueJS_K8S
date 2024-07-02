@@ -217,7 +217,9 @@ export default {
           };
           //console.log(stuff);
           //console.log(requestOptions.body);
-          fetch('http://localhost:3000/requeteUser', requestOptions).then(r => r.json()).then(response => {
+          let adresse = this.$parent.serverNodeAdress + '/requeteUser'
+          console.log("recette.js => : requeteUser => " + adresse)
+          fetch(adresse, requestOptions).then(r => r.json()).then(response => {
             //console.log("compte.js => recuperation status commande update user ");
             let status = response.status
             console.log('compte.js => status = ' + status)
