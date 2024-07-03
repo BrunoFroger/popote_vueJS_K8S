@@ -12,7 +12,8 @@ jobs:
     runs-on: self-hosted
     steps: 
       - name: stop containers (docker-compose stop)
-        run: ssh -p 443 bruno@popote.zapto.org 'cd /home/bruno/popote_vueJS_K8S && docker-compose stop'
+        uses: actions/checkout@v4
+        #run: ssh -p 443 bruno@popote.zapto.org 'cd /home/bruno/popote_vueJS_K8S && docker-compose stop'
       - name: update software (git pull)
         run: ssh -p 443 bruno@popote.zapto.org 'cd /home/bruno/popote_vueJS_K8S && git pull origin main'
       - name: restart containers (docker-compose up --build)
