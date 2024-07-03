@@ -1,7 +1,6 @@
 
-name: Deployment_popote_dev
+name: Deployment_popote
 
-concurrency: development
 
 on:
   push:
@@ -11,7 +10,6 @@ on:
 jobs:
   deployment:
     runs-on: self-hosted
-    environment: development
     steps: 
       - name: stop containers (docker-compose stop)
         run: ssh -p 443 bruno@popote.zapto.org 'cd /home/bruno/popote_vueJS_K8S && docker-compose stop'
