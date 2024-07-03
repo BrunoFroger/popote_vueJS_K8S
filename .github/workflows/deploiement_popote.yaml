@@ -14,13 +14,12 @@ jobs:
       - name: stop containers (docker compose stop)
         run: 'cd /home/bruno/popote_vueJS_K8S && docker-compose stop'
   update-code:
-    needs: stop
     runs-on: self-hosted
     steps: 
       - name: update software (git pull)
         run: cd /home/bruno/popote_vueJS_K8S && git pull origin main
   restart:
-    needs: update-code
+    needs: update-code, stop
     runs-on: self-hosted
     steps: 
       - name: restart containers (docker compose up -d --build)
