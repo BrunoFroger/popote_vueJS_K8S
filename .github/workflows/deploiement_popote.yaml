@@ -1,3 +1,6 @@
+# fichier de deploiement github pour l'application popote
+# (c) B. Froger (2024)->
+
 name: Deployment_popote
 
 on:
