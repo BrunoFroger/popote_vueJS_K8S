@@ -8,6 +8,7 @@ on:
     branches:
       - main
 
+
 jobs:
   stop:
     runs-on: self-hosted
