@@ -429,9 +429,9 @@ Pour utiliser ce runner dans votre projet, il faut configurer votre projet pour 
 Exemple de fichier de déploiement (à localiser dans le répertoire .github/workflow de votre application)
 
 ```
-name: Deployment_popote_dev
 
-concurrency: development
+name: Deployment_popote
+
 
 on:
   push:
@@ -441,14 +441,13 @@ on:
 jobs:
   deployment:
     runs-on: self-hosted
-    environment: development
     steps: 
-      - name: stop containers (docker-compose stop)
-        run: ssh -p 443 bruno@popote.zapto.org 'cd /home/bruno/popote_vueJS_K8S && docker-compose stop'
+      - name: stop containers (docker compose stop)
+        run: 'cd /home/bruno/popote_vueJS_K8S && docker-compose stop'
       - name: update software (git pull)
-        run: ssh -p 443 bruno@popote.zapto.org 'cd /home/bruno/popote_vueJS_K8S && git pull origin main'
-      - name: restart containers (docker-compose up --build)
-        run: ssh -p 443 bruno@popote.zapto.org 'cd /home/bruno/popote_vueJS_K8S && docker-compose up --build'
+        run: cd /home/bruno/popote_vueJS_K8S && git pull origin main
+      - name: restart containers (docker compose up -d --build)
+        run: cd /home/bruno/popote_vueJS_K8S && docker compose up -d --build
 
 ```
 
