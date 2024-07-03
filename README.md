@@ -417,20 +417,16 @@ $ ./config.sh --url https://github.com/BrunoFroger/popote_vueJS_K8S --token AFZA
 $ ./run.sh
 ```
 
-au lieu de lancer le runner manuellement avec ``./run.sh`` , vous pouvez automatiser son lancement automatique avec la commande 
+Au lieu de lancer le runner manuellement avec ``./run.sh`` , vous pouvez automatiser son lancement automatique avec la commande suivante (a ne faire qu'une seule fois) :
 
 ```
 sudo ./svc.sh install && sudo ./svc.sh start
 ```
 
-Using your self-hosted runner
+Pour utiliser ce runner dans votre projet, il faut configurer votre projet pour gerer le déploiement automatique
 
-```
-# Use this YAML in your workflow file for each job
-runs-on: self-hosted
-```
 
-exemple de fichier de déploiement (à localiser dans le répertoire .github/workflow de votre application)
+Exemple de fichier de déploiement (à localiser dans le répertoire .github/workflow de votre application)
 
 ```
 name: Deployment_popote_dev
