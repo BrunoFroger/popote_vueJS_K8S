@@ -425,10 +425,13 @@ sudo ./svc.sh install && sudo ./svc.sh start
 
 Pour utiliser ce runner dans votre projet, il faut configurer votre projet pour gerer le déploiement automatique
 
+Pour pouvoir executer plusieurs jobs en simultané, il faut avoir plusieurs runner sur la machine cible, en creant un deuxieme repertoire actions-runner-2 par exemple, et en executant une nouvelle fois la commande ``./config ...`` en donnant comme nom a ce runner un nom different du runner principal ex machine02-2puis relancer les commandes ``./svc.sh ...``
+
 
 Exemple de fichier de déploiement (à localiser dans le répertoire .github/workflow de votre application)
 
 ```
+
 
 name: Deployment_popote
 
@@ -439,13 +442,21 @@ on:
       - main
 
 jobs:
-  deployment:
+  stop:
     runs-on: self-hosted
     steps: 
       - name: stop containers (docker compose stop)
         run: 'cd /home/bruno/popote_vueJS_K8S && docker-compose stop'
+  update-code:
+    needs: stop
+    runs-on: self-hosted
+    steps: 
       - name: update software (git pull)
         run: cd /home/bruno/popote_vueJS_K8S && git pull origin main
+  restart:
+    needs: update-code
+    runs-on: self-hosted
+    steps: 
       - name: restart containers (docker compose up -d --build)
         run: cd /home/bruno/popote_vueJS_K8S && docker compose up -d --build
 
@@ -483,11 +494,11 @@ Combinaison build + run : ``docker run [options] $(docker build -q .)``
 
 ``ssh root@127.0.0.1:2222`` : à valider (ne fonctionne pas avec le dockerfile actuel)
 
-# 96 Commandes docker-compose
+# 96 Commandes docker compose
 
-``docker-compose up --build`` : construit et execute le contenu du fichier docker-compose.yml en local
+``docker compose up --build`` : construit et execute le contenu du fichier docker-compose.yml en local
 
-``docker-compose exec <nom du service> /bin/bash`` : lance un shel dans le conteneur défini par le service du docker-compose
+``docker compose exec <nom du service> /bin/bash`` : lance un shel dans le conteneur défini par le service du docker-compose
 
 # 97 Commande mysql
 
