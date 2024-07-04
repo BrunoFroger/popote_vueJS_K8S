@@ -67,7 +67,7 @@ const server = http.createServer((req, res) => {
     } else if (req.url.startsWith('/getTypesRecettes')){
         res.setHeader('Content-Type', 'text/json; charset=utf-8');
         var sql = 'SELECT * FROM TypePlats'
-        execRequete(sql, callback_getTypesRecettes, res)
+        execRequete(req, sql, callback_getTypesRecettes, res)
 
     } else if (req.url.startsWith('/updateDatas')){
         //console.log('requete updateDatas ');
