@@ -286,7 +286,7 @@ function callback_getRecettes(req, result, res){
     console.log("callback_getRecettes => resultat recettes = ", resultat)
 
     var sql = 'SELECT * FROM Ingredients \
-        WHERE id =  ' + resultat[id] + '\
+        WHERE id =  ' + resultat.id + '\
         ;'
     console.log("callback_getRecettes => requete getIngredients = ", sql)
     execRequete(req, sql, callback_getRecettesWithIngredients, res)
