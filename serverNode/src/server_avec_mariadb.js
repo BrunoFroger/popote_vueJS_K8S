@@ -53,7 +53,7 @@ const server = http.createServer((req, res) => {
             INNER JOIN Users U ON R.auteur = U.id  \
             INNER JOIN TypePlats T ON R.type = T.id \
             WHERE R.id = "' + idRecette + '"'
-        execRequete(sql, callback_getRecettes, res)
+        execRequete(req, sql, callback_getRecettes, res)
         //console.log('serveur => requete getRecette ' + idRecette);
         //console.log('serveur => ' + JSON.stringify(maRecette));
         // res.end(JSON.stringify(maRecette));
@@ -62,7 +62,7 @@ const server = http.createServer((req, res) => {
         //console.log('requete getNbRecettes ');
         res.setHeader('Content-Type', 'text/json; charset=utf-8');
         var sql = 'SELECT COUNT (*) FROM Recettes'
-        execRequete(sql, callback_getNbRecettes, res)
+        execRequete(req, sql, callback_getNbRecettes, res)
 
     } else if (req.url.startsWith('/getTypesRecettes')){
         res.setHeader('Content-Type', 'text/json; charset=utf-8');
@@ -98,7 +98,7 @@ const server = http.createServer((req, res) => {
             LIMIT ' + nb + '\
             OFFSET ' + debut + '\
             ;'
-        execRequete(sql, callback_getListeRecettes, res)
+        execRequete(req, sql, callback_getListeRecettes, res)
         // listTmp = getListRecettes(debut, nb, auteur, prive, typeRecette)
 
     } else if (req.url.startsWith('/requeteUser')){
@@ -122,7 +122,7 @@ const server = http.createServer((req, res) => {
                 var sql = 'SELECT nom, email, idRole FROM Users \
                     WHERE nom = "' + user.user + '" \
                     AND pwd = "' + user.pwd + '"'
-                execRequete(sql, callback_checkUser,res)
+                execRequete(req, sql, callback_checkUser,res)
                 // let tmp = checkConnect(user)
                 //console.log('serveur => valeur retour checkConnect : ' + tmp)
                 // stuff.user = tmp
@@ -180,40 +180,21 @@ server.listen(port, () => {
 //      function execRequete
 //
 //=====================================================
-function execRequete(requeteSql, callback, res){
+function execRequete(req, requeteSql, callback, res){
     var resultat={}
     console.log("execRequete => debut : " + requeteSql)
 
     console.log("execRequete => tentative de connexion ......")
-    // db.connect((err) => {
-    //     if (err) {
-    //         console.log("execRequete =>  /!\\ erreur tentative de connexion sur base Popote")
-    //         throw err;
-    //     } else {
-    //         console.log("execRequete => Connecté à la base de données MySQL popote !");
-    //         console.log("execRequete => envoi de la requete => ", requeteSql)
-            db.query(requeteSql, (err, result) => {
-                if (err) {
-                    throw err;
-                } else {
-                    resultat=JSON.stringify(result)
-                    console.log("execRequete => requete : OK => resultat = ", resultat);
-                    callback(resultat, res)
-                }
-            });
-    //         console.log("execRequete => on ferme la connexion")
-    //         db.close((err) => {
-    //             if (err) {
-    //                 console.log("execRequete =>  /!\\ erreur tentative de fermeture sur base Popote")
-    //                 throw err;
-    //             } else {
-    //                 console.log("execRequete => connexion fermee")
-    //             }
-    //         });
-    //     }
-    // });
+    db.query(requeteSql, (err, result) => {
+        if (err) {
+            throw err;
+        } else {
+            resultat=JSON.stringify(result)
+            console.log("execRequete => requete : OK => resultat = ", resultat);
+            callback(req, resultat, res)
+        }
+    });
     
-
     console.log("execRequete => fin")
 }
 
@@ -222,7 +203,7 @@ function execRequete(requeteSql, callback, res){
 //      function callback_checkUser
 //
 //=====================================================
-function callback_checkUser(result, res){
+function callback_checkUser(req, result, res){
     console.log("callback_checkUser => debut")
     console.log("callback_checkUser => parametre passe (result) = ", result)
     var stuff
@@ -250,7 +231,7 @@ function callback_checkUser(result, res){
 //      function callback_getNbRecettes
 //
 //=====================================================
-function callback_getNbRecettes(result, res){
+function callback_getNbRecettes(req, result, res){
     console.log("callback_getNbRecettes => debut")
     console.log("callback_getNbRecettes => parametre passe (result) = ", result)
     var resultat = JSON.parse(result)[0]
@@ -270,7 +251,7 @@ function callback_getNbRecettes(result, res){
 //      function callback_getListeRecettes
 //
 //=====================================================
-function callback_getListeRecettes(result, res){
+function callback_getListeRecettes(req, result, res){
     console.log("callback_getListeRecettes => debut")
     console.log("callback_getListeRecettes => parametre passe (result) = ", result)
     var resultat = JSON.parse(result)
@@ -284,7 +265,7 @@ function callback_getListeRecettes(result, res){
 //      function callback_getTypesRecettes
 //
 //=====================================================
-function callback_getTypesRecettes(result, res){
+function callback_getTypesRecettes(req, result, res){
     console.log("callback_getTypesRecettes => debut")
     console.log("callback_getTypesRecettes => parametre passe (result) = ", result)
     var resultat = JSON.parse(result)
@@ -298,7 +279,7 @@ function callback_getTypesRecettes(result, res){
 //      function callback_getRecettes
 //
 //=====================================================
-function callback_getRecettes(result, res){
+function callback_getRecettes(req, result, res){
     console.log("callback_getRecettes => debut")
     console.log("callback_getRecettes => parametre passe (result) = ", result)
     var resultat = JSON.parse(result)[0]
