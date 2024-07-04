@@ -48,11 +48,12 @@ const server = http.createServer((req, res) => {
         res.setHeader('Content-Type', 'text/json; charset=utf-8');
         var sql = 'SELECT R.id, titre, description, realisation, \
             coalesce(U.nom, R.auteur) as auteur, \
-            coalesce(T.nom, R.type) as type \
+            coalesce(T.nom, R.type) as type , \
+            I.nom, I.quantite, I.dosage, I.unite \
             FROM Recettes R \
             INNER JOIN Users U ON R.auteur = U.id  \
             INNER JOIN TypePlats T ON R.type = T.id \
-            JOIN Ingredients I ON I.idRecette = R.id \
+            JOIN Ingredients I ON I.idRecette = R.id AS Ingredients\
             WHERE R.id = "' + idRecette + '"'
         execRequete(sql, callback_getRecettes, res)
         //console.log('serveur => requete getRecette ' + idRecette);
