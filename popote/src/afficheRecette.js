@@ -145,7 +145,7 @@ export default {
             unite: item.unite,
           }
           this.ingredients += ingredient
-        });
+        }
       },
       //---------------------------------
       //
