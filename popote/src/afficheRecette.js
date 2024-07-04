@@ -137,7 +137,7 @@ export default {
         console.log('afficheRecette.js => loadDatas : recette (' + this.recette.titre + ') recupérée')
         console.log('afficheRecette.js => loadDatas : recette (' + this.$parent.recette.titre + ') recupérée')
         this.ingredients = {}
-        recetteJson.foreach((item, index) => {
+        for (item in recetteJson){
           console.log("afficheRecette.js => loadDatas : extraction ingredient : " + item.ingredient)
           var ingredient = {
             nom: item.ingredient,
