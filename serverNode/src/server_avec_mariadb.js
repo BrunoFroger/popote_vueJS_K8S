@@ -284,7 +284,7 @@ function callback_getRecettes(req, result, res){
     console.log("callback_getRecettes => parametre passe (result) = ", result)
     var resultat = JSON.parse(result)[0]
     console.log("callback_getRecettes => resultat recettes = ", resultat)
-    console.log("callback_getRecettes => resultat id = ", resultat["id"])
+    console.log("callback_getRecettes => resultat id = ", resultat.id)
     // var sql = 'SELECT * FROM Ingredients \
     //     WHERE id =  ' + resultat.id + '\
     //     ;'
