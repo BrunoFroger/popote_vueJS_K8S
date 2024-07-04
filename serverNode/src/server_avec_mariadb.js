@@ -301,7 +301,7 @@ function callback_getRecettes(req, result, res){
 //=====================================================
 function callback_getRecettesWithIngredients(req, result, res){
     console.log("callback_getRecettesWithIngredients => debut")
-    console.log("callback_getRecettesWithIngredients => parametre passe (res) = ", res)
+    console.log("callback_getRecettesWithIngredients => parametre passe (res) = ", JSON.parse(res)[0])
     console.log("callback_getRecettesWithIngredients => parametre passe (result) = ", result)
     var resultat = JSON.parse(res)[0]
     console.log("callback_getRecettesWithIngredients => resultat recettes = ", resultat)
