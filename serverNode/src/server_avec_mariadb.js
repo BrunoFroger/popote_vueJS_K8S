@@ -285,12 +285,12 @@ function callback_getRecettes(req, result, res){
     var resultat = JSON.parse(result)[0]
     console.log("callback_getRecettes => resultat recettes = ", resultat)
     console.log("callback_getRecettes => resultat id = ", resultat.id)
-    // var sql = 'SELECT * FROM Ingredients \
-    //     WHERE id =  ' + resultat.id + '\
-    //     ;'
-    // console.log("callback_getRecettes => requete getIngredients = ", sql)
-    // execRequete(req, sql, callback_getRecettesWithIngredients, res)
-    res.end(JSON.stringify(resultat))
+    var sql = 'SELECT * FROM Ingredients \
+        WHERE id =  ' + resultat.id + '\
+        ;'
+    console.log("callback_getRecettes => requete getIngredients = ", sql)
+    execRequete(req, sql, callback_getRecettesWithIngredients, res)
+    //res.end(JSON.stringify(resultat))
     console.log("callback_getRecettes => fin")
 }
 
