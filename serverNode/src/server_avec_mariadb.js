@@ -52,6 +52,7 @@ const server = http.createServer((req, res) => {
             FROM Recettes R \
             INNER JOIN Users U ON R.auteur = U.id  \
             INNER JOIN TypePlats T ON R.type = T.id \
+            JOIN Ingredients I ON I.idRecette = R.id \
             WHERE R.id = "' + idRecette + '"'
         execRequete(sql, callback_getRecettes, res)
         //console.log('serveur => requete getRecette ' + idRecette);
