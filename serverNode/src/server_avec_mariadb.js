@@ -49,7 +49,8 @@ const server = http.createServer((req, res) => {
         var sql = 'SELECT R.id, titre, description, realisation, \
             coalesce(U.nom, R.auteur) as auteur, \
             coalesce(T.nom, R.type) as type , \
-            I.nom, I.quantite, I.unite \
+            I.nom as ingredient, \
+            I.quantite, I.unite \
             FROM Recettes R \
             INNER JOIN Users U ON R.auteur = U.id  \
             INNER JOIN TypePlats T ON R.type = T.id \

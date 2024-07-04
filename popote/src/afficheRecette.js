@@ -60,7 +60,7 @@ export default {
                 <th>quantité</th>\
                 <th>unité</th>\
               </thead>\
-                <tr v-for="ingredient in $parent.recette.ingredients">\
+                <tr v-for="ingredient in ingredients">\
                   <td>\
                     {{ingredient.nom}}\
                   </td>\
@@ -136,6 +136,16 @@ export default {
         console.log('afficheRecette.js => loadDatas : recette (' + this.recette['titre'] + ') recupérée')
         console.log('afficheRecette.js => loadDatas : recette (' + this.recette.titre + ') recupérée')
         console.log('afficheRecette.js => loadDatas : recette (' + this.$parent.recette.titre + ') recupérée')
+        this.ingredients = {}
+        for (item, index in this.recette){
+          console.log("afficheRecette.js => loadDatas : extraction ingredient : " + item.ingredient)
+          var ingredient = {
+            nom: item.ingredient,
+            quantite: item.quantite,
+            unite: item.unite,
+          }
+          this.ingredients += ingredient
+        }
       },
       //---------------------------------
       //
