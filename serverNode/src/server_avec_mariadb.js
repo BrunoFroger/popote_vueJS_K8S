@@ -286,11 +286,7 @@ function callback_getRecettes(req, result, res){
     console.log("callback_getRecettes => resultat recettes = ", resultat)
 
     var sql = 'SELECT * FROM Ingredients \
-        INNER JOIN Users U ON R.auteur = U.id ' + selectAuteur + ' \
-        INNER JOIN TypePlats T ON R.type = T.id ' + selectType + ' \
-        ORDER BY R.id \
-        LIMIT ' + nb + '\
-        OFFSET ' + debut + '\
+        WHERE id =  ' + resultat[id] + '\
         ;'
     execRequete(req, sql, callback_getRecettesWithIngredients, res)
     //res.end(JSON.stringify(resultat))
