@@ -49,11 +49,11 @@ const server = http.createServer((req, res) => {
         var sql = 'SELECT R.id, titre, description, realisation, \
             coalesce(U.nom, R.auteur) as auteur, \
             coalesce(T.nom, R.type) as type , \
-            I.nom, I.quantite, I.dosage, I.unite \
+            I.nom, I.quantite, I.unite \
             FROM Recettes R \
             INNER JOIN Users U ON R.auteur = U.id  \
             INNER JOIN TypePlats T ON R.type = T.id \
-            JOIN Ingredients I ON I.idRecette = R.id AS Ingredients\
+            JOIN Ingredients I ON I.idRecette = R.id\
             WHERE R.id = "' + idRecette + '"'
         execRequete(sql, callback_getRecettes, res)
         //console.log('serveur => requete getRecette ' + idRecette);
