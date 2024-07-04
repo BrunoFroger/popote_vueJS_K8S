@@ -284,8 +284,32 @@ function callback_getRecettes(req, result, res){
     console.log("callback_getRecettes => parametre passe (result) = ", result)
     var resultat = JSON.parse(result)[0]
     console.log("callback_getRecettes => resultat recettes = ", resultat)
-    res.end(JSON.stringify(resultat))
+
+    var sql = 'SELECT * FROM Ingredients \
+        INNER JOIN Users U ON R.auteur = U.id ' + selectAuteur + ' \
+        INNER JOIN TypePlats T ON R.type = T.id ' + selectType + ' \
+        ORDER BY R.id \
+        LIMIT ' + nb + '\
+        OFFSET ' + debut + '\
+        ;'
+    execRequete(req, sql, callback_getRecettesWithIngredients, res)
+    //res.end(JSON.stringify(resultat))
     console.log("callback_getRecettes => fin")
+}
+
+//=====================================================
+//
+//      function callback_getRecettes
+//
+//=====================================================
+function callback_getRecettesWithIngredients(req, result, res){
+    console.log("callback_getRecettesWithIngredients => debut")
+    console.log("callback_getRecettesWithIngredients => parametre passe (res) = ", res)
+    console.log("callback_getRecettesWithIngredients => parametre passe (result) = ", result)
+    var resultat = JSON.parse(res)[0]
+    console.log("callback_getRecettesWithIngredients => resultat recettes = ", resultat)
+    res.end(JSON.stringify(resultat))
+    console.log("callback_getRecettesWithIngredients => fin")
 }
 
 //=====================================================
