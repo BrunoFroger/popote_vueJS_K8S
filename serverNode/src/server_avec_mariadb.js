@@ -287,7 +287,7 @@ function callback_getRecettes(result, res){
     console.log("callback_getRecettes => parametre passe (result) = ", result)
     var recette = JSON.parse(result)[0]
     console.log("callback_getRecettes => resultat recettes = ", recette)
-    var ingredients = {ingredient:[]}
+    var ingredients = {ingredients:[]}
     console.log("Boucle de recuperation des ingredients => debut")
     console.log("liste des ingredients initiale : " + JSON.stringify(ingredients))
     JSON.parse(result).forEach(element => {
@@ -297,7 +297,7 @@ function callback_getRecettes(result, res){
             unite: element.unite
         }
         console.log("callback_getRecettes => ingredient detecte = " + JSON.stringify(ingredient))
-        ingredients.push(ingredient)
+        ingredients.ingredients.push(ingredient)
     });
     console.log("Boucle de recuperation des ingredients => fin")
     console.log("callback_getRecettes => liste des ingredients = " + ingredients)
