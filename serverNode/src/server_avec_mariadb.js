@@ -298,7 +298,8 @@ function callback_getRecettes(result, res){
         ingredients += ingredient
     });
     console.log("callback_getRecettes => liste des ingredients = " + ingredients)
-    recette.push(ingredients)
+    console.log("callback_getRecettes => liste des ingredients = " + JSON.stringify(ingredients))
+    recette.push(JSON.parse(ingredients))
     res.end(JSON.stringify(recette))
     console.log("callback_getRecettes => fin")
 }
