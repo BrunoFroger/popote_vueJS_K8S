@@ -285,9 +285,9 @@ function callback_getTypesRecettes(result, res){
 function callback_getRecettes(result, res){
     console.log("callback_getRecettes => debut")
     console.log("callback_getRecettes => parametre passe (result) = ", result)
-    var resultat = JSON.parse(result)
-    console.log("callback_getRecettes => resultat recettes = ", resultat)
-    res.end(JSON.stringify(resultat))
+    var recette = JSON.parse(result[0])
+    console.log("callback_getRecettes => resultat recettes = ", recette)
+    res.end(JSON.stringify(recette))
     console.log("callback_getRecettes => fin")
 }
 
