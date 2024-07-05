@@ -287,6 +287,16 @@ function callback_getRecettes(result, res){
     console.log("callback_getRecettes => parametre passe (result) = ", result)
     var recette = JSON.parse(result)[0]
     console.log("callback_getRecettes => resultat recettes = ", recette)
+    var ingredients = {}
+    result.array.forEach(element => {
+        var ingredient = {
+            nom: element.ingredient,
+            quantite: element.quantite,
+            unite: element.unite
+        }
+        ingredients += ingredient
+    });
+    console.log("callback_getRecettes => ingredients = " + ingredients)
     res.end(JSON.stringify(recette))
     console.log("callback_getRecettes => fin")
 }
