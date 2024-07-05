@@ -284,24 +284,25 @@ function callback_getTypesRecettes(result, res){
 //=====================================================
 function callback_getRecettes(result, res){
     console.log("callback_getRecettes => debut")
-    console.log("callback_getRecettes => parametre passe (result) = ", result)
+    //console.log("callback_getRecettes => parametre passe (result) = ", result)
     var recette = JSON.stringify(JSON.parse(result)[0])
+    // TODO supprimer les champs concernant l'ingredient (ingredient, quantite, unite)
     console.log("callback_getRecettes => resultat recettes = ", recette)
     var ingredients = {ingredients:[]}
-    console.log("Boucle de recuperation des ingredients => debut")
-    console.log("liste des ingredients initiale : " + JSON.stringify(ingredients))
+    //console.log("Boucle de recuperation des ingredients => debut")
+    //console.log("liste des ingredients initiale : " + JSON.stringify(ingredients))
     JSON.parse(result).forEach(element => {
         var ingredient = {
             nom: element.ingredient,
             quantite: element.quantite,
             unite: element.unite
         }
-        console.log("callback_getRecettes => ingredient detecte = " + JSON.stringify(ingredient))
+        //console.log("callback_getRecettes => ingredient detecte = " + JSON.stringify(ingredient))
         ingredients.ingredients.push(ingredient)
     });
-    console.log("Boucle de recuperation des ingredients => fin")
+    //console.log("Boucle de recuperation des ingredients => fin")
     console.log("callback_getRecettes => liste des ingredients = " + JSON.stringify(ingredients))
-    recette.JSON.push(ingredients)
+    recette.JSON.push(JSON.stringify(ingredients))
     //recette.push(ingredients)
     //recette.push(ingredients)
     console.log("callback_getRecettes => recette avec ingredients : " + recette)
