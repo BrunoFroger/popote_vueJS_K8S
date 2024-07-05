@@ -289,7 +289,7 @@ function callback_getRecettes(result, res){
     console.log("callback_getRecettes => resultat recettes = ", recette)
     var ingredients = {ingredient:[]}
     console.log("Boucle de recuperation des ingredients => debut")
-    console.log("liste des ingredients initiale : " + ingredients)
+    console.log("liste des ingredients initiale : " + JSON.stringify(ingredients))
     JSON.parse(result).forEach(element => {
         var ingredient = {
             nom: element.ingredient,
