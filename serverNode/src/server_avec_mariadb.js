@@ -193,7 +193,7 @@ function execRequete(requeteSql, callback, res){
             throw err;
         } else {
             resultat=JSON.stringify(result)
-            console.log("execRequete => requete : OK => resultat = ", resultat);
+            //console.log("execRequete => requete : OK => resultat = ", resultat);
             callback(resultat, res)
         }
     });
@@ -302,7 +302,7 @@ function callback_getRecettes(result, res){
     });
     //console.log("Boucle de recuperation des ingredients => fin")
     console.log("callback_getRecettes => liste des ingredients = " + JSON.stringify(ingredients))
-    recette.JSON.push(JSON.stringify(ingredients))
+    recette.push(JSON.stringify(ingredients))
     //recette.push(ingredients)
     //recette.push(ingredients)
     console.log("callback_getRecettes => recette avec ingredients : " + recette)
