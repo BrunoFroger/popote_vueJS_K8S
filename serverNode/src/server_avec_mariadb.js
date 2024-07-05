@@ -295,7 +295,7 @@ function callback_getRecettes(result, res){
             unite: element.unite
         }
         console.log("callback_getRecettes => ingredient detecte = " + JSON.stringify(ingredient))
-        ingredients.push(JSON.parse(ingredient))
+        ingredients.push(ingredient)
     });
     console.log("callback_getRecettes => liste des ingredients = " + ingredients)
     console.log("callback_getRecettes => liste des ingredients = " + JSON.stringify(ingredients))
