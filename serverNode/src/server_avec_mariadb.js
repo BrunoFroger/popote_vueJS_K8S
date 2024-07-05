@@ -288,7 +288,7 @@ function callback_getRecettes(result, res){
     var recette = JSON.parse(result)[0]
     console.log("callback_getRecettes => resultat recettes = ", recette)
     var ingredients = {}
-    result.array.forEach(element => {
+    JSON.parse(result).forEach(element => {
         var ingredient = {
             nom: element.ingredient,
             quantite: element.quantite,
