@@ -285,7 +285,7 @@ function callback_getTypesRecettes(result, res){
 function callback_getRecettes(result, res){
     console.log("callback_getRecettes => debut")
     console.log("callback_getRecettes => parametre passe (result) = ", result)
-    var recette = JSON.parse(result)[0]
+    var recette = JSON.stringify(JSON.parse(result)[0])
     console.log("callback_getRecettes => resultat recettes = ", recette)
     var ingredients = {ingredients:[]}
     console.log("Boucle de recuperation des ingredients => debut")
@@ -301,8 +301,9 @@ function callback_getRecettes(result, res){
     });
     console.log("Boucle de recuperation des ingredients => fin")
     console.log("callback_getRecettes => liste des ingredients = " + JSON.stringify(ingredients))
-    recette = JSON.stringify(recette).push(JSON.stringify(ingredients))
+    recette.push(ingredients)
     //recette.push(ingredients)
+    console.log("callback_getRecettes => recette avec ingredients : " + recette)
     res.end(JSON.stringify(recette))
     console.log("callback_getRecettes => fin")
 }
