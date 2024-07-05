@@ -301,7 +301,8 @@ function callback_getRecettes(result, res){
     });
     console.log("Boucle de recuperation des ingredients => fin")
     console.log("callback_getRecettes => liste des ingredients = " + JSON.stringify(ingredients))
-    recette.push(ingredients)
+    recette.JSON.push(ingredients)
+    //recette.push(ingredients)
     //recette.push(ingredients)
     console.log("callback_getRecettes => recette avec ingredients : " + recette)
     res.end(JSON.stringify(recette))
