@@ -302,6 +302,7 @@ function callback_getRecettes(result, res){
     });
     //console.log("Boucle de recuperation des ingredients => fin")
     console.log("callback_getRecettes => liste des ingredients = " + JSON.stringify(ingredients))
+    // TODO inclure les ingredients dans la recette
     recette.push(JSON.stringify(ingredients))
     //recette.push(ingredients)
     //recette.push(ingredients)
