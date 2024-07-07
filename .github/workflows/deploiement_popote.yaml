@@ -16,7 +16,7 @@ jobs:
       - name: stop containers (docker compose stop)
         run: |
           cd /home/bruno/popote_vueJS_K8S
-          docker-compose stop
+          docker compose stop
   update-code:
     runs-on: self-hosted
     steps: 
