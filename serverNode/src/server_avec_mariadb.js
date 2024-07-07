@@ -48,12 +48,15 @@ const server = http.createServer((req, res) => {
         res.setHeader('Content-Type', 'text/json; charset=utf-8');
         var sql = 'SELECT R.id, titre, description, realisation, \
             coalesce(U.nom, R.auteur) as auteur, \
-            coalesce(T.nom, R.type) as type \
+            coalesce(T.nom, R.type) as type , \
+            I.nom as ingredient, \
+            I.quantite, I.unite \
             FROM Recettes R \
             INNER JOIN Users U ON R.auteur = U.id  \
             INNER JOIN TypePlats T ON R.type = T.id \
+            JOIN Ingredients I ON I.idRecette = R.id\
             WHERE R.id = "' + idRecette + '"'
-        execRequete(req, sql, callback_getRecettes, res)
+        execRequete(sql, callback_getRecettes, res)
         //console.log('serveur => requete getRecette ' + idRecette);
         //console.log('serveur => ' + JSON.stringify(maRecette));
         // res.end(JSON.stringify(maRecette));
@@ -62,12 +65,12 @@ const server = http.createServer((req, res) => {
         //console.log('requete getNbRecettes ');
         res.setHeader('Content-Type', 'text/json; charset=utf-8');
         var sql = 'SELECT COUNT (*) FROM Recettes'
-        execRequete(req, sql, callback_getNbRecettes, res)
+        execRequete(sql, callback_getNbRecettes, res)
 
     } else if (req.url.startsWith('/getTypesRecettes')){
         res.setHeader('Content-Type', 'text/json; charset=utf-8');
         var sql = 'SELECT * FROM TypePlats'
-        execRequete(req, sql, callback_getTypesRecettes, res)
+        execRequete(sql, callback_getTypesRecettes, res)
 
     } else if (req.url.startsWith('/updateDatas')){
         //console.log('requete updateDatas ');
@@ -98,7 +101,7 @@ const server = http.createServer((req, res) => {
             LIMIT ' + nb + '\
             OFFSET ' + debut + '\
             ;'
-        execRequete(req, sql, callback_getListeRecettes, res)
+        execRequete(sql, callback_getListeRecettes, res)
         // listTmp = getListRecettes(debut, nb, auteur, prive, typeRecette)
 
     } else if (req.url.startsWith('/requeteUser')){
@@ -122,7 +125,7 @@ const server = http.createServer((req, res) => {
                 var sql = 'SELECT nom, email, idRole FROM Users \
                     WHERE nom = "' + user.user + '" \
                     AND pwd = "' + user.pwd + '"'
-                execRequete(req, sql, callback_checkUser,res)
+                execRequete(sql, callback_checkUser,res)
                 // let tmp = checkConnect(user)
                 //console.log('serveur => valeur retour checkConnect : ' + tmp)
                 // stuff.user = tmp
@@ -180,7 +183,7 @@ server.listen(port, () => {
 //      function execRequete
 //
 //=====================================================
-function execRequete(req, requeteSql, callback, res){
+function execRequete(requeteSql, callback, res){
     var resultat={}
     console.log("execRequete => debut : " + requeteSql)
 
@@ -190,8 +193,8 @@ function execRequete(req, requeteSql, callback, res){
             throw err;
         } else {
             resultat=JSON.stringify(result)
-            console.log("execRequete => requete : OK => resultat = ", resultat);
-            callback(req, resultat, res)
+            //console.log("execRequete => requete : OK => resultat = ", resultat);
+            callback(resultat, res)
         }
     });
     
@@ -203,7 +206,7 @@ function execRequete(req, requeteSql, callback, res){
 //      function callback_checkUser
 //
 //=====================================================
-function callback_checkUser(req, result, res){
+function callback_checkUser(result, res){
     console.log("callback_checkUser => debut")
     console.log("callback_checkUser => parametre passe (result) = ", result)
     var stuff
@@ -231,7 +234,7 @@ function callback_checkUser(req, result, res){
 //      function callback_getNbRecettes
 //
 //=====================================================
-function callback_getNbRecettes(req, result, res){
+function callback_getNbRecettes(result, res){
     console.log("callback_getNbRecettes => debut")
     console.log("callback_getNbRecettes => parametre passe (result) = ", result)
     var resultat = JSON.parse(result)[0]
@@ -251,7 +254,7 @@ function callback_getNbRecettes(req, result, res){
 //      function callback_getListeRecettes
 //
 //=====================================================
-function callback_getListeRecettes(req, result, res){
+function callback_getListeRecettes(result, res){
     console.log("callback_getListeRecettes => debut")
     console.log("callback_getListeRecettes => parametre passe (result) = ", result)
     var resultat = JSON.parse(result)
@@ -265,7 +268,7 @@ function callback_getListeRecettes(req, result, res){
 //      function callback_getTypesRecettes
 //
 //=====================================================
-function callback_getTypesRecettes(req, result, res){
+function callback_getTypesRecettes(result, res){
     console.log("callback_getTypesRecettes => debut")
     console.log("callback_getTypesRecettes => parametre passe (result) = ", result)
     var resultat = JSON.parse(result)
@@ -279,13 +282,33 @@ function callback_getTypesRecettes(req, result, res){
 //      function callback_getRecettes
 //
 //=====================================================
-function callback_getRecettes(req, result, res){
-    console.log("callback_getRecettes => debut")
-    console.log("callback_getRecettes => parametre passe (result) = ", result)
-    var resultat = JSON.parse(result)[0]
-    console.log("callback_getRecettes => resultat recettes = ", resultat)
-    res.end(JSON.stringify(resultat))
-    console.log("callback_getRecettes => fin")
+function callback_getRecettes(result, res){
+    //console.log("callback_getRecettes => debut")
+    //console.log("callback_getRecettes => parametre passe (result) = ", result)
+    let recette = JSON.parse(result)[0]
+    //console.log("\ncallback_getRecettes => resultat recettes = ", recette)
+    recette.ingredient = null
+    delete recette["ingredient"]
+    recette["quantite"] = null
+    delete recette["quantite"]
+    recette["unite"] = null
+    delete recette["unite"]
+    //console.log("\ncallback_getRecettes => resultat recettes sans ingredient = ", JSON.stringify(recette))
+    var listeIngredients = []
+    JSON.parse(result).forEach(element => {
+        var ingredient = {
+            nom: element.ingredient,
+            quantite: element.quantite,
+            unite: element.unite
+        }
+        listeIngredients.push(ingredient)
+    });
+    //console.log("Boucle de recuperation des ingredients => fin")
+    //console.log("\ncallback_getRecettes => liste des ingredients = " + JSON.stringify(listeIngredients))
+    recette.ingredients = listeIngredients
+    console.log("\ncallback_getRecettes => recette avec ingredients : " + JSON.stringify(recette))
+    res.end(JSON.stringify(recette))
+    //console.log("\ncallback_getRecettes => fin")
 }
 
 //=====================================================
