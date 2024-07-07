@@ -33,7 +33,11 @@ DELETE FROM Ingredients;
 
 INSERT INTO Ingredients (idRecette, nom, quantite, unite) VALUES
     (1, "Pamplemousse", "2", ""),
-    (1, "crevettes", "200", "grammes");
+    (1, "crevettes", "200", "grammes"),
+    (2, "poulet", "1", ""),
+    (3, "pate a tarte", "1", ""),
+    (3, "pommes", "8", ""),
+    (3, "sucre", "100", "grammes");
 
 CREATE TABLE IF NOT EXISTS TypePlats(
     id BIGINT PRIMARY KEY AUTO_INCREMENT NOT NULL,
