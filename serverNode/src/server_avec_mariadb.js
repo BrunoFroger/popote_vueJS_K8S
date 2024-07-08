@@ -87,6 +87,7 @@ const server = http.createServer((req, res) => {
         auteur = url.parse(req.url,true).query.user
         if (auteur != 'null') selectAuteur = " AND U.nom = '" + auteur + "' "
         prive = url.parse(req.url,true).query.prive
+        console.log("auteur = <" + auteur + "> : prive = <" + prive +">")
         typeRecette = url.parse(req.url,true).query.type
         console.log("type de recette demandée : " + typeRecette)
         if (typeRecette != 'Tout') selectType = " AND T.nom = '" + typeRecette + "' "
@@ -100,8 +101,8 @@ const server = http.createServer((req, res) => {
             ORDER BY R.id \
             LIMIT ' + nb + '\
             OFFSET ' + debut
-        if (prive === "true")
-            sql += ' WHERE R.auteur = ' + auteur
+        //  if (prive === "true")
+        //      sql += ' WHERE U.nom = ' + auteur
         sql += ';'
         execRequete(sql, callback_getListeRecettes, res)
         // listTmp = getListRecettes(debut, nb, auteur, prive, typeRecette)
