@@ -270,7 +270,16 @@ export default {
           // if (globalUser){
           console.log(" compte.js => isAdminUser : est ce que l'utilisateur est adminUser : " + this.adminUser )
           return this.adminUser;
-        }
+        },
+        //---------------------------------
+        //
+        //  getUserName
+        //
+        //---------------------------------
+        getUserName(){
+          console.log(" compte.js => getUserName : " + this.globalUser.nom )
+          return this.globalUser.nom;
+        },
       }
 }
 

@@ -23,7 +23,7 @@ export default {
         listeRecettes:[],
         recette:[],
         recettesPrivees:false,
-        userName:null,
+        userName:Compte.methods.getUserName(),
         userConnected:false,
         typesRecettes:{},
         typeRecetteSelected:'Tout',
