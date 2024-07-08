@@ -77,6 +77,7 @@ export default {
       //
       //---------------------------------
       incrementeIndex() {
+        this.index = this.recette.id
         this.index++;
         if (this.index >= this.nbRecettes) this.index = this.nbRecettes;
         this.loadRecette(this.index);
@@ -88,6 +89,7 @@ export default {
       //
       //---------------------------------
       decrementeIndex() {
+        this.index = this.recette.id
         this.index--;
         if (this.index <= 0) this.index = 1;
         this.loadRecette(this.index);
