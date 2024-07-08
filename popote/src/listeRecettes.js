@@ -33,7 +33,7 @@ export default {
     <h1>Liste des recettes</h1>\
     <p>Parcourez la liste des recettes disponibles et selectionnez celle que vous voulez préparer</p>\
     <span v-if="userConnected" >\
-      <input @change="loadListeRecettes" type="checkbox" v-model="recettesPrivees"> Mes recettes (visualisation de vos créations)\
+      <input @change="$parent.loadListeRecettes" type="checkbox" v-model="$parent.recettesPrivees"> Mes recettes (visualisation de vos créations)\
     </span>\
     \
       <p>\
