@@ -99,8 +99,10 @@ const server = http.createServer((req, res) => {
             INNER JOIN TypePlats T ON R.type = T.id ' + selectType + ' \
             ORDER BY R.id \
             LIMIT ' + nb + '\
-            OFFSET ' + debut + '\
-            ;'
+            OFFSET ' + debut
+        if (prive)
+            sql += ' WHERE R.auteur = ' + auteur
+        sql += ';'
         execRequete(sql, callback_getListeRecettes, res)
         // listTmp = getListRecettes(debut, nb, auteur, prive, typeRecette)
 

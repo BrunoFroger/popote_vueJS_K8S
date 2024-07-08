@@ -159,7 +159,7 @@ export default {
       //
       //---------------------------------
       loadListeRecettes() {
-        console.log('loadListeRecettes .....')
+        console.log('recettes.js : loadListeRecettes .....')
         var prive = this.recettesPrivees;
         var index = this.idxDebutListeRecettes;
         var nb = this.nbRecettesParPage;
@@ -179,7 +179,7 @@ export default {
         fetch(url).then(r => r.json()).then(response => {
           //console.log("chargement de " + nb + " recettes a partir de  " + index);
           this.listeRecettes = response
-          console.log("listeRecettes => " + response)
+          console.log("recettes.js : listeRecettes => " + JSON.stringify(response))
         })
         .catch(error => {
           console.error(error);
