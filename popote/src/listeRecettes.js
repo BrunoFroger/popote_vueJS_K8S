@@ -75,9 +75,9 @@ export default {
       //
       //---------------------------------
       pageSuivante() {
-        this.idxDebutListeRecettes+=this.nbRecettesParPage;
+        this.$parent.idxDebutListeRecettes += this.nbRecettesParPage;
         if (this.idxDebutListeRecettes >= this.nbRecettes) this.idxDebutListeRecettes -= this.nbRecettesParPage;
-        this.loadListeRecettes();
+        this.$parent.loadListeRecette(index)
       },
       //---------------------------------
       //
@@ -85,9 +85,9 @@ export default {
       //
       //---------------------------------
       pagePrecedente() {
-        this.idxDebutListeRecettes-=this.nbRecettesParPage;
-        if (this.idxDebutListeRecettes <= 0) this.idxDebutListeRecettes = 0;
-        this.loadListeRecettes();
+        this.$parent.idxDebutListeRecettes -= this.nbRecettesParPage
+        if (this.$parent.idxDebutListeRecettes <= 0) this.$parent.idxDebutListeRecettes = 0;
+        this.$parent.loadListeRecette(index)
       },
       //---------------------------------
       //
