@@ -77,7 +77,6 @@ export default {
       //
       //---------------------------------
       incrementeIndex() {
-        this.index = this.recette.id
         this.index++;
         if (this.index >= this.nbRecettes) this.index = this.nbRecettes;
         this.loadRecette(this.index);
@@ -89,7 +88,6 @@ export default {
       //
       //---------------------------------
       decrementeIndex() {
-        this.index = this.recette.id
         this.index--;
         if (this.index <= 0) this.index = 1;
         this.loadRecette(this.index);
@@ -194,7 +192,7 @@ export default {
       //
       //---------------------------------
       loadRecette(index) {
-        //this.indexRecette = item.index
+        this.index = index
         //if (this.modeListe) indexRecette += this.idxDebutListeRecettes;
         var url = this.$parent.serverNodeAdress + '/getRecette?index=' + index
         console.log('recette.js => loadRecette : ' + url)
@@ -213,7 +211,7 @@ export default {
         })
         .catch(error => {
           console.error(error);
-          this.indexRecette--;
+          this.index--;
           console.log("chargement de la recette bidon " + this.indexRecette);
           this.titre = 'fausse recette numero ' + this.indexRecette
           this.description = 'bla bla bla';
