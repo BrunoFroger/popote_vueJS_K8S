@@ -112,7 +112,7 @@ INSERT INTO Recettes (numRecette, type, auteur, titre, description, realisation)
     (13, 2, 2, "Recette bidon", "recette de titi", "bla bla"),
     (14, 2, 2, "Recette bidon", "recette de toto", "bla bla"),
     (15, 2, 2, "Recette bidon", "recette de bruno", "bla bla"),
-    (16, 2, 2, "Recette bidon", "recette de titi", "bla bla");,
+    (16, 2, 2, "Recette bidon", "recette de titi", "bla bla"),
     (17, 2, 2, "Recette bidon", "recette de toto", "bla bla"),
     (18, 2, 2, "Recette bidon", "recette de bruno", "bla bla"),
     (19, 2, 2, "Recette bidon", "recette de titi", "bla bla"),
