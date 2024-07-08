@@ -68,6 +68,7 @@ INSERT INTO Roles (nom) VALUES
 
 CREATE TABLE IF NOT EXISTS Recettes(
     id BIGINT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    numRecette INT NOT NULL,
     type BIGINT NOT NULL,
     auteur BIGINT NOT NULL,
     titre VARCHAR(100),
@@ -77,8 +78,8 @@ CREATE TABLE IF NOT EXISTS Recettes(
 
 DELETE FROM Recettes;
 
-INSERT INTO Recettes (type, auteur, titre, description, realisation) VALUES
-    (2, 2, "pamplemousse crevette", "entree fraiche pour l'ete", "Couper les pamplemousses en 2, les vider en preservant sans abimer le contenu (vous devez avoir l'interieur du demi pamplemeousse entier), couper en des le pamplemeousse et les mettre dans un saladier, ajouter les crevettes decortiquees, ajouter la moyonnaise, melanger puis utiliser les pamplemeousse vides pour servir de bol a votre preparation, servir frais"),
-    (3, 2, "poulet au four", "Plat traditionnel du dimanche midi", "Mettre le poulet dans un plat, poser quelques morceuax de beurre sur le poulet, verser un verre de bouillon au fond du plat, enfourner a 180 pendant 1h30"),
-    (4, 3, "tarte aux pommes", "dessert traditionnel avec des pommes", "etaler la pate dans le plat a tarte, couper les pommes en lamelles, repartir les pommes sur la pate, saupoudrer de sucre, mettre au four pendant 30mn");
+INSERT INTO Recettes (numRecette, type, auteur, titre, description, realisation) VALUES
+    (1, 2, 2, "pamplemousse crevette", "entree fraiche pour l'ete", "Couper les pamplemousses en 2, les vider en preservant sans abimer le contenu (vous devez avoir l'interieur du demi pamplemeousse entier), couper en des le pamplemeousse et les mettre dans un saladier, ajouter les crevettes decortiquees, ajouter la moyonnaise, melanger puis utiliser les pamplemeousse vides pour servir de bol a votre preparation, servir frais"),
+    (2, 3, 2, "poulet au four", "Plat traditionnel du dimanche midi", "Mettre le poulet dans un plat, poser quelques morceuax de beurre sur le poulet, verser un verre de bouillon au fond du plat, enfourner a 180 pendant 1h30"),
+    (3, 4, 3, "tarte aux pommes", "dessert traditionnel avec des pommes", "etaler la pate dans le plat a tarte, couper les pommes en lamelles, repartir les pommes sur la pate, saupoudrer de sucre, mettre au four pendant 30mn");
 
