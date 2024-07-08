@@ -100,7 +100,7 @@ const server = http.createServer((req, res) => {
             ORDER BY R.id \
             LIMIT ' + nb + '\
             OFFSET ' + debut
-        if (prive)
+        if (prive == 'true')
             sql += ' WHERE R.auteur = ' + auteur
         sql += ';'
         execRequete(sql, callback_getListeRecettes, res)
