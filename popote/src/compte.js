@@ -301,6 +301,15 @@ export default {
             return globalNbUsers;
           });
         },
+        //---------------------------------
+        //
+        //  getNombreRecettes
+        //
+        //---------------------------------
+        getNombreUsers() {
+          console.log("compte.js : getNombreUsers ")
+          return globalNbUsers
+        },
       }
 }
 

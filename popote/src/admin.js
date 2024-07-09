@@ -55,7 +55,7 @@ export default {
         updateDatas() {
           console.log("admin.js => updateDatas")
           this.nbRecettes = Recettes.methods.getNombreRecettes();
-          this.nbUsers = Compte.methods.getNbUsers();
+          this.nbUsers = Compte.methods.getNombreUsers();
         },
       }
 }
