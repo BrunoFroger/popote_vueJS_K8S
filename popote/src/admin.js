@@ -53,7 +53,7 @@ export default {
         //---------------------------------
         updateDatas() {
           console.log("admin.js => updateDatas")
-          this.nbRecettes = Recettes.methods.getNombreRecttes()
+          this.nbRecettes = Recettes.methods.getNombreRecettes()
         },
       }
 }
