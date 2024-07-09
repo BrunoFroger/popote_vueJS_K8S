@@ -85,8 +85,8 @@ const server = http.createServer((req, res) => {
         debut = url.parse(req.url,true).query.index
         nb = url.parse(req.url,true).query.nb
         auteur = url.parse(req.url,true).query.user
-        if ((auteur != 'null') && (prive != 'false')) selectAuteur = " AND U.nom = '" + auteur + "' "
         prive = url.parse(req.url,true).query.prive
+        if ((auteur != 'null') && (prive != 'false')) selectAuteur = " AND U.nom = '" + auteur + "' "
         console.log("auteur = <" + auteur + "> : prive = <" + prive +">")
         typeRecette = url.parse(req.url,true).query.type
         console.log("type de recette demandée : " + typeRecette)
