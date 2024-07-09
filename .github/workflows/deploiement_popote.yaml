@@ -17,7 +17,7 @@ jobs:
         run: |
           cd /home/bruno/popote_vueJS_K8S
           docker compose stop
-          
+
   update-code:
     runs-on: self-hosted
     steps: 
@@ -41,5 +41,5 @@ jobs:
     steps:
       - name: rechargeent de la base de données
         run: |
-          docker exec -it popote_mariadb ./initDb.bash
+          docker exec popote_mariadb ./initDb.bash
 
