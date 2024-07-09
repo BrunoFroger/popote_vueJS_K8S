@@ -3,6 +3,7 @@
 var userConnected=false;
 var globalUser=null;
 var globalAdminUser=false;
+var globalNbUsers=0;
 
 export default {
     props: [], 
@@ -30,6 +31,7 @@ export default {
       },
       mounted() {
         this.updateDateTime();
+        this.getNbUsers();
         setInterval(this.updateDateTime, 1000);
       },
       template: '\
@@ -285,6 +287,19 @@ export default {
             console.log(" compte.js => getUserName : null" )
             return null
           }
+        },
+        //---------------------------------
+        //
+        //  getNbUsers
+        //
+        //---------------------------------
+        getNbUsers(){
+          let adresse = this.$parent.serverNodeAdress + '/getNbUsers'
+          console.log("recette.js => : getNbUsers => " + adresse)
+          fetch(adresse, requestOptions).then(r => r.json()).then(response => {
+            globalNbUsers = response.nbUsers;
+          });
+          return globalNbUsers;
         },
       }
 }

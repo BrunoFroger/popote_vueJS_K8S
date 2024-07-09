@@ -67,6 +67,12 @@ const server = http.createServer((req, res) => {
         var sql = 'SELECT COUNT (*) FROM Recettes'
         execRequete(sql, callback_getNbRecettes, res)
 
+    } else if (req.url.startsWith('/getNbUsers')){
+        //console.log('requete getNbUsers ');
+        res.setHeader('Content-Type', 'text/json; charset=utf-8');
+        var sql = 'SELECT COUNT (*) FROM Users'
+        execRequete(sql, callback_getNbUsers, res)
+
     } else if (req.url.startsWith('/getTypesRecettes')){
         res.setHeader('Content-Type', 'text/json; charset=utf-8');
         var sql = 'SELECT * FROM TypePlats'
@@ -230,6 +236,26 @@ function callback_checkUser(result, res){
     //console.log("callback_checkUser => " + JSON.stringify(stuff))
     res.end(JSON.stringify(stuff))
     //console.log("callback_checkUser => fin")
+}
+
+//=====================================================
+//
+//      function callback_getNbUsers
+//
+//=====================================================
+function callback_getNbUsers(result, res){
+    //console.log("callback_getNbUsers => debut")
+    //console.log("callback_getNbUsers => parametre passe (result) = ", result)
+    var resultat = JSON.parse(result)[0]
+    //console.log("callback_getNbUsers => resultat getNbRecettes = ", resultat)
+    var nbUsers = resultat["COUNT (*)"]
+    console.log("callback_getNbUsers => nbUsers = " + nbUsers)
+    const stuff ={
+        nbUsers: nbUsers,
+    };
+    //console.log("callback_getNbUsers => " + JSON.stringify(stuff))
+    res.end(JSON.stringify(stuff))
+    //console.log("callback_getNbUsers => fin")
 }
 
 //=====================================================
