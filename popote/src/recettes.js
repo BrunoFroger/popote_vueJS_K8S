@@ -105,7 +105,7 @@ export default {
         // todo : retourner nb de recettes dans listeRecettes plutot que le nombre de recettes en base
         fetch(adresse).then(r => r.json()).then(response => {
           globalNbRecettes = response.nbRecettes;
-          console.log("recuperation du nombre de recettes " + nbRecettes);
+          console.log("recuperation du nombre de recettes " + globalNbRecettes);
         }).catch(error => {
           console.error(error);
         });
