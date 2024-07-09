@@ -269,7 +269,7 @@ export default {
         //---------------------------------
         isAdminUser(){
           // if (globalUser){
-          console.log(" compte.js => isAdminUser : est ce que l'utilisateur est adminUser : " + globalAdminUser )
+          //console.log(" compte.js => isAdminUser : est ce que l'utilisateur est adminUser : " + globalAdminUser )
           return globalAdminUser;
         },
         //---------------------------------
