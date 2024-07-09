@@ -19,18 +19,20 @@ export default {
           <h1>Administration du site</h1>\
           <p>Cette page est accessible uniquement pour les administrateurs du site</p>\
           <table> \
-            <th> \
-                <td>Variable</td> \
-                <td>Valeur</td> \
-            </th> \
-            <tr> \
-                <td>nombre de users</td> \
-                <td>{{nbUsers}}</td> \
-            </tr> \
-            <tr> \
-                <td>nombre de recettes</td> \
-                <td>{{nbRecettes}}</td> \
-            </tr> \
+            <thead> \
+                <th>Variable</th> \
+                <th>Valeur</th> \
+            </thead> \
+            <tbody> \
+                <tr> \
+                    <td>nombre de users</td> \
+                    <td>{{nbUsers}}</td> \
+                </tr> \
+                <tr> \
+                    <td>nombre de recettes</td> \
+                    <td>{{nbRecettes}}</td> \
+                </tr> \
+            </tbody> \
           </table> \
         </div> \
       ',
