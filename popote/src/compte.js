@@ -31,7 +31,7 @@ export default {
       },
       mounted() {
         this.updateDateTime();
-        this.getNbUsers();
+        //this.getNbUsers();
         setInterval(this.updateDateTime, 1000);
       },
       template: '\
