@@ -188,9 +188,9 @@ server.listen(port, () => {
 //=====================================================
 function execRequete(requeteSql, callback, res){
     var resultat={}
-    console.log("execRequete => debut : " + requeteSql)
+    console.log("execRequete => " + requeteSql)
 
-    console.log("execRequete => tentative de connexion ......")
+    //console.log("execRequete => tentative de connexion ......")
     db.query(requeteSql, (err, result) => {
         if (err) {
             throw err;
@@ -201,7 +201,7 @@ function execRequete(requeteSql, callback, res){
         }
     });
     
-    console.log("execRequete => fin")
+    //console.log("execRequete => fin")
 }
 
 //=====================================================
@@ -210,8 +210,8 @@ function execRequete(requeteSql, callback, res){
 //
 //=====================================================
 function callback_checkUser(result, res){
-    console.log("callback_checkUser => debut")
-    console.log("callback_checkUser => parametre passe (result) = ", result)
+    //console.log("callback_checkUser => debut")
+    //console.log("callback_checkUser => parametre passe (result) = ", result)
     var stuff
     if (result == undefined){
         stuff ={
@@ -220,16 +220,16 @@ function callback_checkUser(result, res){
         };
     } else {
         var resultat = JSON.parse(result)[0]
-        console.log("callback_checkUser => resultat = ", JSON.stringify(resultat))
+        //console.log("callback_checkUser => resultat = ", JSON.stringify(resultat))
         stuff = {
             status: 'OK',
             message: 'Utilisateur connecte',
             user: resultat,
         }
     }
-    console.log("callback_checkUser => " + JSON.stringify(stuff))
+    //console.log("callback_checkUser => " + JSON.stringify(stuff))
     res.end(JSON.stringify(stuff))
-    console.log("callback_checkUser => fin")
+    //console.log("callback_checkUser => fin")
 }
 
 //=====================================================
@@ -238,18 +238,18 @@ function callback_checkUser(result, res){
 //
 //=====================================================
 function callback_getNbRecettes(result, res){
-    console.log("callback_getNbRecettes => debut")
-    console.log("callback_getNbRecettes => parametre passe (result) = ", result)
+    //console.log("callback_getNbRecettes => debut")
+    //console.log("callback_getNbRecettes => parametre passe (result) = ", result)
     var resultat = JSON.parse(result)[0]
-    console.log("callback_getNbRecettes => resultat getNbRecettes = ", resultat)
+    //console.log("callback_getNbRecettes => resultat getNbRecettes = ", resultat)
     var nbRecettes = resultat["COUNT (*)"]
-    console.log("nbRecettes = " + nbRecettes)
+    console.log("callback_getNbRecettes => nbRecettes = " + nbRecettes)
     const stuff ={
         nbRecettes: nbRecettes,
     };
-    console.log("callback_getNbRecettes => " + JSON.stringify(stuff))
+    //console.log("callback_getNbRecettes => " + JSON.stringify(stuff))
     res.end(JSON.stringify(stuff))
-    console.log("callback_getNbRecettes => fin")
+    //console.log("callback_getNbRecettes => fin")
 }
 
 //=====================================================
@@ -258,10 +258,10 @@ function callback_getNbRecettes(result, res){
 //
 //=====================================================
 function callback_getListeRecettes(result, res){
-    console.log("callback_getListeRecettes => debut")
-    console.log("callback_getListeRecettes => parametre passe (result) = ", result)
+    //console.log("callback_getListeRecettes => debut")
+    //console.log("callback_getListeRecettes => parametre passe (result) = ", result)
     var resultat = JSON.parse(result)
-    console.log("callback_getListeRecettes => resultat listRecettes = ", resultat)
+    //console.log("callback_getListeRecettes => resultat listRecettes = ", resultat)
     res.end(JSON.stringify(resultat))
     console.log("callback_getListeRecettes => fin")
 }
@@ -272,10 +272,10 @@ function callback_getListeRecettes(result, res){
 //
 //=====================================================
 function callback_getTypesRecettes(result, res){
-    console.log("callback_getTypesRecettes => debut")
-    console.log("callback_getTypesRecettes => parametre passe (result) = ", result)
+    //console.log("callback_getTypesRecettes => debut")
+    //console.log("callback_getTypesRecettes => parametre passe (result) = ", result)
     var resultat = JSON.parse(result)
-    console.log("callback_getTypesRecettes => resultat typesRecettes = ", resultat)
+    //console.log("callback_getTypesRecettes => resultat typesRecettes = ", resultat)
     res.end(JSON.stringify(resultat))
     console.log("callback_getTypesRecettes => fin")
 }
@@ -311,7 +311,7 @@ function callback_getRecettes(result, res){
     recette.ingredients = listeIngredients
     console.log("\ncallback_getRecettes => recette avec ingredients : " + JSON.stringify(recette))
     res.end(JSON.stringify(recette))
-    //console.log("\ncallback_getRecettes => fin")
+    console.log("\ncallback_getRecettes => fin")
 }
 
 //=====================================================

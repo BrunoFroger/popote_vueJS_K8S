@@ -59,6 +59,7 @@ const app = createApp({
       updateDateTime() {
         const now = new Date();
         this.currentDateTime = now.toLocaleString();
+        this.updateTypeUser()
       },
     }
 });
