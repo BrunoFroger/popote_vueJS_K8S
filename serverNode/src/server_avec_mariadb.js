@@ -142,6 +142,18 @@ const server = http.createServer((req, res) => {
                 //res.end(resultat)
             //} else if (typeRequette === "deconnexion"){
                 //console.log("serveur => traitement de la requete " + typeRequette)
+            } else if (typeRequette === "creation"){
+                //console.log("serveur => traitement de la requete " + typeRequette)
+                var sql = 'INSERT INTO Users (nom, pwd, email, idRole) VALUES \
+                    (' + user.user + ', ' + user.pwd + ', ' + user.email + ', ' + user.idRole + ')' 
+                execRequete(sql, callback_addUser,res)
+                // let tmp = checkConnect(user)
+                //console.log('serveur => valeur retour checkConnect : ' + tmp)
+                // stuff.user = tmp
+                //console.log("serveur => localStatus=" + localStatus + ", localMessage=" + localMessage + ', user=' + stuff.user)
+                //res.end(resultat)
+            //} else if (typeRequette === "deconnexion"){
+                //console.log("serveur => traitement de la requete " + typeRequette)
             } else {
                 console.log("serveur => requete inconnue " + typeRequette)
                 stuff.status = 'KO'
@@ -236,6 +248,34 @@ function callback_checkUser(result, res){
     //console.log("callback_checkUser => " + JSON.stringify(stuff))
     res.end(JSON.stringify(stuff))
     //console.log("callback_checkUser => fin")
+}
+
+//=====================================================
+//
+//      function callback_addUser
+//
+//=====================================================
+function callback_addUser(result, res){
+    //console.log("callback_addUser => debut")
+    //console.log("callback_addUser => parametre passe (result) = ", result)
+    var stuff
+    if (result == undefined){
+        stuff ={
+            status: 'KO',
+            message: 'Impossible de creer l\'utilisateur',
+        };
+    } else {
+        var resultat = JSON.parse(result)[0]
+        //console.log("callback_addUser => resultat = ", JSON.stringify(resultat))
+        stuff = {
+            status: 'OK',
+            message: 'Utilisateur créé',
+            //user: resultat,
+        }
+    }
+    //console.log("callback_addUser => " + JSON.stringify(stuff))
+    res.end(JSON.stringify(stuff))
+    //console.log("callback_addUser => fin")
 }
 
 //=====================================================
