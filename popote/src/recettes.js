@@ -164,6 +164,7 @@ export default {
         var index = this.idxDebutListeRecettes;
         var nb = this.nbRecettesParPage;
         var auteur = this.userName;
+        var auteur = Compte.methods.getUserName();
         var type = this.typeRecetteSelected;
         var url = this.$parent.serverNodeAdress + '/getListeRecettes?index=' + index 
             + '&nb=' + nb + '&user=' + auteur 

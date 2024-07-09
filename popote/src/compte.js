@@ -281,6 +281,7 @@ export default {
             console.log(" compte.js => getUserName : " + this.globalUser.nom)
             return this.globalUser.nom;
           } else {
+            console.log(" compte.js => getUserName : null" )
             return null
           }
         },
