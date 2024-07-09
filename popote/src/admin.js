@@ -1,4 +1,4 @@
-
+import Recettes from './recettes.js'
 
 export default {
     props: [], 
@@ -53,6 +53,7 @@ export default {
         //---------------------------------
         updateDatas() {
           console.log("admin.js => updateDatas")
+          this.nbRecettes = Recettes.getNombreRecttes()
         },
       }
 }

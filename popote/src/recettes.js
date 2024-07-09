@@ -1,6 +1,7 @@
 import Compte from './compte.js'
 
 //var priveSelected = false;
+var globalNbRecettes=0;
 
 export default {
   props: [], 
@@ -17,7 +18,7 @@ export default {
         ingredients : null,
         ingredient : "{[null]}",
         index : 0,
-        nbRecettes : 0,
+        //nbRecettes : 0,
         nbRecettesParPage:10,
         idxDebutListeRecettes:0,
         listeRecettes:[],
@@ -78,7 +79,7 @@ export default {
       //---------------------------------
       incrementeIndex() {
         this.index++;
-        if (this.index >= this.nbRecettes) this.index = this.nbRecettes;
+        if (this.index >= globalNbRecettes) this.index = globalNbRecettes;
         this.loadRecette(this.index);
         console.log("recette.js : incrementeIndex : " + this.index)
       },
@@ -103,8 +104,8 @@ export default {
         console.log("recette.js => : getNbRecette => " + adresse)
         // todo : retourner nb de recettes dans listeRecettes plutot que le nombre de recettes en base
         fetch(adresse).then(r => r.json()).then(response => {
-          this.nbRecettes = response.nbRecettes;
-          console.log("recuperation du nombre de recettes " + this.nbRecettes);
+          globalNbRecettes = response.nbRecettes;
+          console.log("recuperation du nombre de recettes " + nbRecettes);
         }).catch(error => {
           console.error(error);
         });
@@ -141,6 +142,15 @@ export default {
       updateRecette() {
         console.log("recettes.js : updateRecette => TODO")
         this.switchModeEdition()
+      },
+      //---------------------------------
+      //
+      //  getNombreRecettes
+      //
+      //---------------------------------
+      getNombreRecettes() {
+        console.log("recettes.js : getNombreRecettes ")
+        return globalNbRecettes
       },
       //---------------------------------
       //
