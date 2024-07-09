@@ -229,13 +229,13 @@ export default {
               globalUser = response.user
               this.typeUser=globalUser.idRole
               this.user=globalUser
-              console.log('compte.js => user = ' + JSON.stringify(globalUser))
+              console.log('compte.js => globalUser = ' + JSON.stringify(globalUser))
               console.log('compte.js => idRole = ' + this.typeUser)
               userConnected = true
               this.connected = true
               console.log ("compte.js => Utilisateur " + this.user.nom + " connecté")
               if (this.typeUser == 0){
-                console.log("administarteur connecté")
+                console.log("administarteur connecté ")
                 this.adminUser=true
               } else {
                 console.log("utilisateur connecté")
@@ -277,9 +277,9 @@ export default {
         //
         //---------------------------------
         getUserName(){
-          if (this.globalUser != null){
-            console.log(" compte.js => getUserName : " + this.globalUser.nom)
-            return this.globalUser.nom;
+          if (globalUser != null){
+            console.log(" compte.js => getUserName : " + globalUser.nom)
+            return globalUser.nom;
           } else {
             console.log(" compte.js => getUserName : null" )
             return null
