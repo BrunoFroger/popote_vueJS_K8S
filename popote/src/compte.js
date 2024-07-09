@@ -31,7 +31,7 @@ export default {
       },
       mounted() {
         this.updateDateTime();
-        //this.getNbUsers();
+        this.getNbUsers();
         setInterval(this.updateDateTime, 1000);
       },
       template: '\
@@ -296,7 +296,7 @@ export default {
         getNbUsers(){
           let adresse = this.$parent.serverNodeAdress + '/getNbUsers'
           console.log("recette.js => : getNbUsers => " + adresse)
-          fetch(adresse, requestOptions).then(r => r.json()).then(response => {
+          fetch(adresse).then(r => r.json()).then(response => {
             globalNbUsers = response.nbUsers;
             return globalNbUsers;
           });
