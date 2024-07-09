@@ -298,8 +298,8 @@ export default {
           console.log("recette.js => : getNbUsers => " + adresse)
           fetch(adresse, requestOptions).then(r => r.json()).then(response => {
             globalNbUsers = response.nbUsers;
+            return globalNbUsers;
           });
-          return globalNbUsers;
         },
       }
 }
