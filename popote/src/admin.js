@@ -5,6 +5,8 @@ export default {
       data: function () {
         return {
           currentDateTime: '',
+          nbRecettes:null,
+          nbUsers:null,
         };
       },
       mounted() {
@@ -13,7 +15,22 @@ export default {
       },
       template: '\
         <div>\
-          <h1>Administartion du site</h1>\
+          <h1>Administration du site</h1>\
+          <p>Cette page est accessible uniquement pour les administrateurs du site</p>\
+          <table> \
+            <th> \
+                <td>Variable</td> \
+                <td>Valeur</td> \
+            </th> \
+            <tr> \
+                <td>nombre de users</td> \
+                <td>nbUsers</td> \
+            </tr> \
+            <tr> \
+                <td>nombre de recettes</td> \
+                <td>nbRecettes</td> \
+            </tr> \
+          </table> \
         </div> \
       ',
       methods: {
