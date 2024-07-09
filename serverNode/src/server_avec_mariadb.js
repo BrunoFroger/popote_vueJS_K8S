@@ -248,10 +248,10 @@ function callback_getNbUsers(result, res){
     //console.log("callback_getNbUsers => parametre passe (result) = ", result)
     var resultat = JSON.parse(result)[0]
     //console.log("callback_getNbUsers => resultat getNbRecettes = ", resultat)
-    var nbUsers = resultat["COUNT (*)"]
-    console.log("callback_getNbUsers => nbUsers = " + nbUsers)
+    var valNbUsers = resultat["COUNT (*)"]
+    console.log("callback_getNbUsers => nbUsers = " + valNbUsers)
     const stuff ={
-        nbUsers: nbUsers,
+        nbUsers: valNbUsers,
     };
     //console.log("callback_getNbUsers => " + JSON.stringify(stuff))
     res.end(JSON.stringify(stuff))
