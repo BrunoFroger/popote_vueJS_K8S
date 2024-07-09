@@ -145,7 +145,7 @@ const server = http.createServer((req, res) => {
             } else if (typeRequette === "creation"){
                 //console.log("serveur => traitement de la requete " + typeRequette)
                 var sql = 'INSERT INTO Users (nom, pwd, email, idRole) VALUES \
-                    (' + user.user + ', ' + user.pwd + ', ' + user.email + ', ' + user.idRole + ')' 
+                    ("' + user.user + '", "' + user.pwd + '", "' + user.email + '", 1)' 
                 execRequete(sql, callback_addUser,res)
                 // let tmp = checkConnect(user)
                 //console.log('serveur => valeur retour checkConnect : ' + tmp)
