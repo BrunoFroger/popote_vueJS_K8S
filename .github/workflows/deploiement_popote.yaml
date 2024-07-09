@@ -17,6 +17,7 @@ jobs:
         run: |
           cd /home/bruno/popote_vueJS_K8S
           docker compose stop
+          
   update-code:
     runs-on: self-hosted
     steps: 
@@ -24,6 +25,7 @@ jobs:
         run: |
           cd /home/bruno/popote_vueJS_K8S
           git pull origin main
+
   restart:
     needs: [update-code, stop]
     runs-on: self-hosted
@@ -32,3 +34,12 @@ jobs:
         run: |
           cd /home/bruno/popote_vueJS_K8S
           docker compose up -d --build
+
+  MAJ-BDD:
+    needs: restart
+    runs-on: self-hosted
+    steps:
+      - name: rechargeent de la base de données
+        run: |
+          docker exec -it popote_mariadb ./initDb.bash
+
