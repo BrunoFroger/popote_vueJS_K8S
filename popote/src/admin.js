@@ -11,6 +11,7 @@ export default {
       },
       mounted() {
         this.updateDateTime();
+        this.updateDatas();
         setInterval(this.updateDateTime, 1000);
       },
       template: '\
@@ -24,11 +25,11 @@ export default {
             </th> \
             <tr> \
                 <td>nombre de users</td> \
-                <td>nbUsers</td> \
+                <td>{{nbUsers}}</td> \
             </tr> \
             <tr> \
                 <td>nombre de recettes</td> \
-                <td>nbRecettes</td> \
+                <td>{{nbRecettes}}</td> \
             </tr> \
           </table> \
         </div> \
@@ -42,6 +43,14 @@ export default {
         updateDateTime() {
           const now = new Date();
           this.currentDateTime = now.toLocaleString();
+        },
+        //---------------------------------
+        //
+        //  updateDatas
+        //
+        //---------------------------------
+        updateDatas() {
+          console.log("admin.js => updateDatas")
         },
       }
 }
