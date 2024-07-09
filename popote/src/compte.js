@@ -2,6 +2,7 @@
 
 var userConnected=false;
 var globalUser=null;
+var globalAdminUser=false;
 
 export default {
     props: [], 
@@ -24,7 +25,7 @@ export default {
           user:globalUser,
           connected:userConnected,
           message:"",
-          adminUser: false,
+          //adminUser: false,
         };
       },
       mounted() {
@@ -35,7 +36,7 @@ export default {
         <div>\
           <h1>Gestion de votre compte</h1>\
           <p><span v-if="connected">Bonjour {{user.nom}}.</span> Nous somme le {{currentDateTime}}</p>\
-          <p><span v-if="adminUser">Vous etes Administrateur de ce site</span></p>\
+          <p><span v-if="globalAdminUser">Vous etes Administrateur de ce site</span></p>\
           <p>Cette page permet de gérer votre compte : \
             <button @click="changeMode(\'creeCompte\')">création de compte</button> / \
             <span v-if="connected"> <button @click="changeMode(\'suppCompte\')">suppression de compte</button> / </span>\
@@ -236,10 +237,10 @@ export default {
               console.log ("compte.js => Utilisateur " + this.user.nom + " connecté")
               if (this.typeUser == 0){
                 console.log("administarteur connecté ")
-                this.adminUser=true
+                globalAdminUser=true
               } else {
                 console.log("utilisateur connecté")
-                this.adminUser=false
+                globalAdminUser=false
               }
             } else {
               console.log("echec de la connexion de " + login)
@@ -268,8 +269,8 @@ export default {
         //---------------------------------
         isAdminUser(){
           // if (globalUser){
-          console.log(" compte.js => isAdminUser : est ce que l'utilisateur est adminUser : " + this.adminUser )
-          return this.adminUser;
+          console.log(" compte.js => isAdminUser : est ce que l'utilisateur est adminUser : " + globalAdminUser )
+          return globalAdminUser;
         },
         //---------------------------------
         //
