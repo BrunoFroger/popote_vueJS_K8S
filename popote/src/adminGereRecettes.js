@@ -43,7 +43,7 @@ export default {
         //---------------------------------
         changeModeAffichage(mode) {
           console.log("adminGerRecettes.js => changeModeAffichage : " + mode)
-          Admin.methods.changeModeAffichage(mode);
+          this.$parent.modeAffichageAdmin = mode;
         },
       }
 }

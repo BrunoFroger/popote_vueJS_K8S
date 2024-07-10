@@ -44,7 +44,7 @@ export default {
         //---------------------------------
         changeModeAffichage(mode) {
           console.log("adminGereUsers.js => changeModeAffichage : " + mode)
-          Admin.methods.changeModeAffichage(mode);
+          this.$parent.modeAffichageAdmin = mode;
         },
       }
 }
