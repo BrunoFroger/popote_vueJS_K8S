@@ -18,8 +18,6 @@ export default {
       },
       template: '\
         <div>\
-          <h1>Administration du site</h1>\
-          <p>Cette page est accessible uniquement pour les administrateurs du site</p>\
           <span v-if="modeAffichageAdmin == \'gereUsers\'">\
             <adminGereUsers/>\
           </span>\
@@ -27,6 +25,8 @@ export default {
             <adminGereRecettess/>\
           </span>\
           <span v-else> \
+          <h1>Administration du site</h1>\
+          <p>Cette page est accessible uniquement pour les administrateurs du site</p>\
           <table> \
             <thead> \
                 <th>Variable</th> \
