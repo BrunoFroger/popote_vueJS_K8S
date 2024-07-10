@@ -144,7 +144,7 @@ const server = http.createServer((req, res) => {
                 //console.log("serveur => traitement de la requete " + typeRequette)
             } else if (typeRequette === "creation"){
                 //console.log("serveur => traitement de la requete " + typeRequette)
-                var sql = 'INSERT INTO Users (nom, pwd, email, idRole) VALUES \
+                var sql = 'INSERT IGNORE INTO Users (nom, pwd, email, idRole) VALUES \
                     ("' + user.user + '", "' + user.pwd + '", "' + user.email + '", 1)' 
                 execRequete(sql, callback_addUser,res)
                 // let tmp = checkConnect(user)
@@ -257,7 +257,7 @@ function callback_checkUser(result, res){
 //=====================================================
 function callback_addUser(result, res){
     //console.log("callback_addUser => debut")
-    //console.log("callback_addUser => parametre passe (result) = ", result)
+    console.log("callback_addUser => parametre passe (result) = ", result)
     var stuff
     if (result == undefined){
         stuff ={
@@ -273,7 +273,7 @@ function callback_addUser(result, res){
             //user: resultat,
         }
     }
-    //console.log("callback_addUser => " + JSON.stringify(stuff))
+    console.log("callback_addUser => " + JSON.stringify(stuff))
     res.end(JSON.stringify(stuff))
     //console.log("callback_addUser => fin")
 }
