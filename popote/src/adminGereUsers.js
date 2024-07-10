@@ -18,25 +18,27 @@ export default {
           <h1>Administration : Gestion des utilisateurs</h1>\
           <p>Cette page est accessible uniquement pour les administrateurs du site</p>\
         </div> \
-        <table>\
-            <thead> \
-                <th>id</th> \
-                <th>nom</th> \
-                <th>passwd</th> \
-                <th>email</th> \
-                <th>idRole</th> \
-            </thead> \
-            <tbody> \
-                <tr v-for="item in listeUsers"> \
-                    <td>{{item.id}}</td> \
-                    <td>{{item.nom<}}</td> \
-                    <td>{{item.pwd}}</td> \
-                    <td>{{item.email}}</td> \
-                    <td>{{item.iRole}}</td> \
-                </tr> \
-            </tbody> \
-        </table>\
-        <button @click = "changeModeAffichage(\' \')">Retour</button> \
+        <div> \
+            <table>\
+                <thead> \
+                    <th>id</th> \
+                    <th>nom</th> \
+                    <th>passwd</th> \
+                    <th>email</th> \
+                    <th>idRole</th> \
+                </thead> \
+                <tbody> \
+                    <tr v-for="item in listeUsers"> \
+                        <!--td>{{item.id}}</td> \
+                        <td>{{item.nom<}}</td> \
+                        <td>{{item.pwd}}</td> \
+                        <td>{{item.email}}</td> \
+                        <td>{{item.iRole}}</td--> \
+                    </tr> \
+                </tbody> \
+            </table>\
+            <button @click = "changeModeAffichage(\' \')">Retour</button> \
+        </div> \
       ',
       methods: {
         //---------------------------------
