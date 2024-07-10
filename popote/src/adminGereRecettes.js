@@ -36,6 +36,15 @@ export default {
         updateDatas() {
           console.log("adminGereRecettes.js => updateDatas")
         },
+        //---------------------------------
+        //
+        //  changeModeAffichage
+        //
+        //---------------------------------
+        changeModeAffichage(mode) {
+          console.log("adminGerRecettes.js => changeModeAffichage : " + mode)
+          Admin.methods.changeModeAffichage(mode);
+        },
       }
 }
 

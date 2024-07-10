@@ -14,11 +14,10 @@ export default {
       },
       template: '\
         <div>\
-          <h1>Gestion des utilisateurs</h1>\
+          <h1>Administration : Gestion des utilisateurs</h1>\
           <p>Cette page est accessible uniquement pour les administrateurs du site</p>\
         </div> \
-        <button @click = "Admin.methods.changeModeAffichage(\' \')">Retour</button> \
-        <!--button @click "Admin.methods.changeModeAffichage(\' \')"> retour</button!--> \
+        <button @click = "changeModeAffichage(\' \')">Retour</button> \
       ',
       methods: {
         //---------------------------------
@@ -37,6 +36,15 @@ export default {
         //---------------------------------
         updateDatas() {
           console.log("adminGereUsers.js => updateDatas")
+        },
+        //---------------------------------
+        //
+        //  changeModeAffichage
+        //
+        //---------------------------------
+        changeModeAffichage(mode) {
+          console.log("adminGereUsers.js => changeModeAffichage : " + mode)
+          Admin.methods.changeModeAffichage(mode);
         },
       }
 }

@@ -42,7 +42,7 @@ export default {
                 <tr> \
                     <td>nombre de recettes</td> \
                     <td>{{nbRecettes}}</td> \
-                    <!--td@click = "changeModeAffichage(\'gereRecettes\')">Gestion des recettes</td--> \
+                    <td><button @click = "changeModeAffichage(\'gereRecettes\')">Gestion des recettes</button></td> \
                 </tr> \
             </tbody> \
           </table> \
