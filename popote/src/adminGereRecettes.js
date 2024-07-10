@@ -17,6 +17,7 @@ export default {
           <h1>Administration : Gestion des recettes</h1>\
           <p>Cette page est accessible uniquement pour les administrateurs du site</p>\
         </div> \
+        <button @click = "changeModeAffichage(\' \')">Retour</button> \
       ',
       methods: {
         //---------------------------------
