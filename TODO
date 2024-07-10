@@ -2,19 +2,22 @@ Bug a resoudre :
 - sur visualisation des recettes les boutons precedente et suivante calcul de l'index eronné
 
 Fonctions a réaliser :
-- popote :
+- popote (frontend) :
   - edition d'une recette
   - suppression d'une recette
   - ajout d'une recette
-  - dockerisation
   - creer un mode admin
     - gestion des users
-    - reset des mots de passe
+      - reset des mots de passe
+    - gestion des recettes
+      - desactivation d'une recette
+      - changement d'auteur
 
-- nginx : 
-  - mise en place
-  - dockerisation
+- serveur node (backend) :
+  - nettoyer les requetes qui ne servent plus
 
 - Base de données :
-  - mise en place en remplacement du serveur nodeJS
-  - dockerisation
+  - prevoir sauvegarde restauration lors du CI/CD
+
+- nginx : 
+  - pas encore mis en oeuvre

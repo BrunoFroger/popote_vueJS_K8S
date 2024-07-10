@@ -84,6 +84,11 @@ const server = http.createServer((req, res) => {
         res.setHeader('Content-Type', 'text/plain; charset=utf-8');
         res.end("OK");
 
+    } else if (req.url.startsWith('/getAllUsers')){
+        res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+        var sql = 'SELECT * FROM Users'
+        execRequete(sql, callback_getAllUsers, res)
+
     } else if (req.url.startsWith('/getListeRecettes')){
         //console.log('serveur => requete getListeRecettes ');
         var selectAuteur = ''
@@ -330,6 +335,17 @@ function callback_getListeRecettes(result, res){
     //console.log("callback_getListeRecettes => resultat listRecettes = ", resultat)
     res.end(JSON.stringify(resultat))
     console.log("callback_getListeRecettes => fin")
+}
+
+//=====================================================
+//
+//      function callback_getAllUsers
+//
+//=====================================================
+function callback_getAllUsers(result, res){
+    var resultat = JSON.parse(result)
+    res.end(JSON.stringify(resultat))
+    console.log("callback_getAllUsers => fin")
 }
 
 //=====================================================

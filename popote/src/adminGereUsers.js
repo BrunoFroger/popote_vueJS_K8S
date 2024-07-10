@@ -54,7 +54,7 @@ export default {
         //
         //---------------------------------
         getAllUsers() {
-            console.log("adminGereUsers.js => getAllUsers : " + mode)
+            console.log("adminGereUsers.js => getAllUsers " )
             var url = this.$parent.serverNodeAdress + '/getAllUsers'
             console.log('adminGereUsers.js => loadListeRecettes : ' + url);
             fetch(url).then(r => r.json()).then(response => {
