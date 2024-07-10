@@ -37,12 +37,12 @@ export default {
                 <tr> \
                     <td>nombre de users</td> \
                     <td>{{nbUsers}}</td> \
-                    <td @onClick = "changeModeAffichage(gereUsers)">Gestion des Users</td> \
+                    <td @onClick = "changeModeAffichage(\'gereUsers\')">Gestion des Users</td> \
                 </tr> \
                 <tr> \
                     <td>nombre de recettes</td> \
                     <td>{{nbRecettes}}</td> \
-                    <td@onClick = "changeModeAffichage(gereRecettes)">Gestion des recettes</td> \
+                    <td@onClick = "changeModeAffichage(\'gereRecettes\')">Gestion des recettes</td> \
                 </tr> \
             </tbody> \
           </table> \
@@ -68,6 +68,15 @@ export default {
           console.log("admin.js => updateDatas")
           this.nbRecettes = Recettes.methods.getNombreRecettes();
           this.nbUsers = Compte.methods.getNombreUsers();
+        },
+        //---------------------------------
+        //
+        //  changeModeAffichage
+        //
+        //---------------------------------
+        changeModeAffichage(mode) {
+          console.log("admin.js => changeModeAffichage : " + mode)
+          this.modeAffichage = mode
         },
       }
 }
