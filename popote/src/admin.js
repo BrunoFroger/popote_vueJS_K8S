@@ -20,6 +20,13 @@ export default {
         <div>\
           <h1>Administration du site</h1>\
           <p>Cette page est accessible uniquement pour les administrateurs du site</p>\
+          <span v-if="modeAffichage == \'gereUsers\'">\
+            <adminGereUsers/>\
+          </span>\
+          <span v-else-if="modeAffichage == \'gererecettes\'">\
+            <adminGereRecettess/>\
+          </span>\
+          <span v-else> \
           <table> \
             <thead> \
                 <th>Variable</th> \
@@ -30,15 +37,16 @@ export default {
                 <tr> \
                     <td>nombre de users</td> \
                     <td>{{nbUsers}}</td> \
-                    <td @onClick = <adminGereUsers/>>Gestion des Users</td> \
+                    <td @onClick = "changeModeAffichage(gereUsers)">Gestion des Users</td> \
                 </tr> \
                 <tr> \
                     <td>nombre de recettes</td> \
                     <td>{{nbRecettes}}</td> \
-                    <td>Gestion des recettes<adminGereRecettes/></td> \
+                    <td@onClick = "changeModeAffichage(gereRecettes)">Gestion des recettes</td> \
                 </tr> \
             </tbody> \
           </table> \
+          </span> \
         </div> \
       ',
       methods: {
