@@ -17,7 +17,7 @@ export default {
           <h1>Gestion des utilisateurs</h1>\
           <p>Cette page est accessible uniquement pour les administrateurs du site</p>\
         </div> \
-        <button @click "$parent.methods.changeModeAffichage(\'\')> retour</button> \
+        <button @click "$parent.methods.changeModeAffichage(\'\')"> retour</button> \
       ',
       methods: {
         //---------------------------------
