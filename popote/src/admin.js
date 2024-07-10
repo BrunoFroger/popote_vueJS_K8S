@@ -59,7 +59,7 @@ export default {
         updateDateTime() {
           const now = new Date();
           this.currentDateTime = now.toLocaleString();
-          this.serverNodeAdress = $parent.serverNodeAdress;
+          this.serverNodeAdress = this.$parent.serverNodeAdress;
         },
         //---------------------------------
         //
