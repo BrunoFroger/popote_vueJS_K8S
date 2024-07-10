@@ -2,6 +2,8 @@ Bug a resoudre :
 - sur visualisation des recettes les boutons precedente et suivante calcul de l'index eronné
 
 Fonctions a réaliser :
+- passer le site en https
+
 - popote (frontend) :
   - edition d'une recette
   - suppression d'une recette
