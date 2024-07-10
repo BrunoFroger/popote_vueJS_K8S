@@ -30,7 +30,7 @@ export default {
                 <tr> \
                     <td>nombre de users</td> \
                     <td>{{nbUsers}}</td> \
-                    <td @onclick = "adminGereUsers">>Gestion des Users</td> \
+                    <td @onClick = "adminGereUsers">>Gestion des Users</td> \
                 </tr> \
                 <tr> \
                     <td>nombre de recettes</td> \
