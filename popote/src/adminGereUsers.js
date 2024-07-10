@@ -27,12 +27,12 @@ export default {
                 <th>idRole</th> \
             </thead> \
             <tbody> \
-                <tr v-for="(user, id) in listeUsers"> \
-                    <td>{{user.id}}</td> \
-                    <td>{{user.nom<}}/td> \
-                    <td>{{user.pwd}}</td> \
-                    <td>{{user.email}}</td> \
-                    <td>{{user.iRole}}</td> \
+                <tr v-for="(item, id) in listeUsers"> \
+                    <td>{{item.id}}</td> \
+                    <td>{{item.nom<}}/td> \
+                    <td>{{item.pwd}}</td> \
+                    <td>{{item.email}}</td> \
+                    <td>{{item.iRole}}</td> \
                 </tr> \
             </tbody> \
         </table>\
@@ -77,6 +77,7 @@ export default {
             console.log('adminGereUsers.js => loadListeRecettes : ' + url);
             fetch(url).then(r => r.json()).then(response => {
                 this.listeUsers = response
+                console.log("liste des users : " + this.listeUsers)
             })
             .catch(error => {
                 console.error(error);
