@@ -33,7 +33,7 @@ export default {
                         <td>{{item.nom}}</td> \
                         <td>{{item.pwd}}</td> \
                         <td>{{item.email}}</td> \
-                        <td>{{item.iRole}}</td> \
+                        <td>{{item.idRole}}</td> \
                     </tr> \
                 </tbody> \
             </table>\
