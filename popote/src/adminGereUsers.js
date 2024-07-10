@@ -27,7 +27,7 @@ export default {
                 <th>idRole</th> \
             </thead> \
             <tbody> \
-                <tr v-for="(item, id) in this.listeUsers"> \
+                <tr v-for="item in listeUsers"> \
                     <td>{{item.id}}</td> \
                     <td>{{item.nom<}}/td> \
                     <td>{{item.pwd}}</td> \
