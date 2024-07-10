@@ -8,6 +8,8 @@ import AfficheRecette from './afficheRecette.js'
 import EditeRecette from './editeRecette.js'
 import CreationRecette from './creationRecette.js'
 import Admin from './admin.js'
+import AdminGereUsers from './adminGereUsers.js'
+import AdminGereRecettes from './adminGereRecettes.js'
 
 const app = createApp({
     data() {
@@ -73,4 +75,6 @@ app.component('afficheRecette', AfficheRecette);
 app.component('editeRecette', EditeRecette);
 app.component('creationRecette', CreationRecette);
 app.component('admin', Admin);
+app.component('adminGereUsers', AdminGereUsers);
+app.component('adminGereRecettes', AdminGereRecettes);
 app.mount('#app');
