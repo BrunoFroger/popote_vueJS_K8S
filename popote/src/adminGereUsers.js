@@ -27,13 +27,13 @@ export default {
                 <th>idRole</th> \
             </thead> \
             <tbody> \
-                <tr v-for="(item, id) in listeUsers"> \
+                <!--tr v-for="(item, id) in listeUsers"> \
                     <td>{{item.id}}</td> \
                     <td>{{item.nom<}}/td> \
                     <td>{{item.pwd}}</td> \
                     <td>{{item.email}}</td> \
                     <td>{{item.iRole}}</td> \
-                </tr> \
+                </tr--> \
             </tbody> \
         </table>\
         <button @click = "changeModeAffichage(\' \')">Retour</button> \
