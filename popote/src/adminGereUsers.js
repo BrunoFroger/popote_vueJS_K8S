@@ -29,8 +29,8 @@ export default {
                 </thead> \
                 <tbody> \
                     <tr v-for="item in listeUsers"> \
-                        <!--td>{{item.id}}</td> \
-                        <td>{{item.nom<}}</td> \
+                        <td>{{item.id}}</td> \
+                        <!--td>{{item.nom<}}</td> \
                         <td>{{item.pwd}}</td> \
                         <td>{{item.email}}</td> \
                         <td>{{item.iRole}}</td--> \
