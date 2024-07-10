@@ -29,12 +29,12 @@ export default {
                 <tr> \
                     <td>nombre de users</td> \
                     <td>{{nbUsers}}</td> \
-                    <td><AdminGereUsers/></td> \
+                    <td>Gestion des Users<AdminGereUsers/></td> \
                 </tr> \
                 <tr> \
                     <td>nombre de recettes</td> \
                     <td>{{nbRecettes}}</td> \
-                    <td><AdminGereRecettes/></td> \
+                    <td>Gestion des recettes<AdminGereRecettes/></td> \
                 </tr> \
             </tbody> \
           </table> \
