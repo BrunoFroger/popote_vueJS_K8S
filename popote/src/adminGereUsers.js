@@ -77,7 +77,7 @@ export default {
             console.log('adminGereUsers.js => loadListeRecettes : ' + url);
             fetch(url).then(r => r.json()).then(response => {
                 this.listeUsers = response
-                console.log("liste des users : " + this.listeUsers)
+                console.log("liste des users : " + JSON.stringify(this.listeUsers))
             })
             .catch(error => {
                 console.error(error);
