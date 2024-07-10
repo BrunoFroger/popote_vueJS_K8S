@@ -5,10 +5,12 @@ Fonctions a réaliser :
 - popote (frontend) :
   - edition d'une recette
   - suppression d'une recette
-  - ajout d'une recette
+  - ajout d'une recette (prevoir process de validation par un administarteur)
+  - creation d'un utilisateur
   - creer un mode admin
     - gestion des users
       - reset des mots de passe
+      - suppression d'un Utilisateur (basculer ses recette vers user "inconnu")
     - gestion des recettes
       - desactivation d'une recette
       - changement d'auteur

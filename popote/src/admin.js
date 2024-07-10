@@ -9,6 +9,7 @@ export default {
           nbRecettes:null,
           nbUsers:null,
           modeAffichageAdmin:'',
+          serverNodeAdress:null,
         };
       },
       mounted() {
@@ -58,6 +59,7 @@ export default {
         updateDateTime() {
           const now = new Date();
           this.currentDateTime = now.toLocaleString();
+          this.serverNodeAdress = $parent.serverNodeAdress;
         },
         //---------------------------------
         //
