@@ -28,11 +28,11 @@ export default {
             </thead> \
             <tbody> \
                 <tr v-for="user in listeUsers"> \
-                    <td>user.id</td> \
-                    <td>user.nom</td> \
-                    <td>user.pwd</td> \
-                    <td>user.email</td> \
-                    <td>user.iRole</td> \
+                    <td>{{user.id}}</td> \
+                    <td>{{user.nom<}}/td> \
+                    <td>{{user.pwd}}</td> \
+                    <td>{{user.email}}</td> \
+                    <td>{{user.iRole}}</td> \
                 </tr> \
             </tbody> \
         </table>\
