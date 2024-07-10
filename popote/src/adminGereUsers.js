@@ -5,6 +5,7 @@ export default {
       data: function () {
         return {
           currentDateTime: '',
+          listeUsers:[],
         };
       },
       mounted() {
@@ -36,6 +37,7 @@ export default {
         //---------------------------------
         updateDatas() {
           console.log("adminGereUsers.js => updateDatas")
+          this.getAllUsers()
         },
         //---------------------------------
         //
@@ -45,6 +47,23 @@ export default {
         changeModeAffichage(mode) {
           console.log("adminGereUsers.js => changeModeAffichage : " + mode)
           this.$parent.modeAffichageAdmin = mode;
+        },
+        //---------------------------------
+        //
+        //  getAllUsers
+        //
+        //---------------------------------
+        getAllUsers() {
+            console.log("adminGereUsers.js => getAllUsers : " + mode)
+            var url = this.$parent.serverNodeAdress + '/getAllUsers'
+            console.log('adminGereUsers.js => loadListeRecettes : ' + url);
+            fetch(url).then(r => r.json()).then(response => {
+                this.listeUsers = response
+            })
+            .catch(error => {
+                console.error(error);
+                console.log("erreur lors du chargement de la liste de users");
+            });
         },
       }
 }
