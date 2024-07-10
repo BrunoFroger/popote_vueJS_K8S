@@ -37,7 +37,7 @@ export default {
                 <tr> \
                     <td>nombre de users</td> \
                     <td>{{nbUsers}}</td> \
-                    <td><button>@click = "changeModeAffichage(\'gereUsers\')">Gestion des Users</button</td> \
+                    <td><button @click = "changeModeAffichage(\'gereUsers\')">Gestion des Users</button</td> \
                 </tr> \
                 <tr> \
                     <td>nombre de recettes</td> \
