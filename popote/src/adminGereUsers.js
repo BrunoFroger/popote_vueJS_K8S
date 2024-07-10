@@ -17,7 +17,8 @@ export default {
           <h1>Gestion des utilisateurs</h1>\
           <p>Cette page est accessible uniquement pour les administrateurs du site</p>\
         </div> \
-        <button @click "Admin.methods.changeModeAffichage(\' \')"> retour</button> \
+        <button @click = "Admin.methods.changeModeAffichage(\' \')">Retour</button> \
+        <!--button @click "Admin.methods.changeModeAffichage(\' \')"> retour</button!--> \
       ',
       methods: {
         //---------------------------------
