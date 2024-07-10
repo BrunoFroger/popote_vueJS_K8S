@@ -8,6 +8,7 @@ export default {
           currentDateTime: '',
           nbRecettes:null,
           nbUsers:null,
+          modeAffichage:'',
         };
       },
       mounted() {
@@ -29,12 +30,12 @@ export default {
                 <tr> \
                     <td>nombre de users</td> \
                     <td>{{nbUsers}}</td> \
-                    <td>Gestion des Users<AdminGereUsers/></td> \
+                    <td>Gestion des Users<adminGereUsers/></td> \
                 </tr> \
                 <tr> \
                     <td>nombre de recettes</td> \
                     <td>{{nbRecettes}}</td> \
-                    <td>Gestion des recettes<AdminGereRecettes/></td> \
+                    <td>Gestion des recettes<adminGereRecettes/></td> \
                 </tr> \
             </tbody> \
           </table> \
