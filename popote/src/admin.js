@@ -22,7 +22,7 @@ export default {
             <adminGereUsers/>\
           </span>\
           <span v-else-if="modeAffichageAdmin == \'gereRecettes\'">\
-            <adminGereRecettess/>\
+            <adminGereRecettes/>\
           </span>\
           <span v-else> \
           <h1>Administration du site</h1>\
