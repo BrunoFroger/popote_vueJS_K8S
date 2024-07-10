@@ -67,6 +67,12 @@ const server = http.createServer((req, res) => {
         var sql = 'SELECT COUNT (*) FROM Recettes'
         execRequete(sql, callback_getNbRecettes, res)
 
+    } else if (req.url.startsWith('/getNbUsers')){
+        //console.log('requete getNbUsers ');
+        res.setHeader('Content-Type', 'text/json; charset=utf-8');
+        var sql = 'SELECT COUNT (*) FROM Users'
+        execRequete(sql, callback_getNbUsers, res)
+
     } else if (req.url.startsWith('/getTypesRecettes')){
         res.setHeader('Content-Type', 'text/json; charset=utf-8');
         var sql = 'SELECT * FROM TypePlats'
@@ -129,6 +135,18 @@ const server = http.createServer((req, res) => {
                     WHERE nom = "' + user.user + '" \
                     AND pwd = "' + user.pwd + '"'
                 execRequete(sql, callback_checkUser,res)
+                // let tmp = checkConnect(user)
+                //console.log('serveur => valeur retour checkConnect : ' + tmp)
+                // stuff.user = tmp
+                //console.log("serveur => localStatus=" + localStatus + ", localMessage=" + localMessage + ', user=' + stuff.user)
+                //res.end(resultat)
+            //} else if (typeRequette === "deconnexion"){
+                //console.log("serveur => traitement de la requete " + typeRequette)
+            } else if (typeRequette === "creation"){
+                //console.log("serveur => traitement de la requete " + typeRequette)
+                var sql = 'INSERT IGNORE INTO Users (nom, pwd, email, idRole) VALUES \
+                    ("' + user.user + '", "' + user.pwd + '", "' + user.email + '", 1)' 
+                execRequete(sql, callback_addUser,res)
                 // let tmp = checkConnect(user)
                 //console.log('serveur => valeur retour checkConnect : ' + tmp)
                 // stuff.user = tmp
@@ -230,6 +248,54 @@ function callback_checkUser(result, res){
     //console.log("callback_checkUser => " + JSON.stringify(stuff))
     res.end(JSON.stringify(stuff))
     //console.log("callback_checkUser => fin")
+}
+
+//=====================================================
+//
+//      function callback_addUser
+//
+//=====================================================
+function callback_addUser(result, res){
+    //console.log("callback_addUser => debut")
+    console.log("callback_addUser => parametre passe (result) = ", result)
+    var stuff
+    if (result == undefined){
+        stuff ={
+            status: 'KO',
+            message: 'Impossible de creer l\'utilisateur',
+        };
+    } else {
+        var resultat = JSON.parse(result)[0]
+        //console.log("callback_addUser => resultat = ", JSON.stringify(resultat))
+        stuff = {
+            status: 'OK',
+            message: 'Utilisateur créé',
+            //user: resultat,
+        }
+    }
+    console.log("callback_addUser => " + JSON.stringify(stuff))
+    res.end(JSON.stringify(stuff))
+    //console.log("callback_addUser => fin")
+}
+
+//=====================================================
+//
+//      function callback_getNbUsers
+//
+//=====================================================
+function callback_getNbUsers(result, res){
+    //console.log("callback_getNbUsers => debut")
+    //console.log("callback_getNbUsers => parametre passe (result) = ", result)
+    var resultat = JSON.parse(result)[0]
+    //console.log("callback_getNbUsers => resultat getNbRecettes = ", resultat)
+    var valNbUsers = resultat["COUNT (*)"]
+    console.log("callback_getNbUsers => nbUsers = " + valNbUsers)
+    const stuff ={
+        nbUsers: valNbUsers,
+    };
+    //console.log("callback_getNbUsers => " + JSON.stringify(stuff))
+    res.end(JSON.stringify(stuff))
+    //console.log("callback_getNbUsers => fin")
 }
 
 //=====================================================
