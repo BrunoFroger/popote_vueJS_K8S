@@ -21,7 +21,7 @@ export default {
           <span v-if="modeAffichageAdmin == \'gereUsers\'">\
             <adminGereUsers/>\
           </span>\
-          <span v-else-if="modeAffichageAdmin == \'gererecettes\'">\
+          <span v-else-if="modeAffichageAdmin == \'gereRecettes\'">\
             <adminGereRecettess/>\
           </span>\
           <span v-else> \
