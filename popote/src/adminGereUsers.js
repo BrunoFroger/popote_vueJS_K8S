@@ -18,6 +18,24 @@ export default {
           <h1>Administration : Gestion des utilisateurs</h1>\
           <p>Cette page est accessible uniquement pour les administrateurs du site</p>\
         </div> \
+        <table>\
+            <thead> \
+                <th>id</th> \
+                <th>nom</th> \
+                <th>passwd</th> \
+                <th>email</th> \
+                <th>idRole</th> \
+            </thead> \
+            <tbody> \
+                <tr v-for="user in listeUsers"> \
+                    <td>user.id</td> \
+                    <td>user.nom</td> \
+                    <td>user.pwd</td> \
+                    <td>user.email</td> \
+                    <td>user.iRole</td> \
+                </tr> \
+            </tbody> \
+        </table>\
         <button @click = "changeModeAffichage(\' \')">Retour</button> \
       ',
       methods: {
