@@ -8,7 +8,7 @@ export default {
           currentDateTime: '',
           nbRecettes:null,
           nbUsers:null,
-          modeAffichage:'',
+          modeAffichageAdmin:'',
         };
       },
       mounted() {
@@ -20,10 +20,10 @@ export default {
         <div>\
           <h1>Administration du site</h1>\
           <p>Cette page est accessible uniquement pour les administrateurs du site</p>\
-          <span v-if="modeAffichage == \'gereUsers\'">\
+          <span v-if="modeAffichageAdmin == \'gereUsers\'">\
             <adminGereUsers/>\
           </span>\
-          <span v-else-if="modeAffichage == \'gererecettes\'">\
+          <span v-else-if="modeAffichageAdmin == \'gererecettes\'">\
             <adminGereRecettess/>\
           </span>\
           <span v-else> \
@@ -76,7 +76,7 @@ export default {
         //---------------------------------
         changeModeAffichage(mode) {
           console.log("admin.js => changeModeAffichage : " + mode)
-          this.modeAffichage = mode
+          this.modeAffichageAdmin = mode
         },
       }
 }
