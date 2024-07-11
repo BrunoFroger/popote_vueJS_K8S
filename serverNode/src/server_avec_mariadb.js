@@ -131,7 +131,7 @@ const server = http.createServer((req, res) => {
         req.on('end', () => {
             //console.log('serveur => ' + parse(body));
             console.log(body);
-            let sql = JSON.parse(body)
+            let sql = JSON.parse(body).requete
             //console.log('requete requeteSql ');
             res.setHeader('Content-Type', 'text/json; charset=utf-8');
             execRequete(sql, callback_requeteSql, res)
