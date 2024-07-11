@@ -5,7 +5,7 @@ export default {
       data: function () {
         return {
           currentDateTime: '',
-          requetteSql:null,
+          requetteSql:'',
           reponseSql:'',
         };
       },
@@ -21,6 +21,7 @@ export default {
         </div> \
         <div> \
             <span>Votre requete :</span> \
+            <br> \
             <input v-model="requeteSql"/>\
             <button @click = "envoiRequeteSql({{requeteSql}})">Envoi requete</button> \
             <span> Reponse :</span> \
@@ -65,8 +66,8 @@ export default {
             var url = this.$parent.serverNodeAdress + '/requetteSql&requette=' + requette
             console.log('adminRequetteSql.js => loadListeRecettes : ' + url);
             fetch(url).then(r => r.json()).then(response => {
-                this.resultatRequette = response
-                console.log("liste des users : " + JSON.stringify(this.resultatRequette))
+                this.reponseSql = response
+                console.log("liste des users : " + JSON.stringify(this.reponseSql))
             })
             .catch(error => {
                 console.error(error);
