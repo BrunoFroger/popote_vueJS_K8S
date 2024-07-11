@@ -31,6 +31,8 @@ export default {
                 <tbody> \
                     <tr v-for="item in listeRecettes"> \
                         <td>{{item.id}}</td> \
+                        <td>{{item.type}}</td> \
+                        <td>{{item.numRecette}}</td> \
                         <td>{{item.auteur}}</td> \
                         <td>{{item.titre}}</td> \
                         <td>{{item.description}}</td> \
