@@ -25,7 +25,7 @@ export default {
             <button @click = "envoiRequeteSql(requeteSql)">Envoi requete</button> \
             <br/> \
             <span> Reponse :</span> \
-            <textArea v-model= "reponseSql"> </textArea>\
+            <textArea v-model= "reponseSql">{{reponseSql}}</textArea>\
             <button @click = "changeModeAffichage(\' \')">Retour</button> \
         </div> \
       ',
