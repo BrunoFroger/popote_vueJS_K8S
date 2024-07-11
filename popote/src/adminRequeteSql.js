@@ -62,10 +62,18 @@ export default {
         //
         //---------------------------------
         envoiRequeteSql(requete) {
+            const stuff ={
+              "requete":requete,
+            };
+            const requestOptions = {
+              method: "POST",
+              //headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(stuff)
+            };
             console.log("adminRequetteSql.js => envoiRequetteSql " )
-            var url = this.$parent.serverNodeAdress + '/requetteSql&requette=' + requete
-            console.log('adminRequetteSql.js => loadListeRecettes : ' + url);
-            fetch(url).then(r => r.json()).then(response => {
+            var url = this.$parent.serverNodeAdress + '/requetteSql' 
+            console.log('adminRequetteSql.js => envoiRequeteSql : ' + url);
+            fetch(url, requestOptions).then(r => r.json()).then(response => {
                 this.reponseSql = response
                 console.log("reponse a la requete SQL: " + JSON.stringify(this.reponseSql))
             })
