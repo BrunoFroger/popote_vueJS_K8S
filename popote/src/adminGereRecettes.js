@@ -22,18 +22,20 @@ export default {
             <table>\
                 <thead> \
                     <th>id</th> \
-                    <th>nom</th> \
-                    <th></th> \
-                    <th></th> \
-                    <th></th> \
+                    <th>num recette</th> \
+                    <th>type</th> \
+                    <th>auteur</th> \
+                    <th>titre</th> \
+                    <th>description</th> \
                 </thead> \
                 <tbody> \
                     <tr v-for="item in listeRecettes"> \
                         <td>{{item.id}}</td> \
-                        <td>{{item.nom}}</td> \
-                        <td></td> \
-                        <td></td> \
-                        <td></td> \
+                        <td>{{item.type}}</td> \
+                        <td>{{item.numRecette}}</td> \
+                        <td>{{item.auteur}}</td> \
+                        <td>{{item.titre}}</td> \
+                        <td>{{item.description}}</td> \
                     </tr> \
                 </tbody> \
             </table>\
@@ -57,6 +59,7 @@ export default {
         //---------------------------------
         updateDatas() {
           console.log("adminGereRecettes.js => updateDatas")
+          this.getAllRecettes()
         },
         //---------------------------------
         //

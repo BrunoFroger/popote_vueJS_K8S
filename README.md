@@ -189,7 +189,7 @@ voici un exemple de commande permettant de se connecter en ssh depuis une machin
 
 ## 1.5 Configuration mode sécurisé https
 
-Afin de sécuriser les accès a ce site, il est possible d'utiliser le protocole https, pour cela il faut suivre le mode opératoire suivant sur le site certbot : (https://certbot.eff.org/instructions?ws=haproxy&os=ubuntufocal)[https://certbot.eff.org/instructions?ws=haproxy&os=ubuntufocal] 
+Afin de sécuriser les accès a ce site, il est possible d'utiliser le protocole https, pour cela il faut suivre le mode opératoire suivant sur le site certbot : [ici](https://certbot.eff.org/instructions?ws=haproxy&os=ubuntufocal) 
 
 # 2. Développements
 
