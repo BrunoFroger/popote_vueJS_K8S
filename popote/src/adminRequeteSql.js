@@ -22,7 +22,7 @@ export default {
         <div> \
             <span>Votre requete :</span> \
             <input v-model="requeteSql"/>\
-            <button @click = "envoiRequetteSql(requeteSql)">Envoi requete</button> \
+            <button @click = "envoiRequeteSql(requeteSql)">Envoi requete</button> \
             <br/> \
             <span> Reponse :</span> \
             <textArea v-model= "reponseSql"> </textArea\
@@ -61,13 +61,13 @@ export default {
         //  envoiRequetteSql
         //
         //---------------------------------
-        envoiRequetteSql(requete) {
+        envoiRequeteSql(requete) {
             console.log("adminRequetteSql.js => envoiRequetteSql " )
-            var url = this.$parent.serverNodeAdress + '/requetteSql&requette=' + requette
+            var url = this.$parent.serverNodeAdress + '/requetteSql&requette=' + requete
             console.log('adminRequetteSql.js => loadListeRecettes : ' + url);
             fetch(url).then(r => r.json()).then(response => {
                 this.reponseSql = response
-                console.log("liste des users : " + JSON.stringify(this.reponseSql))
+                console.log("reponse a la requete SQL: " + JSON.stringify(this.reponseSql))
             })
             .catch(error => {
                 console.error(error);
