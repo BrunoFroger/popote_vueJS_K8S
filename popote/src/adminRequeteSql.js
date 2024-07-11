@@ -26,6 +26,7 @@ export default {
             <br/> \
             <span> Reponse :</span> \
             <textArea v-model= "reponseSql">{{reponseSql}}</textArea>\
+            <br/> \
             <button @click = "changeModeAffichage(\' \')">Retour</button> \
         </div> \
       ',

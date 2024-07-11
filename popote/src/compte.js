@@ -166,6 +166,7 @@ export default {
           this.user=null;
           userConnected=false;
           this.connected=false;
+          globalAdminUser=false
         },
         //---------------------------------
         //
