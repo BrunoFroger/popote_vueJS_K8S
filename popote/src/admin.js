@@ -25,9 +25,13 @@ export default {
           <span v-else-if="modeAffichageAdmin == \'gereRecettes\'">\
             <adminGereRecettes/>\
           </span>\
+          <span v-else-if="modeAffichageAdmin == \'adminRequeteSql\'">\
+            <adminRequeteSql/>\
+          </span>\
           <span v-else> \
           <h1>Administration du site</h1>\
           <p>Cette page est accessible uniquement pour les administrateurs du site</p>\
+          <button @click = "changeModeAffichage(\'adminRequeteSql\')">Requete SQL</button> \
           <table> \
             <thead> \
                 <th>Variable</th> \
