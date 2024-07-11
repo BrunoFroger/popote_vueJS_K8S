@@ -57,6 +57,7 @@ export default {
         //---------------------------------
         updateDatas() {
           console.log("adminGereRecettes.js => updateDatas")
+          this.getAllRecettes()
         },
         //---------------------------------
         //
