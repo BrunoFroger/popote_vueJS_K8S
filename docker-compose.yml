@@ -44,6 +44,21 @@ services:
     networks:
       - popote_network
 
+  nginx:
+    container_name: popote_nginx
+    restart: on-failure
+    build: 
+      context: .
+      dockerfile: nginx/Dockerfile
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - 8080:8080
+      - 3000:3000
+    depends_on:
+      - frontend
+      - backend
+
 # configuration reseau
 networks:
   popote_network:
