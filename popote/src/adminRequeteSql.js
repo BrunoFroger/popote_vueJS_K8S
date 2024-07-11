@@ -70,16 +70,16 @@ export default {
               //headers: { "Content-Type": "application/json" },
               body: JSON.stringify(stuff)
             };
-            console.log("adminRequetteSql.js => envoiRequetteSql " )
-            var url = this.$parent.serverNodeAdress + '/requetteSql' 
-            console.log('adminRequetteSql.js => envoiRequeteSql : ' + url);
+            console.log("adminRequeteSql.js => envoiRequeteSql " )
+            var url = this.$parent.serverNodeAdress + '/requeteSql' 
+            console.log('adminRequeteSql.js => envoiRequeteSql : ' + url);
             fetch(url, requestOptions).then(r => r.json()).then(response => {
                 this.reponseSql = response
                 console.log("reponse a la requete SQL: " + JSON.stringify(this.reponseSql))
             })
             .catch(error => {
                 console.error(error);
-                console.log("erreur lors de l'execution de la requette SQL");
+                console.log("erreur lors de l'execution de la requete SQL");
             });
         },
       }

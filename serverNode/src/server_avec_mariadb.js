@@ -123,6 +123,19 @@ const server = http.createServer((req, res) => {
         execRequete(sql, callback_getListeRecettes, res)
         // listTmp = getListRecettes(debut, nb, auteur, prive, typeRecette)
 
+    } else if (req.url.startsWith('/requeteSql')){
+        let body = '';
+        req.on('data', chunk => {
+            body += chunk.toString();
+        });
+        req.on('end', () => {
+            //console.log('serveur => ' + parse(body));
+            console.log(body);
+            let sql = JSON.parse(body)
+            //console.log('requete requeteSql ');
+            res.setHeader('Content-Type', 'text/json; charset=utf-8');
+            execRequete(sql, callback_requeteSql, res)
+        });
     } else if (req.url.startsWith('/requeteUser')){
         let body = '';
         req.on('data', chunk => {
@@ -340,6 +353,17 @@ function callback_getListeRecettes(result, res){
     //console.log("callback_getListeRecettes => resultat listRecettes = ", resultat)
     res.end(JSON.stringify(resultat))
     console.log("callback_getListeRecettes => fin")
+}
+
+//=====================================================
+//
+//      function callback_requeteSql
+//
+//=====================================================
+function callback_requeteSql(result, res){
+    var resultat = JSON.parse(result)
+    res.end(JSON.stringify(resultat))
+    console.log("callback_requeteSql => fin")
 }
 
 //=====================================================
