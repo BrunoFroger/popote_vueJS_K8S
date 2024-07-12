@@ -42,7 +42,7 @@ const server = http.createServer((req, res) => {
         res.setHeader('Content-Type', 'text/plain; charset=utf-8');
         res.end('Hello Popote\n');
 
-    } else if (req.url.startsWith('/getRecette')){
+    } else if (req.url.includes('/getRecette')){
         idRecette = url.parse(req.url,true).query.index 
         // let maRecette = recettes[idRecette];
         res.setHeader('Content-Type', 'text/json; charset=utf-8');
@@ -61,40 +61,40 @@ const server = http.createServer((req, res) => {
         //console.log('serveur => ' + JSON.stringify(maRecette));
         // res.end(JSON.stringify(maRecette));
 
-    } else if (req.url.startsWith('/getNbRecettes')){
+    } else if (req.url.includes('/getNbRecettes')){
         //console.log('requete getNbRecettes ');
         res.setHeader('Content-Type', 'text/json; charset=utf-8');
         var sql = 'SELECT COUNT (*) FROM Recettes'
         execRequete(sql, callback_getNbRecettes, res)
 
-    } else if (req.url.startsWith('/getNbUsers')){
+    } else if (req.url.includes('/getNbUsers')){
         //console.log('requete getNbUsers ');
         res.setHeader('Content-Type', 'text/json; charset=utf-8');
         var sql = 'SELECT COUNT (*) FROM Users'
         execRequete(sql, callback_getNbUsers, res)
 
-    } else if (req.url.startsWith('/getTypesRecettes')){
+    } else if (req.url.includes('/getTypesRecettes')){
         res.setHeader('Content-Type', 'text/json; charset=utf-8');
         var sql = 'SELECT * FROM TypePlats'
         execRequete(sql, callback_getTypesRecettes, res)
 
-    } else if (req.url.startsWith('/updateDatas')){
+    } else if (req.url.includes('/updateDatas')){
         //console.log('requete updateDatas ');
         updateDatas();
         res.setHeader('Content-Type', 'text/plain; charset=utf-8');
         res.end("OK");
 
-    } else if (req.url.startsWith('/getAllUsers')){
+    } else if (req.url.includes('/getAllUsers')){
         res.setHeader('Content-Type', 'text/plain; charset=utf-8');
         var sql = 'SELECT * FROM Users'
         execRequete(sql, callback_getAllUsers, res)
 
-    } else if (req.url.startsWith('/getAllRecettes')){
+    } else if (req.url.includes('/getAllRecettes')){
         res.setHeader('Content-Type', 'text/plain; charset=utf-8');
         var sql = 'SELECT * FROM Recettes'
         execRequete(sql, callback_getAllRecettes, res)
 
-    } else if (req.url.startsWith('/getListeRecettes')){
+    } else if (req.url.includes('/getListeRecettes')){
         //console.log('serveur => requete getListeRecettes ');
         var selectAuteur = ''
         var selectType = ''
@@ -123,7 +123,7 @@ const server = http.createServer((req, res) => {
         execRequete(sql, callback_getListeRecettes, res)
         // listTmp = getListRecettes(debut, nb, auteur, prive, typeRecette)
 
-    } else if (req.url.startsWith('/requeteSql')){
+    } else if (req.url.includes('/requeteSql')){
         let body = '';
         req.on('data', chunk => {
             body += chunk.toString();
@@ -136,7 +136,7 @@ const server = http.createServer((req, res) => {
             res.setHeader('Content-Type', 'text/json; charset=utf-8');
             execRequete(sql, callback_requeteSql, res)
         });
-    } else if (req.url.startsWith('/requeteUser')){
+    } else if (req.url.includes('/requeteUser')){
         let body = '';
         req.on('data', chunk => {
             body += chunk.toString();
