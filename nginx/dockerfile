@@ -9,11 +9,11 @@ RUN echo "==========================="; \
     echo "|                         |"; \
     echo "==========================="
 
-# Copy the nginx configuration file
 
 #RUN apt-get update
 #RUN apt-get install certbot python3-certbot-nginx -y
 
+# Copy the nginx configuration file
 COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
 #COPY ./nginx/cert /etc/letsencrypt/live/popote.zapto.org
