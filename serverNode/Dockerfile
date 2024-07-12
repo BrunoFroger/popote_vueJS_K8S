@@ -8,7 +8,6 @@
 
 ARG NODE_VERSION=18.0.0
 
-#FROM node:lts-alpine
 FROM node:current-bullseye
 
 RUN echo "==========================="; \
@@ -24,35 +23,14 @@ RUN apt-get install -y net-tools
 RUN apt-get install -y default-mysql-client
 RUN apt-get install -y iputils-ping
 
-#install ssh server
-#RUN apt-get install -y openssh-server
-#RUN mkdir /var/run/sshd
 RUN echo 'root:root123' | chpasswd
-#RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
-#RUN touch /etc/ssh/sshd_config
-#RUN echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
 
-#RUN /usr/sbin/sshd -D &
-#RUN echo root123 | su -c "/etc/init.d/ssh start" 
-
-#EXPOSE 22
-
-# Use production node environment by default.
 ENV NODE_ENV production
 
 WORKDIR /app
 
 # copie files
 COPY serverNode/ ./
-
-# Download dependencies as a separate step to take advantage of Docker's caching.
-# Leverage a cache mount to /root/.npm to speed up subsequent builds.
-# Leverage a bind mounts to package.json and package-lock.json to avoid having to copy them into
-# into this layer.
-#RUN --mount=type=bind,source=package.json,target=package.json \
-#    --mount=type=bind,source=package-lock.json,target=package-lock.json \
-#    --mount=type=cache,target=/root/.npm \
-#    npm ci --omit=dev
 
 RUN npm install mysql
 
@@ -63,11 +41,6 @@ USER node
 
 # Expose the port that the application listens on.
 EXPOSE 3000
-
-# Run the application.
-#CMD ["/bin/bash", "-c", "/usr/sbin/sshd -D ; node src/server"]
-#CMD ["/bin/bash", "-c", "/etc/init.d/ssh start ; node src/server"]
-#RUN cd src
 
 # execute fichier bash de post traitement (lancement des applications et demons)
 CMD src/docker_cmd.bash
