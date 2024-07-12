@@ -1,6 +1,14 @@
 # Use the lightweight Nginx image from the previous stage for the nginx container
 #FROM nginx:stable-alpine
 FROM nginx:stable-perl
+
+
+RUN echo "==========================="; \
+    echo "|                         |"; \
+    echo "|       NGINX             |"; \
+    echo "|                         |"; \
+    echo "==========================="
+
 # Copy the nginx configuration file
 
 #RUN apt-get update
