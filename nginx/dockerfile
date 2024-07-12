@@ -18,7 +18,7 @@ COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
 COPY ./nginx/cert /etc/letsencrypt/live/popote.zapto.org
 COPY ./nginx/cert/options-ssl-nginx.conf /etc/letsencrypt/options-ssl-nginx.conf 
-COPY ./nginx/cert/ssl-dhparams.pem /etc/letsencrypt/options-ssl-nginx.conf 
+COPY ./nginx/cert/ssl-dhparams.pem /etc/letsencrypt/ssl-dhparams.pem
 
 
 # Expose the port 80
