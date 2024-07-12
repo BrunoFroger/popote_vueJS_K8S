@@ -4,7 +4,7 @@ FROM nginx:stable-perl
 # Copy the nginx configuration file
 
 RUN apt-get update
-RUN sudo apt-get install certbot python3-certbot-nginx -y
+RUN apt-get install certbot python3-certbot-nginx -y
 
 COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
