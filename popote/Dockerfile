@@ -50,7 +50,7 @@ RUN npm install
 # construit l'app pour la production en la minifiant
 RUN npm run build
 
-EXPOSE 8080
+#EXPOSE 8080
 #RUN cd src
 
 # execute fichier bash de post traitement (lancement des applications et demons)
