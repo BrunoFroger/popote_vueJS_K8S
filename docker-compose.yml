@@ -57,6 +57,8 @@ services:
     depends_on:
       - frontend
       - backend
+    networks:
+      - popote_network
 
 # configuration reseau
 networks:
