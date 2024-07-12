@@ -200,13 +200,28 @@ Afin de sécuriser les accès a ce site, il est possible d'utiliser le protocole
 - [angristan](https://angristan.fr/configurer-https-nginx/)
 - [webhi](https://www.webhi.com/how-to/fr/comment-installer-un-certificat-ssl-sur-un-serveur-nginx/)
 
+Pour générer le certificat ssl, vous devez localement sur la machine hote, lancer les commandes suivantes :
+
+```
+sudo apt-get update
+sudo apt-get install certbot python3-certbot-nginx -y
+
+sudo certbot --nginx -d popote.zapto.org
+```
+
+ajouter ensuite au dockerfile les lignes suivantes :
+
+```
+```
+
+
 # 2. Développements
 
 ## 2.1 Installer conteneur Ngnix
 
 pour utiliser nginx (en mode proxy) dans votre environnement docker, voici les fichiers a installer dans un repertoire nginx de votre application :
 
-nginx.conf : gere la configuration (comportement) de votre proxy nginx
+nginx.conf : gere la configuration (comportement) de votre proxy nginx en httpsmode http (non securisé)
 
 ```
 server {
@@ -234,6 +249,10 @@ EXPOSE 8080
 # Start Nginx to serve the application
 CMD ["nginx", "-g", "daemon off;"]
 ```
+
+en version securisé (acces en https) voici les fichiers de configuration :
+
+a definir nginx.conf et dockerfile
 
 ## 2.2 Installer conteneur MariaDB
 
