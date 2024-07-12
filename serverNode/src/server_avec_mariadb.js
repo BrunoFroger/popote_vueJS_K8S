@@ -30,7 +30,7 @@ const db = mysql.createConnection({
 //
 //=====================================================
 const server = http.createServer((req, res) => {
-    console.log('requete = ' + req.url);
+    console.log('server_avec_mariadb.js => requete = ' + req.url);
     //res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
     //res.setHeader('Access-Control-Allow-Origin', 'http://popote_frontend:8080');
     res.setHeader('Access-Control-Allow-Origin', '*');
