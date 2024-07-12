@@ -21,8 +21,8 @@ COPY ./nginx/cert /etc/letsencrypt/
 
 
 # Expose the port 80
-EXPOSE 80
-EXPOSE 443
+#EXPOSE 80
+#EXPOSE 443
 
 # Start Nginx to serve the application
 CMD ["nginx", "-g", "daemon off;"]
