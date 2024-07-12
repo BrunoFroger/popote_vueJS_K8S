@@ -2,6 +2,11 @@
 Ce projet décrit le mode opératoire du développement en VueJS et du déploiement de l'application popote (serveur de recettes de cuisine) sur une architecture Kubernetes en utilisant Docker pour la production des conteneur.  
 Un serveur NodeJS (avec données locales) est proposé dans des fin de tests des dev VueJS
 
+
+Voici une vue de l'architecture choisie
+
+![architecture](architecture_popote.pdf)
+
 # 1. Installation
 
 Pour procéder à cette installation, il est nécessaire de disposer des éléments suivants :  
