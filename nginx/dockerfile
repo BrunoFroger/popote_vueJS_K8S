@@ -10,13 +10,13 @@ RUN echo "==========================="; \
     echo "==========================="
 
 
-#RUN apt-get update
-#RUN apt-get install certbot python3-certbot-nginx -y
+RUN apt-get update
+RUN apt-get install certbot python3-certbot-nginx -y
 
 # Copy the nginx configuration file
 COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
-#COPY ./nginx/cert /etc/letsencrypt/live/popote.zapto.org
+COPY ./nginx/cert /etc/letsencrypt/live/popote.zapto.org
 
 # Expose the port 80
 EXPOSE 80
