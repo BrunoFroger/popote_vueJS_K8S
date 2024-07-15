@@ -23,7 +23,7 @@ RUN echo "==========================="; \
 #RUN /usr/sbin/sshd -D &
 #RUN echo root123 | su -c "/etc/init.d/ssh start" 
 
-#EXPOSE 22
+EXPOSE 8080
     
 # installe un simple serveur http pour servir un contenu statique
 #RUN npm install -g http-server 
