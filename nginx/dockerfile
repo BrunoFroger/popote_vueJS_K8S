@@ -10,7 +10,10 @@ RUN echo "==========================="; \
     echo "==========================="
 
 
+#install optionnels
 RUN apt-get update
+RUN apt-get install -y net-tools
+RUN apt-get install -y iputils-ping
 RUN apt-get install certbot python3-certbot-nginx -y
 
 # Copy the nginx configuration file
