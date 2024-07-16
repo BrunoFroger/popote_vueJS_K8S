@@ -11,8 +11,8 @@ services:
     build: 
       context: .
       dockerfile: mariadb/dockerfile
-    #ports:
-      #- 3306:3306
+    ports:
+      - 3306:3306
     networks:
       - popote_network
 
@@ -23,8 +23,8 @@ services:
     build: 
       context: .
       dockerfile: serverNode/Dockerfile
-    #ports:
-      #- 3000:3000
+    ports:
+      - 3000:3000
     depends_on:
       - mariadb
     networks:
