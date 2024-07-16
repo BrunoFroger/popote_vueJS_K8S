@@ -2,12 +2,11 @@ Bug a resoudre :
 - sur visualisation des recettes les boutons precedente et suivante calcul de l'index eronné
 
 Fonctions a réaliser :
-- passer le site en https
+- passer le site en https :
+  - doc a finaliser
   - OK mais reste quelques details a regler :
     - renouvellement automatique du certificat
     - favicon.ico ne se charge pas ?
-    - gerer correction gitguardian sur presence certificat dans depot
-
 
 - popote (frontend) :
   - edition d'une recette

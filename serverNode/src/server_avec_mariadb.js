@@ -234,6 +234,7 @@ function execRequete(requeteSql, callback, res){
     //console.log("execRequete => tentative de connexion ......")
     db.query(requeteSql, (err, result) => {
         if (err) {
+            res.end(err)
             throw err;
         } else {
             resultat=JSON.stringify(result)
