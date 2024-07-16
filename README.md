@@ -209,6 +209,12 @@ sudo apt-get install certbot python3-certbot-nginx -y
 sudo certbot --nginx -d popote.zapto.org
 ```
 
+Pour verifier la date d'expiration de votre certifcat : tapez la commande suivante (en root) : ``certbot certificates``
+
+Pour verifier que votre certificat est bien actif et qu'il est reactualisable (simulation renouvellement) : ``certbot renew --dry-run`` 
+
+Pour renouveller votre certificat (si ce n'est pas fait par un cron) : ``certbot renew`` 
+
 ajouter ensuite au dockerfile les lignes suivantes :
 
 ```
