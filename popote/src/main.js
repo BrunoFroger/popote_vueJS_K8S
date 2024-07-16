@@ -22,7 +22,7 @@ const app = createApp({
           currentDateTime: '',
           //serverNodeAdress: 'http://localhost:3000',
           //serverNodeAdress: 'http://popote.zapto.org:3000',
-          serverNodeAdress: 'http://popote.zapto.org/api',
+          serverNodeAdress: 'https://popote.zapto.org/api',
           
         }
     },
