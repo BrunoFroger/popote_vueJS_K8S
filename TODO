@@ -3,6 +3,11 @@ Bug a resoudre :
 
 Fonctions a réaliser :
 - passer le site en https
+  - OK mais reste quelques details a regler :
+    - renouvellement automatique du certificat
+    - favicon.ico ne se charge pas ?
+    - gerer correction gitguardian sur presence certificat dans depot
+
 
 - popote (frontend) :
   - edition d'une recette
