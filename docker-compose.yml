@@ -54,7 +54,7 @@ services:
       dockerfile: nginx/Dockerfile
     volumes:
       #- ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-      - /etc/letsencrypt/live/popote.zapto.org:/etc/letsencrypt/live/popote.zapto.org
+      - /etc/letsencrypt/live/popote.zapto.org:/etc/letsencrypt/live/±==popote.zapto.org
     ports:
       #- 8080:8080 
       - 80:80

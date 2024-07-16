@@ -27,6 +27,7 @@ Fonctions a réaliser :
 
 - Base de données :
   - prevoir sauvegarde restauration lors du CI/CD
+  - prevoir de mettre la bdd sur volume sur machine hote
 
 - nginx : 
-  - pas encore mis en oeuvre
+  - OK, eventelleemnt des tests a finaliser 
