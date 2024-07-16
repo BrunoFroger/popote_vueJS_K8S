@@ -24,7 +24,7 @@ COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
 #copy files for https
 #COPY ./nginx/cert /etc/letsencrypt/
 
-VOLUME "/etc/letsencrypt/live/popote.zapto.org"
+VOLUME /etc/letsencrypt/live/popote.zapto.org /etc/letsencrypt/live/popote.zapto.org
 
 # Expose the port 80
 EXPOSE 80
