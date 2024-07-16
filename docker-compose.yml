@@ -37,8 +37,8 @@ services:
     build: 
       context: .
       dockerfile: popote/Dockerfile
-    environment:
-      BACKEND_IP: "https://popote.zapto.org/api"
+    #environment:
+      #BACKEND_IP: "https://popote.zapto.org/api"
     ports:
       - 8080:8080
     depends_on:
