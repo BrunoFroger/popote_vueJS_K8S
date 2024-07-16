@@ -194,7 +194,26 @@ voici un exemple de commande permettant de se connecter en ssh depuis une machin
 
 ## 1.5 Configuration mode sécurisé https (pas encore géré)
 
-Afin de sécuriser les accès a ce site, il est possible d'utiliser le protocole https, pour cela il faut suivre le mode opératoire suivant sur le site certbot : [ici](https://certbot.eff.org/instructions?ws=haproxy&os=ubuntufocal) 
+Afin de sécuriser les accès a ce site, il est possible d'utiliser le protocole https, pour cela il faut suivre le mode opératoire suivant sur le site it-connect pour utiliser certbot qui effectue les demandes de certificat Let's Encrypt ; voir les différents tuto sur le sujet :
+
+- [it-connect](https://www.it-connect.fr/nginx-ajouter-un-certificat-ssl-lets-encrypt-pour-passer-en-https/) 
+- [angristan](https://angristan.fr/configurer-https-nginx/)
+- [webhi](https://www.webhi.com/how-to/fr/comment-installer-un-certificat-ssl-sur-un-serveur-nginx/)
+
+Pour générer le certificat ssl, vous devez localement sur la machine hote, lancer les commandes suivantes :
+
+```
+sudo apt-get update
+sudo apt-get install certbot python3-certbot-nginx -y
+
+sudo certbot --nginx -d popote.zapto.org
+```
+
+ajouter ensuite au dockerfile les lignes suivantes :
+
+```
+```
+
 
 # 2. Développements
 
@@ -202,7 +221,7 @@ Afin de sécuriser les accès a ce site, il est possible d'utiliser le protocole
 
 pour utiliser nginx (en mode proxy) dans votre environnement docker, voici les fichiers a installer dans un repertoire nginx de votre application :
 
-nginx.conf : gere la configuration (comportement) de votre proxy nginx
+nginx.conf : gere la configuration (comportement) de votre proxy nginx en httpsmode http (non securisé)
 
 ```
 server {
@@ -230,6 +249,10 @@ EXPOSE 8080
 # Start Nginx to serve the application
 CMD ["nginx", "-g", "daemon off;"]
 ```
+
+en version securisé (acces en https) voici les fichiers de configuration :
+
+a definir nginx.conf et dockerfile
 
 ## 2.2 Installer conteneur MariaDB
 
@@ -525,7 +548,9 @@ networks:
 vous disposer d'un certain nombre de commandes pour gerer ce groupe de conteneurs :
 
 ``docker compose up --build`` pour contruire votre groupe de conteneurs (ajouter option -d pour le lancer en mode demon)
+
 ``docker compose stop`` pour arreter votre groupe de conteneurs
+
 ``docker compose start`` pour demarrer votre groupe de conteneurs
 
 
@@ -632,8 +657,9 @@ jobs:
 ``docker build [options] path`` : construit un container en fonction du dockerfile dans le répertoire path
 
 Principales options :
-	- -t nomImage : génère une image nommée
-	- -q : quiet mode (mode silencieux ; pas de log de la construction)
+
+- -t nomImage : génère une image nommée
+- -q : quiet mode (mode silencieux ; pas de log de la construction)
 
 ## Execution d'un container
 

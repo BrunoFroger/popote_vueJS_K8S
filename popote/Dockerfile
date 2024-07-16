@@ -23,7 +23,7 @@ RUN echo "==========================="; \
 #RUN /usr/sbin/sshd -D &
 #RUN echo root123 | su -c "/etc/init.d/ssh start" 
 
-#EXPOSE 22
+EXPOSE 8080
     
 # installe un simple serveur http pour servir un contenu statique
 #RUN npm install -g http-server 
@@ -50,7 +50,7 @@ RUN npm install
 # construit l'app pour la production en la minifiant
 RUN npm run build
 
-#EXPOSE 8080
+EXPOSE 8080
 #RUN cd src
 
 # execute fichier bash de post traitement (lancement des applications et demons)
