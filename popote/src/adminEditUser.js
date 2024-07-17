@@ -40,7 +40,7 @@ export default {
                     </tr> \
                     <tr> \
                         <td>Role</td> \
-                        <td><input v-model="this.newIdRole" placeholder="localUser.idRole"></input></td> \
+                        <td><input v-model="newIdRole" placeholder="{{localUser.idRole}}"></input></td> \
                     </tr> \
                 </tbody> \
             </table>\
