@@ -60,6 +60,7 @@ export default {
         <span v-if="modeEdition">\
           <button @click="updateRecette">Mise a jour</button>\
           <button @click="switchModeEdition">Annuler</button>\
+          <button @click="$parent.changeModeAffichage(\'listeRecettes\'">Retour</button>\
         </span>\
       </div>\
     ',

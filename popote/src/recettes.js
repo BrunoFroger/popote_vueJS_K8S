@@ -199,6 +199,14 @@ export default {
       },
       //---------------------------------
       //
+      //  changeModeAffichage
+      //
+      //---------------------------------
+      changeModeAffichage(mode) {
+        this.modeAffichage = mode
+      },
+      //---------------------------------
+      //
       //  loadRecette
       //
       //---------------------------------
