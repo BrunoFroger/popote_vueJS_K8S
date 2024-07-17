@@ -25,7 +25,7 @@ export default {
                     <th>nom</th> \
                     <th>passwd</th> \
                     <th>email</th> \
-                    <th>idRole</th> \
+                    <th></th> \
                 </thead> \
                 <tbody> \
                     <tr v-for="item in listeUsers"> \
@@ -34,6 +34,7 @@ export default {
                         <td>{{item.pwd}}</td> \
                         <td>{{item.email}}</td> \
                         <td>{{item.idRole}}</td> \
+                        <td><button @click="editUser(\'editUser\, {{item.id}})">Edit</button></td> \
                     </tr> \
                 </tbody> \
             </table>\
@@ -66,6 +67,16 @@ export default {
         //---------------------------------
         changeModeAffichage(mode) {
           console.log("adminGereUsers.js => changeModeAffichage : " + mode)
+          this.$parent.modeAffichageAdmin = mode;
+        },
+        //---------------------------------
+        //
+        //  editUser
+        //
+        //---------------------------------
+        editUser(mode, user) {
+          console.log("editUser.js => changeModeAffichage : " + mode)
+          this.$parent.EditUser = user
           this.$parent.modeAffichageAdmin = mode;
         },
         //---------------------------------
