@@ -85,9 +85,9 @@ export default {
         //
         //---------------------------------
         getAllUsers() {
-            console.log("adminGereUsers.js => getAllUsers " )
+            //console.log("adminGereUsers.js => getAllUsers " )
             var url = this.$parent.serverNodeAdress + '/getAllUsers'
-            console.log('adminGereUsers.js => loadListeRecettes : ' + url);
+            console.log('adminGereUsers.js => getAllUsers : ' + url);
             fetch(url).then(r => r.json()).then(response => {
                 this.listeUsers = response
                 console.log("liste des users : " + JSON.stringify(this.listeUsers))
