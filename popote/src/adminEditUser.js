@@ -27,7 +27,7 @@ export default {
                 <tbody> \
                     <tr> \
                         <td>Nom</td> \
-                        <td>localUser.nom</td> \
+                        <td>{{localUser.nom}}</td> \
                     </tr> \
                     <tr> \
                         <td>Passwd</td> \
