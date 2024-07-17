@@ -85,7 +85,7 @@ export default {
         valider() {
           console.log("adminGereUsers.js => valider : newIdRole = " + this.newIdRole)
           this.localUser.idRole = this.newIdRole
-          console.log("nouvelles donnees user = " + JSON.stringify(ths.loca))
+          console.log("nouvelles donnees user = " + JSON.stringify(this.localUser))
         },
         //---------------------------------
         //
