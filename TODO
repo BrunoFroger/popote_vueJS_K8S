@@ -16,6 +16,7 @@ Fonctions a réaliser :
   - creer un mode admin
     - gestion des users
       - reset des mots de passe
+      - modification de idRole (reste a envoyer requte sql et valider resultat)
       - suppression d'un Utilisateur (basculer ses recette vers user "inconnu")
     - gestion des recettes
       - desactivation d'une recette

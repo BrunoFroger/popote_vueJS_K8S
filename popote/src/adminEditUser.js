@@ -7,6 +7,8 @@ export default {
           currentDateTime: '',
           localUser:{},
           newIdRole:'',
+          newPasswd,
+          newEmail,
         };
       },
       mounted() {
@@ -32,7 +34,7 @@ export default {
                     </tr> \
                     <tr> \
                         <td>Passwd</td> \
-                        <td>{{localUser.pwd}}</td> \
+                        <td><input v-model="newPasswd" value="newPasswd"></td> \
                     </tr> \
                     <tr> \
                         <td>email</td> \
@@ -68,6 +70,8 @@ export default {
           console.log("adminEditUsers.js => updateDatas")
           this.localUser = this.$parent.editUser
           this.newIdRole = this.localUser.idRole
+          this.newPasswd = this.localUser.pwd
+          this.newEmail = this.localUser.email
         },
         //---------------------------------
         //
