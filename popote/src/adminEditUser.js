@@ -5,7 +5,7 @@ export default {
       data: function () {
         return {
           currentDateTime: '',
-          listeUsers:[],
+          localUser:null,
         };
       },
       mounted() {
@@ -27,7 +27,7 @@ export default {
                 <tbody> \
                     <tr> \
                         <td>Nom</td> \
-                        <td>this.$parent.editUser.nom</td> \
+                        <td>localUser.nom</td> \
                     </tr> \
                     <tr> \
                         <td>Passwd</td> \
@@ -66,8 +66,8 @@ export default {
         //
         //---------------------------------
         updateDatas() {
-          console.log("adminGereUsers.js => updateDatas")
-          this.getAllUsers()
+          console.log("adminEditUsers.js => updateDatas")
+          this.localUser = this.$parent.editUser
         },
         //---------------------------------
         //
