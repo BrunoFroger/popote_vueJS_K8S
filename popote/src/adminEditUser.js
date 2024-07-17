@@ -38,7 +38,7 @@ export default {
                     </tr> \
                     <tr> \
                         <td>email</td> \
-                        <td>{{localUser.email}}</td> \
+                        <td><input v-model="newEmail" value="newEmail"></td> \
                     </tr> \
                     <tr> \
                         <td>Role</td> \
@@ -88,9 +88,9 @@ export default {
         //
         //---------------------------------
         valider() {
-          console.log("adminGereUsers.js => valider : newIdRole = " + this.newIdRole)
           this.localUser.idRole = this.newIdRole
           this.localUser.pwd = this.newPasswd
+          this.localUser.email = this.newEmail
           console.log("nouvelles donnees user = " + JSON.stringify(this.localUser))
         },
         //---------------------------------
