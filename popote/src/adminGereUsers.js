@@ -34,7 +34,7 @@ export default {
                         <td>{{item.pwd}}</td> \
                         <td>{{item.email}}</td> \
                         <td>{{item.idRole}}</td> \
-                        <td><button @click="editUser(\'editUser\', item.id)">Edit</button></td> \
+                        <td><button @click="editUser(\'editUser\', item)">Edit</button></td> \
                     </tr> \
                 </tbody> \
             </table>\
