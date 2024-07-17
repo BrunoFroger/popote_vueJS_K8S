@@ -27,7 +27,7 @@ export default {
                 <tbody> \
                     <tr> \
                         <td>Nom</td> \
-                        <td>ths.$parent.editUser.nom</td> \
+                        <td>this.$parent.editUser.nom</td> \
                     </tr> \
                     <tr> \
                         <td>Passwd</td> \
