@@ -40,7 +40,7 @@ export default {
                     </tr> \
                     <tr> \
                         <td>Role</td> \
-                        <td><input v-model="newIdRole" value="localUser.idRole"></input></td> \
+                        <td><input v-model="newIdRole" value="newIdRole"></input></td> \
                     </tr> \
                 </tbody> \
             </table>\
@@ -67,6 +67,7 @@ export default {
         updateDatas() {
           console.log("adminEditUsers.js => updateDatas")
           this.localUser = this.$parent.editUser
+          this.newIdRole = this.localUser.idRole
         },
         //---------------------------------
         //
