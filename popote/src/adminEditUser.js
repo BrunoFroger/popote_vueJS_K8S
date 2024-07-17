@@ -7,8 +7,8 @@ export default {
           currentDateTime: '',
           localUser:{},
           newIdRole:'',
-          newPasswd,
-          newEmail,
+          newPasswd:'',
+          newEmail:'',
         };
       },
       mounted() {
@@ -90,6 +90,7 @@ export default {
         valider() {
           console.log("adminGereUsers.js => valider : newIdRole = " + this.newIdRole)
           this.localUser.idRole = this.newIdRole
+          this.localUser.pwd = this.newPasswd
           console.log("nouvelles donnees user = " + JSON.stringify(this.localUser))
         },
         //---------------------------------
