@@ -75,8 +75,9 @@ export default {
         //
         //---------------------------------
         editUser(mode, user) {
-          console.log("editUser.js => changeModeAffichage : " + mode)
+          console.log("adminGereUsers.js => editUser : mode = " + mode)
           this.$parent.editUser = user
+          console.log("adminGereUsers.js => editUser : user = " + JSON.stringify(user));
           this.$parent.modeAffichageAdmin = mode;
         },
         //---------------------------------
