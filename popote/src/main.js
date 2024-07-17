@@ -80,7 +80,7 @@ app.component('editeRecette', EditeRecette);
 app.component('creationRecette', CreationRecette);
 app.component('admin', Admin);
 app.component('adminGereUsers', AdminGereUsers);
-app.component('adminEditUsers', AdminEditUsers);
+app.component('adminEditUser', AdminEditUser);
 app.component('adminGereRecettes', AdminGereRecettes);
 app.component('adminRequeteSql', AdminRequeteSql);
 app.mount('#app');
