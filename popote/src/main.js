@@ -11,6 +11,7 @@ import Admin from './admin.js'
 import AdminGereUsers from './adminGereUsers.js'
 import AdminGereRecettes from './adminGereRecettes.js'
 import AdminRequeteSql from './adminRequeteSql.js'
+import AdminEditUser from './adminEditUser.js'
 
 const app = createApp({
     data() {
@@ -79,6 +80,7 @@ app.component('editeRecette', EditeRecette);
 app.component('creationRecette', CreationRecette);
 app.component('admin', Admin);
 app.component('adminGereUsers', AdminGereUsers);
+app.component('adminEditUsers', AdminGereUsers);
 app.component('adminGereRecettes', AdminGereRecettes);
 app.component('adminRequeteSql', AdminRequeteSql);
 app.mount('#app');
