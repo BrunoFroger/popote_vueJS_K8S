@@ -10,7 +10,7 @@ export default {
           nbUsers:null,
           modeAffichageAdmin:'',
           serverNodeAdress:null,
-          editUser:null,
+          editUser:{},
         };
       },
       mounted() {
@@ -29,7 +29,7 @@ export default {
           <span v-else-if="modeAffichageAdmin == \'adminRequeteSql\'">\
             <adminRequeteSql/>\
           </span>\
-          <span v-else-if="modeAffichageAdmin == \'editUser\'">\
+          <span v-else-if="modeAffichageAdmin == \'editionUser\'">\
             <adminEditUser/>\
           </span>\
           <span v-else> \

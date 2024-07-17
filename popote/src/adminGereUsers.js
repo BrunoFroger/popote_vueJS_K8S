@@ -34,7 +34,7 @@ export default {
                         <td>{{item.pwd}}</td> \
                         <td>{{item.email}}</td> \
                         <td>{{item.idRole}}</td> \
-                        <td><button @click="editUser(\'editUser\', item)">Edit</button></td> \
+                        <td><button @click="editUser(\'editionUser\', item)">Edit</button></td> \
                     </tr> \
                 </tbody> \
             </table>\
@@ -77,7 +77,7 @@ export default {
         editUser(mode, user) {
           console.log("adminGereUsers.js => editUser : mode = " + mode)
           this.$parent.editUser = user
-          console.log("adminGereUsers.js => editUser : user = " + JSON.stringify(user));
+          console.log("adminGereUsers.js => editUser : user = " + JSON.stringify(this.$parent.editUser));
           this.$parent.modeAffichageAdmin = mode;
         },
         //---------------------------------

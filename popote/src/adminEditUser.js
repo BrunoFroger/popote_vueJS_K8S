@@ -5,7 +5,7 @@ export default {
       data: function () {
         return {
           currentDateTime: '',
-          localUser:null,
+          localUser:{},
         };
       },
       mounted() {
