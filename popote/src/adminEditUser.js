@@ -40,7 +40,7 @@ export default {
                     </tr> \
                     <tr> \
                         <td>Role</td> \
-                        <td><input v-model="newIdRole" placeholder={{localUser.idRole}}></input></td> \
+                        <td><input v-model="newIdRole" placeholder="localUser.idRole"></input></td> \
                     </tr> \
                 </tbody> \
             </table>\
@@ -83,7 +83,7 @@ export default {
         //
         //---------------------------------
         valider() {
-          console.log("adminGereUsers.js => valider")
+          console.log("adminGereUsers.js => valider : newIdRole = " + newIdRole)
           this.localUser.idRole = newIdRole
           console.log("nouvelles donnees user = " + JSON.stringify(ths.loca))
         },
