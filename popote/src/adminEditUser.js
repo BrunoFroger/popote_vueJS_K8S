@@ -6,6 +6,7 @@ export default {
         return {
           currentDateTime: '',
           localUser:{},
+          newIdRole:'',
         };
       },
       mounted() {
@@ -39,11 +40,13 @@ export default {
                     </tr> \
                     <tr> \
                         <td>Role</td> \
-                        <td>{{localUser.idRole}}</td> \
+                        <td><input v-model="newIdRole">{{localUser.idRole}}</input></td> \
                     </tr> \
                 </tbody> \
             </table>\
-            <button @click = "changeModeAffichage(\' \')">Retour</button> \
+            <button @click = "valider">Valider</button> \
+            <br> \
+            <button @click = "changeModeAffichage(\'gereUsers\')">Retour</button> \
         </div> \
       ',
       methods: {
@@ -73,6 +76,16 @@ export default {
         changeModeAffichage(mode) {
           console.log("adminGereUsers.js => changeModeAffichage : " + mode)
           this.$parent.modeAffichageAdmin = mode;
+        },
+        //---------------------------------
+        //
+        //  valider
+        //
+        //---------------------------------
+        valider() {
+          console.log("adminGereUsers.js => valider")
+          this.localUser.idRole = newIdRole
+          console.log("nouvelles donnees user = " + JSON.stringify(ths.loca))
         },
         //---------------------------------
         //
