@@ -10,7 +10,7 @@ export default {
           nbUsers:null,
           modeAffichageAdmin:'',
           serverNodeAdress:null,
-          EditUser:null;
+          EditUser:null,
         };
       },
       mounted() {
