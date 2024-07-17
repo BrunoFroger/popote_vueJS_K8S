@@ -31,19 +31,15 @@ export default {
                     </tr> \
                     <tr> \
                         <td>Passwd</td> \
-                        <td> </td> \
+                        <td>{{localUser.pwd}}</td> \
                     </tr> \
                     <tr> \
                         <td>email</td> \
-                        <td> </td> \
+                        <td>{{localUser.email}}</td> \
                     </tr> \
                     <tr> \
                         <td>Role</td> \
-                        <td> </td> \
-                    </tr> \
-                    <tr> \
-                        <td>Nom</td> \
-                        <td> </td> \
+                        <td>{{localUser.idRole}}</td> \
                     </tr> \
                 </tbody> \
             </table>\
