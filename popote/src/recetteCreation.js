@@ -7,7 +7,7 @@ export default {
         newTitre:'',
         newDescription:'',
         newRealisation:'',
-        newIngredients:{},
+        newIngredients:[],
         recette:{},
         selectedType:'',
       };
