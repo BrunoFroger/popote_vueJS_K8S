@@ -26,7 +26,11 @@ export default {
         </tr>\
         <tr>\
           <td>type</td>\
-          <td>{{typeRecette}}</td>\
+          <td> \
+            <select v-model="selectedType" @change"updateRecette">\
+              <option v-for="type in $parent.listeTypes"></option>\
+            </select>\
+          </td>\
         </tr>\
           <tr>\
             <td>description</td>\
@@ -89,6 +93,21 @@ export default {
           realisation: this.newRealisation,
         }
         console.log("recette cree : " +JSON.stringify(this.recette))
+      },
+      //---------------------------------
+      //
+      //  updateRecette
+      //
+      //---------------------------------
+      updateRecette() {
+        this.recette={
+          titre: this.newTitre,
+          type: this.newType,
+          description: this.newDescription,
+          ingredients: this.newIngredients,
+          realisation: this.newRealisation,
+        }
+        console.log("updateRecette: " +JSON.stringify(this.recette))
       },
     }
 }
