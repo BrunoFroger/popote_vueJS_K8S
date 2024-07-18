@@ -15,7 +15,7 @@ export default {
       this.updateDateTime();
     },
     template: '\
-    <h1>Création d\'une recettes</h1>\
+    <h1>Création d\'une recette</h1>\
     <p>Remplissez les champs suivant et validez quand votre recette sera complète</p>\
     \
       <div>\
@@ -82,7 +82,7 @@ export default {
       //---------------------------------
       creerRecette() {
         this.recette={
-          titre: this.newType,
+          titre: this.newTitre,
           type: this.newType,
           description: this.newDescription,
           ingredients: this.newIngredients,

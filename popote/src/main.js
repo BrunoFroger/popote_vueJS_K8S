@@ -54,6 +54,11 @@ const app = createApp({
         </div>\
       ',
     methods: {
+      //---------------------------------
+      //
+      //  updateTypeUser
+      //
+      //---------------------------------
       updateTypeUser(){
         this.isAdmin = Compte.methods.isAdminUser();
         //console.log('isAdmin : ' + this.isAdmin)
