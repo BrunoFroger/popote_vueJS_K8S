@@ -120,5 +120,14 @@ export default {
         console.log("types de recettes : " + JSON.stringify(this.$parent.typesRecettes))
         console.log("updateDatas : " + JSON.stringify(this.recette))
       },
+      //---------------------------------
+      //
+      //  ajouteIngredient
+      //
+      //---------------------------------
+      ajouteIngredient() {
+        newIngredients.push({"nom":"", "quantite":"", "unite":""})
+        console.log("ajouteIngredient : " + JSON.stringify(this.newIngredients))
+      },
     }
 }
