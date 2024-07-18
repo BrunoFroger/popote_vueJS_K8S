@@ -118,7 +118,6 @@ export default {
       //---------------------------------
       updateDatas() {
         console.log("types de recettes : " + JSON.stringify(this.$parent.typesRecettes))
-        this.
         console.log("updateDatas : " + JSON.stringify(this.recette))
       },
       //---------------------------------
