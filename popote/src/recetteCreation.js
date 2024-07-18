@@ -30,7 +30,7 @@ export default {
           <td>type</td>\
           <td> \
             <select v-model="selectedType" @change"updateRecette">\
-              <option v-for="type in this.$parent.typesRecettes" :value=type.nom></option>\
+              <option v-on="type in this.$parent.typesRecettes" :value=type.nom></option>\
             </select>\
           </td>\
         </tr>\
@@ -47,7 +47,7 @@ export default {
                 <th>unité</th>\
                 <th><button @click="ajoutIngredient">+</button></th>\
               </thead>\
-                <tr v-for="ingredient in ingredients">\
+                <tr v-for="ingredient in newIngredients">\
                   <td>\
                     {{ingredient.nom}}\
                   </td>\
