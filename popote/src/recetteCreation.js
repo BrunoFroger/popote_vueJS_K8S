@@ -9,10 +9,13 @@ export default {
         newDescription:'',
         newRealisation:'',
         newIngredients:{},
+        recette:{},
+        selectedType:'',
       };
     },
     mounted() {
       this.updateDateTime();
+      this.updateDatas();
     },
     template: '\
     <h1>Création d\'une recette</h1>\
@@ -107,7 +110,15 @@ export default {
           ingredients: this.newIngredients,
           realisation: this.newRealisation,
         }
-        console.log("updateRecette: " +JSON.stringify(this.recette))
+        console.log("updateRecette : " +JSON.stringify(this.recette))
+      },
+      //---------------------------------
+      //
+      //  updateDatas
+      //
+      //---------------------------------
+      updateDatas() {
+        console.log("updateDatas : " +JSON.stringify(this.recette))
       },
     }
 }
