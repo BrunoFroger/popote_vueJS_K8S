@@ -48,9 +48,10 @@ export default {
                 <th><button @click="ajoutIngredient">+</button></th>\
               </thead>\
                 <tr v-for="ingredient in newIngredients">\
-                  <td>\
+                  <td><input v-model="ingredient.nom" value="ingredient.nom" @change="updateRecette"></td>\
+                  <!--td>\
                     {{ingredient.nom}}\
-                  </td>\
+                  </td-->\
                   <td>\
                     {{ingredient.quantite}}\
                   </td>\
