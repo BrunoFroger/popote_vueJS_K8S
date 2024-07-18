@@ -30,7 +30,7 @@ export default {
             <td>type</td>\
             <td> \
               <select v-model="selectedType" @change="updateRecette">\
-                <option v-for="localType in this.$parent.typesRecettes" :value="localType">{{localType.nom}}</option>\
+                <option v-for="localType in this.$parent.typesRecettes" :value="localType.id">{{localType.nom}}</option>\
               </select>\
             </td>\
           </tr>\
@@ -63,7 +63,7 @@ export default {
           </tr>\
           <tr>\
             <td>realisation</td>\
-            <td><textarea v-model="newRealisation" :value="newRealisation" @change="updateRecette"></td>\
+            <td><input v-model="newRealisation" value="newRealisation" @change="updateRecette"></td>\
           </tr>\
         </table>\
         <button @click="creerRecette">Valider la recette</button>\
