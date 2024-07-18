@@ -22,21 +22,21 @@ export default {
     \
       <div>\
         <table>\
-        <tr>\
-          <td>titre</td>\
-          <td><input v-model="newTitre" value="newTitre" @change="updateRecette"></td>\
-        </tr>\
-        <tr>\
-          <td>type</td>\
-          <td> \
-            <select v-model="selectedType" @change="updateRecette">\
-              <option v-for="localType in this.$parent.typesRecettes" :value="localType.nom">{{localType.nom}}</option>\
-            </select>\
-          </td>\
-        </tr>\
+          <tr>\
+            <td>titre</td>\
+            <td><input v-model="newTitre" value="newTitre" @change="updateRecette"></td>\
+          </tr>\
+          <tr>\
+            <td>type</td>\
+            <td> \
+              <select v-model="selectedType" @change="updateRecette">\
+                <option v-for="localType in this.$parent.typesRecettes" :value="localType.nom">{{localType.nom}}</option>\
+              </select>\
+            </td>\
+          </tr>\
           <tr>\
             <td>description</td>\
-          <td><input v-model="newDescription" value="newDescription" @change="updateRecette"></td>\
+            <td><input v-model="newDescription" value="newDescription" @change="updateRecette"></td>\
           </tr>\
           <tr>\
             <td>ingredients</td>\
@@ -62,13 +62,11 @@ export default {
           </tr>\
           <tr>\
             <td>realisation</td>\
-          <td><textarea v-model="newRealisation" value="newRealisation" @change="updateRecette"></td>\
+            <td><input v-model="newRealisation" value="newRealisation" @change="updateRecette"></td>\
           </tr>\
         </table>\
-        <span>\
-          <button @click="creerRecette">Valider la recette</button>\
-          <button @click="$parent.changeModeAffichage(\'listeRecettes\')">Retour</button>\
-        </span>\
+        <button @click="creerRecette">Valider la recette</button>\
+        <button @click="$parent.changeModeAffichage(\'listeRecettes\')">Retour</button>\
       </div>\
     ',
     methods: {
