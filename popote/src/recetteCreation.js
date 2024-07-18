@@ -5,7 +5,6 @@ export default {
       return {
         currentDateTime: '',
         newTitre:'',
-        newType:'',
         newDescription:'',
         newRealisation:'',
         newIngredients:{},
@@ -25,13 +24,13 @@ export default {
         <table>\
         <tr>\
           <td>titre</td>\
-          <td><input v-model="newTitre" value="newTitre"></td>\
+          <td><input v-model="newTitre" value="newTitre" @change="updateRecette"></td>\
         </tr>\
         <tr>\
           <td>type</td>\
           <td> \
             <select v-model="selectedType" @change"updateRecette">\
-              <option v-for="type in $parent.typesRecettes" :value=type.nom></option>\
+              <option v-for="type in this.$parent.typesRecettes" :value=type.nom></option>\
             </select>\
           </td>\
         </tr>\
@@ -90,7 +89,7 @@ export default {
       creerRecette() {
         this.recette={
           titre: this.newTitre,
-          type: this.newType,
+          type: this.selectedType,
           description: this.newDescription,
           ingredients: this.newIngredients,
           realisation: this.newRealisation,
@@ -105,7 +104,7 @@ export default {
       updateRecette() {
         this.recette={
           titre: this.newTitre,
-          type: this.newType,
+          type: this.selectedType,
           description: this.newDescription,
           ingredients: this.newIngredients,
           realisation: this.newRealisation,
