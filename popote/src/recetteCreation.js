@@ -101,11 +101,11 @@ export default {
       //
       //---------------------------------
       updateRecette() {
-        console.log("test si des ingredients sont vide dans ingredients : " + this.ingredients)
-        for(item in this.ingredients){
+        console.log("test si des ingredients sont vide dans ingredients : " + this.newIngredients)
+        for(item in this.newIngredients){
           console.log("test de l'ingredient " + JSON.stringify(item))
           if (item.nom == ""){
-            this.ingredients.delete(item)
+            this.newIngredients.delete(item)
             console.log("suppression d'un ingredient vide")
           }
         }
