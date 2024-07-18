@@ -10,6 +10,7 @@ export default {
         newIngredients:[],
         recette:{},
         selectedType:'',
+        type:{},
       };
     },
     mounted() {
@@ -29,8 +30,8 @@ export default {
         <tr>\
           <td>type</td>\
           <td> \
-            <select v-model="selectedType" @change"updateRecette">\
-              <option v-on="type in this.$parent.typesRecettes" :value=type.nom></option>\
+            <select v-model="selectedType" @change="updateRecette">\
+              <option v-for="type in this.$parent.typesRecettes" :value=type.nom></option>\
             </select>\
           </td>\
         </tr>\
