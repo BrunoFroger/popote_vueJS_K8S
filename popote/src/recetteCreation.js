@@ -88,6 +88,7 @@ export default {
           ingredients: newIngredients,
           realisation: newRealisation,
         }
+        console.log("recette cree : " +JSON.stringify(recette))
       },
     }
 }
