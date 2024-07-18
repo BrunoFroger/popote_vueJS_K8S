@@ -82,13 +82,13 @@ export default {
       //---------------------------------
       creerRecette() {
         this.recette={
-          titre: newType,
+          titre: this.newType,
           type: this.newType,
-          description: newDescription,
-          ingredients: newIngredients,
-          realisation: newRealisation,
+          description: this.newDescription,
+          ingredients: this.newIngredients,
+          realisation: this.newRealisation,
         }
-        console.log("recette cree : " +JSON.stringify(recette))
+        console.log("recette cree : " +JSON.stringify(this.recette))
       },
     }
 }
