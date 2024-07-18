@@ -7,12 +7,12 @@ export default {
       };
     },
     mounted() {
+      updateDateTime();
     },
     template: '\
     <h1>Création d\'une recettes</h1>\
     <p>Remplissez les champs suivant et validez quand votre recette sera complète</p>\
     \
-      <p><button @click="setModeListe">Retour à la liste de recettes</button></p>\
       <div>\
         <table>\
         <!--tr>\
@@ -57,13 +57,21 @@ export default {
             <td>{{realisation}}</td>\
           </tr>\
         </table>\
-        <span v-if="modeEdition">\
-          <button @click="updateRecette">Mise a jour</button>\
-          <button @click="switchModeEdition">Annuler</button>\
+        <span>\
+          <button @click="creerRecette">Valider la recette</button>\
           <button @click="$parent.changeModeAffichage(\'listeRecettes\')">Retour</button>\
         </span>\
       </div>\
     ',
     methods: {
+      //---------------------------------
+      //
+      //  updateDateTime
+      //
+      //---------------------------------
+      updateDateTime() {
+        const now = new Date();
+        this.currentDateTime = now.toLocaleString();
+      },
     }
 }
