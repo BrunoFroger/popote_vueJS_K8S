@@ -34,7 +34,7 @@ export default {
     <p>Parcourez la liste des recettes disponibles et selectionnez celle que vous voulez préparer</p>\
     <span v-if="userConnected" >\
       <input @change="$parent.loadListeRecettes" type="checkbox" v-model="$parent.recettesPrivees"> Mes recettes (visualisation de vos créations)\
-      <button @click="$parent.changeModeAffichage(\'creationRecette\'">creation d\'une recette</button>\
+      <button @click="$parent.changeModeAffichage(\'creationRecette\')">creation d\'une recette</button>\
     </span>\
     \
       <p>\
