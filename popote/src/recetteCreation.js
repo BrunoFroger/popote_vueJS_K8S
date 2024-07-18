@@ -125,9 +125,9 @@ export default {
       //  ajouteIngredient
       //
       //---------------------------------
-      ajouteIngredient() {
+      ajoutIngredient() {
         newIngredients.push({"nom":"", "quantite":"", "unite":""})
-        console.log("ajouteIngredient : " + JSON.stringify(this.newIngredients))
+        console.log("ajoutIngredient : " + JSON.stringify(this.newIngredients))
       },
     }
 }
