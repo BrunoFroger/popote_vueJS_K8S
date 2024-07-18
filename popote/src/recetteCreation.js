@@ -101,7 +101,7 @@ export default {
       //
       //---------------------------------
       updateRecette() {
-        console.log("test si des ingredients sont vide")
+        console.log("test si des ingredients sont vide dans ingredients : " + this.ingredients)
         for(item in this.ingredients){
           console.log("test de l'ingredient " + JSON.stringify(item))
           if (item.nom == ""){
