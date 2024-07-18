@@ -100,6 +100,11 @@ export default {
       //
       //---------------------------------
       updateRecette() {
+        for(ingredient in this.ingredients){
+          if (ingredient.nom == ''){
+            this.ingredients.delete(ingredient)
+          }
+        }
         this.recette={
           titre: this.newTitre,
           type: this.selectedType,
