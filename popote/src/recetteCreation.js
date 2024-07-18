@@ -4,6 +4,11 @@ export default {
     data: function () {
       return {
         currentDateTime: '',
+        newTitre:'',
+        newType:'',
+        newDescription:'',
+        newRealisation:'',
+        newIngredients:{},
       };
     },
     mounted() {
@@ -15,13 +20,9 @@ export default {
     \
       <div>\
         <table>\
-        <!--tr>\
-          <td>index</td>\
-          <td>{{indexRecette}}</td>\
-        </tr-->\
         <tr>\
           <td>titre</td>\
-          <td>{{titre}}</td>\
+          <td><input v-model="newTitre" value="newTitre"></td>\
         </tr>\
         <tr>\
           <td>type</td>\
@@ -32,12 +33,13 @@ export default {
             <td>{{description}}</td>\
           </tr>\
           <tr>\
-            <td >ingredients</td>\
+            <td>ingredients</td>\
             <td >\
               <thead>\
                 <th>nom</th>\
                 <th>quantité</th>\
                 <th>unité</th>\
+                <th><button @click="ajoutIngredient">+</button></th>\
               </thead>\
                 <tr v-for="ingredient in ingredients">\
                   <td>\
@@ -72,6 +74,20 @@ export default {
       updateDateTime() {
         const now = new Date();
         this.currentDateTime = now.toLocaleString();
+      },
+      //---------------------------------
+      //
+      //  creerRecette
+      //
+      //---------------------------------
+      creerRecette() {
+        this.recette={
+          titre: newType,
+          type: this.newType,
+          description: newDescription,
+          ingredients: newIngredients,
+          realisation: newRealisation,
+        }
       },
     }
 }
