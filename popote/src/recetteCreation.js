@@ -31,7 +31,7 @@ export default {
           <td>type</td>\
           <td> \
             <select v-model="selectedType" @change="updateRecette">\
-              <option v-for="type in this.$parent.typesRecettes" :value=type.nom></option>\
+              <option v-for="type in this.$parent.typesRecettes" :value=this.type.nom></option>\
             </select>\
           </td>\
         </tr>\
