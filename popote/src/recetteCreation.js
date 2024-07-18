@@ -36,7 +36,7 @@ export default {
         </tr>\
           <tr>\
             <td>description</td>\
-            <td>{{description}}</td>\
+            <td></td>\
           </tr>\
           <tr>\
             <td>ingredients</td>\
@@ -62,7 +62,7 @@ export default {
           </tr>\
           <tr>\
             <td>realisation</td>\
-            <td>{{realisation}}</td>\
+            <td></td>\
           </tr>\
         </table>\
         <span>\
@@ -118,6 +118,7 @@ export default {
       //---------------------------------
       updateDatas() {
         console.log("types de recettes : " + JSON.stringify(this.$parent.typesRecettes))
+        this.
         console.log("updateDatas : " + JSON.stringify(this.recette))
       },
       //---------------------------------
