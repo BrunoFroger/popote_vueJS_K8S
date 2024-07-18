@@ -36,7 +36,7 @@ export default {
         </tr>\
           <tr>\
             <td>description</td>\
-            <td></td>\
+          <td><input v-model="newDescription" value="newDescription" @change="updateRecette"></td>\
           </tr>\
           <tr>\
             <td>ingredients</td>\
@@ -62,7 +62,7 @@ export default {
           </tr>\
           <tr>\
             <td>realisation</td>\
-            <td></td>\
+          <td><textarea v-model="newRealisation" value="newRealisation" @change="updateRecette"></td>\
           </tr>\
         </table>\
         <span>\
