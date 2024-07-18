@@ -30,7 +30,7 @@ export default {
           <td>type</td>\
           <td> \
             <select v-model="selectedType" @change="updateRecette">\
-              <option v-for="localType in this.$parent.typesRecettes" :value="localType.nom"></option>\
+              <option v-for="localType in this.$parent.typesRecettes" :value="localType.nom">{{localType.nom}}</option>\
             </select>\
           </td>\
         </tr>\
