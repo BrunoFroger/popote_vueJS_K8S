@@ -7,7 +7,7 @@ export default {
       };
     },
     mounted() {
-      updateDateTime();
+      this.updateDateTime();
     },
     template: '\
     <h1>Création d\'une recettes</h1>\
