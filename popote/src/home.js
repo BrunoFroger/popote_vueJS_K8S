@@ -20,7 +20,7 @@ export default {
           <li>Recettes : accès a l\'ensemble des recettes disponibles</li>\
           <li>Mon compte : gestion de votre conpte (connexion / deconnexion / données personnelles</li>\
           </ul>\
-          <p stype="color:red">Site experimental en cours de construction (support de formation) aucune donnée n\'est valide ni conservée</p>\
+          <p style="color:red">Site experimental en cours de construction (support de formation) aucune donnée n\'est valide ni conservée</p>\
         </div>\
       ',
       methods: {
