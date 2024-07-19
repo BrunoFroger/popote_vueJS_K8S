@@ -91,7 +91,7 @@ export default {
           titre: this.newTitre,
           type: this.selectedType,
           description: this.newDescription,
-          auteur:this.auteur.nom,
+          auteur:this.$parent.auteur.nom,
           ingredients: this.newIngredients,
           realisation: this.newRealisation,
         }
