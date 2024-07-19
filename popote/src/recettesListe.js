@@ -118,25 +118,25 @@ export default {
         //   console.log('recettes.js (updateConnected) => pas de user connecte ')
         }
       },
-      //---------------------------------
-      //
-      //  loadRecette
-      //
-      //---------------------------------
-      loadRecette(index) {
-        console.log('listeRecette.js : listeRecette.js => loadRecette')
-        this.$parent.loadRecette(index)
-      },
-      //---------------------------------
-      //
-      //  loadListeRecette
-      //
-      //---------------------------------
-      loadListeRecette() {
-        console.log('listeRecette.js : loadListeRecette.js => loadListeRecette')
-        this.$parent.recettesPrivees = this.recettesPrivees
-        this.$parent.auteur = this.auteur
-        this.$parent.loadListeRecette(index)
-      },
+      // //---------------------------------
+      // //
+      // //  loadRecette
+      // //
+      // //---------------------------------
+      // loadRecette(index) {
+      //   console.log('listeRecette.js : listeRecette.js => loadRecette')
+      //   this.$parent.loadRecette(index)
+      // },
+      // //---------------------------------
+      // //
+      // //  loadListeRecette
+      // //
+      // //---------------------------------
+      // loadListeRecette() {
+      //   console.log('listeRecette.js : loadListeRecette.js => loadListeRecette')
+      //   this.$parent.recettesPrivees = this.recettesPrivees
+      //   this.$parent.auteur = this.auteur
+      //   this.$parent.loadListeRecette(index)
+      // },
     }
 }
