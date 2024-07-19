@@ -64,7 +64,8 @@ export default {
           </tr>\
           <tr>\
             <td>realisation</td>\
-            <td><input v-model="newRealisation" value="newRealisation" @change="updateRecette"></td>\
+            <!--td><input v-model="newRealisation" value="newRealisation" @change="updateRecette"></td-->\
+            <td><textarea v-model="newRealisation" @change="updateRecette"></td>\
           </tr>\
         </table>\
         <button @click="creerRecette">Valider la recette</button>\
