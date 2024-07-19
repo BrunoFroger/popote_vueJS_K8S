@@ -65,11 +65,13 @@ export default {
           <tr>\
             <td>realisation</td>\
             <!--td><input v-model="newRealisation" value="newRealisation" @change="updateRecette"></td-->\
-            <td><textarea v-model="newRealisation" onchange="updateRecette"></td>\
+            <td><textarea v-model="newRealisation"></td>\
           </tr>\
         </table>\
-        <button @click="creerRecette">Valider la recette</button>\
-        <button @click="$parent.changeModeAffichage(\'listeRecettes\')">Retour</button>\
+        <div>\
+          <button @click="creerRecette">Valider la recette</button>\
+          <button @click="$parent.changeModeAffichage(\'listeRecettes\')">Retour</button>\
+        </div>\
       </div>\
     ',
     methods: {
