@@ -95,6 +95,31 @@ export default {
           realisation: this.newRealisation,
         }
         console.log("recette cree : " +JSON.stringify(this.recette))
+        requeteSql = "INSERT INTO Recettes (titre, "
+        this.envoiRequeteSql(requtesql)
+      },
+      //---------------------------------
+      //
+      //  envoiRequetteSql
+      //
+      //---------------------------------
+      envoiRequeteSql(requete) {
+          const requestOptions = {
+            method: "POST",
+            //headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(this.recette)
+          };
+          console.log("recetteCreation.js => creeRecette " )
+          var url = this.$parent.serverNodeAdress + '/creeRecette' 
+          console.log('recetteCreation.js => creeRecette : ' + url);
+          fetch(url, requestOptions).then(r => r.json()).then(response => {
+              this.reponseSql = response
+              console.log("recetteCreation => reponse a la requete SQL: " + JSON.stringify(this.reponseSql))
+          })
+          .catch(error => {
+              console.error(error);
+              console.log("recetteCreation => erreur lors de l'execution de la requete SQL");
+          });
       },
       //---------------------------------
       //
