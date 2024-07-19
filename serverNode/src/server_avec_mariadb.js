@@ -100,15 +100,11 @@ const server = http.createServer((req, res) => {
             body += chunk.toString();
         });
         req.on('end', () => {
-            let recette = JSON.parse(body)
-            let type = recette.type
-            let titre = recette.titre
-            let auteur = recette.auteur
-            let description = recette.description
-            let realisation = recette.realisation
+            let tmpRecette = JSON.parse(body)
             res.setHeader('Content-Type', 'text/plain; charset=utf-8');
             var sql = 'INSERT INTO Recettes (type, titre, description, auteur, realisation) \
-                VALUES (' + recette.type + ',' + recette.titre + ',' + recette.description + ',' + recette.auteur +',' + recette.realisation +')'
+                VALUES (' + this.tmpRecette.type + ',' + this.tmpRecette.titre + ','
+                + this.tmpRecette.description + ',' + this.tmpRecette.auteur +',' + this.tmpRecette.realisation +')'
             execRequete(sql, callback_creeRecette, res)
         })
 
