@@ -94,6 +94,22 @@ const server = http.createServer((req, res) => {
         var sql = 'SELECT * FROM Recettes'
         execRequete(sql, callback_getAllRecettes, res)
 
+    }  else if (req.url.includes('/creeRecette')){
+        let body = '';
+        req.on('data', chunk => {
+            body += chunk.toString();
+        });
+        req.on('end', () => {
+            let recette = JSON.parse(body)
+            let type = recette.type
+            let titre = recette.titre
+            let auteur = recette.auteur
+            let description = recette.description
+            let realisation = recette.realisation
+            res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+            execRequete(sql, callback_creeRecette, res)
+        })
+
     } else if (req.url.includes('/getListeRecettes')){
         //console.log('serveur => requete getListeRecettes ');
         var selectAuteur = ''
@@ -272,6 +288,34 @@ function callback_checkUser(result, res){
     //console.log("callback_checkUser => " + JSON.stringify(stuff))
     res.end(JSON.stringify(stuff))
     //console.log("callback_checkUser => fin")
+}
+
+//=====================================================
+//
+//      function callback_creeRecette
+//
+//=====================================================
+function callback_creeRecette(result, res){
+    //console.log("callback_creeRecette => debut")
+    //console.log("callback_creeRecette => parametre passe (result) = ", result)
+    var stuff
+    if (result == undefined){
+        stuff ={
+            status: 'KO',
+            message: 'Impossible de sauvegarder cette recette',
+        };
+    } else {
+        var resultat = JSON.parse(result)[0]
+        //console.log("callback_creeRecette => resultat = ", JSON.stringify(resultat))
+        stuff = {
+            status: 'OK',
+            message: 'Recette sauvegardee',
+            user: resultat,
+        }
+    }
+    //console.log("callback_creeRecette => " + JSON.stringify(stuff))
+    res.end(JSON.stringify(stuff))
+    //console.log("callback_creeRecette => fin")
 }
 
 //=====================================================
