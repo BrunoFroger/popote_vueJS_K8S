@@ -101,7 +101,7 @@ export default {
         requeteSql += this.recette.type + ", "
         requeteSql += this.recette.auteur + ", "
         requeteSql += this.recette.description + ", "
-        requeteSql += this.recette.realisation + ", "
+        requeteSql += this.recette.realisation + ")"
         this.envoiRequeteSql(requeteSql)
       },
       //---------------------------------
@@ -110,7 +110,7 @@ export default {
       //
       //---------------------------------
       envoiRequeteSql(requete) {
-        console.log("recetteCreation.js => this.envoiRequeteSql : " +requete)
+        console.log("recetteCreation.js => envoiRequeteSql : "  requete)
         const stuff ={
           "requete":requete,
         };
