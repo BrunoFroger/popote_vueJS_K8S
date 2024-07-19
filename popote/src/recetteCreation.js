@@ -103,10 +103,10 @@ export default {
       updateRecette() {
         console.log("test si des ingredients sont vide dans ingredients : " + JSON.stringify(this.newIngredients))
         //var tmpIngredient = {}
-        this.newIngredients.forEach((tmpIngredient) => {
+        this.newIngredients.forEach((tmpIngredient, index) => {
           console.log("test de l'ingredient " + JSON.stringify(tmpIngredient))
           if (tmpIngredient.nom == ""){
-            this.newIngredients.delete(tmpIngredient)
+            this.newIngredients.splice(index,1)
             console.log("suppression d'un ingredient vide " + JSON.stringify(tmpIngredient))
           }
         })
