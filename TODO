@@ -24,6 +24,7 @@ Fonctions a réaliser :
     - gestion des recettes
       - desactivation d'une recette
       - changement d'auteur
+      - effacer une recette
 
 - serveur node (backend) :
   - nettoyer les requetes qui ne servent plus

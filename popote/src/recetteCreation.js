@@ -96,23 +96,23 @@ export default {
           realisation: this.newRealisation,
         }
         console.log("recette cree : " +JSON.stringify(this.recette))
-        let requeteSql = "INSERT INTO Recettes (titre, type, auteur, description, realisation) value ("
+        let requeteSql = "INSERT INTO Recettes (titre, type, auteur, description, realisation) VALUES ("
         requeteSql += this.recette.titre + ", "
         requeteSql += this.recette.type + ", "
         requeteSql += this.recette.auteur + ", "
         requeteSql += this.recette.description + ", "
         requeteSql += this.recette.realisation + ")"
-        this.envoiRequeteSql(requeteSql)
+        this.envoiRequeteCreation(recette)
       },
       //---------------------------------
       //
-      //  envoiRequetteSql
+      //  envoiRequeteCreation
       //
       //---------------------------------
-      envoiRequeteSql(requete) {
+      envoiRequeteCreation(recette) {
         console.log("recetteCreation.js => envoiRequeteSql : " + requete)
         const stuff ={
-          "requete":requete,
+          "recette":recette,
         };
         const requestOptions = {
           method: "POST",
@@ -123,8 +123,7 @@ export default {
         var url = this.$parent.$parent.serverNodeAdress + '/creeRecette' 
         console.log('recetteCreation.js => creeRecette : ' + url);
         fetch(url, requestOptions).then(r => r.json()).then(response => {
-            this.reponseSql = response
-            console.log("recetteCreation => reponse a la requete SQL: " + JSON.stringify(this.reponseSql))
+            console.log("recetteCreation => reponse a la requete creation recette : " + JSON.stringify(response))
         })
         .catch(error => {
             console.error(error);
