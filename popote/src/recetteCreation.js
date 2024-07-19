@@ -95,14 +95,14 @@ export default {
           ingredients: this.newIngredients,
           realisation: this.newRealisation,
         }
-        console.log("recette cree : " +JSON.stringify(this.recette))
-        let requeteSql = "INSERT INTO Recettes (titre, type, auteur, description, realisation) VALUES ("
-        requeteSql += this.recette.titre + ", "
-        requeteSql += this.recette.type + ", "
-        requeteSql += this.recette.auteur + ", "
-        requeteSql += this.recette.description + ", "
-        requeteSql += this.recette.realisation + ")"
-        this.envoiRequeteCreation(recette)
+        // console.log("recette cree : " +JSON.stringify(this.recette))
+        // let requeteSql = "INSERT INTO Recettes (titre, type, auteur, description, realisation) VALUES ("
+        // requeteSql += this.recette.titre + ", "
+        // requeteSql += this.recette.type + ", "
+        // requeteSql += this.recette.auteur + ", "
+        // requeteSql += this.recette.description + ", "
+        // requeteSql += this.recette.realisation + ")"
+        this.envoiRequeteCreation(this.recette)
       },
       //---------------------------------
       //
