@@ -91,12 +91,18 @@ export default {
           titre: this.newTitre,
           type: this.selectedType,
           description: this.newDescription,
+          auteur:this.auteur.nom,
           ingredients: this.newIngredients,
           realisation: this.newRealisation,
         }
         console.log("recette cree : " +JSON.stringify(this.recette))
-        requeteSql = "INSERT INTO Recettes (titre, "
-        this.envoiRequeteSql(requtesql)
+        requeteSql = "INSERT INTO Recettes (titre, type, auteur, description, realisation) value ("
+        requete += recette.titre + ", "
+        requete += recette.type + ", "
+        requete += recette.auteur + ", "
+        requete += recette.description + ", "
+        requete += recette.realisation + ", "
+        this.envoiRequeteSql(requeteSql)
       },
       //---------------------------------
       //
@@ -104,22 +110,26 @@ export default {
       //
       //---------------------------------
       envoiRequeteSql(requete) {
-          const requestOptions = {
-            method: "POST",
-            //headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(this.recette)
-          };
-          console.log("recetteCreation.js => creeRecette " )
-          var url = this.$parent.serverNodeAdress + '/creeRecette' 
-          console.log('recetteCreation.js => creeRecette : ' + url);
-          fetch(url, requestOptions).then(r => r.json()).then(response => {
-              this.reponseSql = response
-              console.log("recetteCreation => reponse a la requete SQL: " + JSON.stringify(this.reponseSql))
-          })
-          .catch(error => {
-              console.error(error);
-              console.log("recetteCreation => erreur lors de l'execution de la requete SQL");
-          });
+        console.log("recetteCreation.js => this.envoiRequeteSql : " +requete)
+        const stuff ={
+          "requete":requete,
+        };
+        const requestOptions = {
+          method: "POST",
+          //headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(stuff)
+        };
+        console.log("recetteCreation.js => creeRecette " )
+        var url = this.$parent.serverNodeAdress + '/creeRecette' 
+        console.log('recetteCreation.js => creeRecette : ' + url);
+        fetch(url, requestOptions).then(r => r.json()).then(response => {
+            this.reponseSql = response
+            console.log("recetteCreation => reponse a la requete SQL: " + JSON.stringify(this.reponseSql))
+        })
+        .catch(error => {
+            console.error(error);
+            console.log("recetteCreation => erreur lors de l'execution de la requete SQL");
+        });
       },
       //---------------------------------
       //
