@@ -102,13 +102,13 @@ export default {
       //
       //---------------------------------
       updateRecette() {
-        console.log("test si des ingredients sont vide dans ingredients : " + JSON.stringify(this.newIngredients))
+        //console.log("test si des ingredients sont vide dans ingredients : " + JSON.stringify(this.newIngredients))
         //var tmpIngredient = {}
         this.newIngredients.forEach((tmpIngredient, index) => {
-          console.log("test de l'ingredient " + JSON.stringify(tmpIngredient))
+          //console.log("test de l'ingredient " + JSON.stringify(tmpIngredient))
           if (tmpIngredient.nom == ""){
             this.newIngredients.splice(index,1)
-            console.log("suppression d'un ingredient vide " + JSON.stringify(tmpIngredient))
+            //console.log("suppression d'un ingredient vide " + JSON.stringify(tmpIngredient))
           }
         })
         this.recette={
@@ -129,7 +129,7 @@ export default {
         console.log("types de recettes : " + JSON.stringify(this.$parent.typesRecettes))
         console.log("updateDatas : " + JSON.stringify(this.recette))
         this.localTypes = this.$parent.typesRecettes
-        this.localTypes.splice(1,1)
+        this.localTypes.splice(2,1)
       },
       //---------------------------------
       //
