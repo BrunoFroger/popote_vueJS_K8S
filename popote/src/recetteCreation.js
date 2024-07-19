@@ -10,6 +10,7 @@ export default {
         newIngredients:[],
         recette:{},
         selectedType:'',
+        localTypes:{},
       };
     },
     mounted() {
@@ -30,7 +31,7 @@ export default {
             <td>type</td>\
             <td> \
               <select v-model="selectedType" @change="updateRecette">\
-                <option v-for="localType in this.$parent.typesRecettes" :value="localType.id">{{localType.nom}}</option>\
+                <option v-for="localType in this.localTypes" :value="localType.id">{{localType.nom}}</option>\
               </select>\
             </td>\
           </tr>\
@@ -88,7 +89,7 @@ export default {
       creerRecette() {
         this.recette={
           titre: this.newTitre,
-          type: this.selectedType.id,
+          type: this.selectedType,
           description: this.newDescription,
           ingredients: this.newIngredients,
           realisation: this.newRealisation,
@@ -127,6 +128,8 @@ export default {
       updateDatas() {
         console.log("types de recettes : " + JSON.stringify(this.$parent.typesRecettes))
         console.log("updateDatas : " + JSON.stringify(this.recette))
+        this.localTypes = this.$parent.typesRecettes
+        this.localTypes.splice(2,1)
       },
       //---------------------------------
       //
