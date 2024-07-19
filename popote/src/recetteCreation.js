@@ -120,7 +120,7 @@ export default {
           body: JSON.stringify(stuff)
         };
         console.log("recetteCreation.js => creeRecette " )
-        var url = this.$parent.serverNodeAdress + '/creeRecette' 
+        var url = this.$parent.$parent.serverNodeAdress + '/creeRecette' 
         console.log('recetteCreation.js => creeRecette : ' + url);
         fetch(url, requestOptions).then(r => r.json()).then(response => {
             this.reponseSql = response
