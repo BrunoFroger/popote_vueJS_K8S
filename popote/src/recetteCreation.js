@@ -129,7 +129,7 @@ export default {
         console.log("types de recettes : " + JSON.stringify(this.$parent.typesRecettes))
         console.log("updateDatas : " + JSON.stringify(this.recette))
         this.localTypes = this.$parent.typesRecettes
-        this.localTypes.splice(2,1)
+        this.localTypes.splice(1,1)
       },
       //---------------------------------
       //
