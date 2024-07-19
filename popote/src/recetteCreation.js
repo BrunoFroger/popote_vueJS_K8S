@@ -50,14 +50,11 @@ export default {
               </thead>\
                 <tr v-for="ingredient in newIngredients">\
                   <td><input v-model="ingredient.nom" value="ingredient.nom" @change="updateRecette"></td>\
-                  <!--td>\
-                    {{ingredient.nom}}\
-                  </td-->\
                   <td>\
-                    {{ingredient.quantite}}\
+                  <td><input v-model="ingredient.quantite" value="ingredient.quantite" @change="updateRecette"></td>\
                   </td>\
                   <td>\
-                    {{ingredient.unite}}\
+                  <td><input v-model="ingredient.unite" value="ingredient.unite" @change="updateRecette"></td>\
                   </td>\
               </tr>\
             </td>\
@@ -65,7 +62,7 @@ export default {
           <tr>\
             <td>realisation</td>\
             <!--td><input v-model="newRealisation" value="newRealisation" @change="updateRecette"></td-->\
-            <td><textarea v-model="newRealisation"></td>\
+            <td><textarea v-model="newRealisation" @change="updateRecette"></textarea></td>\
           </tr>\
         </table>\
         <div>\
