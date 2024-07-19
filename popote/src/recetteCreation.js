@@ -126,10 +126,12 @@ export default {
       //
       //---------------------------------
       updateDatas() {
-        console.log("types de recettes : " + JSON.stringify(this.$parent.typesRecettes))
-        console.log("updateDatas : " + JSON.stringify(this.recette))
+        console.log("recetteCreation => updateDatas : types de recettes : " + JSON.stringify(this.$parent.typesRecettes))
+        console.log("recetteCreation => updateDatas : types de recettes originale : " + JSON.stringify(this.$parent.typesRecettes))
         this.localTypes = this.$parent.typesRecettes
+        console.log("recetteCreation => updateDatas : types de recettes locale : " + JSON.stringify(this.localTypes))
         this.localTypes.splice(2,1)
+        console.log("recetteCreation => updateDatas : types de recettes locale apres suppresion item tout : " + JSON.stringify(this.localTypes))
       },
       //---------------------------------
       //
