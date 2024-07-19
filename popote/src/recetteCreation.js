@@ -97,11 +97,11 @@ export default {
         }
         console.log("recette cree : " +JSON.stringify(this.recette))
         requeteSql = "INSERT INTO Recettes (titre, type, auteur, description, realisation) value ("
-        requete += recette.titre + ", "
-        requete += recette.type + ", "
-        requete += recette.auteur + ", "
-        requete += recette.description + ", "
-        requete += recette.realisation + ", "
+        requete += this.recette.titre + ", "
+        requete += this.recette.type + ", "
+        requete += this.recette.auteur + ", "
+        requete += this.recette.description + ", "
+        requete += this.recette.realisation + ", "
         this.envoiRequeteSql(requeteSql)
       },
       //---------------------------------
