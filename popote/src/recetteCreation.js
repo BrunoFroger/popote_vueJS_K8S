@@ -96,7 +96,7 @@ export default {
           realisation: this.newRealisation,
         }
         console.log("recette cree : " +JSON.stringify(this.recette))
-        requeteSql = "INSERT INTO Recettes (titre, type, auteur, description, realisation) value ("
+        let requeteSql = "INSERT INTO Recettes (titre, type, auteur, description, realisation) value ("
         requete += this.recette.titre + ", "
         requete += this.recette.type + ", "
         requete += this.recette.auteur + ", "
