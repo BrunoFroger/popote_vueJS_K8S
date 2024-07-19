@@ -296,8 +296,8 @@ function callback_checkUser(result, res){
 //
 //=====================================================
 function callback_creeRecette(result, res){
-    //console.log("callback_creeRecette => debut")
-    //console.log("callback_creeRecette => parametre passe (result) = ", result)
+    console.log("callback_creeRecette => debut")
+    console.log("callback_creeRecette => parametre passe (result) = ", result)
     var stuff
     if (result == undefined){
         stuff ={
@@ -306,14 +306,14 @@ function callback_creeRecette(result, res){
         };
     } else {
         var resultat = JSON.parse(result)[0]
-        //console.log("callback_creeRecette => resultat = ", JSON.stringify(resultat))
+        console.log("callback_creeRecette => resultat = ", JSON.stringify(resultat))
         stuff = {
             status: 'OK',
             message: 'Recette sauvegardee',
             user: resultat,
         }
     }
-    //console.log("callback_creeRecette => " + JSON.stringify(stuff))
+    console.log("callback_creeRecette => " + JSON.stringify(stuff))
     res.end(JSON.stringify(stuff))
     //console.log("callback_creeRecette => fin")
 }
