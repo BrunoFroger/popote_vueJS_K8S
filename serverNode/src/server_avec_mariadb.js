@@ -393,7 +393,7 @@ function callback_getListeRecettes(result, res){
     //console.log("callback_getListeRecettes => debut")
     //console.log("callback_getListeRecettes => parametre passe (result) = ", result)
     var resultat = JSON.parse(result)
-    //console.log("callback_getListeRecettes => resultat listRecettes = ", resultat)
+    console.log("callback_getListeRecettes => resultat listRecettes = ", resultat)
     res.end(JSON.stringify(resultat))
     console.log("callback_getListeRecettes => fin")
 }
