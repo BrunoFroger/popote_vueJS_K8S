@@ -22,6 +22,7 @@ export default {
             <table>\
                 <thead> \
                     <th>id</th> \
+                    <th>numero</th> \
                     <th>nom</th> \
                     <th>passwd</th> \
                     <th>email</th> \
@@ -30,6 +31,7 @@ export default {
                 <tbody> \
                     <tr v-for="item in listeUsers"> \
                         <td>{{item.id}}</td> \
+                        <td>{{item.numero}}</td> \
                         <td>{{item.nom}}</td> \
                         <td>{{item.pwd}}</td> \
                         <td>{{item.email}}</td> \
