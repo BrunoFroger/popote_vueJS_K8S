@@ -26,6 +26,7 @@ ENV MYSQL_PASSWORD popote123
 
 COPY mariadb/ /home/mysql/
 COPY mariadb/.bashrc /home/mysql/
+COPY mariadb/create_base.sql /home/mysql/
 
 EXPOSE 3306
 
