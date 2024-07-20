@@ -1,3 +1,4 @@
+import Compte from './compte.js'
 
 export default {
   props: [], 
