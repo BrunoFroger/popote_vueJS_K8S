@@ -148,6 +148,7 @@ export default {
         this.recette={
           titre: this.newTitre,
           type: this.selectedType,
+          auteur: Compte.methods.getUserId(),
           description: this.newDescription,
           ingredients: this.newIngredients,
           realisation: this.newRealisation,
