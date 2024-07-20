@@ -7,6 +7,7 @@ USE Popote;
 
 CREATE TABLE IF NOT EXISTS Users(
     id BIGINT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    numero BIGINT AUTO_INCREMENT NOT NULL
     nom VARCHAR(50) NOT NULL,
     pwd VARCHAR(50) NOT NULL,
     email VARCHAR(100),
@@ -15,12 +16,12 @@ CREATE TABLE IF NOT EXISTS Users(
 
 DELETE FROM Users;
 
-INSERT INTO Users (nom, pwd, email, idRole) VALUES 
-    ("admin", "nimda", "bruno.froger93@gmail.com", 0),
-    ("toto", "toto", "toto@orange.com", 1),
-    ("titi", "titi", "titi@orange.com", 1),
-    ("Bruno", "bruno", "bruno.froger@orange.com", 0),
-    ("Inconnu", "sdgflsqfgjqsdgfqljsdfgq", "", 1);
+INSERT INTO Users (numero, nom, pwd, email, idRole) VALUES 
+    (1, "admin", "nimda", "bruno.froger93@gmail.com", 0),
+    (2, "toto", "toto", "toto@orange.com", 1),
+    (3, "titi", "titi", "titi@orange.com", 1),
+    (4, "Bruno", "bruno", "bruno.froger@orange.com", 0),
+    (5, "Inconnu", "sdgflsqfgjqsdgfqljsdfgq", "", 1);
 
 CREATE TABLE IF NOT EXISTS Ingredients(
     id BIGINT PRIMARY KEY AUTO_INCREMENT NOT NULL,
