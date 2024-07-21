@@ -92,7 +92,7 @@ export default {
           titre: this.newTitre,
           type: this.selectedType,
           description: this.newDescription,
-          auteur:this.$parent.userName,
+          auteur:Compte.methods.getUserId(),
           ingredients: this.newIngredients,
           realisation: this.newRealisation,
         }
