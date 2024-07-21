@@ -1,4 +1,4 @@
-import Recettes from 'recettes.js'
+import Recettes from './recettes.js'
 
 export default {
     props: [], 
