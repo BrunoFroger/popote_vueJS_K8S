@@ -104,8 +104,8 @@ const server = http.createServer((req, res) => {
             console.log("server_avec_mariadb => requete creeRecette : tmpRecette = " + JSON.stringify(tmpRecette))
             res.setHeader('Content-Type', 'text/plain; charset=utf-8');
             var sql = 'INSERT INTO Recettes (type, titre, description, auteur, realisation) \
-                VALUES (' + tmpRecette.type + ',' + tmpRecette.titre + ','
-                + tmpRecette.description + ',' + tmpRecette.auteur +',' + tmpRecette.realisation +')'
+                VALUES (\"' + tmpRecette.type + '\",\"' + tmpRecette.titre + '\",\"'
+                + tmpRecette.description + '\",\"' + tmpRecette.auteur +'\",\"' + tmpRecette.realisation +')'
             execRequete(sql, callback_creeRecette, res)
         })
 
