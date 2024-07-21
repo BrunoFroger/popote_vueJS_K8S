@@ -105,7 +105,7 @@ const server = http.createServer((req, res) => {
             res.setHeader('Content-Type', 'text/plain; charset=utf-8');
             var sql = 'INSERT INTO Recettes (type, titre, description, auteur, realisation) \
                 VALUES (\"' + tmpRecette.type + '\",\"' + tmpRecette.titre + '\",\"'
-                + tmpRecette.description + '\",\"' + tmpRecette.auteur +'\",\"' + tmpRecette.realisation +')'
+                + tmpRecette.description + '\",\"' + tmpRecette.auteur +'\",\"' + tmpRecette.realisation +'\")'
             execRequete(sql, callback_creeRecette, res)
         })
 
