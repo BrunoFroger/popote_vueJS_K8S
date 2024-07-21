@@ -52,6 +52,7 @@ export default {
         <table>\
           <tr>\
             <th>id</th>\
+            <th>numero</th>\
             <th>titre</th>\
             <th>auteur</th>\
             <th>type</th>\
@@ -59,6 +60,7 @@ export default {
           </tr>\
           <tr v-for="(item, id) in $parent.listeRecettes">\
             <td @click="loadRecette(item.id)">{{item.id}}</td>\
+            <td @click="loadRecette(item.id)">{{item.numRecette}}</td>\
             <td @click="loadRecette(item.id)">{{item.titre}}</td>\
             <td @click="loadRecette(item.id)">{{item.auteur}}</td>\
             <td @click="loadRecette(item.id)">{{item.type}}</td>\
