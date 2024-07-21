@@ -64,7 +64,7 @@ const server = http.createServer((req, res) => {
     } else if (req.url.includes('/getNbRecettes')){
         //console.log('requete getNbRecettes ');
         res.setHeader('Content-Type', 'text/json; charset=utf-8');
-        var sql = 'SELECT COUNT (*) FROM Recettes'
+        var sql = 'SELECT MAX (numRecette) FROM Recettes'
         execRequete(sql, callback_getNbRecettes, res)
 
     } else if (req.url.includes('/getNbUsers')){
@@ -101,9 +101,10 @@ const server = http.createServer((req, res) => {
         });
         req.on('end', () => {
             let tmpRecette = JSON.parse(body).recette
+            tmpRecette.numRecette = 
             console.log("server_avec_mariadb => requete creeRecette : tmpRecette = " + JSON.stringify(tmpRecette))
             res.setHeader('Content-Type', 'text/plain; charset=utf-8');
-            var sql = 'INSERT INTO Recettes (type, titre, description, auteur, realisation) \
+            var sql = 'INSERT INTO Recettes (type, numRecette, titre, description, auteur, realisation) \
                 VALUES (' + tmpRecette.type + ',\"' + tmpRecette.titre + '\",\"'
                 + tmpRecette.description + '\",' + tmpRecette.auteur +',\"' + tmpRecette.realisation +'\")'
             execRequete(sql, callback_creeRecette, res)
@@ -375,7 +376,7 @@ function callback_getNbRecettes(result, res){
     //console.log("callback_getNbRecettes => parametre passe (result) = ", result)
     var resultat = JSON.parse(result)[0]
     //console.log("callback_getNbRecettes => resultat getNbRecettes = ", resultat)
-    var nbRecettes = resultat["COUNT (*)"]
+    var nbRecettes = resultat["max(numRecette)"]
     console.log("callback_getNbRecettes => nbRecettes = " + nbRecettes)
     const stuff ={
         nbRecettes: nbRecettes,

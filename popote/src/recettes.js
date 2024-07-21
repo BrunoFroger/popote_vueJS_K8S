@@ -190,6 +190,10 @@ export default {
         fetch(url).then(r => r.json()).then(response => {
           //console.log("chargement de " + nb + " recettes a partir de  " + index);
           this.listeRecettes = response
+          listeRecettes.foreach((numRecette) => {
+            if (numRecette > this.globalNbRecettes)
+                this.globalNbRecettes = numRecette
+          })
           //console.log("recettes.js : listeRecettes => " + JSON.stringify(response))
         })
         .catch(error => {
