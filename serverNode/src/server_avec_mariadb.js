@@ -375,7 +375,7 @@ function callback_getNbRecettes(result, res){
     //console.log("callback_getNbRecettes => debut")
     //console.log("callback_getNbRecettes => parametre passe (result) = ", result)
     var resultat = JSON.parse(result)[0]
-    //console.log("callback_getNbRecettes => resultat getNbRecettes = ", resultat)
+    console.log("callback_getNbRecettes => resultat getNbRecettes = ", resultat)
     var nbRecettes = resultat["max(numRecette)"]
     console.log("callback_getNbRecettes => nbRecettes = " + nbRecettes)
     const stuff ={
