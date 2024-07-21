@@ -105,7 +105,7 @@ export default {
         // todo : retourner nb de recettes dans listeRecettes plutot que le nombre de recettes en base
         fetch(adresse).then(r => r.json()).then(response => {
           globalNbRecettes = response.nbRecettes;
-          console.log("recuperation du nombre de recettes " + globalNbRecettes);
+          console.log("recette.js => : getNbRecette => recuperation du nombre de recettes " + globalNbRecettes);
         }).catch(error => {
           console.error(error);
         });
@@ -190,10 +190,6 @@ export default {
         fetch(url).then(r => r.json()).then(response => {
           //console.log("chargement de " + nb + " recettes a partir de  " + index);
           this.listeRecettes = response
-          listeRecettes.foreach((numRecette) => {
-            if (numRecette > this.globalNbRecettes)
-                this.globalNbRecettes = numRecette
-          })
           //console.log("recettes.js : listeRecettes => " + JSON.stringify(response))
         })
         .catch(error => {
