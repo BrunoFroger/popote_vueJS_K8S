@@ -100,8 +100,8 @@ const server = http.createServer((req, res) => {
             body += chunk.toString();
         });
         req.on('end', () => {
-            let tmpRecette = JSON.parse(body)
-            console.log("server_avec_mariadb => requete creeRecette : body = " + JSON.stringify(tmpRecette))
+            let tmpRecette = JSON.parse(body).recette
+            console.log("server_avec_mariadb => requete creeRecette : tmpRecette = " + JSON.stringify(tmpRecette))
             res.setHeader('Content-Type', 'text/plain; charset=utf-8');
             var sql = 'INSERT INTO Recettes (type, titre, description, auteur, realisation) \
                 VALUES (' + this.tmpRecette.type + ',' + this.tmpRecette.titre + ','

@@ -2,10 +2,12 @@ Bug a resoudre :
 - sur visualisation des recettes les boutons precedente et suivante calcul de l'index eronné
 
 Fonctions a réaliser :
+- gerer la generation des numero de user lors de la creation
+- gerer la generation des numero de recette lors de la creation
 - gerer envoi de mail :
   - validation creation de compte
   - reset passwd
-- passer le site en https :
+- passer le site en https => OK:
   - doc a finaliser
   - OK mais reste quelques details a regler :
     - renouvellement automatique du certificat
