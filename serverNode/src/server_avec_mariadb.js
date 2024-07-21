@@ -168,7 +168,7 @@ const server = http.createServer((req, res) => {
             };
             if (typeRequette === "connexion"){
                 //console.log("serveur => traitement de la requete " + typeRequette)
-                var sql = 'SELECT nom, email, idRole FROM Users \
+                var sql = 'SELECT nom, numero, email, idRole FROM Users \
                     WHERE nom = "' + user.user + '" \
                     AND pwd = "' + user.pwd + '"'
                 execRequete(sql, callback_checkUser,res)
