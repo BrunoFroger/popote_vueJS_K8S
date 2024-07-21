@@ -1,3 +1,5 @@
+import Recettes from 'recettes.js'
+
 export default {
     props: [], 
       data: function () {
@@ -8,6 +10,7 @@ export default {
       mounted() {
         this.updateDateTime();
         setInterval(this.updateDateTime, 1000);
+        this.updateNbRecettes()
       },
       template: '\
         <div>\
@@ -27,6 +30,9 @@ export default {
         updateDateTime() {
           const now = new Date();
           this.currentDateTime = now.toLocaleString();
+        },
+        updateNbRecettes(){
+          Recettes.methods.getNbRecettes()
         },
       }
 }
