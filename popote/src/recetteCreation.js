@@ -111,7 +111,7 @@ export default {
       //
       //---------------------------------
       envoiRequeteCreation(recette) {
-        console.log("recetteCreation.js => envoiRequeteSql : " + recette)
+        console.log("recetteCreation.js => envoiRequeteSql : recette =" + (recette))
         const stuff ={
           "recette":recette,
         };
