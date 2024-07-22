@@ -13,7 +13,7 @@ export default {
         //ingredients : null,
         //ingredient : "{[null]}",
         //index : 0,
-        nbRecettes : 0,
+        nbRecettes : this.$parent.data.nbRecettes,
         nbRecettesParPage:10,
         idxDebutListeRecettes:0,
         //listeRecettes:[],
