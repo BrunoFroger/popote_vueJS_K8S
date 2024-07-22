@@ -239,11 +239,11 @@ export default {
               this.connected = true
               console.log ("compte.js => Utilisateur " + this.user.nom + " connecté")
               if (this.typeUser == 0){
-                alert('Administrateur " + this.user.nom + " connecté')
+                alert('Administrateur ' + this.user.nom + ' connecté')
                 console.log("administarteur connecté ")
                 globalAdminUser=true
               } else {
-                alert('Utilisateur " + this.user.nom + " connecté')
+                alert('Utilisateur ' + this.user.nom + ' connecté')
                 console.log("utilisateur connecté")
                 globalAdminUser=false
               }
