@@ -299,10 +299,10 @@ export default {
         //---------------------------------
         getUserId(){
           if (globalUser != null){
-            console.log(" compte.js => getUserId : " + globalUser.numero)
+            //console.log(" compte.js => getUserId : " + globalUser.numero)
             return globalUser.numero;
           } else {
-            console.log(" compte.js => getUserId : null" )
+            //console.log(" compte.js => getUserId : null" )
             return null
           }
         },

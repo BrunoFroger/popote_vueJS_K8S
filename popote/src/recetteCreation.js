@@ -111,14 +111,11 @@ export default {
       //
       //---------------------------------
       envoiRequeteCreation(recette) {
-        console.log("recetteCreation.js => envoiRequeteSql : recette =" + (recette))
-        const stuff ={
-          "recette":recette,
-        };
+        console.log("recetteCreation.js => envoiRequeteSql : recette =" + JSON.stringify(recette))
         const requestOptions = {
           method: "POST",
           //headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(stuff)
+          body: JSON.stringify(recette)
         };
         console.log("recetteCreation.js => creeRecette " )
         var url = this.$parent.$parent.serverNodeAdress + '/creeRecette' 
