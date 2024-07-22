@@ -146,7 +146,7 @@ const server = http.createServer((req, res) => {
         });
         req.on('end', () => {
             let tmpRecette = JSON.parse(body)
-            tmpRecette.numRecette = this.nbRecettes + 1
+            tmpRecette.numRecette = nbRecettes + 1
             console.log("server_avec_mariadb => requete creeRecette : tmpRecette = " + JSON.stringify(tmpRecette))
             res.setHeader('Content-Type', 'text/plain; charset=utf-8');
             var sql = 'INSERT INTO Recettes (type, numRecette, titre, description, auteur, realisation) \
@@ -273,8 +273,9 @@ const server = http.createServer((req, res) => {
         //          not found
         //
         //-------------------------------------------
+        res.statusCode = 404;
         res.setHeader('Content-Type', 'text/plain; charset=utf-8');
-        res.end('page not found')
+        res.end('Tout le monde peut se tromper ; comme disait le hérisson en descendant de la brosse à vêtements')
     }   
 });
 
