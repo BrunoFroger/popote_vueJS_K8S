@@ -382,7 +382,7 @@ function callback_getNbRecettes(result, res){
         nbRecettes: nbRecettes,
     };
     this.nbRecettes = nbRecettes
-    //console.log("callback_getNbRecettes => " + JSON.stringify(stuff))
+    console.log("callback_getNbRecettes => " + JSON.stringify(stuff))
     res.end(JSON.stringify(stuff))
     //console.log("callback_getNbRecettes => fin")
 }
