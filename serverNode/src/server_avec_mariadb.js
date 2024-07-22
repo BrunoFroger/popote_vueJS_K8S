@@ -38,11 +38,21 @@ const server = http.createServer((req, res) => {
 
     console.log("serveur => url = " + req.url);
     if (req.url === '/'){
+        //-------------------------------------------
+        //
+        //          / 
+        //
+        //-------------------------------------------
         res.statusCode = 200;
         res.setHeader('Content-Type', 'text/plain; charset=utf-8');
         res.end('Hello Popote\n');
 
     } else if (req.url.includes('/getRecette')){
+        //-------------------------------------------
+        //
+        //          getRecette
+        //
+        //-------------------------------------------
         idRecette = url.parse(req.url,true).query.index 
         // let maRecette = recettes[idRecette];
         res.setHeader('Content-Type', 'text/json; charset=utf-8');
@@ -62,39 +72,74 @@ const server = http.createServer((req, res) => {
         // res.end(JSON.stringify(maRecette));
 
     } else if (req.url.includes('/getNbRecettes')){
+        //-------------------------------------------
+        //
+        //          getNbRecettes
+        //
+        //-------------------------------------------
         //console.log('requete getNbRecettes ');
         res.setHeader('Content-Type', 'text/json; charset=utf-8');
         var sql = 'SELECT MAX (numRecette) FROM Recettes'
         execRequete(sql, callback_getNbRecettes, res)
 
     } else if (req.url.includes('/getNbUsers')){
+        //-------------------------------------------
+        //
+        //          getNbUsers
+        //
+        //-------------------------------------------
         //console.log('requete getNbUsers ');
         res.setHeader('Content-Type', 'text/json; charset=utf-8');
         var sql = 'SELECT COUNT (*) FROM Users'
         execRequete(sql, callback_getNbUsers, res)
 
     } else if (req.url.includes('/getTypesRecettes')){
+        //-------------------------------------------
+        //
+        //          getTypesRecettes
+        //
+        //-------------------------------------------
         res.setHeader('Content-Type', 'text/json; charset=utf-8');
         var sql = 'SELECT * FROM TypePlats'
         execRequete(sql, callback_getTypesRecettes, res)
 
     } else if (req.url.includes('/updateDatas')){
+        //-------------------------------------------
+        //
+        //          updateDatas
+        //
+        //-------------------------------------------
         //console.log('requete updateDatas ');
         updateDatas();
         res.setHeader('Content-Type', 'text/plain; charset=utf-8');
         res.end("OK");
 
     } else if (req.url.includes('/getAllUsers')){
+        //-------------------------------------------
+        //
+        //          getAllUsers
+        //
+        //-------------------------------------------
         res.setHeader('Content-Type', 'text/plain; charset=utf-8');
         var sql = 'SELECT * FROM Users'
         execRequete(sql, callback_getAllUsers, res)
 
     } else if (req.url.includes('/getAllRecettes')){
+        //-------------------------------------------
+        //
+        //          getAllRecettes
+        //
+        //-------------------------------------------
         res.setHeader('Content-Type', 'text/plain; charset=utf-8');
         var sql = 'SELECT * FROM Recettes'
         execRequete(sql, callback_getAllRecettes, res)
 
     }  else if (req.url.includes('/creeRecette')){
+        //-------------------------------------------
+        //
+        //          creeRecette
+        //
+        //-------------------------------------------
         let body = '';
         req.on('data', chunk => {
             body += chunk.toString();
@@ -111,6 +156,11 @@ const server = http.createServer((req, res) => {
         })
 
     } else if (req.url.includes('/getListeRecettes')){
+        //-------------------------------------------
+        //
+        //          getListeRecettes
+        //
+        //-------------------------------------------
         //console.log('serveur => requete getListeRecettes ');
         var selectAuteur = ''
         var selectType = ''
@@ -140,6 +190,11 @@ const server = http.createServer((req, res) => {
         // listTmp = getListRecettes(debut, nb, auteur, prive, typeRecette)
 
     } else if (req.url.includes('/requeteSql')){
+        //-------------------------------------------
+        //
+        //          requeteSql
+        //
+        //-------------------------------------------
         let body = '';
         req.on('data', chunk => {
             body += chunk.toString();
@@ -153,6 +208,11 @@ const server = http.createServer((req, res) => {
             execRequete(sql, callback_requeteSql, res)
         });
     } else if (req.url.includes('/requeteUser')){
+        //-------------------------------------------
+        //
+        //          requeteUser
+        //
+        //-------------------------------------------
         let body = '';
         req.on('data', chunk => {
             body += chunk.toString();
@@ -208,6 +268,11 @@ const server = http.createServer((req, res) => {
         //console.log('requete requeteUser ');
 
     } else {
+        //-------------------------------------------
+        //
+        //          not found
+        //
+        //-------------------------------------------
         res.setHeader('Content-Type', 'text/plain; charset=utf-8');
         res.end('page not found')
     }   
