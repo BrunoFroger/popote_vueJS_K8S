@@ -310,7 +310,7 @@ function callback_creeRecette(result, res){
         stuff = {
             status: 'OK',
             message: 'Recette sauvegardee',
-            user: resultat,
+            recette: resultat,
         }
     }
     console.log("callback_creeRecette => " + JSON.stringify(stuff))
