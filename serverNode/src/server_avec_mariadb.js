@@ -377,9 +377,9 @@ function callback_getNbRecettes(result, res){
     var resultat = JSON.parse(result)[0]
     console.log("callback_getNbRecettes => resultat getNbRecettes = ", resultat)
     this.nbRecettes = resultat["MAX (numRecette)"]
-    console.log("callback_getNbRecettes => nbRecettes = " + nbRecettes)
+    console.log("callback_getNbRecettes => nbRecettes = " + this.nbRecettes)
     const stuff ={
-        nbRecettes: nbRecettes,
+        nbRecettes: this.nbRecettes,
     };
     console.log("callback_getNbRecettes => " + JSON.stringify(stuff))
     res.end(JSON.stringify(stuff))
