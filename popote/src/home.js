@@ -32,7 +32,7 @@ export default {
           this.currentDateTime = now.toLocaleString();
         },
         updateNbRecettes(){
-          Recettes.methods.getNbRecettes()
+          Recettes.data.globalNbRecettes
         },
       }
 }
