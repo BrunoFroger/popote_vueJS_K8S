@@ -124,12 +124,14 @@ export default {
         var url = this.$parent.$parent.serverNodeAdress + '/creeRecette' 
         console.log('recetteCreation.js => creeRecette : ' + url);
         fetch(url, requestOptions).then(r => r.json()).then(response => {
-            console.log("recetteCreation => reponse a la requete creation recette : " + JSON.stringify(response))
+          alert("recette créé avec succès")
+          console.log("recetteCreation => reponse a la requete creation recette : " + JSON.stringify(response))
         })
         .catch(error => {
-            console.error(error);
-            console.log("recetteCreation => erreur lors de l'execution de la requete SQL");
-        });
+          alert("erreur lors de la création de la recette : " + error)
+          console.error(error);
+          console.log("recetteCreation => erreur lors de l'execution de la requete SQL");
+      });
       },
       //---------------------------------
       //
