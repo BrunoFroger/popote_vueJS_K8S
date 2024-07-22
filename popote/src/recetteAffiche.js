@@ -56,25 +56,17 @@ export default {
             <td >ingredients</td>\
             <td >\
               <thead>\
-                <th>numero</th>\
+                <!--th>numero</th-->\
                 <th>nom</th>\
                 <th>quantité</th>\
                 <th>unité</th>\
               </thead>\
-                <tr v-for="ingredient in $parent.recette.ingredients">\
-                  <td>\
-                    {{ingredient.numRecette}}\
-                  </td>\
-                  <td>\
-                    {{ingredient.nom}}\
-                  </td>\
-                  <td>\
-                    {{ingredient.quantite}}\
-                  </td>\
-                  <td>\
-                    {{ingredient.unite}}\
-                  </td>\
-              </tr>\
+              <tr v-for="ingredient in $parent.recette.ingredients">\
+                <!--td>{{ingredient.numRecette}}</td-->\
+                <td> {{ingredient.nom}}</td>\
+                <td>{{ingredient.quantite}} </td>\
+                <td>{{ingredient.unite}}</td>\
+            </tr>\
             </td>\
           </tr>\
           <tr>\
@@ -168,6 +160,14 @@ export default {
       decrementeIndex() {
         this.$parent.decrementeIndex()
         this.recette = this.$parent.recette
+      },
+      //---------------------------------
+      //
+      //  switchModeedition()
+      //
+      //---------------------------------
+      switchModeedition() {
+        this.$parent.switchModeedition()
       },
     },
 }
