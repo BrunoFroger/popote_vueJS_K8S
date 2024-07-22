@@ -13,7 +13,7 @@ export default {
         //ingredients : null,
         //ingredient : "{[null]}",
         //index : 0,
-        nbRecettes : this.$parent.methods.getNombreRecettes(),
+        nbRecettes : Recettes.methods.getNombreRecettes(),
         nbRecettesParPage:10,
         idxDebutListeRecettes:0,
         //listeRecettes:[],
