@@ -197,6 +197,7 @@ const server = http.createServer((req, res) => {
             coalesce(U.nom, R.auteur) as auteur, \
             coalesce(T.nom, R.type) as type \
             FROM Recettes R \
+            WHERE validation = 1 \
             INNER JOIN Users U ON R.auteur = U.id ' + selectAuteur + ' \
             INNER JOIN TypePlats T ON R.type = T.id ' + selectType + ' \
             ORDER BY R.id \
