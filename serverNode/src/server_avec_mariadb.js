@@ -125,10 +125,11 @@ const server = http.createServer((req, res) => {
             body += chunk.toString();
         });
         req.on('end', () => {
-            console.log("server_avec_mariadb => requete switchValidation : body = " + JSON.stringify(body))
+            let tmpRecette = JSON.parse(body)
+            console.log("server_avec_mariadb => requete switchValidation : body = " + JSON.stringify(tmpRecette))
             res.setHeader('Content-Type', 'text/plain; charset=utf-8');
-            var sql = 'UPDATE Recettes SET validation = ' + body.validation +
-                'WHERE id = ' + body.idRecette
+            var sql = 'UPDATE Recettes SET validation = ' + tmpRecette.validation +
+                'WHERE id = ' + tmpRecette.idRecette
             execRequete(sql, callback_switchValidation, res)
         })
 
