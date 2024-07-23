@@ -66,7 +66,7 @@ export default {
             <td @click="loadRecette(item.id)">{{item.auteur}}</td>\
             <td @click="loadRecette(item.id)">{{item.type}}</td>\
             <td @click="loadRecette(item.id)">{{item.description}}</td>\
-            <td v-if="userConnected"">Validée</td>\
+            <td v-if="userConnected">Validée</td>\
             <td v-else>En attente de validation</td>\
           </tr>\
         </table>\
