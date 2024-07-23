@@ -24,15 +24,15 @@ export default {
         <div>\
           <table>\
             <tr>\
-              <td>Destinataire</td\
+              <td>Destinataire</td>\
               <td>{{mail.destinataire}}</td>\
             </tr>\
             <tr>\
-              <td>objet</td\
+              <td>objet</td>\
               <td>{{mail.objet}}</td>\
             </tr>\
             <tr>\
-              <td>message</td\
+              <td>message</td>\
               <td>{{mail.message}}</td>\
             </tr>\
           </table>\
