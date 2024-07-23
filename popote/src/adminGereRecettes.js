@@ -37,9 +37,9 @@ export default {
                         <td>{{item.auteur}}</td> \
                         <td>{{item.titre}}</td> \
                         <td>{{item.description}}</td> \
-                        <td v-if="item.validation === 1"  @onchange="switchValidation(item.id, item.validation)">OK</td>\
+                        <td v-if="item.validation === 1" @onclick="switchValidation(item.id, item.validation)">OK</td>\
                         <!--td @onchange="switchValidation(item.id, item.validation)>{{item.validation}}</td--> \
-                        <td v-else  @onchange="switchValidation(item.id, item.validation)">A valider</td>\
+                        <td v-else @onclick="switchValidation(item.id, item.validation)">A valider</td>\
                     </tr> \
                 </tbody> \
             </table>\
@@ -85,7 +85,7 @@ export default {
             console.log('getAllRecettes.js => loadListeRecettes : ' + url);
             fetch(url).then(r => r.json()).then(response => {
                 this.listeRecettes = response
-                console.log("liste des recetees : " + JSON.stringify(this.listeRecettes))
+                //console.log("liste des recetees : " + JSON.stringify(this.listeRecettes))
             })
             .catch(error => {
                 console.error(error);
