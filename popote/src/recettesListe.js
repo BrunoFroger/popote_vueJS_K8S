@@ -66,9 +66,8 @@ export default {
             <td @click="loadRecette(item.id)">{{item.auteur}}</td>\
             <td @click="loadRecette(item.id)">{{item.type}}</td>\
             <td @click="loadRecette(item.id)">{{item.description}}</td>\
-            <td>{{item.validation}}</td>\
-            <td v-if="userConnected && $parent.recettesPrivees && item.validation != 0">Validée</td>\
-            <td v-if="userConnected && $parent.recettesPrivees && item.validation == 0">En attente de validation</td>\
+            <td v-if="$parent.recettesPrivees && item.validation != 0">Validée</td>\
+            <td v-if="$parent.recettesPrivees && item.validation == 0">En attente de validation</td>\
           </tr>\
         </table>\
         <button @click="pagePrecedente">recettes précédentes</button>\
