@@ -37,7 +37,8 @@ export default {
                         <td>{{item.auteur}}</td> \
                         <td>{{item.titre}}</td> \
                         <td>{{item.description}}</td> \
-                        <td @onchange="switchValidation(item.id, item.validation)>{{item.validation}}</td> \
+                        <!--td @onchange="switchValidation(item.id, item.validation)>{{item.validation}}</td--> \
+                        <td>{{item.validation}}</td> \
                     </tr> \
                 </tbody> \
             </table>\
