@@ -193,7 +193,7 @@ const server = http.createServer((req, res) => {
         console.log("type de recette demandée : " + typeRecette)
         if (typeRecette != 'Tout') selectType = " AND T.nom = '" + typeRecette + "' "
         res.setHeader('Content-Type', 'text/json; charset=utf-8');
-        var sql = 'SELECT R.id, R.numRecette, titre, description, validation\
+        var sql = 'SELECT R.id, R.numRecette, titre, description, validation, \
             coalesce(U.nom, R.auteur) as auteur, \
             coalesce(T.nom, R.type) as type \
             FROM Recettes R \
