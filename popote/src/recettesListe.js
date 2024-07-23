@@ -57,7 +57,7 @@ export default {
             <th>auteur</th>\
             <th>type</th>\
             <th>description</th>\
-            <th v-if="userConnected">Status</th>\
+            <th v-if="$parent.recettesPrivees">Status</th>\
           </tr>\
           <tr v-for="(item, id) in $parent.listeRecettes">\
             <td @click="loadRecette(item.id)">{{item.id}}</td>\
