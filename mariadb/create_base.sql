@@ -93,31 +93,32 @@ CREATE TABLE IF NOT EXISTS Recettes(
     auteur BIGINT NOT NULL,
     titre VARCHAR(100),
     description VARCHAR(300),
-    realisation VARCHAR(5000)
+    realisation VARCHAR(5000),
+    validation BOOLEAN
 );
 
 DELETE FROM Recettes;
 
-INSERT INTO Recettes (numRecette, type, auteur, titre, description, realisation) VALUES
-    (1, 2, 2, "pamplemousse crevette", "entree fraiche pour l'ete", "Couper les pamplemousses en 2, les vider en preservant sans abimer le contenu (vous devez avoir l'interieur du demi pamplemeousse entier), couper en des le pamplemeousse et les mettre dans un saladier, ajouter les crevettes decortiquees, ajouter la moyonnaise, melanger puis utiliser les pamplemeousse vides pour servir de bol a votre preparation, servir frais"),
-    (2, 3, 2, "poulet au four", "Plat traditionnel du dimanche midi", "Mettre le poulet dans un plat, poser quelques morceuax de beurre sur le poulet, verser un verre de bouillon au fond du plat, enfourner a 180 pendant 1h30"),
-    (3, 4, 3, "tarte aux pommes", "dessert traditionnel avec des pommes", "etaler la pate dans le plat a tarte, couper les pommes en lamelles, repartir les pommes sur la pate, saupoudrer de sucre, mettre au four pendant 30mn"),
-    (4, 2, 2, "Recette bidon", "recette de titi", "bla bla"),
-    (5, 3, 3, "Recette bidon", "recette de toto", "bla bla"),
-    (6, 4, 4, "Recette bidon", "recette de bruno", "bla bla"),
-    (7, 2, 2, "Recette bidon", "recette de titi", "bla bla"),
-    (8, 3, 3, "Recette bidon", "recette de toto", "bla bla"),
-    (9, 4, 4, "Recette bidon", "recette de bruno", "bla bla"),
-    (10, 2, 2, "Recette bidon", "recette de titi", "bla bla"),
-    (11, 3, 3, "Recette bidon", "recette de toto", "bla bla"),
-    (12, 4, 4, "Recette bidon", "recette de bruno", "bla bla"),
-    (13, 2, 2, "Recette bidon", "recette de titi", "bla bla"),
-    (14, 3, 3, "Recette bidon", "recette de toto", "bla bla"),
-    (15, 4, 4, "Recette bidon", "recette de bruno", "bla bla"),
-    (16, 2, 2, "Recette bidon", "recette de titi", "bla bla"),
-    (17, 3, 3, "Recette bidon", "recette de toto", "bla bla"),
-    (18, 4, 4, "Recette bidon", "recette de bruno", "bla bla"),
-    (19, 2, 2, "Recette bidon", "recette de titi", "bla bla"),
-    (20, 3, 3, "Recette bidon", "recette de toto", "bla bla"),
-    (21, 4, 4, "Recette bidon", "recette de bruno", "bla bla");
+INSERT INTO Recettes (numRecette, type, auteur, titre, description, realisation, validation) VALUES
+    (1, 2, 2, "pamplemousse crevette", "entree fraiche pour l'ete", "Couper les pamplemousses en 2, les vider en preservant sans abimer le contenu (vous devez avoir l'interieur du demi pamplemeousse entier), couper en des le pamplemeousse et les mettre dans un saladier, ajouter les crevettes decortiquees, ajouter la moyonnaise, melanger puis utiliser les pamplemeousse vides pour servir de bol a votre preparation, servir frais", 1),
+    (2, 3, 2, "poulet au four", "Plat traditionnel du dimanche midi", "Mettre le poulet dans un plat, poser quelques morceuax de beurre sur le poulet, verser un verre de bouillon au fond du plat, enfourner a 180 pendant 1h30", 1),
+    (3, 4, 3, "tarte aux pommes", "dessert traditionnel avec des pommes", "etaler la pate dans le plat a tarte, couper les pommes en lamelles, repartir les pommes sur la pate, saupoudrer de sucre, mettre au four pendant 30mn", 1),
+    (4, 2, 2, "Recette bidon", "recette de titi", "bla bla", 1),
+    (5, 3, 3, "Recette bidon", "recette de toto", "bla bla", 1),
+    (6, 4, 4, "Recette bidon", "recette de bruno", "bla bla", 1),
+    (7, 2, 2, "Recette bidon", "recette de titi", "bla bla", 1),
+    (8, 3, 3, "Recette bidon", "recette de toto", "bla bla", 1),
+    (9, 4, 4, "Recette bidon", "recette de bruno", "bla bla", 1),
+    (10, 2, 2, "Recette bidon", "recette de titi", "bla bla", 1),
+    (11, 3, 3, "Recette bidon", "recette de toto", "bla bla", 1),
+    (12, 4, 4, "Recette bidon", "recette de bruno", "bla bla", 1),
+    (13, 2, 2, "Recette bidon", "recette de titi", "bla bla", 1),
+    (14, 3, 3, "Recette bidon", "recette de toto", "bla bla", 1),
+    (15, 4, 4, "Recette bidon", "recette de bruno", "bla bla", 1),
+    (16, 2, 2, "Recette bidon", "recette de titi", "bla bla", 1),
+    (17, 3, 3, "Recette bidon", "recette de toto", "bla bla", 1),
+    (18, 4, 4, "Recette bidon", "recette de bruno", "bla bla", 1),
+    (19, 2, 2, "Recette bidon", "recette de titi", "bla bla", 1),
+    (20, 3, 3, "Recette bidon", "recette de toto", "bla bla", 1),
+    (21, 4, 4, "Recette bidon", "recette de bruno", "bla bla", 1);
 
