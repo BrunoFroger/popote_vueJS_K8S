@@ -5,6 +5,7 @@ export default {
       data: function () {
         return {
           currentDateTime: '',
+          mail : {},
           destinataire: 'dest',
           objet: 'obj',
           message: 'mess',
@@ -13,6 +14,7 @@ export default {
       mounted() {
         this.updateDateTime();
         setInterval(this.updateDateTime, 1000);
+        this.updateDatas()
       },
       template: '\
         <div>\
@@ -23,15 +25,15 @@ export default {
           <table>\
             <tr>\
               <td>Destinataire</td\
-              <td>{{destinataire}}</td>\
+              <td>{{mail.destinataire}}</td>\
             </tr>\
             <tr>\
               <td>objet</td\
-              <td>{{objet}}</td>\
+              <td>{{mail.objet}}</td>\
             </tr>\
             <tr>\
               <td>message</td\
-              <td>{{message}}</td>\
+              <td>{{mail.message}}</td>\
             </tr>\
           </table>\
         </div> \
@@ -52,11 +54,22 @@ export default {
         },
         //---------------------------------
         //
+        //  updateDatas
+        //
+        //---------------------------------
+        updateDatas() {
+          console.log("formulaireMail.js => updateDatas : " + mode)
+          this.mail.destinataire = 'destinataire'
+          this.mail.objet = 'objet'
+          this.mail.message = 'messsage'
+        },
+        //---------------------------------
+        //
         //  changeModeAffichage
         //
         //---------------------------------
         changeModeAffichage(mode) {
-          console.log("adminGereUsers.js => changeModeAffichage : " + mode)
+          console.log("formulaireMail.js => changeModeAffichage : " + mode)
           this.$parent.modeAffichageAdmin = mode;
         },
       }
