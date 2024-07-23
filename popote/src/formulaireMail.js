@@ -25,7 +25,6 @@ export default {
           <table>\
             <tr>\
               <td>Destinataire</td>\
-              <td>{{mail.destinataire}}</td>\
               <td><input v-model="mail.destinataire">{{mail.destinataire}}</input</td>\
             </tr>\
             <tr>\
@@ -60,9 +59,9 @@ export default {
         //---------------------------------
         updateDatas() {
           console.log("formulaireMail.js => updateDatas : ")
-          this.mail.destinataire = 'destinataire'
-          this.mail.objet = 'objet'
-          this.mail.message = 'messsage'
+          this.mail.destinataire = 'sdfq@sdfq.com'
+          this.mail.objet = 'test de mail'
+          this.mail.message = 'ceci est le message de test'
         },
         //---------------------------------
         //
