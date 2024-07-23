@@ -114,7 +114,7 @@ export default {
           }
           var url = this.$parent.serverNodeAdress + '/switchValidationrecette'
           console.log('getAllRecettes.js => switchValidation : url = ' + url);
-          console.log('getAllRecettes.js => switchValidation : body = ' + JSON.stringify(body));
+          console.log('getAllRecettes.js => switchValidation : body = ' + JSON.stringify(stuff));
           fetch(url, requestOptions).then(r => r.json()).then(response => {
             alert("Switch validation realisé avec succès de la recette " + idRecette)
           })
