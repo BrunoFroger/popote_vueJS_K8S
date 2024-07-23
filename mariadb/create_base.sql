@@ -118,7 +118,7 @@ INSERT INTO Recettes (numRecette, type, auteur, titre, description, realisation,
     (16, 2, 2, "Recette bidon", "recette de titi", "bla bla", 1),
     (17, 3, 3, "Recette bidon", "recette de toto", "bla bla", 1),
     (18, 4, 4, "Recette bidon", "recette de bruno", "bla bla", 1),
-    (19, 2, 2, "Recette bidon", "recette de titi", "bla bla", 1),
-    (20, 3, 3, "Recette bidon", "recette de toto", "bla bla", 1),
-    (21, 4, 4, "Recette bidon", "recette de bruno", "bla bla", 1);
+    (19, 2, 2, "Recette bidon", "recette de titi", "bla bla", 0),
+    (20, 3, 3, "Recette bidon", "recette de toto", "bla bla", 0),
+    (21, 4, 4, "Recette bidon", "recette de bruno", "bla bla", 0);
 
