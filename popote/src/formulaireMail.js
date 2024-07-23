@@ -26,6 +26,7 @@ export default {
             <tr>\
               <td>Destinataire</td>\
               <td>{{mail.destinataire}}</td>\
+              <td><input v-model="mail.destinataire">{{mail.destinataire}}</input</td>\
             </tr>\
             <tr>\
               <td>objet</td>\
