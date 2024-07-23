@@ -7,14 +7,6 @@ Voici une vue de l'architecture choisie
 
 ![architecture](architecture_popote.pdf)
 
-# Table des matières
-
-- [1 installation](#installation)
-- [1.1 installation de linux](#installationdelinux)
-- [1.2 Installation de Kubernetes](#installation de kubernetes)
-- [1.3 Installation de Vue JS](#Installation de Vue JS)
-- [2 Developpements](#Développements)
-
 # 1. Installation
 
 Pour procéder à cette installation, il est nécessaire de disposer des éléments suivants :  
