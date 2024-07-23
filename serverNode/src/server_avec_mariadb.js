@@ -183,11 +183,13 @@ const server = http.createServer((req, res) => {
         //console.log('serveur => requete getListeRecettes ');
         var selectAuteur = ''
         var selectType = ''
+        var selectValid = ''
         debut = url.parse(req.url,true).query.index
         nb = url.parse(req.url,true).query.nb
         auteur = url.parse(req.url,true).query.user
         prive = url.parse(req.url,true).query.prive
         if ((auteur != 'null') && (prive != 'false')) selectAuteur = " AND U.nom = '" + auteur + "' "
+        if (prive != false) selectValid = " WHERE validation = 1 "
         console.log("auteur = <" + auteur + "> : prive = <" + prive +">")
         typeRecette = url.parse(req.url,true).query.type
         console.log("type de recette demandée : " + typeRecette)
@@ -196,8 +198,7 @@ const server = http.createServer((req, res) => {
         var sql = 'SELECT R.id, R.numRecette, titre, description, validation, \
             coalesce(U.nom, R.auteur) as auteur, \
             coalesce(T.nom, R.type) as type \
-            FROM Recettes R \
-            WHERE validation = 1 \
+            FROM Recettes R ' + selectValid + '\
             INNER JOIN Users U ON R.auteur = U.id ' + selectAuteur + ' \
             INNER JOIN TypePlats T ON R.type = T.id ' + selectType + ' \
             ORDER BY R.id \
