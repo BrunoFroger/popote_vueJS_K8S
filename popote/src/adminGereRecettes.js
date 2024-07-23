@@ -116,8 +116,8 @@ export default {
           console.log('getAllRecettes.js => switchValidation : url = ' + url);
           console.log('getAllRecettes.js => switchValidation : body = ' + JSON.stringify(stuff));
           fetch(url, requestOptions).then(r => r.json()).then(response => {
-            alert("Switch validation realisé avec succès de la recette " + idRecette)
             this.$forceupdate()
+            alert("Switch validation realisé avec succès de la recette " + idRecette)
           })
           .catch(error => {
               console.error(error);
