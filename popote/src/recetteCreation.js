@@ -121,8 +121,7 @@ export default {
         var url = this.$parent.$parent.serverNodeAdress + '/creeRecette' 
         console.log('recetteCreation.js => creeRecette : ' + url);
         fetch(url, requestOptions).then(r => r.json()).then(response => {
-          let numRecette = response.recette.numRecette
-          alert("recette n° " + numRecette + " créé avec succès")
+          alert("recette créé avec succès")
           console.log("recetteCreation => reponse a la requete creation recette : " + JSON.stringify(response))
         })
         .catch(error => {
