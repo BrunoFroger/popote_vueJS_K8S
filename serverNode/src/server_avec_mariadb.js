@@ -120,12 +120,17 @@ const server = http.createServer((req, res) => {
         //          switchValidation
         //
         //-------------------------------------------
-        idRecette = url.parse(req.url,true).query.idRecette 
-        validation = url.parse(req.url,true).query.validation 
-        res.setHeader('Content-Type', 'text/plain; charset=utf-8');
-        var sql = 'UPDATE Recettes SET validation = ' + validation +
-            'WHERE id = ' + idRecette
-        execRequete(sql, callback_switchValidation, res)
+        let body = '';
+        req.on('data', chunk => {
+            body += chunk.toString();
+        });
+        req.on('end', () => {
+            console.log("server_avec_mariadb => requete switchValidation : body = " + JSON.stringify(body))
+            res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+            var sql = 'UPDATE Recettes SET validation = ' + body.validation +
+                'WHERE id = ' + body.idRecette
+            execRequete(sql, callback_switchValidation, res)
+        })
 
     } else if (req.url.includes('/getAllUsers')){
         //-------------------------------------------
