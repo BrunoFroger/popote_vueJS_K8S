@@ -39,6 +39,7 @@ export default {
           <h1>Administration du site</h1>\
           <p>Cette page est accessible uniquement pour les administrateurs du site</p>\
           <button @click = "changeModeAffichage(\'adminRequeteSql\')">Requete SQL</button> \
+          <button @click = "changeModeAffichage(\'adminFormulaireMail\')">Envoi d\'un mail</button> \
           <table> \
             <thead> \
                 <th>Variable</th> \
