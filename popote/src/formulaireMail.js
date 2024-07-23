@@ -25,15 +25,15 @@ export default {
           <table>\
             <tr>\
               <td>Destinataire</td>\
-              <td><input v-model="mail.destinataire"></input</td>\
+              <td><input v-model="mail.destinataire"></input></td>\
             </tr>\
             <tr>\
               <td>objet</td>\
-              <td>{{mail.objet}}</td>\
+              <td><input v-model="mail.objet"></input></td>\
             </tr>\
             <tr>\
               <td>message</td>\
-              <td>{{mail.message}}</td>\
+              <td><textarea v-model="mail.message"></textarea></td>\
             </tr>\
           </table>\
         </div> \
