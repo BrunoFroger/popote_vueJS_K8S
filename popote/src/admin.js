@@ -29,6 +29,9 @@ export default {
           <span v-else-if="modeAffichageAdmin == \'adminRequeteSql\'">\
             <adminRequeteSql/>\
           </span>\
+          <span v-else-if="modeAffichageAdmin == \'formulaireMail\'">\
+            <adminFormulaireMail/>\
+          </span>\
           <span v-else-if="modeAffichageAdmin == \'editionUser\'">\
             <adminEditUser/>\
           </span>\

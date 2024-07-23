@@ -12,6 +12,7 @@ import AdminGereUsers from './adminGereUsers.js'
 import AdminGereRecettes from './adminGereRecettes.js'
 import AdminRequeteSql from './adminRequeteSql.js'
 import AdminEditUser from './adminEditUser.js'
+import AdminFormulaireMail from './adminFormulaireMail.js'
 
 const app = createApp({
     data() {
@@ -88,4 +89,5 @@ app.component('adminGereUsers', AdminGereUsers);
 app.component('adminEditUser', AdminEditUser);
 app.component('adminGereRecettes', AdminGereRecettes);
 app.component('adminRequeteSql', AdminRequeteSql);
+app.component('adminFormulaireMail', AdminFormulaireMaill);
 app.mount('#app');

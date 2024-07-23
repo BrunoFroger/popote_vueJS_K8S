@@ -1,5 +1,6 @@
 Bug a resoudre :
 - sur visualisation des recettes les boutons precedente et suivante calcul de l'index eronné
+- lors de la creation de recette, le numero de recette n'et pas bon ; toujours 1
 
 Fonctions a réaliser :
 - gerer la generation des numero de user lors de la creation
@@ -18,6 +19,7 @@ Fonctions a réaliser :
   - edition d'une recette
   - suppression d'une recette
   - ajout d'une recette (prevoir process de validation par un administarteur)
+    - prevoir l'ajout d'ingredients
   - creation d'un utilisateur
   - creer un mode admin
     - gestion des users
@@ -33,7 +35,7 @@ Fonctions a réaliser :
   - nettoyer les requetes qui ne servent plus
 
 - Base de données :
-  - prevoir sauvegarde restauration lors du CI/CD
+  - prevoir sauvegarde restauration de la BDD lors du CI/CD
   - prevoir de mettre la bdd sur volume sur machine hote
 
 - nginx : 
