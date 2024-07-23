@@ -3,10 +3,10 @@ const { createApp } = Vue;
 import Home from './home.js';
 import Recettes from './recettes.js';
 import Compte from './compte.js';
-import ListeRecettes from './listeRecettes.js'
-import AfficheRecette from './afficheRecette.js'
-import EditeRecette from './editeRecette.js'
-import CreationRecette from './creationRecette.js'
+import ListeRecettes from './recettesListe.js'
+import AfficheRecette from './recetteAffiche.js'
+import EditeRecette from './recetteEdit.js'
+import CreationRecette from './recetteCreation.js'
 import Admin from './admin.js'
 import AdminGereUsers from './adminGereUsers.js'
 import AdminGereRecettes from './adminGereRecettes.js'
@@ -54,6 +54,11 @@ const app = createApp({
         </div>\
       ',
     methods: {
+      //---------------------------------
+      //
+      //  updateTypeUser
+      //
+      //---------------------------------
       updateTypeUser(){
         this.isAdmin = Compte.methods.isAdminUser();
         //console.log('isAdmin : ' + this.isAdmin)

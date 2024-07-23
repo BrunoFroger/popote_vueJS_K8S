@@ -1,3 +1,5 @@
+import Recettes from './recettes.js'
+
 export default {
     props: [], 
       data: function () {
@@ -8,6 +10,7 @@ export default {
       mounted() {
         this.updateDateTime();
         setInterval(this.updateDateTime, 1000);
+        this.updateNbRecettes()
       },
       template: '\
         <div>\
@@ -20,12 +23,16 @@ export default {
           <li>Recettes : accès a l\'ensemble des recettes disponibles</li>\
           <li>Mon compte : gestion de votre conpte (connexion / deconnexion / données personnelles</li>\
           </ul>\
+          <p style="color:red">Site experimental en cours de construction (support de formation) aucune donnée n\'est valide ni conservée</p>\
         </div>\
       ',
       methods: {
         updateDateTime() {
           const now = new Date();
           this.currentDateTime = now.toLocaleString();
+        },
+        updateNbRecettes(){
+          Recettes.data.globalNbRecettes
         },
       }
 }

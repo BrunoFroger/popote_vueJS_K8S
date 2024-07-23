@@ -29,6 +29,10 @@ export default {
                 </thead> \
                 <tbody> \
                     <tr> \
+                        <td>Numero</td> \
+                        <td>{{localUser.numero}}</td> \
+                    </tr> \
+                    <tr> \
                         <td>Nom</td> \
                         <td>{{localUser.nom}}</td> \
                     </tr> \

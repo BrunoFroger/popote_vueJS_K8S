@@ -44,16 +44,16 @@ export default {
                 <th>quantité</th>\
                 <th>unité</th>\
               </thead>\
-                <tr v-for="ingredient in ingredients">\
-                  <td>\
-                    {{ingredient.nom}}\
-                  </td>\
-                  <td>\
-                    {{ingredient.quantite}}\
-                  </td>\
-                  <td>\
-                    {{ingredient.unite}}\
-                  </td>\
+              <tr v-for="ingredient in ingredients">\
+                <td>\
+                  {{ingredient.nom}}\
+                </td>\
+                <td>\
+                  {{ingredient.quantite}}\
+                </td>\
+                <td>\
+                  {{ingredient.unite}}\
+                </td>\
               </tr>\
             </td>\
           </tr>\

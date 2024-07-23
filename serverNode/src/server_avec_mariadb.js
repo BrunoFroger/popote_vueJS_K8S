@@ -38,11 +38,21 @@ const server = http.createServer((req, res) => {
 
     console.log("serveur => url = " + req.url);
     if (req.url === '/'){
+        //-------------------------------------------
+        //
+        //          / 
+        //
+        //-------------------------------------------
         res.statusCode = 200;
         res.setHeader('Content-Type', 'text/plain; charset=utf-8');
         res.end('Hello Popote\n');
 
     } else if (req.url.includes('/getRecette')){
+        //-------------------------------------------
+        //
+        //          getRecette
+        //
+        //-------------------------------------------
         idRecette = url.parse(req.url,true).query.index 
         // let maRecette = recettes[idRecette];
         res.setHeader('Content-Type', 'text/json; charset=utf-8');
@@ -62,58 +72,136 @@ const server = http.createServer((req, res) => {
         // res.end(JSON.stringify(maRecette));
 
     } else if (req.url.includes('/getNbRecettes')){
+        //-------------------------------------------
+        //
+        //          getNbRecettes
+        //
+        //-------------------------------------------
         //console.log('requete getNbRecettes ');
         res.setHeader('Content-Type', 'text/json; charset=utf-8');
-        var sql = 'SELECT COUNT (*) FROM Recettes'
+        var sql = 'SELECT MAX (numRecette) FROM Recettes'
         execRequete(sql, callback_getNbRecettes, res)
 
     } else if (req.url.includes('/getNbUsers')){
+        //-------------------------------------------
+        //
+        //          getNbUsers
+        //
+        //-------------------------------------------
         //console.log('requete getNbUsers ');
         res.setHeader('Content-Type', 'text/json; charset=utf-8');
         var sql = 'SELECT COUNT (*) FROM Users'
         execRequete(sql, callback_getNbUsers, res)
 
     } else if (req.url.includes('/getTypesRecettes')){
+        //-------------------------------------------
+        //
+        //          getTypesRecettes
+        //
+        //-------------------------------------------
         res.setHeader('Content-Type', 'text/json; charset=utf-8');
         var sql = 'SELECT * FROM TypePlats'
         execRequete(sql, callback_getTypesRecettes, res)
 
     } else if (req.url.includes('/updateDatas')){
+        //-------------------------------------------
+        //
+        //          updateDatas
+        //
+        //-------------------------------------------
         //console.log('requete updateDatas ');
         updateDatas();
         res.setHeader('Content-Type', 'text/plain; charset=utf-8');
         res.end("OK");
 
+    } else if (req.url.includes('/switchValidationrecette')){
+        //-------------------------------------------
+        //
+        //          switchValidation
+        //
+        //-------------------------------------------
+        let body = '';
+        req.on('data', chunk => {
+            body += chunk.toString();
+        });
+        req.on('end', () => {
+            let tmpRecette = JSON.parse(body)
+            console.log("server_avec_mariadb => requete switchValidation : body = " + JSON.stringify(tmpRecette))
+            res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+            var sql = 'UPDATE Recettes SET validation = ' + tmpRecette.validation +
+                ' WHERE id = ' + tmpRecette.idRecette
+            execRequete(sql, callback_switchValidation, res)
+        })
+
     } else if (req.url.includes('/getAllUsers')){
+        //-------------------------------------------
+        //
+        //          getAllUsers
+        //
+        //-------------------------------------------
         res.setHeader('Content-Type', 'text/plain; charset=utf-8');
         var sql = 'SELECT * FROM Users'
         execRequete(sql, callback_getAllUsers, res)
 
     } else if (req.url.includes('/getAllRecettes')){
+        //-------------------------------------------
+        //
+        //          getAllRecettes
+        //
+        //-------------------------------------------
         res.setHeader('Content-Type', 'text/plain; charset=utf-8');
         var sql = 'SELECT * FROM Recettes'
         execRequete(sql, callback_getAllRecettes, res)
 
+    }  else if (req.url.includes('/creeRecette')){
+        //-------------------------------------------
+        //
+        //          creeRecette
+        //
+        //-------------------------------------------
+        let body = '';
+        req.on('data', chunk => {
+            body += chunk.toString();
+        });
+        req.on('end', () => {
+            let tmpRecette = JSON.parse(body)
+            tmpRecette.numRecette = nbRecettes + 1
+            console.log("server_avec_mariadb => requete creeRecette : tmpRecette = " + JSON.stringify(tmpRecette))
+            res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+            var sql = 'INSERT INTO Recettes (type, numRecette, titre, description, auteur, realisation, validation) \
+                VALUES (' + tmpRecette.type + ',' + tmpRecette.numRecette + ',\"' + tmpRecette.titre + '\",\"'
+                + tmpRecette.description + '\",' + tmpRecette.auteur +',\"' + tmpRecette.realisation +'\", 0)'
+            execRequete(sql, callback_creeRecette, res)
+        })
+
     } else if (req.url.includes('/getListeRecettes')){
+        //-------------------------------------------
+        //
+        //          getListeRecettes
+        //
+        //-------------------------------------------
         //console.log('serveur => requete getListeRecettes ');
         var selectAuteur = ''
         var selectType = ''
+        var selectValid = ''
         debut = url.parse(req.url,true).query.index
         nb = url.parse(req.url,true).query.nb
         auteur = url.parse(req.url,true).query.user
         prive = url.parse(req.url,true).query.prive
         if ((auteur != 'null') && (prive != 'false')) selectAuteur = " AND U.nom = '" + auteur + "' "
+        if (prive == 'false') selectValid = " WHERE validation = 1 "
         console.log("auteur = <" + auteur + "> : prive = <" + prive +">")
         typeRecette = url.parse(req.url,true).query.type
         console.log("type de recette demandée : " + typeRecette)
         if (typeRecette != 'Tout') selectType = " AND T.nom = '" + typeRecette + "' "
         res.setHeader('Content-Type', 'text/json; charset=utf-8');
-        var sql = 'SELECT R.id, titre, description, \
+        var sql = 'SELECT R.id, R.numRecette, titre, description, validation, \
             coalesce(U.nom, R.auteur) as auteur, \
             coalesce(T.nom, R.type) as type \
             FROM Recettes R \
             INNER JOIN Users U ON R.auteur = U.id ' + selectAuteur + ' \
             INNER JOIN TypePlats T ON R.type = T.id ' + selectType + ' \
+            ' + selectValid + ' \
             ORDER BY R.id \
             LIMIT ' + nb + '\
             OFFSET ' + debut
@@ -124,6 +212,11 @@ const server = http.createServer((req, res) => {
         // listTmp = getListRecettes(debut, nb, auteur, prive, typeRecette)
 
     } else if (req.url.includes('/requeteSql')){
+        //-------------------------------------------
+        //
+        //          requeteSql
+        //
+        //-------------------------------------------
         let body = '';
         req.on('data', chunk => {
             body += chunk.toString();
@@ -137,6 +230,11 @@ const server = http.createServer((req, res) => {
             execRequete(sql, callback_requeteSql, res)
         });
     } else if (req.url.includes('/requeteUser')){
+        //-------------------------------------------
+        //
+        //          requeteUser
+        //
+        //-------------------------------------------
         let body = '';
         req.on('data', chunk => {
             body += chunk.toString();
@@ -154,7 +252,7 @@ const server = http.createServer((req, res) => {
             };
             if (typeRequette === "connexion"){
                 //console.log("serveur => traitement de la requete " + typeRequette)
-                var sql = 'SELECT nom, email, idRole FROM Users \
+                var sql = 'SELECT nom, numero, email, idRole FROM Users \
                     WHERE nom = "' + user.user + '" \
                     AND pwd = "' + user.pwd + '"'
                 execRequete(sql, callback_checkUser,res)
@@ -192,8 +290,14 @@ const server = http.createServer((req, res) => {
         //console.log('requete requeteUser ');
 
     } else {
+        //-------------------------------------------
+        //
+        //          not found
+        //
+        //-------------------------------------------
+        res.statusCode = 404;
         res.setHeader('Content-Type', 'text/plain; charset=utf-8');
-        res.end('page not found')
+        res.end('Tout le monde peut se tromper ; comme disait le hérisson en descendant de la brosse à vêtements')
     }   
 });
 
@@ -276,6 +380,34 @@ function callback_checkUser(result, res){
 
 //=====================================================
 //
+//      function callback_creeRecette
+//
+//=====================================================
+function callback_creeRecette(result, res){
+    console.log("callback_creeRecette => debut")
+    console.log("callback_creeRecette => parametre passe (result) = ", result)
+    var stuff
+    if (result == undefined){
+        stuff ={
+            status: 'KO',
+            message: 'Impossible de sauvegarder cette recette',
+        };
+    } else {
+        var resultat = JSON.parse(result)[0]
+        console.log("callback_creeRecette => resultat = ", JSON.stringify(resultat))
+        stuff = {
+            status: 'OK',
+            message: 'Recette sauvegardee',
+            recette: resultat,
+        }
+    }
+    console.log("callback_creeRecette => " + JSON.stringify(stuff))
+    res.end(JSON.stringify(stuff))
+    //console.log("callback_creeRecette => fin")
+}
+
+//=====================================================
+//
 //      function callback_addUser
 //
 //=====================================================
@@ -331,13 +463,13 @@ function callback_getNbRecettes(result, res){
     //console.log("callback_getNbRecettes => debut")
     //console.log("callback_getNbRecettes => parametre passe (result) = ", result)
     var resultat = JSON.parse(result)[0]
-    //console.log("callback_getNbRecettes => resultat getNbRecettes = ", resultat)
-    var nbRecettes = resultat["COUNT (*)"]
-    console.log("callback_getNbRecettes => nbRecettes = " + nbRecettes)
+    console.log("callback_getNbRecettes => resultat getNbRecettes = ", resultat)
+    this.nbRecettes = resultat["MAX (numRecette)"]
+    console.log("callback_getNbRecettes => nbRecettes = " + this.nbRecettes)
     const stuff ={
-        nbRecettes: nbRecettes,
+        nbRecettes: this.nbRecettes,
     };
-    //console.log("callback_getNbRecettes => " + JSON.stringify(stuff))
+    console.log("callback_getNbRecettes => " + JSON.stringify(stuff))
     res.end(JSON.stringify(stuff))
     //console.log("callback_getNbRecettes => fin")
 }
@@ -365,6 +497,17 @@ function callback_requeteSql(result, res){
     var resultat = JSON.parse(result)
     res.end(JSON.stringify(resultat))
     console.log("callback_requeteSql => fin")
+}
+
+//=====================================================
+//
+//      function callback_switchValidation
+//
+//=====================================================
+function callback_switchValidation(result, res){
+    var resultat = JSON.parse(result)
+    res.end(JSON.stringify(resultat))
+    console.log("callback_switchValidation => fin")
 }
 
 //=====================================================

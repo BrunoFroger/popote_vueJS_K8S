@@ -239,13 +239,16 @@ export default {
               this.connected = true
               console.log ("compte.js => Utilisateur " + this.user.nom + " connecté")
               if (this.typeUser == 0){
+                alert('Administrateur ' + this.user.nom + ' connecté')
                 console.log("administarteur connecté ")
                 globalAdminUser=true
               } else {
+                alert('Utilisateur ' + this.user.nom + ' connecté')
                 console.log("utilisateur connecté")
                 globalAdminUser=false
               }
             } else {
+              alert("Echec de la connexion de " + this.user.nom)
               console.log("echec de la connexion de " + login)
             }
             this.message = response.message
@@ -286,6 +289,20 @@ export default {
             return globalUser.nom;
           } else {
             console.log(" compte.js => getUserName : null" )
+            return null
+          }
+        },
+        //---------------------------------
+        //
+        //  getUserId
+        //
+        //---------------------------------
+        getUserId(){
+          if (globalUser != null){
+            //console.log(" compte.js => getUserId : " + globalUser.numero)
+            return globalUser.numero;
+          } else {
+            //console.log(" compte.js => getUserId : null" )
             return null
           }
         },

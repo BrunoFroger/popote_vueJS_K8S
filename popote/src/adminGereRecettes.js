@@ -27,6 +27,7 @@ export default {
                     <th>auteur</th> \
                     <th>titre</th> \
                     <th>description</th> \
+                    <th>validation</th> \
                 </thead> \
                 <tbody> \
                     <tr v-for="item in listeRecettes"> \
@@ -36,6 +37,8 @@ export default {
                         <td>{{item.auteur}}</td> \
                         <td>{{item.titre}}</td> \
                         <td>{{item.description}}</td> \
+                        <td v-if="item.validation === 1" @click="switchValidation(item.id, item.validation)">OK</td>\
+                        <td v-else @click="switchValidation(item.id, item.validation)">A valider</td>\
                     </tr> \
                 </tbody> \
             </table>\
@@ -81,12 +84,46 @@ export default {
             console.log('getAllRecettes.js => loadListeRecettes : ' + url);
             fetch(url).then(r => r.json()).then(response => {
                 this.listeRecettes = response
-                console.log("liste des recetees : " + JSON.stringify(this.listeRecettes))
+                //console.log("liste des recetees : " + JSON.stringify(this.listeRecettes))
             })
             .catch(error => {
                 console.error(error);
                 console.log("erreur lors du chargement de la liste de recettes");
             });
+        },
+        //---------------------------------
+        //
+        //  switchValidation
+        //
+        //---------------------------------
+        switchValidation(idRecette, validation) {
+          console.log("adminGerRecettes.js => switchValidation de la recette id : " + idRecette)
+          if (validation != 0){
+            validation = 0
+          } else {
+            validation = 1
+          }
+          const stuff ={
+            "idRecette": idRecette,
+            "validation": validation,
+          };
+          const requestOptions = {
+            method: "POST",
+            //headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(stuff)
+          }
+          var url = this.$parent.serverNodeAdress + '/switchValidationrecette'
+          console.log('getAllRecettes.js => switchValidation : url = ' + url);
+          console.log('getAllRecettes.js => switchValidation : body = ' + JSON.stringify(stuff));
+          fetch(url, requestOptions).then(r => r.json()).then(response => {
+            this.updateDatas()
+            alert("Switch validation realisé avec succès de la recette " + idRecette)
+          })
+          .catch(error => {
+              console.error(error);
+              alert("Echec switch validation de la recette " + idRecette)
+              console.log("erreur lors du switch validation de la liste de recettes");
+          });
         },
       }
 }

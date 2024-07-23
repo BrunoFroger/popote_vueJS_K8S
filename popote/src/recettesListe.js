@@ -13,7 +13,7 @@ export default {
         //ingredients : null,
         //ingredient : "{[null]}",
         //index : 0,
-        nbRecettes : 0,
+        nbRecettes : Recettes.methods.getNombreRecettes(),
         nbRecettesParPage:10,
         idxDebutListeRecettes:0,
         //listeRecettes:[],
@@ -31,9 +31,10 @@ export default {
     },
     template: '\
     <h1>Liste des recettes</h1>\
-    <p>Parcourez la liste des recettes disponibles et selectionnez celle que vous voulez préparer</p>\
+    <p>Parcourez la liste des {{nbRecettes}} recettes disponibles et selectionnez celle que vous voulez préparer</p>\
     <span v-if="userConnected" >\
       <input @change="$parent.loadListeRecettes" type="checkbox" v-model="$parent.recettesPrivees"> Mes recettes (visualisation de vos créations)\
+      <button @click="$parent.changeModeAffichage(\'creationRecette\')">creation d\'une recette</button>\
     </span>\
     \
       <p>\
@@ -51,17 +52,22 @@ export default {
         <table>\
           <tr>\
             <th>id</th>\
+            <th>numero</th>\
             <th>titre</th>\
             <th>auteur</th>\
             <th>type</th>\
             <th>description</th>\
+            <th v-if="$parent.recettesPrivees">Status</th>\
           </tr>\
           <tr v-for="(item, id) in $parent.listeRecettes">\
             <td @click="loadRecette(item.id)">{{item.id}}</td>\
+            <td @click="loadRecette(item.id)">{{item.numRecette}}</td>\
             <td @click="loadRecette(item.id)">{{item.titre}}</td>\
             <td @click="loadRecette(item.id)">{{item.auteur}}</td>\
             <td @click="loadRecette(item.id)">{{item.type}}</td>\
             <td @click="loadRecette(item.id)">{{item.description}}</td>\
+            <td v-if="$parent.recettesPrivees && item.validation != 0">Validée</td>\
+            <td v-if="$parent.recettesPrivees && item.validation == 0">En attente de validation</td>\
           </tr>\
         </table>\
         <button @click="pagePrecedente">recettes précédentes</button>\
