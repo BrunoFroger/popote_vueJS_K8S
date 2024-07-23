@@ -89,5 +89,5 @@ app.component('adminGereUsers', AdminGereUsers);
 app.component('adminEditUser', AdminEditUser);
 app.component('adminGereRecettes', AdminGereRecettes);
 app.component('adminRequeteSql', AdminRequeteSql);
-app.component('adminFormulaireMail', AdminFormulaireMaill);
+app.component('adminFormulaireMail', AdminFormulaireMail);
 app.mount('#app');
