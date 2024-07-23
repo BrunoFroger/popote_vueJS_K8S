@@ -189,7 +189,7 @@ const server = http.createServer((req, res) => {
         auteur = url.parse(req.url,true).query.user
         prive = url.parse(req.url,true).query.prive
         if ((auteur != 'null') && (prive != 'false')) selectAuteur = " AND U.nom = '" + auteur + "' "
-        if (prive != false) selectValid = " WHERE validation = 1 "
+        if (prive == 'false') selectValid = " WHERE validation = 1 "
         console.log("auteur = <" + auteur + "> : prive = <" + prive +">")
         typeRecette = url.parse(req.url,true).query.type
         console.log("type de recette demandée : " + typeRecette)
@@ -198,9 +198,10 @@ const server = http.createServer((req, res) => {
         var sql = 'SELECT R.id, R.numRecette, titre, description, validation, \
             coalesce(U.nom, R.auteur) as auteur, \
             coalesce(T.nom, R.type) as type \
-            FROM Recettes R ' + selectValid + '\
+            FROM Recettes R \
             INNER JOIN Users U ON R.auteur = U.id ' + selectAuteur + ' \
             INNER JOIN TypePlats T ON R.type = T.id ' + selectType + ' \
+            ' + selectValid + ' \
             ORDER BY R.id \
             LIMIT ' + nb + '\
             OFFSET ' + debut
