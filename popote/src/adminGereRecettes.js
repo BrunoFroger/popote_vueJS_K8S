@@ -37,7 +37,7 @@ export default {
                         <td>{{item.auteur}}</td> \
                         <td>{{item.titre}}</td> \
                         <td>{{item.description}}</td> \
-                        <span v-if="item.validation === 1> <td>OK</td> </span>\
+                        <span v-if="item.validation === 1"> <td>OK</td> </span>\
                           <!--td @onchange="switchValidation(item.id, item.validation)>{{item.validation}}</td--> \
                         <span v-else><td>A valider</td></span>\
                     </tr> \
