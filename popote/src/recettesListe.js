@@ -57,6 +57,7 @@ export default {
             <th>auteur</th>\
             <th>type</th>\
             <th>description</th>\
+            <th v-if="userConnected">Status</th>\
           </tr>\
           <tr v-for="(item, id) in $parent.listeRecettes">\
             <td @click="loadRecette(item.id)">{{item.id}}</td>\
@@ -65,6 +66,8 @@ export default {
             <td @click="loadRecette(item.id)">{{item.auteur}}</td>\
             <td @click="loadRecette(item.id)">{{item.type}}</td>\
             <td @click="loadRecette(item.id)">{{item.description}}</td>\
+            <td v-if="userConnected"">Validée</td>\
+            <td v-else>En attente de validation</td>\
           </tr>\
         </table>\
         <button @click="pagePrecedente">recettes précédentes</button>\
