@@ -5,9 +5,9 @@ export default {
       data: function () {
         return {
           currentDateTime: '',
-          destinataire: '',
-          objet: '',
-          message: '',
+          destinataire: 'dest',
+          objet: 'obj',
+          message: 'mess',
         };
       },
       mounted() {
