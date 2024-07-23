@@ -13,7 +13,6 @@ export default {
       },
       mounted() {
         this.updateDateTime();
-        this.updateDatas();
         setInterval(this.updateDateTime, 1000);
       },
       template: '\
@@ -21,7 +20,7 @@ export default {
           <h1>Formulaire d\'envoi de mail</h1>\
         </div> \
         <div> \
-            <button @click = "changeModeAffichage(\'gereUsers\')">Retour</button> \
+            <button @click = "changeModeAffichage(\'\')">Retour</button> \
         </div> \
       ',
       methods: {
@@ -33,18 +32,6 @@ export default {
         updateDateTime() {
           const now = new Date();
           this.currentDateTime = now.toLocaleString();
-        },
-        //---------------------------------
-        //
-        //  updateDatas
-        //
-        //---------------------------------
-        updateDatas() {
-          console.log("adminEditUsers.js => updateDatas")
-          this.localUser = this.$parent.editUser
-          this.newIdRole = this.localUser.idRole
-          this.newPasswd = this.localUser.pwd
-          this.newEmail = this.localUser.email
         },
         //---------------------------------
         //
