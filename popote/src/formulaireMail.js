@@ -39,7 +39,7 @@ export default {
         </div> \
         <div> \
             <button @click = "envoiMail(\'\')">Envoi du mail</button> \
-            <button @click = "changeModeAffichage(\'\')">Retour</button> \
+            <button @click = "changeModeAffichage(\' \')">Retour</button> \
         </div> \
       ',
       methods: {
