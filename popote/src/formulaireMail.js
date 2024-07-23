@@ -25,7 +25,7 @@ export default {
           <table>\
             <tr>\
               <td>Destinataire</td>\
-              <td><input v-model="mail.destinataire">{{mail.destinataire}}</input</td>\
+              <td><input v-model="mail.destinataire"></input</td>\
             </tr>\
             <tr>\
               <td>objet</td>\
