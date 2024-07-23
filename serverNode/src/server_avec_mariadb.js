@@ -117,6 +117,19 @@ const server = http.createServer((req, res) => {
     } else if (req.url.includes('/getAllUsers')){
         //-------------------------------------------
         //
+        //          switchValidation
+        //
+        //-------------------------------------------
+        idRecette = url.parse(req.url,true).query.idRecette 
+        validation = url.parse(req.url,true).query.validation 
+        res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+        var sql = 'UPDATE Recettes SET validation = ' + validation +
+            'WHERE id = ' + idRecette
+        execRequete(sql, callback_switchValidation, res)
+
+    } else if (req.url.includes('/getAllUsers')){
+        //-------------------------------------------
+        //
         //          getAllUsers
         //
         //-------------------------------------------
@@ -475,6 +488,17 @@ function callback_requeteSql(result, res){
     var resultat = JSON.parse(result)
     res.end(JSON.stringify(resultat))
     console.log("callback_requeteSql => fin")
+}
+
+//=====================================================
+//
+//      function callback_switchValidation
+//
+//=====================================================
+function callback_switchValidation(result, res){
+    var resultat = JSON.parse(result)
+    res.end(JSON.stringify(resultat))
+    console.log("callback_switchValidation => fin")
 }
 
 //=====================================================
