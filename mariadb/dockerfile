@@ -1,6 +1,6 @@
 
 # Pull the mariadb latest image
-FROM mariadb:11.1
+FROM mariadb:latest
 
 RUN echo "==========================="; \
     echo "|                         |"; \
@@ -38,7 +38,7 @@ RUN cd /home/mysql/
 
 USER mysql
 
-#RUN mariadb-install-db --user=mysql
+RUN /usr/bin/mariadb-install-db --defaults-file=~/.my.cnf
 
 ADD mariadb/create_base.sql /docker-entrypoint-initdb.d
 
