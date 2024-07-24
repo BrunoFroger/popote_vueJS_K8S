@@ -1,6 +1,6 @@
 
 # Pull the mariadb latest image
-FROM mariadb:11.4
+FROM mariadb:11.1
 
 RUN echo "==========================="; \
     echo "|                         |"; \
