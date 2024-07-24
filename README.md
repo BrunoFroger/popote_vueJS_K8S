@@ -480,6 +480,7 @@ Afin de simplifier les déploment et l'exploitation de votre application, vous p
 
 voici un exemple de fichier docker-compose.yaml permettant de générer automatique l'ensemble de vos conteneurs (il faut que les ficheirs dockerfile de chacun de vos conteneurs existent et soit validés)
 
+voici un site utilistaire pour parametrer votre fichier docker compose en transformant une ligne de commande docker run en elements de configuration docjker compose [composerize](https://www.composerize.com/)
 
 ```
 #version: '3.5'
