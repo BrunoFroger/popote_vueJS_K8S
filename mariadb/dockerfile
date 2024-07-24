@@ -38,7 +38,7 @@ RUN cd /home/mysql/
 
 USER mysql
 
-RUN ls /home/mysql
+RUN ls /home/mysql > dump.txt ; cat dump.txt
 
 RUN mariadb-install-db --user=mysql
 
