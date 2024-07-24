@@ -1,6 +1,6 @@
 
 # Pull the mariadb latest image
-FROM mariadb:latest
+FROM mariadb:11.5
 
 RUN echo "==========================="; \
     echo "|                         |"; \
@@ -37,8 +37,6 @@ RUN chown -R mysql:mysql /home/mysql
 RUN cd /home/mysql/
 
 USER mysql
-
-RUN ls /home/mysql > dump.txt ; echo < dump.txt
 
 #RUN mariadb-install-db --user=mysql
 
