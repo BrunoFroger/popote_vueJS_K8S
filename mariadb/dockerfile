@@ -40,11 +40,11 @@ USER mysql
 
 RUN ls /home/mysql > dump.txt ; echo < dump.txt
 
-RUN mariadb-install-db --user=mysql
+#RUN mariadb-install-db --user=mysql
 
 ADD mariadb/create_base.sql /docker-entrypoint-initdb.d
 
-RUN echo $SHELL
+#RUN echo $SHELL
 
 #CMD ["mysqld"]
 #CMD ["mysqld &", ";", "./docker_cmd.bash"]
