@@ -5,18 +5,18 @@
 services:
 
   # base de donnee Service :
-  mariadb:
-    container_name: popote_mariadb
-    restart: on-failure
-    security_opt:
-        - seccomp=unconfined
-    build: 
-      context: .
-      dockerfile: mariadb/dockerfile
-    ports:
-      - 3306:3306
-    networks:
-      - popote_network
+  # mariadb:
+  #   container_name: popote_mariadb
+  #   restart: on-failure
+  #   security_opt:
+  #       - seccomp=unconfined
+  #   build: 
+  #     context: .
+  #     dockerfile: mariadb/dockerfile
+  #   ports:
+  #     - 3306:3306
+  #   networks:
+  #     - popote_network
 
   # backend Service : serveur node
   backend:
@@ -27,8 +27,8 @@ services:
       dockerfile: serverNode/Dockerfile
     ports:
       - 3000:3000
-    depends_on:
-      - mariadb
+    #depends_on:
+      #- mariadb
     networks:
       - popote_network
 
