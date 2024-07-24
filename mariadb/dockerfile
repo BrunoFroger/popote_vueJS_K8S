@@ -39,7 +39,7 @@ RUN cd /home/mysql/
 
 USER mysql
 
-RUN /usr/bin/mariadb-install-db --defaults-file=~/.my.cnf
+#RUN /usr/bin/mariadb-install-db --defaults-file=~/.my.cnf
 
 ADD mariadb/create_base.sql /docker-entrypoint-initdb.d
 
