@@ -1,6 +1,7 @@
 
 # Pull the mariadb latest image
 FROM mariadb:latest
+NAME popote_mariabd_image
 
 RUN echo "==========================="; \
     echo "|                         |"; \
@@ -37,6 +38,8 @@ RUN chown -R mysql:mysql /home/mysql
 RUN cd /home/mysql/
 
 USER mysql
+
+RUN ./bin/my_print_defaults
 
 ADD mariadb/create_base.sql /docker-entrypoint-initdb.d
 
