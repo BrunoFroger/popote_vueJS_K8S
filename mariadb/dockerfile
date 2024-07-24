@@ -32,13 +32,13 @@ EXPOSE 3306
 
 RUN chmod +x *bash
 
+RUN ./bin/my_print_defaults
+
 RUN chown -R mysql:mysql /home/mysql
 
 RUN cd /home/mysql/
 
 USER mysql
-
-RUN ./bin/my_print_defaults
 
 ADD mariadb/create_base.sql /docker-entrypoint-initdb.d
 
