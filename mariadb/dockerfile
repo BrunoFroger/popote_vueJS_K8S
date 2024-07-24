@@ -38,6 +38,8 @@ RUN cd /home/mysql/
 
 USER mysql
 
+RUN mariadb-install-db --user=mysql
+
 ADD mariadb/create_base.sql /docker-entrypoint-initdb.d
 
 RUN echo $SHELL
