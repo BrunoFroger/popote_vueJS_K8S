@@ -1,7 +1,6 @@
 
 # Pull the mariadb latest image
 FROM mariadb:latest
-NAME popote_mariabd_image
 
 RUN echo "==========================="; \
     echo "|                         |"; \
