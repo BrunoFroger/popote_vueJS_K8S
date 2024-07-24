@@ -133,6 +133,40 @@ const server = http.createServer((req, res) => {
             execRequete(sql, callback_switchValidation, res)
         })
 
+    } else if (req.url.includes('/envoiMail')){
+        //-------------------------------------------
+        //
+        //          envoiMail
+        //
+        //-------------------------------------------
+        let body = '';
+        req.on('data', chunk => {
+            body += chunk.toString();
+        });
+        req.on('end', () => {
+            let datasMail = JSON.parse(body)
+            console.log("server_avec_mariadb => requete envoiMail : body = " + JSON.stringify(datasMail))
+            res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+            // TODO executer l'envoi systeme du mail  
+            let result = 'OK'
+            if (result == undefined){
+                stuff ={
+                    status: 'KO',
+                    message: 'mail non envoyé',
+                };
+            } else {
+                var resultat = JSON.parse(result)[0]
+                //console.log("callback_checkUser => resultat = ", JSON.stringify(resultat))
+                stuff = {
+                    status: 'OK',
+                    message: 'mail envoyé avec succès',
+                }
+            }
+            //console.log("callback_checkUser => " + JSON.stringify(stuff))
+            res.end(JSON.stringify(stuff))
+            //console.log("callback_checkUser => fin")
+        })
+
     } else if (req.url.includes('/getAllUsers')){
         //-------------------------------------------
         //
