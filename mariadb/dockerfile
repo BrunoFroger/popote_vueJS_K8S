@@ -32,7 +32,7 @@ EXPOSE 3306
 
 RUN chmod +x *bash
 
-RUN ./bin/my_print_defaults
+RUN /bin/my_print_defaults
 
 RUN chown -R mysql:mysql /home/mysql
 
