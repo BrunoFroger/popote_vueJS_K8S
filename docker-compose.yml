@@ -8,7 +8,7 @@ services:
   mariadb:
     container_name: popote_mariadb
     restart: on-failure
-    entrypoint: ""
+    entrypoint: "/bin/bash"
     security_opt:
         - seccomp=unconfined
     build: 
