@@ -83,7 +83,7 @@ export default {
           const requestOptions = {
             method: "POST",
             //headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(mail)
+            body: JSON.stringify(this.mail)
           };
           console.log("envoiMail.js => envoiMail " )
           var url = this.$parent.serverNodeAdress + '/envoiMail' 
