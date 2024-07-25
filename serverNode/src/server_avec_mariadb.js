@@ -154,6 +154,7 @@ const server = http.createServer((req, res) => {
                 status: '',
                 message: '',
             }
+            console.log("envoiMail : result = " +result)
             if (result == 'OK'){
                 stuff ={
                     status: 'KO',
