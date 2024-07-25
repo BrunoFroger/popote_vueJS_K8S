@@ -80,6 +80,21 @@ export default {
         //---------------------------------
         envoiMail() {
           console.log("formulaireMail.js => envoiMail : " + JSON.stringify(this.mail))
+          const requestOptions = {
+            method: "POST",
+            //headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(mail)
+          };
+          console.log("envoiMail.js => envoiMail " )
+          var url = this.$parent.serverNodeAdress + '/envoiMail' 
+          console.log('envoiMail.js => envoiMail : ' + url);
+          fetch(url, requestOptions).then(r => r.json()).then(response => {
+              console.log("reponse a l'envoi de mail : " + JSON.stringify(response))
+          })
+          .catch(error => {
+              console.error(error);
+              console.log("erreur lors de l'envoi de mail");
+          });
         },
       }
 }
