@@ -41,7 +41,7 @@ USER mysql
 
 #RUN /usr/bin/mariadb-install-db --defaults-file=~/.my.cnf
 
-ADD mariadb/create_base.sql /docker-entrypoint-initdb.d
+#ADD mariadb/create_base.sql /docker-entrypoint-initdb.d
 
 #RUN echo $SHELL
 
