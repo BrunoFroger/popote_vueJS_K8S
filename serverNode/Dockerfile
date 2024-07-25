@@ -23,6 +23,8 @@ RUN apt-get install -y net-tools
 RUN apt-get install -y default-mysql-client
 RUN apt-get install -y iputils-ping
 
+#installation Mutt (relai mail)
+
 RUN echo 'root:root123' | chpasswd
 
 ENV NODE_ENV production
