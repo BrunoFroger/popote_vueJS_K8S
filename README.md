@@ -560,6 +560,16 @@ vous disposer d'un certain nombre de commandes pour gerer ce groupe de conteneur
 
 ``docker compose start`` pour demarrer votre groupe de conteneurs
 
+``docker compose logs -f`` : affiche les logs en temps reel de l'activite de votre groupe de conteneurs
+
+pour manipuler un conteneur particulier vous pouvez utiliser ces meêmes commandes en précisant sur quel conteneur vous voulez agir
+
+``docker compose build <nom_conteneur>``  : construit le conteneur
+
+``docker compose up <nom_conteneur>`` : demarre le conteneur
+
+``docker compose stop <nom_conteneur>`` : arrete le conteneur
+
 
 # 9. Informations diverses
 
@@ -567,7 +577,7 @@ vous disposer d'un certain nombre de commandes pour gerer ce groupe de conteneur
 
 voir doc sur [gitHub](https://docs.github.com/fr/actions/deployment/about-deployments/about-continuous-deployment)
 
-Crer le fichier de déploiement .github/
+Crer le repertoire de déploiement .github/workflows
 
 ### 91.installation d'un self-hosted runner sur la machine cible
 
@@ -610,7 +620,7 @@ Pour pouvoir executer plusieurs jobs en simultané, il faut avoir plusieurs runn
 Exemple de fichier de déploiement (à localiser dans le répertoire .github/workflow de votre application)
 
 ```
-# fichier de deploiement github pour l'application popote
+# fichier de deploiement github pour l'application popote (a mettre dans le repertoire .github/workflows)
 # (c) B. Froger (2024)-> now
 
 name: Deployment_popote
