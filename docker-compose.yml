@@ -7,13 +7,14 @@ services:
   # base de donnee Service :
   mariadb:
     container_name: popote_mariadb
+    image: mariadb:latest
     #restart: on-failure
     #entrypoint: "/bin/bash -c 'echo \"demarrage mariadb\"'"
     security_opt:
         - seccomp=unconfined
-    build: 
-      context: .
-      dockerfile: mariadb/dockerfile
+    # build: 
+    #   context: .
+    #   dockerfile: mariadb/dockerfile
     ports:
       - 3306:3306
     networks:
