@@ -76,6 +76,15 @@ services:
     networks:
       - popote_network
 
+  mail:
+    image: bytemark/smtp
+    restart: always
+    environment:
+      RELAY_HOST: gmail.com.com
+      RELAY_PORT: 25
+      RELAY_USERNAME: mailpopote@gmail.com
+      RELAY_PASSWORD: mdp@mail!popote
+
 # configuration reseau
 networks:
   popote_network:
