@@ -7,9 +7,7 @@ services:
   # base de donnee Service :
   mariadb:
     container_name: popote_mariadb
-    #image: mariadb:latest
-    #restart: on-failure
-    #entrypoint: "/bin/bash -c 'echo \"demarrage mariadb\"'"
+    restart: on-failure
     # environment:
     #   - MYSQL_ROOT_PASSWORD=root123
     #   - MYSQL_DATABASE=Popote
@@ -78,12 +76,17 @@ services:
 
   mail:
     image: bytemark/smtp
-    restart: always
+    container_name: popote_mail
+    #restart: always
     environment:
-      RELAY_HOST: gmail.com.com
-      RELAY_PORT: 25
+      RELAY_HOST: gmail.com
+      RELAY_PORT: 587
       RELAY_USERNAME: mailpopote@gmail.com
       RELAY_PASSWORD: mdp@mail!popote
+    networks:
+      - popote_network
+    depends_on:
+      - backend
 
 # configuration reseau
 networks:
