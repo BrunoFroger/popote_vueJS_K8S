@@ -154,21 +154,20 @@ const server = http.createServer((req, res) => {
                 status: '',
                 message: '',
             }
-            console.log("envoiMail : result = " +result)
+            console.log("server_avec_mariadb => envoiMail : result = " + result)
             if (result == 'OK'){
                 stuff ={
-                    status: 'KO',
-                    message: 'mail non envoyé',
-                };
-            } else {
-                var resultat = JSON.parse(result)[0]
-                //console.log("callback_checkUser => resultat = ", JSON.stringify(resultat))
-                stuff = {
                     status: 'OK',
                     message: 'mail envoyé avec succès',
+                };
+            } else {
+                //console.log("callback_checkUser => resultat = ", JSON.stringify(resultat))
+                stuff = {
+                    status: 'KO',
+                    message: 'mail non envoyé',
                 }
             }
-            //console.log("callback_checkUser => " + JSON.stringify(stuff))
+            console.log("server_avec_mariadb => envoiMail : resultat envoyé => " + JSON.stringify(stuff))
             res.end(JSON.stringify(stuff))
             //console.log("callback_checkUser => fin")
         })
