@@ -5,10 +5,11 @@ export default {
       data: function () {
         return {
           currentDateTime: '',
-          mail : {},
-          destinataire: 'dest',
-          objet: 'obj',
-          message: 'mess',
+          mail : {
+            destinataire: 'dest',
+            objet: 'obj',
+            message: 'mess',
+          },
         };
       },
       mounted() {
@@ -70,6 +71,15 @@ export default {
         //---------------------------------
         changeModeAffichage(mode) {
           console.log("formulaireMail.js => changeModeAffichage : " + mode)
+          this.$parent.modeAffichageAdmin = mode;
+        },
+        //---------------------------------
+        //
+        //  envoiMail
+        //
+        //---------------------------------
+        envoiMail() {
+          console.log("formulaireMail.js => envoiMail : " + JSON.stringify(this.mail))
           this.$parent.modeAffichageAdmin = mode;
         },
       }
