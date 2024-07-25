@@ -554,7 +554,7 @@ networks:
 
 vous disposer d'un certain nombre de commandes pour gerer ce groupe de conteneurs :
 
-``docker compose up --build`` pour contruire votre groupe de conteneurs (ajouter option -d pour le lancer en mode demon)
+``docker compose up --build`` pour contruire votre groupe de conteneurs (ajouter option -d pour le lancer en background)
 
 ``docker compose stop`` pour arreter votre groupe de conteneurs
 
@@ -566,7 +566,7 @@ pour manipuler un conteneur particulier vous pouvez utiliser ces meêmes command
 
 ``docker compose build <nom_conteneur>``  : construit le conteneur
 
-``docker compose up <nom_conteneur>`` : demarre le conteneur
+``docker compose up -d <nom_conteneur>`` : demarre le conteneur (-d pour le lancer en background)
 
 ``docker compose stop <nom_conteneur>`` : arrete le conteneur
 
