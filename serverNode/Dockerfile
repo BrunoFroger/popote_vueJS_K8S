@@ -31,7 +31,7 @@ WORKDIR /app
 
 # copie files
 COPY serverNode/ ./
-COPY mariadb.initDb.bash .
+COPY mariadb/initDb.bash .
 COPY mariadb/create_base.sql .
 
 RUN chmod +x *bash
