@@ -80,7 +80,6 @@ export default {
         //---------------------------------
         envoiMail() {
           console.log("formulaireMail.js => envoiMail : " + JSON.stringify(this.mail))
-          this.$parent.modeAffichageAdmin = mode;
         },
       }
 }
