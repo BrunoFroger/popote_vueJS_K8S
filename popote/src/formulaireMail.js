@@ -90,8 +90,10 @@ export default {
           console.log('envoiMail.js => envoiMail : ' + url);
           fetch(url, requestOptions).then(r => r.json()).then(response => {
               console.log("reponse a l'envoi de mail : " + JSON.stringify(response))
+              alert("message envoyé avec succès")
           })
           .catch(error => {
+              alert("impossible d\'envoyer le message : " + error)
               console.error(error);
               console.log("erreur lors de l'envoi de mail");
           });
