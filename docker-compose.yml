@@ -7,7 +7,7 @@ services:
   # base de donnee Service :
   mariadb:
     container_name: popote_mariadb
-    restart: on-failure
+    #restart: on-failure
     #entrypoint: "/bin/bash -c 'echo \"demarrage mariadb\"'"
     security_opt:
         - seccomp=unconfined
