@@ -7,19 +7,21 @@ services:
   # base de donnee Service :
   mariadb:
     container_name: popote_mariadb
-    image: mariadb:latest
+    #image: mariadb:latest
     #restart: on-failure
     #entrypoint: "/bin/bash -c 'echo \"demarrage mariadb\"'"
-    environment:
-      - MYSQL_ROOT_PASSWORD=root123
-      - MYSQL_DATABASE=Popote
-      - MYSQL_USER=popote
-      - MYSQL_PASSWORD=popote123    
+    # environment:
+    #   - MYSQL_ROOT_PASSWORD=root123
+    #   - MYSQL_DATABASE=Popote
+    #   - MYSQL_USER=popote
+    #   - MYSQL_PASSWORD=popote123    
     security_opt:
-        - seccomp=unconfined
-    # build: 
-    #   context: .
-    #   dockerfile: mariadb/dockerfile
+      - seccomp=unconfined
+    # volumes:
+    #   - ./mariadb/volume:
+    build: 
+      context: .
+      dockerfile: mariadb/dockerfile
     ports:
       - 3306:3306
     networks:
