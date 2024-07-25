@@ -148,7 +148,11 @@ const server = http.createServer((req, res) => {
             console.log("server_avec_mariadb => requete envoiMail : body = " + JSON.stringify(datasMail))
             res.setHeader('Content-Type', 'text/plain; charset=utf-8');
             // TODO executer l'envoi systeme du mail  
-            let result = 'OK'
+            let result = [{status:'OK'}]
+            let stuff = {
+                status: '',
+                message: '',
+            }
             if (result == undefined){
                 stuff ={
                     status: 'KO',
