@@ -6,10 +6,10 @@ RUN echo "==========================="; \
     echo "|                         |"; \
     echo "==========================="
 
-RUN apt update 
+RUN apk update 
 
 #install optionnels
-RUN apt add bash
+RUN apk add bash
 #RUN apt-get install -y net-tools
 #RUN apt-get install -y iputils-ping
 
