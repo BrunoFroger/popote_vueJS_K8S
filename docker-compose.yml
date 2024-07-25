@@ -8,9 +8,9 @@ services:
   mariadb:
     container_name: popote_mariadb
     restart: on-failure
-    #entrypoint: skip
-    # security_opt:
-    #     - seccomp=unconfined
+    entrypoint: skip
+    security_opt:
+        - seccomp=unconfined
     build: 
       context: .
       dockerfile: mariadb/dockerfile
