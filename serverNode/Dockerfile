@@ -31,6 +31,9 @@ WORKDIR /app
 
 # copie files
 COPY serverNode/ ./
+COPY mariadb.initDb.bash .
+
+RUN chmod +x *bash
 
 RUN npm install mysql
 
