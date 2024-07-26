@@ -41,6 +41,10 @@ RUN npm install
 # copie files
 COPY serverNode/ ./
 COPY mariadb/create_base.sql .
+
+RUN mkdir /var/spool/mail/node
+RUN mkdir ~/mail
+RUN mkdir ~/tmp
 COPY serverNode/mutt/.muttrc .
 COPY serverNode/mutt/ssmtp.conf /etc/ssmtp/ssmtp.conf
 
