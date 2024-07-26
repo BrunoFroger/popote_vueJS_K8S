@@ -33,8 +33,6 @@ ENV NODE_ENV production
 
 WORKDIR /app
 
-RUN chmod +x *bash
-
 RUN npm install mysql
 
 RUN npm install
@@ -46,6 +44,8 @@ USER node
 COPY serverNode/ ./
 COPY mariadb/create_base.sql .
 COPY serverNode/mutt/.muttrc .
+
+RUN chmod +x *bash
 
 # Expose the port that the application listens on.
 EXPOSE 3000
