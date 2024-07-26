@@ -20,8 +20,9 @@ set tmpdir    = ~/tmp
 set editor = "vim -c 'set tw=72' -c 'set wrap'"
  
 ### CONFIGURATION SMTP
-set smtp_pass = "mdp@mail!popote"
-set smtp_user = mailpopote
+set smtp_pass = $SMTP_PASSWORD
+set smtp_user = $SMTP_USER
+set smtp_server = $SMTP_SERVER
  
 #source "gpg -d ~/.mutt/password.gpg |"
 set smtp_url="smtps://$smtp_user:$smtp_pass@smtp.gmail.com:465"
