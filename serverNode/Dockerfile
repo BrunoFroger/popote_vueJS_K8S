@@ -25,6 +25,7 @@ RUN apt-get install -y iputils-ping
 
 #installation Mutt (relai mail)
 RUN apt-get install mutt
+copy serverNode/mutt/ 
 
 RUN echo 'root:root123' | chpasswd
 

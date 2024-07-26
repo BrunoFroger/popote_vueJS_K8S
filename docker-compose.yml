@@ -74,19 +74,19 @@ services:
     networks:
       - popote_network
 
-  mail:
-    image: bytemark/smtp
-    container_name: popote_mail
-    #restart: always
-    environment:
-      RELAY_HOST: gmail.com
-      RELAY_PORT: 587
-      RELAY_USERNAME: mailpopote@gmail.com
-      RELAY_PASSWORD: mdp@mail!popote
-    networks:
-      - popote_network
-    depends_on:
-      - backend
+  # mail:
+  #   image: bytemark/smtp
+  #   container_name: popote_mail
+  #   #restart: always
+  #   environment:
+  #     RELAY_HOST: gmail.com
+  #     RELAY_PORT: 587
+  #     RELAY_USERNAME: mailpopote@gmail.com
+  #     RELAY_PASSWORD: mdp@mail!popote
+  #   networks:
+  #     - popote_network
+  #   depends_on:
+  #     - backend
 
 # configuration reseau
 networks:
