@@ -169,15 +169,15 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 **Création**
 
-Vous pouvez ensuite créer votre cluster  
+Vous pouvez ensuite créer votre cluster   (OK)
 ```
-kubeadm init
+kubeadm init  --cri-socket=unix:///var/run/cri-dockerd.sock
 ```
 
 ## 1.3 Installation de Vue JS (si utilisation en local)
 `` npm install -g @vue/cli ``
 
-## 1.4 configuration de la livebox (TODO a valider)
+## 1.4 configuration de la livebox (OK)
 Pour permettre d'accéder a votre application depuis internet, vous devez configurer votre livebox pour authoriser les flux entrant vers votre ordinateur hébergeant votre application
 
 - Se connecter sur votre livebox en mode administrateur
@@ -189,7 +189,7 @@ Pour permettre d'accéder a votre application depuis internet, vous devez config
 	- Pour HTTP : vous devez ouvrir le port 80 (externe) vers le port 8080 (interne)  
 
 voici un exemple de commande permettant de se connecter en ssh depuis une machine distante :
-``ssh -p xxx bruno@popote.zapto.org`` ou xxx est le numéro de port que vous avez configuré ci-dessus
+``ssh -p xxx bruno@popote.zapto.org`` ou xxx est le numéro de port externe que vous avez configuré ci-dessus
 
 
 ## 1.5 Configuration mode sécurisé https (pas encore géré)
