@@ -24,7 +24,7 @@ RUN apt-get install -y default-mysql-client
 RUN apt-get install -y iputils-ping
 
 #installation Mutt (relai mail)
-RUN apt-get install mutt
+RUN apt-get install -y mutt
 copy serverNode/mutt/.muttrc .
 
 RUN echo 'root:root123' | chpasswd
