@@ -26,17 +26,12 @@ RUN apt-get install -y iputils-ping
 #installation Mutt (relai mail)
 RUN apt-get install -y mutt
 RUN apt-get install -y ssmtp
-COPY serverNode/mutt/.muttrc .
 
 RUN echo 'root:root123' | chpasswd
 
 ENV NODE_ENV production
 
 WORKDIR /app
-
-# copie files
-COPY serverNode/ ./
-COPY mariadb/create_base.sql .
 
 RUN chmod +x *bash
 
@@ -46,6 +41,11 @@ RUN npm install
 
 # Run the application as a non-root user.
 USER node
+
+# copie files
+COPY serverNode/ ./
+COPY mariadb/create_base.sql .
+COPY serverNode/mutt/.muttrc .
 
 # Expose the port that the application listens on.
 EXPOSE 3000

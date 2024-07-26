@@ -12,7 +12,7 @@ set use_from = yes
 #set signature=~/.signature
  
 # Définition des dossiers de travail de Mutt ( ne pas oublier de créer les répertoires)
-set spoolfile = /var/spool/mail/$USER
+set spoolfile = /var/spool/mail/node
 set folder    = ~/mail
 set tmpdir    = ~/tmp
  
