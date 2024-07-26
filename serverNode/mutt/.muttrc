@@ -23,5 +23,5 @@ set editor = "vim -c 'set tw=72' -c 'set wrap'"
 set smtp_pass = "mdp@mail!popote"
  
 #source "gpg -d ~/.mutt/password.gpg |"
-#set smtp_url="smtps://USER:VOTRE MOT DE PASSE@smtp.gmail.com:587"
+set smtp_url="smtps://mailpopote:mdp@mail!popote@smtp.gmail.com:587"
 #set ssl_starttls="yes"
