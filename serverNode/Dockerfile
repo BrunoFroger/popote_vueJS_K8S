@@ -37,15 +37,16 @@ RUN npm install mysql
 
 RUN npm install
 
-# Run the application as a non-root user.
-USER node
-
 # copie files
 COPY serverNode/ ./
 COPY mariadb/create_base.sql .
 COPY serverNode/mutt/.muttrc .
 
 RUN chmod +x *bash
+RUN chown -R node:node *
+
+# Run the application as a non-root user.
+USER node
 
 # Expose the port that the application listens on.
 EXPOSE 3000
