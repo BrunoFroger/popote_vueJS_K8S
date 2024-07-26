@@ -169,10 +169,11 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 **Création**
 
-Vous pouvez ensuite créer votre cluster   (OK)
-```
-kubeadm init  --cri-socket=unix:///var/run/cri-dockerd.sock
-```
+Vous pouvez ensuite créer votre cluster   (a debuger, commande init fini en erreur, kubelet ne demarre pas semble t'il)
+
+``sudo kubeadm init --cri-socket=unix:///var/run/cri-dockerd.sock``
+
+en cas d'erreur sur cette commande (et avoir résolu le problème), faire ``sudo kubeadm reset --cri-socket=unix:///var/run/cri-dockerd.sock`` et recommencer la commande d'init
 
 ## 1.3 Installation de Vue JS (si utilisation en local)
 `` npm install -g @vue/cli ``
@@ -192,7 +193,7 @@ voici un exemple de commande permettant de se connecter en ssh depuis une machin
 ``ssh -p xxx bruno@popote.zapto.org`` ou xxx est le numéro de port externe que vous avez configuré ci-dessus
 
 
-## 1.5 Configuration mode sécurisé https (pas encore géré)
+## 1.5 Configuration mode sécurisé https (OK)
 
 Afin de sécuriser les accès a ce site, il est possible d'utiliser le protocole https, pour cela il faut suivre le mode opératoire suivant sur le site it-connect pour utiliser certbot qui effectue les demandes de certificat Let's Encrypt ; voir les différents tuto sur le sujet :
 
