@@ -20,10 +20,10 @@ WORKDIR /home/mysql/
 
 RUN echo 'root:root123' | chpasswd
 
-ENV MYSQL_ROOT_PASSWORD=root123
-ENV MYSQL_DATABASE=Popote
-ENV MYSQL_USER=popote
-ENV MYSQL_PASSWORD=popote123
+# ENV MYSQL_ROOT_PASSWORD=root123
+# ENV MYSQL_DATABASE=Popote
+# ENV MYSQL_USER=popote
+# ENV MYSQL_PASSWORD=popote123
 
 COPY mariadb/ /home/mysql/
 COPY mariadb/.bashrc /home/mysql/

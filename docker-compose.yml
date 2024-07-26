@@ -8,11 +8,11 @@ services:
   mariadb:
     container_name: popote_mariadb
     restart: on-failure
-    # environment:
-    #   - MYSQL_ROOT_PASSWORD=root123
-    #   - MYSQL_DATABASE=Popote
-    #   - MYSQL_USER=popote
-    #   - MYSQL_PASSWORD=popote123    
+    environment:
+      - MYSQL_ROOT_PASSWORD=root123
+      - MYSQL_DATABASE=Popote
+      - MYSQL_USER=popote
+      - MYSQL_PASSWORD=popote123    
     security_opt:
       - seccomp=unconfined
     # volumes:
