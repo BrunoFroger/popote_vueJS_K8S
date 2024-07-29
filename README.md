@@ -205,6 +205,11 @@ kubeadm join 192.168.1.17:6443 --token j7auvq.mmf044uhugzxofes \
 Pour visualiser un tableau de bord de votre interface web de Kubernetes (Tableau de Bord / Dashbord)
 Vous pouvez suivre ce [tuto](https://kubernetes.io/fr/docs/tasks/access-application-cluster/web-ui-dashboard/)
 
+Vous pouvez aussi utiliser une l'application [aptakube](https://aptakube.com/) et l'installer sur votre machine hote.
+
+Télécharger et installer l'interface utilisateur (Dashboard) : ``kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/charts/recommended.yaml``
+Pour commencer il faut preparer l'environneemnt Kubernetes pour pouvoir deployer le dashboard
+
 **Migration application docker compose en kubernetes**
 Pour deloyer l'application docker compose dans kubernetes, il faut migrer l'application, pour cela, voici un [tuto](https://loft.sh/blog/docker-compose-to-kubernetes-step-by-step-migration) qui explique la marche a suivre 
 
