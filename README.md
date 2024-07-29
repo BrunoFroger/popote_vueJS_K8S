@@ -71,7 +71,7 @@ sudo install minikube-linux-amd64 /usr/local/bin/minikube
 
 Vérification que Minikube est bien installé : ``minikube start`` aucun message d'erreur ne doit s'afficher
 
-### 1.2.2 Installation standard
+### 1.2.2 Installation standard de kubernetes
 
 #### 1.2.2.1 Installation de Docker Engine
 Voir la documentation d'installation [ici](https://docs.docker.com/engine/install/#server)
@@ -159,7 +159,6 @@ sudo apt-get upgrade
 #### 1.2.2.4 Création d'un cluster (a valider)
 **Pré-requis**
 
-Initialiser le cri-endpoint !!! TODO procédure à trouver  
 Pour que kubectl fonctionne pour un utilisateur non root, exécutez ces commandes
 
 ```
@@ -169,9 +168,7 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 **Création**
 
-Lors de l'installation de 
-
-Vous pouvez ensuite créer votre cluster   (a debuger, commande init fini en erreur, kubelet ne demarre pas semble t'il)
+Vous pouvez ensuite créer votre cluster 
 
 ``sudo kubeadm init --cri-socket=unix:///var/run/cri-dockerd.sock``
 
