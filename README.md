@@ -169,11 +169,42 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 **Création**
 
+Lors de l'installation de 
+
 Vous pouvez ensuite créer votre cluster   (a debuger, commande init fini en erreur, kubelet ne demarre pas semble t'il)
 
 ``sudo kubeadm init --cri-socket=unix:///var/run/cri-dockerd.sock``
 
+Dans le cas ou kubelet ne demarre pas dans le delai de 4 minutes imparti, cela peut etre du au swap qu'il faut desactiver sur votre machine pour cela il faut executer les commandes suivnates : ``sudo swapoff -v /swapfile`` puis éditer le fichier /etc/fstab et mettre en commentaire (#) la ligne correspondant au swap
+
 en cas d'erreur sur cette commande (et avoir résolu le problème), faire ``sudo kubeadm reset --cri-socket=unix:///var/run/cri-dockerd.sock`` et recommencer la commande d'init
+
+Une fois que l'init kubeadm est ok, vous aurez un message semblabe a celui ci dessous pour vous inviter à preparer votre cluster :
+
+```
+Your Kubernetes control-plane has initialized successfully!
+
+To start using your cluster, you need to run the following as a regular user:
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+Alternatively, if you are the root user, you can run:
+
+  export KUBECONFIG=/etc/kubernetes/admin.conf
+
+You should now deploy a pod network to the cluster.
+Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+Then you can join any number of worker nodes by running the following on each as root:
+
+kubeadm join 192.168.1.17:6443 --token j7auvq.mmf044uhugzxofes \
+	--discovery-token-ca-cert-hash sha256:e39e5232bdda70a7f71f05e60228f6e8b725f7041359baf8c24f36b7440bd3a9 
+```
+
+
 
 ## 1.3 Installation de Vue JS (si utilisation en local)
 `` npm install -g @vue/cli ``
@@ -209,6 +240,7 @@ sudo apt-get install certbot python3-certbot-nginx -y
 
 sudo certbot --nginx -d popote.zapto.org
 ```
+Pour vérifier que les certificats sont valides, vous pouvez utliser les commandes suivantes (sur le conteneur nginx) :
 
 Pour verifier la date d'expiration de votre certifcat : tapez la commande suivante (en root) : ``certbot certificates``
 
@@ -219,6 +251,11 @@ Pour renouveller votre certificat (si ce n'est pas fait par un cron) : ``certbot
 ajouter ensuite au dockerfile les lignes suivantes :
 
 ```
+....
+RUN apt-get install certbot python3-certbot-nginx -y
+....
+VOLUME /etc/letsencrypt/ /etc/letsencrypt/:ro
+....
 ```
 
 
@@ -259,7 +296,83 @@ CMD ["nginx", "-g", "daemon off;"]
 
 en version securisé (acces en https) voici les fichiers de configuration :
 
-a definir nginx.conf et dockerfile
+nginx.conf : 
+
+```
+    server {
+        listen 80;
+        server_name popote.zapto.org;
+        return 301 https://$host$request_uri; #Redirection 
+    }
+    server{
+        listen 443 ssl;
+        #server_name popote.zapto.org;
+
+        ssl_certificate /etc/letsencrypt/live/popote.zapto.org/fullchain.pem; # managed by Certbot
+        ssl_certificate_key /etc/letsencrypt/live/popote.zapto.org/privkey.pem; # managed by Certbot
+
+        location /api {
+            proxy_set_header Host $http_host;
+            proxy_set_header X-NginX-Proxy true;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_pass http://popote_backend:3000/;
+        }
+
+        location / {
+            proxy_set_header Host $http_host;
+            proxy_set_header X-NginX-Proxy true;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_pass http://popote_frontend:8080;
+        }
+    }
+```
+
+dockerfile : 
+
+
+```
+# Use the lightweight Nginx image from the previous stage for the nginx container
+#FROM nginx:stable-alpine
+#FROM nginx:stable-perl
+#FROM nginx:alpine-perl
+FROM nginx
+
+
+RUN echo "==========================="; \
+    echo "|                         |"; \
+    echo "|       NGINX             |"; \
+    echo "|                         |"; \
+    echo "==========================="
+
+
+#install optionnels
+RUN apt-get update
+RUN apt-get install -y net-tools
+RUN apt-get install -y iputils-ping
+RUN apt-get install certbot python3-certbot-nginx -y
+
+# Copy the nginx configuration file
+COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
+
+# Set the timezone (change this to your local timezone)
+RUN echo "Europe/Paris" | tee /etc/timezone
+RUN dpkg-reconfigure --frontend noninteractive tzdata
+
+#copy files for https
+#COPY ./nginx/cert /etc/letsencrypt/
+
+
+VOLUME /etc/letsencrypt/ /etc/letsencrypt/:ro
+
+# Expose the port 80
+EXPOSE 80
+EXPOSE 443
+
+# Start Nginx to serve the application
+#CMD ["nginx", "-g", "daemon off;"]
+```
 
 ## 2.2 Installer conteneur MariaDB
 
