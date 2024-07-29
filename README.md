@@ -169,15 +169,16 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 **Création**
 
-Vous pouvez ensuite créer votre cluster  
-```
-kubeadm init
-```
+Vous pouvez ensuite créer votre cluster   (a debuger, commande init fini en erreur, kubelet ne demarre pas semble t'il)
+
+``sudo kubeadm init --cri-socket=unix:///var/run/cri-dockerd.sock``
+
+en cas d'erreur sur cette commande (et avoir résolu le problème), faire ``sudo kubeadm reset --cri-socket=unix:///var/run/cri-dockerd.sock`` et recommencer la commande d'init
 
 ## 1.3 Installation de Vue JS (si utilisation en local)
 `` npm install -g @vue/cli ``
 
-## 1.4 configuration de la livebox (TODO a valider)
+## 1.4 configuration de la livebox (OK)
 Pour permettre d'accéder a votre application depuis internet, vous devez configurer votre livebox pour authoriser les flux entrant vers votre ordinateur hébergeant votre application
 
 - Se connecter sur votre livebox en mode administrateur
@@ -189,10 +190,10 @@ Pour permettre d'accéder a votre application depuis internet, vous devez config
 	- Pour HTTP : vous devez ouvrir le port 80 (externe) vers le port 8080 (interne)  
 
 voici un exemple de commande permettant de se connecter en ssh depuis une machine distante :
-``ssh -p xxx bruno@popote.zapto.org`` ou xxx est le numéro de port que vous avez configuré ci-dessus
+``ssh -p xxx bruno@popote.zapto.org`` ou xxx est le numéro de port externe que vous avez configuré ci-dessus
 
 
-## 1.5 Configuration mode sécurisé https (pas encore géré)
+## 1.5 Configuration mode sécurisé https (OK)
 
 Afin de sécuriser les accès a ce site, il est possible d'utiliser le protocole https, pour cela il faut suivre le mode opératoire suivant sur le site it-connect pour utiliser certbot qui effectue les demandes de certificat Let's Encrypt ; voir les différents tuto sur le sujet :
 
@@ -480,6 +481,7 @@ Afin de simplifier les déploment et l'exploitation de votre application, vous p
 
 voici un exemple de fichier docker-compose.yaml permettant de générer automatique l'ensemble de vos conteneurs (il faut que les ficheirs dockerfile de chacun de vos conteneurs existent et soit validés)
 
+voici un site utilistaire pour parametrer votre fichier docker compose en transformant une ligne de commande docker run en elements de configuration docker compose [composerize](https://www.composerize.com/)
 
 ```
 #version: '3.5'
@@ -553,11 +555,21 @@ networks:
 
 vous disposer d'un certain nombre de commandes pour gerer ce groupe de conteneurs :
 
-``docker compose up --build`` pour contruire votre groupe de conteneurs (ajouter option -d pour le lancer en mode demon)
+``docker compose up --build`` pour contruire votre groupe de conteneurs (ajouter option -d pour le lancer en background)
 
 ``docker compose stop`` pour arreter votre groupe de conteneurs
 
 ``docker compose start`` pour demarrer votre groupe de conteneurs
+
+``docker compose logs -f`` : affiche les logs en temps reel de l'activite de votre groupe de conteneurs
+
+pour manipuler un conteneur particulier vous pouvez utiliser ces meêmes commandes en précisant sur quel conteneur vous voulez agir
+
+``docker compose build <nom_conteneur>``  : construit le conteneur
+
+``docker compose up -d <nom_conteneur>`` : demarre le conteneur (-d pour le lancer en background)
+
+``docker compose stop <nom_conteneur>`` : arrete le conteneur
 
 
 # 9. Informations diverses
@@ -566,7 +578,7 @@ vous disposer d'un certain nombre de commandes pour gerer ce groupe de conteneur
 
 voir doc sur [gitHub](https://docs.github.com/fr/actions/deployment/about-deployments/about-continuous-deployment)
 
-Crer le fichier de déploiement .github/
+Crer le repertoire de déploiement .github/workflows
 
 ### 91.installation d'un self-hosted runner sur la machine cible
 
@@ -609,7 +621,7 @@ Pour pouvoir executer plusieurs jobs en simultané, il faut avoir plusieurs runn
 Exemple de fichier de déploiement (à localiser dans le répertoire .github/workflow de votre application)
 
 ```
-# fichier de deploiement github pour l'application popote
+# fichier de deploiement github pour l'application popote (a mettre dans le repertoire .github/workflows)
 # (c) B. Froger (2024)-> now
 
 name: Deployment_popote

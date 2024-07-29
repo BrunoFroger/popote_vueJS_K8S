@@ -6,9 +6,10 @@ RUN echo "==========================="; \
     echo "|                         |"; \
     echo "==========================="
 
-#RUN apt-get update 
+RUN apk update 
 
 #install optionnels
+RUN apk add bash
 #RUN apt-get install -y net-tools
 #RUN apt-get install -y iputils-ping
 
@@ -51,7 +52,7 @@ RUN npm install
 RUN npm run build
 
 EXPOSE 8080
-#RUN cd src
+RUN bash
 
 # execute fichier bash de post traitement (lancement des applications et demons)
 #CMD src/docker_cmd.bash

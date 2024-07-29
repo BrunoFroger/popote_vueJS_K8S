@@ -1,6 +1,7 @@
 
 # Pull the mariadb latest image
 FROM mariadb:latest
+#FROM mariadb:10.4.34-focal
 
 RUN echo "==========================="; \
     echo "|                         |"; \
@@ -13,16 +14,16 @@ RUN apt-get update
 RUN apt-get install -y net-tools
 RUN apt-get install -y iputils-ping
 RUN apt-get install nano
-RUN apt-get install -y default-mysql-client
+#RUN apt-get install -y default-mysql-client
 
 WORKDIR /home/mysql/
 
 RUN echo 'root:root123' | chpasswd
 
-ENV MYSQL_ROOT_PASSWORD root123
-ENV MYSQL_DATABASE Popote
-ENV MYSQL_USER popote
-ENV MYSQL_PASSWORD popote123
+# ENV MYSQL_ROOT_PASSWORD=root123
+# ENV MYSQL_DATABASE=Popote
+# ENV MYSQL_USER=popote
+# ENV MYSQL_PASSWORD=popote123
 
 COPY mariadb/ /home/mysql/
 COPY mariadb/.bashrc /home/mysql/
@@ -38,9 +39,11 @@ RUN cd /home/mysql/
 
 USER mysql
 
+#RUN /usr/bin/mariadb-install-db --defaults-file=~/.my.cnf
+
 ADD mariadb/create_base.sql /docker-entrypoint-initdb.d
 
-RUN echo $SHELL
+#RUN echo $SHELL
 
 #CMD ["mysqld"]
 #CMD ["mysqld &", ";", "./docker_cmd.bash"]

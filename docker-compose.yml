@@ -8,6 +8,15 @@ services:
   mariadb:
     container_name: popote_mariadb
     restart: on-failure
+    environment:
+      - MYSQL_ROOT_PASSWORD=root123
+      - MYSQL_DATABASE=Popote
+      - MYSQL_USER=popote
+      - MYSQL_PASSWORD=popote123    
+    security_opt:
+      - seccomp=unconfined
+    # volumes:
+    #   - ./mariadb/volume:
     build: 
       context: .
       dockerfile: mariadb/dockerfile
@@ -20,13 +29,17 @@ services:
   backend:
     container_name: popote_backend
     restart: on-failure
+    environment:
+      - SMTP_PASSWORD=mdp@mail!popote
+      - SMTP_USER=mailpopote
+      - SMTP_SERVER=smtp.gmail.com:465
     build: 
       context: .
       dockerfile: serverNode/Dockerfile
     ports:
       - 3000:3000
-    depends_on:
-      - mariadb
+    #depends_on:
+      #- mariadb
     networks:
       - popote_network
 
@@ -64,6 +77,20 @@ services:
       - backend
     networks:
       - popote_network
+
+  # mail:
+  #   image: bytemark/smtp
+  #   container_name: popote_mail
+  #   #restart: always
+  #   environment:
+  #     RELAY_HOST: gmail.com
+  #     RELAY_PORT: 587
+  #     RELAY_USERNAME: mailpopote@gmail.com
+  #     RELAY_PASSWORD: mdp@mail!popote
+  #   networks:
+  #     - popote_network
+  #   depends_on:
+  #     - backend
 
 # configuration reseau
 networks:

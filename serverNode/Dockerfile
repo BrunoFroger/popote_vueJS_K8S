@@ -22,6 +22,11 @@ RUN apt-get update
 RUN apt-get install -y net-tools
 RUN apt-get install -y default-mysql-client
 RUN apt-get install -y iputils-ping
+RUN apt-get install -y nano
+
+#installation Mutt (relai mail)
+RUN apt-get install -y mutt
+RUN apt-get install -y ssmtp
 
 RUN echo 'root:root123' | chpasswd
 
@@ -29,12 +34,23 @@ ENV NODE_ENV production
 
 WORKDIR /app
 
-# copie files
-COPY serverNode/ ./
-
 RUN npm install mysql
 
 RUN npm install
+
+# copie files
+COPY serverNode/ ./
+COPY mariadb/create_base.sql .
+
+RUN mkdir /var/spool/mail/node
+RUN mkdir ~/mail
+RUN mkdir ~/tmp
+COPY serverNode/mutt/.muttrc .
+COPY serverNode/mutt/ssmtp.conf /etc/ssmtp/ssmtp.conf
+
+RUN chmod +x *bash
+RUN chown -R node:node *
+RUN chown -R node:node .muttrc
 
 # Run the application as a non-root user.
 USER node
