@@ -200,8 +200,13 @@ Then you can join any number of worker nodes by running the following on each as
 kubeadm join 192.168.1.17:6443 --token j7auvq.mmf044uhugzxofes \
 	--discovery-token-ca-cert-hash sha256:e39e5232bdda70a7f71f05e60228f6e8b725f7041359baf8c24f36b7440bd3a9 
 ```
+**Tableau de bord / Dashboard**
 
+Pour visualiser un tableau de bord de votre interface web de Kubernetes (Tableau de Bord / Dashbord)
+Vous pouvez suivre ce [tuto](https://kubernetes.io/fr/docs/tasks/access-application-cluster/web-ui-dashboard/)
 
+**Migration application docker compose en kubernetes**
+Pour deloyer l'application docker compose dans kubernetes, il faut migrer l'application, pour cela, voici un [tuto](https://loft.sh/blog/docker-compose-to-kubernetes-step-by-step-migration) qui explique la marche a suivre 
 
 ## 1.3 Installation de Vue JS (si utilisation en local)
 `` npm install -g @vue/cli ``
