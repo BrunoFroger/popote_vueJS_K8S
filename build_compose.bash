@@ -2,4 +2,4 @@
 
 docker compose stop
 
-docker compose $1 up --build
+docker compose up --build $1
