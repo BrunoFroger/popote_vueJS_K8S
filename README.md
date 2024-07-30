@@ -43,6 +43,11 @@ paramètres à renseigner pour l'installation de linux :
     - password : exemple K8S&machineXX  (XX numéro de la machine)
 - Lors du message installation terminée, retirer la clé USB et lancer le redémarrage.
 
+Ne pas oublier de faire une mise a jour globale après l'installation :
+
+``sudo apt-get update``
+``sudo apt-get upgrade``
+
 **Post installation :**
 
 La suite de ces opérations sont a faire sur la ou les machines du cluster.  
@@ -57,7 +62,14 @@ Certains utilitaires sont a installer pour pouvoir utiliser les commandes de man
 
 Suite à toutes ces manipulations, le système proposera sans doute des mises à jour, il faut les accepter, et si un redémarrage est demandé l'accepter aussi.
 
-## 1.2 Installation de Kubernetes (pas encore validé, passer a Docker dans un premier temps)
+**accès à distance**
+Vous pouvez desormais authoriser la connexion a distance (en ssh) sur votre machine pour cela executez es commandes suivantes :
+installation de ssh
+
+``sudo apt install openssh-client`` pour authoriser les connexions sur d'autres machines depuis cette machine
+``sudo apt install openssh-server`` pour authoriser les connexions d'autres machines vers cette machine
+
+## 1.2 Installation de Kubernetes 
 
 Pour l'installation de Kubernetes ; 2 possibilités (Minikube ou standard)
 
