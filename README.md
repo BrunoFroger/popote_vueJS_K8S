@@ -228,7 +228,10 @@ Pour visualiser un tableau de bord Kubernetes via une interface web, vous pouvez
 Vous pouvez aussi utiliser une l'application independante [aptakube](https://aptakube.com/) et l'installer sur votre machine hote (plus simple).
 
 
-**Installation d'un noued supplemenetaire**
+**Ajout d'une machine dans le cluster**
+
+Si vous souhaitez ajouter des machines a votre cluster Kubernetes, voici la procédure
+voir cet [article](https://kubernetes.io/fr/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/) qui decrit la procedure
 
 suivre les items suivants de l'installation du cluster :
 - installation de linux et des outils complementaire 
@@ -238,14 +241,11 @@ suivre les items suivants de l'installation du cluster :
 
 
 **Migration application docker compose en kubernetes**
-Pour deloyer l'application docker compose dans kubernetes, il faut migrer l'application, pour cela, voici un [tuto](https://loft.sh/blog/docker-compose-to-kubernetes-step-by-step-migration) qui explique la marche a suivre 
+Pour deloyer l'application docker compose dans kubernetes, il faut migrer l'application, pour cela, voici un quelques liens interressants :
+- [Docker compose to kubernetes step by step](https://loft.sh/blog/docker-compose-to-kubernetes-step-by-step-migration)
+- [De Docker à Kubernetes en passant par Compose](https://jpetazzo.github.io/2018/11/07/docker-compose-kubernetes-1/)
+- [doc Kubernetes sur Kompose](https://kubernetes.io/fr/docs/tasks/configure-pod-container/translate-compose-kubernetes/)
 
-**Ajout d'une machine dans le cluster**
-
-Si vous souhaitez ajouter des machines a votre cluster Kubernetes, voici la procédure
-voir cet [article](https://kubernetes.io/fr/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/) qui decrit la procedure
-Sur la nouvelle machine (reproduire les étapesmentionnées comme decrit dans les chapitres de ce document)
-- installation de linux
 
 ## 1.3 Installation de Vue JS (si utilisation en local)
 `` npm install -g @vue/cli ``
