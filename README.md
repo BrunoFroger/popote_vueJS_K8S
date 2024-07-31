@@ -240,12 +240,25 @@ suivre les items suivants de l'installation du cluster :
 - au lieu de faire le ``kubeadm init ....`` il faut utilisser la commande ``kubeadm join ....`` qui est mentionnée lors de la commande init sur le master en ajoutant eventuellemnt l'option ``--cri-socket=unix:///var/run/cri-dockerd.sock``.
 
 
-**Migration application docker compose en kubernetes**
+**Migration application docker compose en kubernetes** (a tester)
+
 Pour deloyer l'application docker compose dans kubernetes, il faut migrer l'application, pour cela, voici un quelques liens interressants :
 - [Docker compose to kubernetes step by step](https://loft.sh/blog/docker-compose-to-kubernetes-step-by-step-migration)
 - [De Docker à Kubernetes en passant par Compose](https://jpetazzo.github.io/2018/11/07/docker-compose-kubernetes-1/)
 - [doc Kubernetes sur Kompose](https://kubernetes.io/fr/docs/tasks/configure-pod-container/translate-compose-kubernetes/)
 
+Pour effectuer la migration, nous allons utiliser l'outils de conversion [Kompose](http://Kompose.io)
+
+- Installation de "Kompose" avec les commandes suivantes (sur master Kubernetes): 
+
+``curl -L https://github.com/kubernetes/kompose/releases/download/v1.16.0/kompose-linux-amd64 -o kompose``
+``chmod +x kompose``
+``sudo mv ./kompose /usr/local/bin/kompose``
+
+Aller ensuite dans le repertoire contenant votre docker-compose.yaml pour convertir ce fihier en plussieurs fichiers utilisables par kubectl
+
+``kompose convert  ``
+``kubectl apply -f nginx-service, mariadb-service, backend-service, frontend-service, nginx-deployement, mariadb-deployement, backend-deployement, frontend-deployement``
 
 ## 1.3 Installation de Vue JS (si utilisation en local)
 `` npm install -g @vue/cli ``
