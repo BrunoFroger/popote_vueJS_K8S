@@ -48,26 +48,33 @@ Ne pas oublier de faire une mise a jour globale après l'installation :
 ``sudo apt-get update``
 ``sudo apt-get upgrade``
 
+Vous pouvez également faire un échange de clé ssh pour ne plus avoir a tapr le mot de passe lorsque vous vous connecterez sur cete machine
+sur chaque machine distante désireuse de se connecter sur cette machine ; tapez les commandes suivantes :
+
+```
+cd ~/.ssh
+ls
+```
+
+si le fichier id_rsa.pub n'existe pas il faut le générer avec la commande ``ssh-keygen``
+
+vous pouvez alors copier votre clé ssh avec la commande 
+
+``ssh-copy-id -i id_rsa bruno@<nom_machine>``
+
 **Post installation :**
 
 La suite de ces opérations sont a faire sur la ou les machines du cluster.  
 Certains utilitaires sont a installer pour pouvoir utiliser les commandes de manipulation réseau : 
 
 - ifconfig : ``sudo apt install net-tools``
-- curl : ``sudo apt install curl``
+- curl : ``sudo apt install curl`` (optionel)
 - server ssh : ``sudo apt install openssh-server``
 - optionnel Mobaxterm : 
 	- sur Windows, [télécharger](https://mobaxterm.mobatek.net/download-home-edition.html) et installer Mobaxterm nativement
 	- sur Mac ou Linux, cette application Windows nécessite l'installation de [wine](https://www.winehq.org/) ``sudo apt install wine`` puis copier le téléchargement de l'application [mobaxterm.exe](https://mobaxterm.mobatek.net/download-home-edition.html) localement sur la machine ; vous pourrez alors lancer son exécution avec la commande ``wine mobaxterm.exe``
 
 Suite à toutes ces manipulations, le système proposera sans doute des mises à jour, il faut les accepter, et si un redémarrage est demandé l'accepter aussi.
-
-**accès à distance**
-Vous pouvez desormais authoriser la connexion a distance (en ssh) sur votre machine pour cela executez es commandes suivantes :
-installation de ssh
-
-``sudo apt install openssh-client`` pour authoriser les connexions sur d'autres machines depuis cette machine
-``sudo apt install openssh-server`` pour authoriser les connexions d'autres machines vers cette machine
 
 ## 1.2 Installation de Kubernetes 
 
@@ -85,7 +92,7 @@ Vérification que Minikube est bien installé : ``minikube start`` aucun message
 
 ### 1.2.2 Installation standard de kubernetes
 
-#### 1.2.2.1 Installation de Docker Engine
+#### 1.2.2.1 Installation de Docker Engine (sur machine maitre)
 Voir la documentation d'installation [ici](https://docs.docker.com/engine/install/#server)
 
 Par sécurité, il faut commencer par désintaller une éventuelle installation précédente.
@@ -144,7 +151,7 @@ aller sur le site [cri-dockerd](https://github.com/Mirantis/cri-dockerd?tab=read
 Activation de cri-dockerd : ``sudo systemctl enable cri-docker.service``
 
 
-#### 1.2.2.3 Installation de kubadm (a revoir plus tard)
+#### 1.2.2.3 Installation de kubadm (OK, a valider)
 voir sur le site [kubernetes](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/)
 
 ```
@@ -168,19 +175,12 @@ sudo apt-get upgrade
 ```
 
 
-#### 1.2.2.4 Création d'un cluster (a valider)
-**Pré-requis**
+#### 1.2.2.4 Création d'un cluster
 
-Pour que kubectl fonctionne pour un utilisateur non root, exécutez ces commandes
 
-```
-mkdir -p $HOME/.kube
-sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-sudo chown $(id -u):$(id -g) $HOME/.kube/config
-```
 **Création**
 
-Vous pouvez ensuite créer votre cluster 
+saisir les commandes suivantes
 
 ``sudo kubeadm init --cri-socket=unix:///var/run/cri-dockerd.sock``
 
@@ -212,11 +212,30 @@ Then you can join any number of worker nodes by running the following on each as
 kubeadm join 192.168.1.17:6443 --token j7auvq.mmf044uhugzxofes \
 	--discovery-token-ca-cert-hash sha256:e39e5232bdda70a7f71f05e60228f6e8b725f7041359baf8c24f36b7440bd3a9 
 ```
+
+Pour que kubectlkubeadm fonctionne pour un utilisateur non root, exécutez ces commandes (seulement sur noaud maitre)
+
+```
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+```
+
 **Tableau de bord / Dashboard**
 
 Pour visualiser un tableau de bord Kubernetes via une interface web, vous pouvez suivre ce [tuto](https://kubernetes.io/fr/docs/tasks/access-application-cluster/web-ui-dashboard/)
 
 Vous pouvez aussi utiliser une l'application independante [aptakube](https://aptakube.com/) et l'installer sur votre machine hote (plus simple).
+
+
+**Installation d'un noued supplemenetaire**
+
+suivre les items suivants de l'installation du cluster :
+- installation de linux et des outils complementaire 
+- installer cri-dockerd
+- suivre installation de kubeadm (avec installation de docker engine)
+- au lieu de faire le ``kubeadm init ....``
+
 
 **Migration application docker compose en kubernetes**
 Pour deloyer l'application docker compose dans kubernetes, il faut migrer l'application, pour cela, voici un [tuto](https://loft.sh/blog/docker-compose-to-kubernetes-step-by-step-migration) qui explique la marche a suivre 
