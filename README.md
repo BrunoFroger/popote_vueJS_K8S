@@ -234,7 +234,7 @@ suivre les items suivants de l'installation du cluster :
 - installation de linux et des outils complementaire 
 - installer cri-dockerd
 - suivre installation de kubeadm (avec installation de docker engine)
-- au lieu de faire le ``kubeadm init ....``
+- au lieu de faire le ``kubeadm init ....`` il faut utilisser la commande ``kubeadm join ....`` qui est mentionnée lors de la commande init sur le master en ajoutant eventuellemnt l'option ``--cri-socket=unix:///var/run/cri-dockerd.sock``.
 
 
 **Migration application docker compose en kubernetes**
