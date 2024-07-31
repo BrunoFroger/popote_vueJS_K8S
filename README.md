@@ -240,6 +240,13 @@ suivre les items suivants de l'installation du cluster :
 **Migration application docker compose en kubernetes**
 Pour deloyer l'application docker compose dans kubernetes, il faut migrer l'application, pour cela, voici un [tuto](https://loft.sh/blog/docker-compose-to-kubernetes-step-by-step-migration) qui explique la marche a suivre 
 
+**Ajout d'une machine dans le cluster**
+
+Si vous souhaitez ajouter des machines a votre cluster Kubernetes, voici la procédure
+voir cet [article](https://kubernetes.io/fr/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/) qui decrit la procedure
+Sur la nouvelle machine (reproduire les étapesmentionnées comme decrit dans les chapitres de ce document)
+- installation de linux
+
 ## 1.3 Installation de Vue JS (si utilisation en local)
 `` npm install -g @vue/cli ``
 
