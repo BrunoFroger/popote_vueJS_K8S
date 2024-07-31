@@ -251,14 +251,18 @@ Pour effectuer la migration, nous allons utiliser l'outils de conversion [Kompos
 
 - Installation de "Kompose" avec les commandes suivantes (sur master Kubernetes): 
 
-``curl -L https://github.com/kubernetes/kompose/releases/download/v1.16.0/kompose-linux-amd64 -o kompose``
-``chmod +x kompose``
-``sudo mv ./kompose /usr/local/bin/kompose``
+```
+curl -L https://github.com/kubernetes/kompose/releases/download/v1.16.0/kompose-linux-amd64 -o kompose
+chmod +x kompose
+sudo mv ./kompose /usr/local/bin/kompose
+```
 
 Aller ensuite dans le repertoire contenant votre docker-compose.yaml pour convertir ce fihier en plussieurs fichiers utilisables par kubectl
 
-``kompose convert  ``
-``kubectl apply -f nginx-service, mariadb-service, backend-service, frontend-service, nginx-deployement, mariadb-deployement, backend-deployement, frontend-deployement``
+```
+kompose convert
+kubectl apply -f nginx-service, mariadb-service, backend-service, frontend-service, nginx-deployement, mariadb-deployement, backend-deployement, frontend-deployement
+```
 
 ## 1.3 Installation de Vue JS (si utilisation en local)
 `` npm install -g @vue/cli ``
