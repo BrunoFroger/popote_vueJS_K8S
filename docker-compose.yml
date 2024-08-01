@@ -22,8 +22,8 @@ services:
       dockerfile: mariadb/dockerfile
     ports:
       - 3306:3306
-    networks:
-      - popote_network
+    # networks:
+    #   - popote_network
 
   # backend Service : serveur node
   backend:
