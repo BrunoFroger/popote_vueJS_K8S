@@ -11,8 +11,8 @@ fi
 # Création du fichier declaratif pour le service
 nomService="service-"$1
 nomDeployment="deployment-"$1
-mkdir -p tp/kubernetes-$1
-cd tp/kubernetes-$1
+mkdir -p tp/
+cd tp/
 cat > "service.yaml" <<EOF
 apiVersion: v1
 kind: Service
@@ -26,7 +26,7 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 80
+      targetPort: 8080
       nodePort: $2
 EOF
 
