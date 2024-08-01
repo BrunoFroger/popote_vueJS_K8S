@@ -20,7 +20,7 @@ cat > "pods.yaml" <<EOF
 apiVersion: v1
 kind: Pod
 metadata:
-  namespace: "namespace-"$1
+  namespace: namespace-$1
   name: $nomPod
 spec:
   containers:
