@@ -20,7 +20,7 @@ cat > "deployment.yaml" <<EOF
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: $1
+  namespace: namespace-$1
   name: $nomDeployment
   labels:
     app: $nomDeployment
