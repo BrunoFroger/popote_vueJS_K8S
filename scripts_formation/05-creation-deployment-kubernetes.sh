@@ -14,8 +14,8 @@ fi
 # Création du fichier declaratif pour le demployment
 nomContaineur="containeur-nginx"$1
 nomDeployment="deployment-"$1
-mkdir -p tp/kubernetes-$1
-cd tp/kubernetes-$1
+mkdir -p tp/
+cd tp/
 cat > "deployment.yaml" <<EOF
 apiVersion: apps/v1
 kind: Deployment
