@@ -17,7 +17,7 @@ cat > "service.yaml" <<EOF
 apiVersion: v1
 kind: Service
 metadata:
-  namespace: $1
+  namespace: namespace-$1
   name: $nomService
 spec:
   type: NodePort
