@@ -6,7 +6,7 @@
 #Vérification argument
 if [ $# -ne 1 ]; then
  echo "Le nombre d'argument est invalide : $#"
- echo "Commande attendue : ./01-creation-containeur.sh prenom" 
+ echo "Commande attendue : ./$0 prenom" 
  echo "Création du containeur [NOK]"
  exit
 fi

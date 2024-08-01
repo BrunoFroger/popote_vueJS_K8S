@@ -6,7 +6,7 @@
 #Vérification argument
 if [ $# -ne 2 ]; then
  echo "Le nombre d'argument est invalide : $#"
- echo "Commande attendue : ./02-deploiement-containeur.sh prénom numéroPort" 
+ echo "Commande attendue : ./$0 prénom numéroPort" 
  echo "Déploiement du containeur [NOK]"
  exit
 fi
