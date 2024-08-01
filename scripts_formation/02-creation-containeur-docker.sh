@@ -12,8 +12,8 @@ if [ $# -ne 2 ]; then
 fi
 
 # récupration de l'image
-nomContaineur="containeur-nginx"$1
-nomDeploiement="deploiement-nginx"$1
+nomContaineur="containeur-nginx-"$1
+nomDeploiement="deploiement-"$1
 #sudo docker pull $registry/$nomContaineur
 sudo docker run -d -p $2:80 --name $nomDeploiement $nomContaineur
 

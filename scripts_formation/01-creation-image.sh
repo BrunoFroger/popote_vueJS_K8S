@@ -12,8 +12,8 @@ if [ $# -ne 1 ]; then
 fi
 
 # Création du Dockerfile
-mkdir -p tp/containeur-$1
-cd tp/containeur-$1
+mkdir -p tp/
+cd tp/
 cat > "index.html" <<EOF
 <html>
     <body>
@@ -29,7 +29,7 @@ COPY index.html /usr/share/nginx/html/index.html
 EOF
 
 # Compilation de l'image
-nomContaineur="containeur-nginx"$1
+nomContaineur="containeur-nginx-"$1
 sudo docker build -t $nomContaineur .
 echo "Création du containeur [OK]"
 
