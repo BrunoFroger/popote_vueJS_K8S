@@ -17,7 +17,7 @@ cat > "ingress.yaml" <<EOF
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  namespace: $1
+  namespace: namespace-$1
   name: $nomIngress
 spec:
   rules:
