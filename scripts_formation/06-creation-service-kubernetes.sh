@@ -26,7 +26,7 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 8080
+      targetPort: 80
       nodePort: $2
 EOF
 

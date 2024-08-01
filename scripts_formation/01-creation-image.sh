@@ -26,7 +26,7 @@ EOF
 cat > "./Dockerfile" <<EOF
 FROM nginx
 COPY index.html /usr/share/nginx/html/index.html
-EXPOSE 8080
+EXPOSE 80
 EOF
 
 # Compilation de l'image

@@ -14,8 +14,8 @@ fi
 # Création du fichier declaratif pour le pod
 nomContaineur="containeur-nginx"$1
 nomPod="pod-"$1
-mkdir -p tp/kubernetes-$1
-cd tp/kubernetes-$1
+mkdir -p tp/
+cd tp/
 cat > "pods.yaml" <<EOF
 apiVersion: v1
 kind: Pod
