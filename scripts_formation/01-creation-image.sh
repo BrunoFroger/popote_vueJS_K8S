@@ -29,7 +29,7 @@ COPY index.html /usr/share/nginx/html/index.html
 EOF
 
 # Compilation de l'image
-nomContaineur="nginx"$1
+nomContaineur="containeur-nginx"$1
 sudo docker build -t $nomContaineur .
 echo "Création du containeur [OK]"
 
@@ -37,7 +37,7 @@ echo "Création du containeur [OK]"
 #docker tag $nomContaineur $registry/$nomContaineur
 #docker push $registry/$nomContaineur
 
-echo "Envoi du containeur sur le registry [OK]"
+echo "Construction du containeur [OK]"
 
 
 cd - > /dev/null
