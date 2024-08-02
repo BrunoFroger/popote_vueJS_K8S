@@ -3,12 +3,12 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: popote
-  name: deployment_popote_monoPod
+  name: deployment-popote-monoPod
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: popote_monoPod
+      app: popote-monoPod
   template:
     metadata:
       labels:
