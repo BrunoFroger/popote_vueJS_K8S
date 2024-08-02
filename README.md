@@ -223,6 +223,8 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 **Ajout d'un add-on reseau avec son CRD associé**
 
+voir doc [ici](https://docs.tigera.io/calico/latest/getting-started/kubernetes/quickstart)
+
 ``kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.28.1/manifests/tigera-operator.yaml``
 ``kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.28.1/manifests/custom-resources.yaml``
 ``kubectl create -f custom-resources.yaml``
@@ -280,9 +282,14 @@ sudo mv ./kompose /usr/local/bin/kompose
 Aller ensuite dans le repertoire contenant votre docker-compose.yaml pour convertir ce fihier en plussieurs fichiers utilisables par kubectl
 
 ```
+mkdir kompose_files
+cd kompose_files
 kompose convert
-kubectl apply -f nginx-service, mariadb-service, backend-service, frontend-service, nginx-deployement, mariadb-deployement, backend-deployement, frontend-deployement
+kubectl apply -f .
 ```
+
+Verifier dans le Dashboard (aptakube) que vos pods sont bien lancés ....
+
 
 ## 1.3 Installation de Vue JS (si utilisation en local)
 `` npm install -g @vue/cli ``
