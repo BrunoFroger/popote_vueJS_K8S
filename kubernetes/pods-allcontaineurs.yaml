@@ -8,7 +8,7 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: popote-monopod
+      app: deployment-popote-monopod
   template:
     metadata:
       labels:
