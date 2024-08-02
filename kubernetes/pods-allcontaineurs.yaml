@@ -34,5 +34,5 @@ spec:
         image: popote_vuejs_k8s-nginx
         ports:
           - containerPort: 80
-          - containerPort: 3000
+          - containerPort: 443
       
