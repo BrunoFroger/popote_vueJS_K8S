@@ -15,22 +15,22 @@ spec:
         app: deployment_popote_monoPod
     spec:
       containers:
-      - name: popote_mariadb
+      - name: popote-mariadb
         image: popote_vuejs_k8s-mariadb
         ports:
           - containerPort: 3306
           
-      - name: popote_backend
+      - name: popote-backend
         image: popote_vuejs_k8s-backend
         ports:
           - containerPort: 3000
       
-      - name: popote_frontend
+      - name: popote-frontend
         image: popote_vuejs_k8s-frontend
         ports:
           - containerPort: 8080
       
-      - name: popote_nginx
+      - name: popote-nginx
         image: popote_vuejs_k8s-nginx
         ports:
           - containerPort: 80
