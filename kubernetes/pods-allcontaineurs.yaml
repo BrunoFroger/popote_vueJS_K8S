@@ -3,16 +3,16 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: popote
-  name: deployment-popote-monoPod
+  name: deployment-popote-monopod
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: popote-monoPod
+      app: popote-monopod
   template:
     metadata:
       labels:
-        app: deployment-popote-monoPod
+        app: deployment-popote-monopod
     spec:
       containers:
       - name: popote-mariadb
