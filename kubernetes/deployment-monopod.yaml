@@ -3,16 +3,16 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: popote
-  name: pod-popote-allcontainer
+  name: deployment-popote-allcontainer
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: pod-popote-allcontainer
+      app: deployment-popote-allcontainer
   template:
     metadata:
       labels:
-        app: pod-popote-allcontainer
+        app: deployment-popote-allcontainer
     spec:
       containers:
       - name: popote-mariadb
