@@ -34,21 +34,6 @@ sudo apt-get upgrade
 #-------------------------------------------------
 echo "kubeadm => initialisation/joindre un cluster"
 ./14-install-master-slave.bash
-while :
-do
-    echo "Voulez vous initialiser un cluster (master) ou joindre un cluster (slave) [master/slave]: " 
-    read saisie
-    if [[ "$saisie" == "master" ]]
-    then
-        sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --cri-socket=unix:///var/run/cri-dockerd.sock
-        break
-    elif [[ "$saisie" == "slave" ]]
-        token='kubeadm token create'
-        echo "token = $token"
-        break
-    fi
-done
-
 #-------------------------------------------------
 
 
