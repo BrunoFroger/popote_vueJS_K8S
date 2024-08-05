@@ -45,8 +45,10 @@ paramètres à renseigner pour l'installation de linux :
 
 Ne pas oublier de faire une mise a jour globale après l'installation :
 
-``sudo apt-get update``
-``sudo apt-get upgrade``
+```
+sudo apt-get update
+sudo apt-get upgrade
+```
 
 Vous pouvez également faire un échange de clé ssh pour ne plus avoir a tapr le mot de passe lorsque vous vous connecterez sur cete machine
 sur chaque machine distante désireuse de se connecter sur cette machine ; tapez les commandes suivantes :
