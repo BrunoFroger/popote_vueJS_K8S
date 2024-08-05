@@ -240,6 +240,13 @@ suivre les items suivants de l'installation du cluster :
 - au lieu de faire le ``kubeadm init ....`` il faut utilisser la commande ``kubeadm join ....`` qui est mentionnée lors de la commande init sur le master en ajoutant eventuellemnt l'option ``--cri-socket=unix:///var/run/cri-dockerd.sock``.
 
 
+
+**Ajout d'un add-on reseau pour que les pods puissent communiquer entre eux**
+
+Pour ajouter un add-on reseau il est necessaire de disposer d'un CRDl'exemple on utilisera Calico, amis un autre add on peut etre utiliser (voir [doc kubernetes](https://kubernetes.io/fr/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#pod-network) a ce sujet)
+
+``kubectl apply -f https://docs.projectcalico.org/v3.8/manifests/calico.yaml``
+
 **Migration application docker compose en kubernetes** (a tester)
 
 Pour deloyer l'application docker compose dans kubernetes, il faut migrer l'application, pour cela, voici un quelques liens interressants :

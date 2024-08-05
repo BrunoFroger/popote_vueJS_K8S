@@ -1,4 +1,4 @@
-#version: '3.5'
+version: '2.29'
 #name: 'popote'
 
 # Services
@@ -54,8 +54,8 @@ services:
       #BACKEND_IP: "https://popote.zapto.org/api"
     ports:
       - 8080:8080
-    depends_on:
-      - backend
+    # depends_on:
+    #   - backend
     networks:
       - popote_network
 
@@ -72,9 +72,9 @@ services:
       #- 8080:8080 
       - 80:80
       - 443:443
-    depends_on:
-      - frontend
-      - backend
+    # depends_on:
+    #   - frontend
+    #   - backend
     networks:
       - popote_network
 

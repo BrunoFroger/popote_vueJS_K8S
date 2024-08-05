@@ -1,3 +1,5 @@
 popote/node_modules
 ~*
 .DS_Store
+.vs
+*.sln
