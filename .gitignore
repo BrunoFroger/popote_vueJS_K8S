@@ -2,4 +2,5 @@ popote/node_modules
 ~*
 .DS_Store
 .vs
-*.sln
+kompose_files
+scripts_formation/tp

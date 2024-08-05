@@ -45,8 +45,10 @@ paramètres à renseigner pour l'installation de linux :
 
 Ne pas oublier de faire une mise a jour globale après l'installation :
 
-``sudo apt-get update``
-``sudo apt-get upgrade``
+```
+sudo apt-get update
+sudo apt-get upgrade
+```
 
 Vous pouvez également faire un échange de clé ssh pour ne plus avoir a tapr le mot de passe lorsque vous vous connecterez sur cete machine
 sur chaque machine distante désireuse de se connecter sur cette machine ; tapez les commandes suivantes :
@@ -153,7 +155,7 @@ Activation de cri-dockerd : ``sudo systemctl enable cri-docker.service``
 
 #### 1.2.2.3 Installation de kubadm (OK, a valider)
 voir sur le site [kubernetes](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/)
-
+voir également ce tuto :[configurer et administrer un cluster Kubernetes avec kubeadm](https://hackernoon.com/fr/configurer-et-g%C3%A9rer-un-cluster-kubernetes-avec-kubeadm)
 ```
 sudo apt-get update
 sudo apt-get install -y apt-transport-https ca-certificates curl gpg
@@ -182,11 +184,11 @@ sudo apt-get upgrade
 
 saisir les commandes suivantes
 
-``sudo kubeadm init --cri-socket=unix:///var/run/cri-dockerd.sock``
+``sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --cri-socket=unix:///var/run/cri-dockerd.sock``
 
 Dans le cas ou kubelet ne demarre pas dans le delai de 4 minutes imparti, cela peut etre du au swap qu'il faut desactiver sur votre machine pour cela il faut executer les commandes suivnates : ``sudo swapoff -v /swapfile`` puis éditer le fichier /etc/fstab et mettre en commentaire (#) la ligne correspondant au swap
 
-en cas d'erreur sur cette commande (et avoir résolu le problème), faire ``sudo kubeadm reset --cri-socket=unix:///var/run/cri-dockerd.sock`` et recommencer la commande d'init
+en cas d'erreur sur cette commande (et avoir résolu le problème), faire ``sudo kubeadm reset --pod-network-cidr=192.168.0.0/16 --cri-socket=unix:///var/run/cri-dockerd.sock`` et recommencer la commande d'init ; cette commande peut etre remplacée par ``kubeadm reset --force --cri-socket=unix:///var/run/cri-dockerd.sock`` qui assure une reinitialisation complète.
 
 Une fois que l'init kubeadm est ok, vous aurez un message semblabe a celui ci dessous pour vous inviter à preparer votre cluster :
 
@@ -221,6 +223,27 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
+**Ajout d'un add-on reseau avec son CRD associé**
+
+voir doc [ici](https://docs.tigera.io/calico/latest/getting-started/kubernetes/quickstart)
+
+``kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.28.1/manifests/tigera-operator.yaml``
+``kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.28.1/manifests/custom-resources.yaml``
+``kubectl create -f custom-resources.yaml``
+
+surveiller la bonne mise en place de calico avec la commande 
+
+``watch kubectl get pods -n calico-system``
+
+qui doit donner a la fin de son execution un resultat similaire a : 
+
+```
+NAMESPACE     NAME                READY   STATUS                  RESTARTS         AGE
+kube-system   calico-node-txngh   1/1     Running                   0              54s
+```
+
+vous pouvez eventuellement installer 
+
 **Tableau de bord / Dashboard**
 
 Pour visualiser un tableau de bord Kubernetes via une interface web, vous pouvez suivre ce [tuto](https://kubernetes.io/fr/docs/tasks/access-application-cluster/web-ui-dashboard/)
@@ -240,12 +263,6 @@ suivre les items suivants de l'installation du cluster :
 - au lieu de faire le ``kubeadm init ....`` il faut utilisser la commande ``kubeadm join ....`` qui est mentionnée lors de la commande init sur le master en ajoutant eventuellemnt l'option ``--cri-socket=unix:///var/run/cri-dockerd.sock``.
 
 
-
-**Ajout d'un add-on reseau pour que les pods puissent communiquer entre eux**
-
-Pour ajouter un add-on reseau il est necessaire de disposer d'un CRDl'exemple on utilisera Calico, amis un autre add on peut etre utiliser (voir [doc kubernetes](https://kubernetes.io/fr/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#pod-network) a ce sujet)
-
-``kubectl apply -f https://docs.projectcalico.org/v3.8/manifests/calico.yaml``
 
 **Migration application docker compose en kubernetes** (a tester)
 
@@ -267,9 +284,14 @@ sudo mv ./kompose /usr/local/bin/kompose
 Aller ensuite dans le repertoire contenant votre docker-compose.yaml pour convertir ce fihier en plussieurs fichiers utilisables par kubectl
 
 ```
+mkdir kompose_files
+cd kompose_files
 kompose convert
-kubectl apply -f nginx-service, mariadb-service, backend-service, frontend-service, nginx-deployement, mariadb-deployement, backend-deployement, frontend-deployement
+kubectl apply -f .
 ```
+
+Verifier dans le Dashboard (aptakube) que vos pods sont bien lancés ....
+
 
 ## 1.3 Installation de Vue JS (si utilisation en local)
 `` npm install -g @vue/cli ``

@@ -1,0 +1,39 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: popote
+  name: deployment-popote-allcontainer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deployment-popote-allcontainer
+  template:
+    metadata:
+      labels:
+        app: deployment-popote-allcontainer
+    spec:
+      containers:
+      - name: popote-mariadb
+        image: popote_vuejs_k8s-mariadb
+        ports:
+          - containerPort: 3306
+          
+      - name: popote-backend
+        image: popote_vuejs_k8s-backend
+        ports:
+          - containerPort: 3000
+      
+      - name: popote-frontend
+        image: popote_vuejs_k8s-frontend
+        ports:
+          - containerPort: 8080
+      
+      - name: popote-nginx
+        image: popote_vuejs_k8s-nginx
+        ports:
+          - containerPort: 80
+          - containerPort: 443
+        volume:
+      
