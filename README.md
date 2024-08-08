@@ -14,7 +14,29 @@ Pour procéder à cette installation, il est nécessaire de disposer des éléme
 - 1 connexion à internet (via une routeur de type Livebox par exemple)  
 - 1 switch, pour connecter entre elles toutes les machines et les raccorder au routeur d'accès a internet  
 
-## 1.1 Installation de Linux 
+**configuration git**
+
+pour pouvoir utiliser les scripts pré-défini de configuration, vous devez initialiser git avec les commandes suivantes : 
+
+```
+sudo apt-get install git
+cd ~
+mkdir projets
+cd projets
+```
+Il faut alors générer la clé ssh et la renseigner sur github
+```
+cd ~/.ssh
+ssh-keygen -n "" -f id_rsa
+```
+
+
+```
+cd ~/projets/
+git clone git@github.com:BrunoFroger/popote_vueJS_K8S.git
+```
+
+## 1.1 Installation de Linux (si pas deja faite)
 
 Télécharger [ici](https://www.ubuntu-fr.org/download/) la dernière version de Linux (ici exemple avec Ubuntu)
 
@@ -58,11 +80,11 @@ cd ~/.ssh
 ls
 ```
 
-si le fichier id_rsa.pub n'existe pas il faut le générer avec la commande ``ssh-keygen``
+si le fichier id_rsa.pub n'existe pas il faut le générer avec la commande ``ssh-keygen -N "" -f id_rsa``
 
 vous pouvez alors copier votre clé ssh avec la commande 
 
-``ssh-copy-id -i id_rsa bruno@<nom_machine>``
+``ssh-copy-id -i id_rsa <user>@<nom_machine>``
 
 **Post installation :**
 
@@ -78,7 +100,8 @@ Certains utilitaires sont a installer pour pouvoir utiliser les commandes de man
 
 Suite à toutes ces manipulations, le système proposera sans doute des mises à jour, il faut les accepter, et si un redémarrage est demandé l'accepter aussi.
 
-## 1.2 Installation de Kubernetes 
+
+## 1.2 Installation de Kubernetes (a supprimer au profit du projet install_K8S)
 
 Pour l'installation de Kubernetes ; 2 possibilités (Minikube ou standard)
 
@@ -311,7 +334,7 @@ voici un exemple de commande permettant de se connecter en ssh depuis une machin
 ``ssh -p xxx bruno@popote.zapto.org`` ou xxx est le numéro de port externe que vous avez configuré ci-dessus
 
 
-## 1.5 Configuration mode sécurisé https (OK)
+## 1.5 Configuration mode sécurisé https (OK) si pas deja fait dans install kubernetes
 
 Afin de sécuriser les accès a ce site, il est possible d'utiliser le protocole https, pour cela il faut suivre le mode opératoire suivant sur le site it-connect pour utiliser certbot qui effectue les demandes de certificat Let's Encrypt ; voir les différents tuto sur le sujet :
 
@@ -334,6 +357,8 @@ Pour verifier la date d'expiration de votre certifcat : tapez la commande suivan
 Pour verifier que votre certificat est bien actif et qu'il est reactualisable (simulation renouvellement) : ``certbot renew --dry-run`` 
 
 Pour renouveller votre certificat (si ce n'est pas fait par un cron) : ``certbot renew`` 
+
+## 1.6 configuration dockerfile nginx pour https
 
 ajouter ensuite au dockerfile les lignes suivantes :
 
@@ -383,7 +408,7 @@ CMD ["nginx", "-g", "daemon off;"]
 
 en version securisé (acces en https) voici les fichiers de configuration :
 
-nginx.conf : 
+nginx.conf :
 
 ```
     server {
