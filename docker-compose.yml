@@ -7,7 +7,7 @@ services:
   # base de donnee Service :
   mariadb:
     container_name: popote_mariadb
-    restart: on-failure
+    restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=root123
       - MYSQL_DATABASE=Popote
@@ -28,7 +28,7 @@ services:
   # backend Service : serveur node
   backend:
     container_name: popote_backend
-    restart: on-failure
+    restart: always
     environment:
       - SMTP_PASSWORD=mdp@mail!popote
       - SMTP_USER=mailpopote
@@ -38,15 +38,15 @@ services:
       dockerfile: serverNode/Dockerfile
     ports:
       - 3000:3000
-    #depends_on:
-      #- mariadb
+    depends_on:
+      - mariadb
     networks:
       - popote_network
 
   # frontend Service : VueJS
   frontend:
     container_name: popote_frontend
-    restart: on-failure
+    restart: always
     build: 
       context: .
       dockerfile: popote/Dockerfile
@@ -54,14 +54,14 @@ services:
       #BACKEND_IP: "https://popote.zapto.org/api"
     ports:
       - 8080:8080
-    # depends_on:
-    #   - backend
+    depends_on:
+      - backend
     networks:
       - popote_network
 
   nginx:
     container_name: popote_nginx
-    restart: on-failure
+    restart: always
     build: 
       context: .
       dockerfile: nginx/Dockerfile
@@ -72,9 +72,9 @@ services:
       #- 8080:8080 
       - 80:80
       - 443:443
-    # depends_on:
-    #   - frontend
-    #   - backend
+    depends_on:
+      - frontend
+      - backend
     networks:
       - popote_network
 
