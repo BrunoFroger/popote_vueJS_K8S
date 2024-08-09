@@ -29,7 +29,7 @@ RUN dpkg-reconfigure --frontend noninteractive tzdata
 #COPY ./nginx/cert /etc/letsencrypt/
 
 
-VOLUME /etc/letsencrypt/ /etc/letsencrypt/:ro
+VOLUME /etc/letsencrypt/ /etc/letsencrypt/ :ro
 
 # Expose the port 80
 EXPOSE 80
