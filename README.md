@@ -347,7 +347,11 @@ Pour générer le certificat ssl, vous devez localement sur la machine hote, lan
 ```
 sudo apt-get update
 sudo apt-get install certbot python3-certbot-nginx -y
+```
 
+La commande suivante est a executer dans le containeur nginx ; il est peut etre necessaire de changer la configuration de nginx pour supprimer les parametres https.
+
+```
 sudo certbot --nginx -d popote.zapto.org
 ```
 Pour vérifier que les certificats sont valides, vous pouvez utliser les commandes suivantes (sur le conteneur nginx) :
