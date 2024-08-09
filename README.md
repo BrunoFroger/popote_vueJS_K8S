@@ -349,11 +349,14 @@ sudo apt-get update
 sudo apt-get install certbot python3-certbot-nginx -y
 ```
 
-La commande suivante est a executer dans le containeur nginx ; il est peut etre necessaire de changer la configuration de nginx pour supprimer les parametres https.
+ATTENTION .... 
+La commande suivante est a executer dans le containeur nginx lors de la première execution (afin d'initialiser les certificat sur la machine hote); il est peut etre necessaire de changer la configuration de nginx pour supprimer les parametres https .
 
 ```
 sudo certbot --nginx -d popote.zapto.org
 ```
+
+
 Pour vérifier que les certificats sont valides, vous pouvez utliser les commandes suivantes (sur le conteneur nginx) :
 
 Pour verifier la date d'expiration de votre certifcat : tapez la commande suivante (en root) : ``certbot certificates``

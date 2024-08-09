@@ -32,7 +32,7 @@ VOLUME /etc/letsencrypt/ /etc/letsencrypt/
 
 RUN apt-get install certbot python3-certbot-nginx -y
 
-# Expose the port 80
+# Expose the port 80 and 443
 EXPOSE 80
 EXPOSE 443
 
