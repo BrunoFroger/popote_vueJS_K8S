@@ -816,13 +816,15 @@ Crer le repertoire de déploiement .github/workflows
 
 les opérations suivantes sont a réaliser sur la machine cible (hebergeant votre application)
 
+les valeurs des token sont a mettre a jour en fonction des informations que vous donne github lors de la création du self hosted runner
+
 ```
 # Create a folder
 $ mkdir actions-runner && cd actions-runner
-Copied!
+
 # Download the latest runner package
 $ curl -o actions-runner-linux-x64-2.317.0.tar.gz -L https://github.com/actions/runner/releases/download/v2.317.0/actions-runner-linux-x64-2.317.0.tar.gz
-Copied!
+
 # Optional: Validate the hash
 $ echo "9e883d210df8c6028aff475475a457d380353f9d01877d51cc01a17b2a91161d  actions-runner-linux-x64-2.317.0.tar.gz" | shasum -a 256 -c
 # Extract the installer
