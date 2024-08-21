@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash
 
 
 mkdir kompose_files
