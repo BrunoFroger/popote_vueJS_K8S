@@ -350,7 +350,7 @@ sudo apt-get install certbot python3-certbot-nginx -y
 ```
 
 ATTENTION .... 
-La commande suivante est a executer dans le containeur nginx lors de la première execution (afin d'initialiser les certificat sur la machine hote); il est peut etre necessaire de changer la configuration de nginx pour supprimer les parametres https .
+La commande suivante est a executer dans le containeur nginx lors de la première execution (afin d'initialiser les certificat sur la machine hote); il est peut etre necessaire de changer la configuration de nginx pour supprimer les parametres https . (changer la ligne de copy du nginx.conf dans le dockerfile)
 
 ```
 sudo certbot --nginx -d popote.zapto.org
