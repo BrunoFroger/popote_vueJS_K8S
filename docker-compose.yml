@@ -15,8 +15,8 @@ services:
       - MYSQL_PASSWORD=popote123    
     security_opt:
       - seccomp=unconfined
-    volumes:
-      - ./mariadb/volume:
+    # volumes:
+    #   - ./mariadb/volume:
     build: 
       context: .
       dockerfile: mariadb/dockerfile
