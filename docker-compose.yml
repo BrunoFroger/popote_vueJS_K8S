@@ -92,7 +92,7 @@ services:
   #   depends_on:
   #     - backend
 
-  # configuration reseau
-  networks:
-    popote_network:
-      driver: bridge
+# configuration reseau
+networks:
+  popote_network:
+    driver: bridge
