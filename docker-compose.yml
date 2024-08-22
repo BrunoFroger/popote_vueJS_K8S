@@ -1,4 +1,4 @@
-version: '2'    # utile pour kompose
+#version: '2'    # utile pour kompose
 #name: 'popote'
 
 # Services
