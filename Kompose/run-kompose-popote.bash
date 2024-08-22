@@ -3,6 +3,7 @@
 
 mkdir kompose_files
 cd kompose_files
-kompose convert -f ../../docker-compose.yml --namespace popote 
+kubectl config set-context --current --namespace=popote
+kompose convert -f ../../docker-compose.yml
 kubectl apply -f .
 
