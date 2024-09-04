@@ -6,7 +6,7 @@ name: Deployment_popote
 on:
   push:
     branches:
-      - main
+      - prod
 
 jobs:
   stop:
