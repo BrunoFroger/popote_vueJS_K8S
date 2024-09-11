@@ -17,7 +17,7 @@ var passPhrase = 'sldjreioenos,soa';
 var tmpUser=null
 
 const db = mysql.createConnection({
-    host: process.env.IP_MARIADB,
+    host: "popote_mariadb",
     database: "Popote",
     user: "popote",   
     password: "popote123" 
@@ -348,6 +348,7 @@ const server = http.createServer((req, res) => {
 server.listen(port, () => {
     console.log('Serveur NodeJS pour popote');
     console.log('Serveur MariaDb : ' + process.env.IP_MARIADB)
+    db.host = process.env.IP_MARIADB
     console.log('db.host         : ' + db.host)
     console.log('server address  : ' + server.address().address)
     console.log(`serveur => Server running at http://${hostname}:${port}/`);
