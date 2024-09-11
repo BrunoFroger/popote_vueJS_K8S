@@ -348,7 +348,8 @@ const server = http.createServer((req, res) => {
 server.listen(port, () => {
     console.log('Serveur NodeJS pour popote');
     console.log('Serveur MariaDb : ' + process.env.IP_MARIADB)
-    console.log('server address = ' + server.address().address)
+    console.log('db.host         : ' + db.host)
+    console.log('server address  : ' + server.address().address)
     console.log(`serveur => Server running at http://${hostname}:${port}/`);
     //chargeRecettes();
     //chargeUsers()
