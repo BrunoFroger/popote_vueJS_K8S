@@ -31,6 +31,7 @@ RUN apt-get install -y ssmtp
 RUN echo 'root:root123' | chpasswd
 
 ENV NODE_ENV production
+ENV IP_MARIADB="popote_mariadb"
 
 WORKDIR /app
 
