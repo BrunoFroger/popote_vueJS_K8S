@@ -18,7 +18,7 @@ var tmpUser=null
 
 const db = mysql.createConnection({
     host: "popote_mariadb",
-    database: "Popote",
+    database: "popote",
     user: "popote",   
     password: "popote123" 
 });

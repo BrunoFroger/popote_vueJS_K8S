@@ -60,4 +60,4 @@ USER node
 EXPOSE 3000
 
 # execute fichier bash de post traitement (lancement des applications et demons)
-CMD src/docker_cmd.bash
+#CMD src/docker_cmd.bash
