@@ -16,7 +16,7 @@ var localMessage='';
 var passPhrase = 'sldjreioenos,soa';
 var tmpUser=null
 
-const db = mysql.createConnection({
+var db = mysql.createConnection({
     host: "popote_mariadb",
     database: "popote",
     user: "popote",   
