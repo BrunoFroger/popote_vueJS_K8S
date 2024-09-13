@@ -16,14 +16,6 @@ var localMessage='';
 var passPhrase = 'sldjreioenos,soa';
 var tmpUser=null
 
-var db = mysql.createConnection({
-    host: "popote_mariadb",
-    database: "popote",
-    user: "popote",   
-    password: "popote123" 
-});
-
-
 //=====================================================
 //
 //      http.createServer
@@ -346,11 +338,14 @@ const server = http.createServer((req, res) => {
 //
 //=====================================================
 server.listen(port, () => {
+    var db = mysql.createConnection({
+        host: process.env.IP_MARIADB,
+        database: "popote",
+        user: "popote",   
+        password: "popote123" 
+    });
     console.log('Serveur NodeJS pour popote');
     console.log('Serveur MariaDb : ' + process.env.IP_MARIADB)
-    db.host = process.env.IP_MARIADB
-    console.log("structure db = " + db.stringify())
-    console.log('db.host         : ' + db.host)
     console.log('server address  : ' + server.address().address)
     console.log(`serveur => Server running at http://${hostname}:${port}/`);
     //chargeRecettes();
