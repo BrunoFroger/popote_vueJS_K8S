@@ -38,6 +38,8 @@ WORKDIR /app
 # copy files
 COPY popote/ ./
 
+ENV IP_BACKEND='https://popote.zapto.org/api'
+
 # copie 'package.json' et 'package-lock.json' (si disponible)
 #COPY ./package*.json ./
 #COPY ./webpack.config.js ./
