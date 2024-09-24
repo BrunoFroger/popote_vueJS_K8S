@@ -37,6 +37,7 @@ RUN apt-get install certbot python3-certbot-nginx -y
 # Expose the port 80 and 443
 EXPOSE 80
 EXPOSE 443
+EXPOSE 3000
 
 # Start Nginx to serve the application
 #CMD ["nginx", "-g", "daemon off;"]

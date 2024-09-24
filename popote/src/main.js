@@ -23,8 +23,8 @@ const app = createApp({
           isAdmin: false,
           currentDateTime: '',
           //serverNodeAdress: 'http://localhost:3000',
-          //serverNodeAdress: 'http://popote.zapto.org:3000',
-          serverNodeAdress: process.env.IP_BACKEND,
+          serverNodeAdress: 'http://popote.zapto.org:3000',
+          // serverNodeAdress: process.env.IP_BACKEND,
           //serverNodeAdress: 'https://popote.zapto.org/api',
           //serverNodeAdress: process.env.BACKEND_IP,
           
