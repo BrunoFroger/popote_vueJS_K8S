@@ -29,10 +29,10 @@ services:
   backend:
     container_name: popote_backend
     restart: always
-    environment:
-      - SMTP_PASSWORD=mdp@mail!popote
-      - SMTP_USER=mailpopote
-      - SMTP_SERVER=smtp.gmail.com:465
+    # environment:
+    #   - SMTP_PASSWORD=mdp@mail!popote
+    #   - SMTP_USER=mailpopote
+    #   - SMTP_SERVER=smtp.gmail.com:465
     build: 
       context: .
       dockerfile: serverNode/Dockerfile
