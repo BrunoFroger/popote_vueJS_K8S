@@ -340,7 +340,7 @@ const server = http.createServer((req, res) => {
 server.listen(port, () => {
     var db = mysql.createConnection({
         // host: process.env.IP_MARIADB,
-        host: "localhost",
+        host: "127.0.0.1",
         database: "Popote",
         user: "popote",   
         password: "popote123" 
