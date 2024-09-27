@@ -31,7 +31,7 @@ RUN apt-get install -y ssmtp
 RUN echo 'root:root123' | chpasswd
 
 ENV NODE_ENV production
-ENV IP_MARIADB="localhost"
+ENV IP_MARIADB="127.0.0.1"
 
 WORKDIR /app
 
