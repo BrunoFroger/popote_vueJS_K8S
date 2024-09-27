@@ -342,8 +342,8 @@ server.listen(port, () => {
         // host: process.env.IP_MARIADB,
         host: "127.0.0.1",
         database: "Popote",
-        user: "popote",   
-        password: "popote123" 
+        user: "root",   
+        password: "root123" 
     });
     console.log('Serveur NodeJS pour popote');
     console.log('Serveur MariaDb : ' + process.env.IP_MARIADB)
