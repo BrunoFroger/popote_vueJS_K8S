@@ -10,6 +10,7 @@ RUN apk update
 
 #install optionnels
 RUN apk add bash
+RUN apk add curl
 #RUN apt-get install -y net-tools
 #RUN apt-get install -y iputils-ping
 

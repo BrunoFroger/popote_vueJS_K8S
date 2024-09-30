@@ -38,6 +38,7 @@ const app = createApp({
     template: '\
         <div class="entete">\
           <table>\
+            <tbody>\
             <tr>\
               <td><a href="#" @click.prevent="page=\'home\'">Acceuil</a></td>\
               <td><a href="#" @click.prevent="page=\'recettes\'">Recettes</a></td>\
@@ -45,6 +46,7 @@ const app = createApp({
               <td v-if="isAdmin"><a href="#" @click.prevent="page=\'admin\'">Admin</a></td>\
               <td>{{currentDateTime}}</td>\
             </tr>\
+            </tbody>\
           </table>\
         </div>\
         <div>\
