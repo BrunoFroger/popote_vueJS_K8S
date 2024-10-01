@@ -26,7 +26,7 @@ export default {
                     <th>nom</th> \
                     <th>passwd</th> \
                     <th>email</th> \
-                    <th></th> \
+                    <th>idRole (0=admin)</th> \
                 </thead> \
                 <tbody> \
                     <tr v-for="item in listeUsers"> \
