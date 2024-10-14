@@ -43,39 +43,51 @@ jobs:
           #   fi
           # done
 
-  build-images:
+  build-mariadb:
     needs: [get-code]
     runs-on: self-hosted
     steps:
       - name: build mariadb
         run: |
           echo "build mariadb"
-          cd /home/master/githubWorkflows
-          compose build --no-cache mariadb
+          # cd /home/master/githubWorkflows
+          # compose build --no-cache mariadb
 
+  build-backend:
+    needs: [get-code]
+    runs-on: self-hosted
+    steps:
       - name: build backend
         run: |
           echo "build backend"
-          cd /home/master/githubWorkflows
-          compose build --no-cache backend
+          # cd /home/master/githubWorkflows
+          # compose build --no-cache backend
 
+  build-frontend:
+    needs: [get-code]
+    runs-on: self-hosted
+    steps:
       - name: build frontend
         run: |
           echo "build frontend"
-          cd /home/master/githubWorkflows
+          # cd /home/master/githubWorkflows
           # compose build --no-cache popote
 
+  build-nginx:
+    needs: [get-code]
+    runs-on: self-hosted
+    steps:
       - name: build nginx
         run: |
           echo "build nginx"
-          cd /home/master/githubWorkflows
+          # cd /home/master/githubWorkflows
           # compose build --no-cache nginx
 
-  push-images:
-    needs: [build-images]
+  push-mariadb:
+    needs: [build-mariadb]
     runs-on: self-hosted
     steps: 
-      - name: push images on github
+      - name: push image mariadb on github
         run: |
-          echo "push images sur github"
-          cd /home/master/githubWorkflows
+          echo "push image mariadb sur github"
+          # cd /home/master/githubWorkflows
