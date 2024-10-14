@@ -9,7 +9,6 @@ on:
 
 jobs:
   get-code:
-    needs: [update-code, stop]
     runs-on: self-hosted
     steps:
       - name: get code
