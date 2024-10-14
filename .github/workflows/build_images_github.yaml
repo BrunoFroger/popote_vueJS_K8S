@@ -5,7 +5,7 @@ name: Deployment_popote
 
 on:
   release:
-    types: [published]
+    types: [published, update]
 
 jobs:
   get-code:
