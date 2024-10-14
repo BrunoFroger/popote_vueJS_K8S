@@ -1,0 +1,77 @@
+# fichier de deploiement github pour l'application popote
+# (c) B. Froger (2024)-> now
+
+name: Deployment_popote
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  get-code:
+    needs: [update-code, stop]
+    runs-on: self-hosted
+    steps:
+      - name: get code
+        run: |
+          echo "Les images popote n'existent pas, il faut les creer !"
+          rm -rf popote_files
+          mkdir popote_files
+          cd popote_files
+          wget https://github.com/BrunoFroger/popote_vueJS_K8S/releases/latest > wget.log 2>&1 
+          rm latest
+          archive="$(cat wget.log | grep release | tail -1 | awk -F' ' '{print $NF}')"
+          #echo "archive = $archive"
+          version=$(echo $archive | awk -F'/' '{print $NF}')
+          #echo "version = $version"
+          zipFile=$(echo "$archive.zip" | sed 's/releases/archive/g' | sed 's/tag/tags/g')
+          #echo "zipFile = $zipFile"
+          rm wget.log
+          fichier="$(echo $zipFile | awk -F'/' '{print $NF}')"
+          #echo "fichier = $fichier"
+          wget $zipFile
+          unzip $fichier
+          rm $fichier
+          echo on efface les anciennes images popote locale
+          while :
+          do
+            if [[ $(docker images | grep popote_vuejs_k8s-tags- | wc -l) > 0 ]]; then
+                image=$(docker images | grep popote_vuejs_k8s-tags- | awk -F' ' '{print $1}')
+                echo "on efface l'image $image"
+                docker rmi $image
+            else
+                break;
+            fi
+          done
+
+  build-images:
+    needs: [get-code]
+    runs-on: self-hosted
+    steps:
+      - name: build mariadb
+        run: |
+          cd /home/master/githubWorkflows
+          compose build --no-cache mariadb
+
+      - name: build backend
+        run: |
+          cd /home/master/githubWorkflows
+          compose build --no-cache backend
+
+      - name: build frontend
+        run: |
+          cd /home/master/githubWorkflows
+          compose build --no-cache popote
+
+      - name: build nginx
+        run: |
+          cd /home/master/githubWorkflows
+          compose build --no-cache nginx
+
+  push-images:
+    needs: [build-images]
+    runs-on: self-hosted
+    steps: 
+      - name: push images on github
+        run: |
+          cd /home/master/githubWorkflows
