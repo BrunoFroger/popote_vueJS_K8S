@@ -91,3 +91,30 @@ jobs:
         run: |
           echo "push image mariadb sur github"
           # cd /home/master/githubWorkflows
+
+  push-backend:
+    needs: [build-backend]
+    runs-on: self-hosted
+    steps: 
+      - name: push image backend on github
+        run: |
+          echo "push image backend sur github"
+          # cd /home/master/githubWorkflows
+
+  push-frontend:
+    needs: [build-frontend]
+    runs-on: self-hosted
+    steps: 
+      - name: push image frontend on github
+        run: |
+          echo "push image frontend sur github"
+          # cd /home/master/githubWorkflows
+
+  push-nginx:
+    needs: [build-nginx]
+    runs-on: self-hosted
+    steps: 
+      - name: push image nginx on github
+        run: |
+          echo "push image nginx sur github"
+          # cd /home/master/githubWorkflows
