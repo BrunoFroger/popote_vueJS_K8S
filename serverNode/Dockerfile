@@ -51,7 +51,7 @@ COPY mariadb/create_base.sql .
 
 RUN chmod +x *bash
 RUN chown -R node:node *
-RUN chown -R node:node .muttrc
+# RUN chown -R node:node .muttrc
 
 # Run the application as a non-root user.
 USER node
