@@ -113,7 +113,7 @@ jobs:
         run: |
           echo "build frontend"
           cd ~/popote_files/popote*
-          docker compose build --no-cache popote
+          docker compose build --no-cache frontend
 
   build-nginx:
     needs: [get-code-1, get-code-2]
