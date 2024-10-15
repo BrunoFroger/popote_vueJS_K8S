@@ -71,17 +71,17 @@ jobs:
             wget $zipFile
             unzip $fichier
             rm $fichier
-            echo on efface les anciennes images popote locale
-            while :
-            do
-              if [[ $(docker images | grep popote_vuejs_k8s-tags- | wc -l) > 0 ]]; then
-                  image=$(docker images | grep popote_vuejs_k8s-tags- | awk -F' ' '{print $1}' | tail -1)
-                  echo "on efface l'image $image"
-                  docker rmi $image
-              else
-                  break;
-              fi
-            done
+            # echo on efface les anciennes images popote locale
+            # while :
+            # do
+            #   if [[ $(docker images | grep popote_vuejs_k8s-tags- | wc -l) > 0 ]]; then
+            #       image=$(docker images | grep popote_vuejs_k8s-tags- | awk -F' ' '{print $1}' | tail -1)
+            #       echo "on efface l'image $image"
+            #       docker rmi $image
+            #   else
+            #       break;
+            #   fi
+            # done
           fi
 
   build-mariadb:
@@ -91,7 +91,7 @@ jobs:
       - name: build mariadb
         run: |
           echo "build mariadb"
-          cd ~/popote_files
+          cd ~/popote_files/popote*
           compose build --no-cache mariadb
 
   build-backend:
@@ -101,7 +101,7 @@ jobs:
       - name: build backend
         run: |
           echo "build backend"
-          cd ~/popote_files
+          cd ~/popote_files/popote*
           # compose build --no-cache backend
 
   build-frontend:
@@ -111,7 +111,7 @@ jobs:
       - name: build frontend
         run: |
           echo "build frontend"
-          cd ~/popote_files
+          cd ~/popote_files/popote*
           # compose build --no-cache popote
 
   build-nginx:
@@ -121,7 +121,7 @@ jobs:
       - name: build nginx
         run: |
           echo "build nginx"
-          cd ~/popote_files
+          cd ~/popote_files/popote*
           # compose build --no-cache nginx
 
   push-mariadb:
@@ -131,7 +131,7 @@ jobs:
       - name: push image mariadb on github
         run: |
           echo "push image mariadb sur github"
-          cd ~/popote_files
+          cd ~/popote_files/popote*
 
   push-backend:
     needs: [build-backend]
@@ -140,7 +140,7 @@ jobs:
       - name: push image backend on github
         run: |
           echo "push image backend sur github"
-          cd ~/popote_files
+          cd ~/popote_files/popote*
 
   push-frontend:
     needs: [build-frontend]
@@ -149,7 +149,7 @@ jobs:
       - name: push image frontend on github
         run: |
           echo "push image frontend sur github"
-          cd ~/popote_files
+          cd ~/popote_files/popote*
 
   push-nginx:
     needs: [build-nginx]
@@ -158,7 +158,7 @@ jobs:
       - name: push image nginx on github
         run: |
           echo "push image nginx sur github"
-          cd ~/popote_files
+          cd ~/popote_files/popote*
 
   finalisation:
     needs: [push-nginx, push-backend, push-frontend, push-mariadb]
