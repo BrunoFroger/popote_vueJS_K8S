@@ -90,14 +90,15 @@ jobs:
     steps:
       - name: build mariadb
         run: |
-          echo "build mariadb"
+          module="mariadb"
+          echo "build ${module}"
           cd ~/popote_files/popote*
           echo "on execute les commandes dans le repertorie $PWD"
-          docker compose build --no-cache mariadb
-          image=$(docker images | egrep "^popote" | grep mariadb | awk -F ' ' '{print $1}')
+          docker compose build --no-cache ${module}
+          image=$(docker images | egrep "^popote" | grep ${module} | awk -F ' ' '{print $1}')
           loginDocker=$(docker info | grep Username | cut -d':' -f 2)
           docker image tag ${image}:latest ${loginDocker}/${image}:latest
-          docker image push fbruno/${image}:latest
+          docker image push ${loginDocker}/${image}:latest
 
   build-backend:
     needs: [get-code-1, get-code-2]
@@ -129,44 +130,8 @@ jobs:
           cd ~/popote_files/popote*
           docker compose build --no-cache nginx
 
-  push-mariadb:
-    needs: [build-mariadb]
-    runs-on: self-hosted
-    steps: 
-      - name: push image mariadb on github
-        run: |
-          echo "push image mariadb sur github"
-          cd ~/popote_files/popote*
-
-  push-backend:
-    needs: [build-backend]
-    runs-on: self-hosted
-    steps: 
-      - name: push image backend on github
-        run: |
-          echo "push image backend sur github"
-          cd ~/popote_files/popote*
-
-  push-frontend:
-    needs: [build-frontend]
-    runs-on: self-hosted
-    steps: 
-      - name: push image frontend on github
-        run: |
-          echo "push image frontend sur github"
-          cd ~/popote_files/popote*
-
-  push-nginx:
-    needs: [build-nginx]
-    runs-on: self-hosted
-    steps: 
-      - name: push image nginx on github
-        run: |
-          echo "push image nginx sur github"
-          cd ~/popote_files/popote*
-
   finalisation-1:
-    needs: [push-nginx, push-backend, push-frontend, push-mariadb]
+    needs: [build-nginx, build-backend, build-frontend, build-mariadb]
     runs-on: self-hosted
     steps: 
       - name: finalisation génération images
@@ -176,7 +141,7 @@ jobs:
           rm -rf ~/popote_files  
   
   finalisation-2:
-    needs: [push-nginx, push-backend, push-frontend, push-mariadb]
+    needs: [build-nginx, build-backend, build-frontend, build-mariadb]
     runs-on: self-hosted
     steps: 
       - name: finalisation génération images
