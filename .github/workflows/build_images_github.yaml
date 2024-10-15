@@ -161,7 +161,17 @@ jobs:
           echo "push image nginx sur github"
           cd ~/popote_files/popote*
 
-  finalisation:
+  finalisation-1:
+    needs: [push-nginx, push-backend, push-frontend, push-mariadb]
+    runs-on: self-hosted
+    steps: 
+      - name: finalisation génération images
+        run: |
+          echo "finalisation génération images"
+          cd
+          rm -rf ~/popote_files  
+  
+  finalisation-2:
     needs: [push-nginx, push-backend, push-frontend, push-mariadb]
     runs-on: self-hosted
     steps: 
