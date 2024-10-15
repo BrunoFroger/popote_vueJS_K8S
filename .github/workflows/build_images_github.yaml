@@ -36,7 +36,7 @@ jobs:
             while :
             do
               if [[ $(docker images | grep popote_vuejs_k8s-tags- | wc -l) > 0 ]]; then
-                  image=$(docker images | grep popote_vuejs_k8s-tags- | awk -F' ' '{print $1}')
+                  image=$(docker images | grep popote_vuejs_k8s-tags- | awk -F' ' '{print $1}' | tail -1)
                   echo "on efface l'image $image"
                   docker rmi $image
               else
@@ -73,7 +73,7 @@ jobs:
             while :
             do
               if [[ $(docker images | grep popote_vuejs_k8s-tags- | wc -l) > 0 ]]; then
-                  image=$(docker images | grep popote_vuejs_k8s-tags- | awk -F' ' '{print $1}')
+                  image=$(docker images | grep popote_vuejs_k8s-tags- | awk -F' ' '{print $1}' | tail -1)
                   echo "on efface l'image $image"
                   docker rmi $image
               else
