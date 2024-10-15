@@ -93,7 +93,7 @@ jobs:
           echo "build mariadb"
           cd ~/popote_files/popote*
           echo "on execute les commandes dans le repertorie $PWD"
-          compose build --no-cache mariadb
+          docker compose build --no-cache mariadb
 
   build-backend:
     needs: [get-code-1, get-code-2]
@@ -103,7 +103,7 @@ jobs:
         run: |
           echo "build backend"
           cd ~/popote_files/popote*
-          # compose build --no-cache backend
+          docker compose build --no-cache backend
 
   build-frontend:
     needs: [get-code-1, get-code-2]
@@ -113,7 +113,7 @@ jobs:
         run: |
           echo "build frontend"
           cd ~/popote_files/popote*
-          # compose build --no-cache popote
+          docker compose build --no-cache popote
 
   build-nginx:
     needs: [get-code-1, get-code-2]
@@ -123,7 +123,7 @@ jobs:
         run: |
           echo "build nginx"
           cd ~/popote_files/popote*
-          # compose build --no-cache nginx
+          docker compose build --no-cache nginx
 
   push-mariadb:
     needs: [build-mariadb]
