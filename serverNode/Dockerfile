@@ -43,11 +43,11 @@ RUN npm install
 COPY serverNode/ ./
 COPY mariadb/create_base.sql .
 
-RUN mkdir /var/spool/mail/node
-RUN mkdir ~/mail
-RUN mkdir ~/tmp
-COPY serverNode/mutt/.muttrc .
-COPY serverNode/mutt/ssmtp.conf /etc/ssmtp/ssmtp.conf
+# RUN mkdir /var/spool/mail/node
+# RUN mkdir ~/mail
+# RUN mkdir ~/tmp
+# COPY serverNode/mutt/.muttrc .
+# COPY serverNode/mutt/ssmtp.conf /etc/ssmtp/ssmtp.conf
 
 RUN chmod +x *bash
 RUN chown -R node:node *
