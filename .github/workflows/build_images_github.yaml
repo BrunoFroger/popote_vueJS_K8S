@@ -51,7 +51,7 @@ jobs:
     steps:
       - name: get code runner 2
         run: |
-          docker system prune
+          docker system prune -f
           if [[ ! -d ~/popote_file ]]; then
             echo "Chargement du code popote"
             rm -rf ~/popote_files
@@ -111,8 +111,18 @@ jobs:
       - name: build backend
         run: |
           echo "build backend"
+          echo "build ${module}"
           cd ~/popote_files/popote*
-          docker compose build --no-cache backend
+          echo "on execute les commandes dans le repertorie $PWD"
+          echo "build de l'image ${module}"
+          docker compose build --no-cache ${module}
+          image=$(docker images | egrep "^popote" | grep ${module} | awk -F ' ' '{print $1}' | sed 's/ /\n/g' |sort | tail -1)
+          echo "tag de l'image ${module}"
+          loginDocker=$(docker info 2> /dev/null | grep Username | cut -d':' -f 2)
+          echo "login docker = ${loginDocker}"
+          docker image tag ${image}:latest ${loginDocker}/${image}:latest
+          echo "push de l'image ${loginDocker}${module}"
+          docker image push ${loginDocker}/${image}:latest
 
   build-frontend:
     needs: [get-code-1, get-code-2]
@@ -121,8 +131,18 @@ jobs:
       - name: build frontend
         run: |
           echo "build frontend"
+          echo "build ${module}"
           cd ~/popote_files/popote*
-          docker compose build --no-cache frontend
+          echo "on execute les commandes dans le repertorie $PWD"
+          echo "build de l'image ${module}"
+          docker compose build --no-cache ${module}
+          image=$(docker images | egrep "^popote" | grep ${module} | awk -F ' ' '{print $1}' | sed 's/ /\n/g' |sort | tail -1)
+          echo "tag de l'image ${module}"
+          loginDocker=$(docker info 2> /dev/null | grep Username | cut -d':' -f 2)
+          echo "login docker = ${loginDocker}"
+          docker image tag ${image}:latest ${loginDocker}/${image}:latest
+          echo "push de l'image ${loginDocker}${module}"
+          docker image push ${loginDocker}/${image}:latest
 
   build-nginx:
     needs: [get-code-1, get-code-2]
@@ -131,8 +151,18 @@ jobs:
       - name: build nginx
         run: |
           echo "build nginx"
+          echo "build ${module}"
           cd ~/popote_files/popote*
-          docker compose build --no-cache nginx
+          echo "on execute les commandes dans le repertorie $PWD"
+          echo "build de l'image ${module}"
+          docker compose build --no-cache ${module}
+          image=$(docker images | egrep "^popote" | grep ${module} | awk -F ' ' '{print $1}' | sed 's/ /\n/g' |sort | tail -1)
+          echo "tag de l'image ${module}"
+          loginDocker=$(docker info 2> /dev/null | grep Username | cut -d':' -f 2)
+          echo "login docker = ${loginDocker}"
+          docker image tag ${image}:latest ${loginDocker}/${image}:latest
+          echo "push de l'image ${loginDocker}${module}"
+          docker image push ${loginDocker}/${image}:latest
 
   finalisation-1:
     needs: [build-nginx, build-backend, build-frontend, build-mariadb]
