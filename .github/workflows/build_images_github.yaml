@@ -118,3 +118,11 @@ jobs:
         run: |
           echo "push image nginx sur github"
           # cd /home/master/githubWorkflows
+
+  finalisation:
+    needs: [build-nginx, build-backend, build-frontend, build-mariadb]
+    runs-on: self-hosted
+    steps: 
+      - name: finalisation génération images
+        run: |
+          echo "finalisation génération images"
