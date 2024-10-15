@@ -167,7 +167,7 @@ jobs:
   finalisation-1:
     needs: [build-nginx, build-backend, build-frontend, build-mariadb]
     runs-on: self-hosted
-    if: ${{ always() && (needs.build-nginx.result == 'failure' || needs.build-backend.result == 'failure' || needs.build-frontend.result == 'failure' || needs.build-mariadb.result == 'failure') }}
+    # if: ${{ always() && (needs.build-nginx.result == 'failure' || needs.build-backend.result == 'failure' || needs.build-frontend.result == 'failure' || needs.build-mariadb.result == 'failure') }}
     steps: 
       - name: finalisation génération images
         run: |
@@ -189,7 +189,7 @@ jobs:
   finalisation-2:
     needs: [build-nginx, build-backend, build-frontend, build-mariadb]
     runs-on: self-hosted
-    if: ${{ always() && (needs.build-nginx.result == 'failure' || needs.build-backend.result == 'failure' || needs.build-frontend.result == 'failure' || needs.build-mariadb.result == 'failure') }}
+    # if: ${{ always() && (needs.build-nginx.result == 'failure' || needs.build-backend.result == 'failure' || needs.build-frontend.result == 'failure' || needs.build-mariadb.result == 'failure') }}
     steps: 
       - name: finalisation génération images
         run: |
