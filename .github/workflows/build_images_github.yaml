@@ -94,10 +94,14 @@ jobs:
           echo "build ${module}"
           cd ~/popote_files/popote*
           echo "on execute les commandes dans le repertorie $PWD"
+          echo "build de l'image ${module}"
           docker compose build --no-cache ${module}
           image=$(docker images | egrep "^popote" | grep ${module} | awk -F ' ' '{print $1}')
+          echo "tag de l'image ${module}"
           loginDocker=$(docker info | grep Username | cut -d':' -f 2)
+          echo "login docker = ${loginDocker}"
           docker image tag ${image}:latest ${loginDocker}/${image}:latest
+          echo "push de l'image ${loginDocker}${module}"
           docker image push ${loginDocker}/${image}:latest
 
   build-backend:
