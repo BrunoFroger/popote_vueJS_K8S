@@ -83,7 +83,7 @@ jobs:
           fi
 
   build-mariadb:
-    needs: [get-code]
+    needs: [get-code-1, get-code-2]
     runs-on: self-hosted
     steps:
       - name: build mariadb
@@ -93,7 +93,7 @@ jobs:
           compose build --no-cache mariadb
 
   build-backend:
-    needs: [get-code]
+    needs: [get-code-1, get-code-2]
     runs-on: self-hosted
     steps:
       - name: build backend
@@ -103,7 +103,7 @@ jobs:
           # compose build --no-cache backend
 
   build-frontend:
-    needs: [get-code]
+    needs: [get-code-1, get-code-2]
     runs-on: self-hosted
     steps:
       - name: build frontend
@@ -113,7 +113,7 @@ jobs:
           # compose build --no-cache popote
 
   build-nginx:
-    needs: [get-code]
+    needs: [get-code-1, get-code-2]
     runs-on: self-hosted
     steps:
       - name: build nginx
