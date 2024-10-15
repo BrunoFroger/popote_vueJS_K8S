@@ -13,6 +13,7 @@ jobs:
     steps:
       - name: get code runner 1
         run: |
+          docker system prune
           if [[ ! -d ~/popote_file ]]; then
             echo "Chargement du code popote"
             rm -rf ~/popote_files
@@ -50,6 +51,7 @@ jobs:
     steps:
       - name: get code runner 2
         run: |
+          docker system prune
           if [[ ! -d ~/popote_file ]]; then
             echo "Chargement du code popote"
             rm -rf ~/popote_files
