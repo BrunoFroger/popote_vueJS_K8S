@@ -92,6 +92,7 @@ jobs:
         run: |
           echo "build mariadb"
           cd ~/popote_files/popote*
+          echo "on execute les commandes dans le repertorie $PWD"
           compose build --no-cache mariadb
 
   build-backend:
