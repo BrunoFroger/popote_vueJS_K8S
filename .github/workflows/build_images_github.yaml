@@ -110,7 +110,7 @@ jobs:
     steps:
       - name: build backend
         run: |
-          echo "build backend"
+          module="backend"
           echo "build ${module}"
           cd ~/popote_files/popote*
           echo "on execute les commandes dans le repertorie $PWD"
@@ -130,7 +130,7 @@ jobs:
     steps:
       - name: build frontend
         run: |
-          echo "build frontend"
+          module="frontend"
           echo "build ${module}"
           cd ~/popote_files/popote*
           echo "on execute les commandes dans le repertorie $PWD"
@@ -150,7 +150,7 @@ jobs:
     steps:
       - name: build nginx
         run: |
-          echo "build nginx"
+          module="nginx"
           echo "build ${module}"
           cd ~/popote_files/popote*
           echo "on execute les commandes dans le repertorie $PWD"
