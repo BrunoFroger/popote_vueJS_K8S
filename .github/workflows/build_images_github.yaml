@@ -94,6 +94,10 @@ jobs:
           cd ~/popote_files/popote*
           echo "on execute les commandes dans le repertorie $PWD"
           docker compose build --no-cache mariadb
+          image=$(docker images | egrep "^popote" | grep mariadb | awk -F ' ' '{print $1}')
+          loginDocker=$(docker info | grep Username | cut -d':' -f 2)
+          docker image tag ${image}:latest ${loginDocker}/${image}:latest
+          docker image push fbruno/${image}:latest
 
   build-backend:
     needs: [get-code-1, get-code-2]
