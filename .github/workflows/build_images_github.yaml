@@ -50,8 +50,8 @@ jobs:
       - name: build mariadb
         run: |
           echo "build mariadb"
-          # cd /home/master/githubWorkflows
-          # compose build --no-cache mariadb
+          cd ~/popote_files
+          compose build --no-cache mariadb
 
   build-backend:
     needs: [get-code]
@@ -60,7 +60,7 @@ jobs:
       - name: build backend
         run: |
           echo "build backend"
-          # cd /home/master/githubWorkflows
+          cd ~/popote_files
           # compose build --no-cache backend
 
   build-frontend:
@@ -70,7 +70,7 @@ jobs:
       - name: build frontend
         run: |
           echo "build frontend"
-          # cd /home/master/githubWorkflows
+          cd ~/popote_files
           # compose build --no-cache popote
 
   build-nginx:
@@ -80,7 +80,7 @@ jobs:
       - name: build nginx
         run: |
           echo "build nginx"
-          # cd /home/master/githubWorkflows
+          cd ~/popote_files
           # compose build --no-cache nginx
 
   push-mariadb:
@@ -90,7 +90,7 @@ jobs:
       - name: push image mariadb on github
         run: |
           echo "push image mariadb sur github"
-          # cd /home/master/githubWorkflows
+          cd ~/popote_files
 
   push-backend:
     needs: [build-backend]
@@ -99,7 +99,7 @@ jobs:
       - name: push image backend on github
         run: |
           echo "push image backend sur github"
-          # cd /home/master/githubWorkflows
+          cd ~/popote_files
 
   push-frontend:
     needs: [build-frontend]
@@ -108,7 +108,7 @@ jobs:
       - name: push image frontend on github
         run: |
           echo "push image frontend sur github"
-          # cd /home/master/githubWorkflows
+          cd ~/popote_files
 
   push-nginx:
     needs: [build-nginx]
@@ -117,7 +117,7 @@ jobs:
       - name: push image nginx on github
         run: |
           echo "push image nginx sur github"
-          # cd /home/master/githubWorkflows
+          cd ~/popote_files
 
   finalisation:
     needs: [push-nginx, push-backend, push-frontend, push-mariadb]
@@ -126,3 +126,5 @@ jobs:
       - name: finalisation génération images
         run: |
           echo "finalisation génération images"
+          cd
+          rm -rf ~/popote_files
