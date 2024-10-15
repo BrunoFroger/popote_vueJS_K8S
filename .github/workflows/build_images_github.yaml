@@ -71,17 +71,17 @@ jobs:
             wget $zipFile
             unzip $fichier
             rm $fichier
-            # echo on efface les anciennes images popote locale
-            # while :
-            # do
-            #   if [[ $(docker images | grep popote_vuejs_k8s-tags- | wc -l) > 0 ]]; then
-            #       image=$(docker images | grep popote_vuejs_k8s-tags- | awk -F' ' '{print $1}' | tail -1)
-            #       echo "on efface l'image $image"
-            #       docker rmi $image
-            #   else
-            #       break;
-            #   fi
-            # done
+            echo "on efface les anciennes images popote locale"
+            while :
+            do
+              if [[ $(docker images | grep popote_vuejs_k8s-tags- | wc -l) > 0 ]]; then
+                  image=$(docker images | grep popote_vuejs_k8s-tags- | awk -F' ' '{print $1}' | tail -1)
+                  echo "on efface l'image $image"
+                  docker rmi $image -f
+              else
+                  break;
+              fi
+            done
           fi
 
   build-mariadb:
@@ -167,19 +167,43 @@ jobs:
   finalisation-1:
     needs: [build-nginx, build-backend, build-frontend, build-mariadb]
     runs-on: self-hosted
+    if: ${{ always() && (needs.build-nginx.result == 'failure' || needs.build-backend.result == 'failure') || needs.build-frontend.result == 'failure') || needs.build-mariadb.result == 'failure') }}
     steps: 
       - name: finalisation génération images
         run: |
           echo "finalisation génération images"
           cd
           rm -rf ~/popote_files  
+          echo "on efface les images popote locale"
+          while :
+          do
+            if [[ $(docker images | grep popote_vuejs_k8s-tags- | wc -l) > 0 ]]; then
+                image=$(docker images | grep popote_vuejs_k8s-tags- | awk -F' ' '{print $1}' | tail -1)
+                echo "on efface l'image $image"
+                docker rmi $image -f
+            else
+                break;
+            fi
+          done
   
   finalisation-2:
     needs: [build-nginx, build-backend, build-frontend, build-mariadb]
     runs-on: self-hosted
+    if: ${{ always() && (needs.build-nginx.result == 'failure' || needs.build-backend.result == 'failure') || needs.build-frontend.result == 'failure') || needs.build-mariadb.result == 'failure') }}
     steps: 
       - name: finalisation génération images
         run: |
           echo "finalisation génération images"
           cd
           rm -rf ~/popote_files
+          echo "on efface les images popote locale"
+          while :
+          do
+            if [[ $(docker images | grep popote_vuejs_k8s-tags- | wc -l) > 0 ]]; then
+                image=$(docker images | grep popote_vuejs_k8s-tags- | awk -F' ' '{print $1}' | tail -1)
+                echo "on efface l'image $image"
+                docker rmi $image -f
+            else
+                break;
+            fi
+          done
