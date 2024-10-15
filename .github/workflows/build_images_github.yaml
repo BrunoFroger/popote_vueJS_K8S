@@ -98,7 +98,7 @@ jobs:
           docker compose build --no-cache ${module}
           image=$(docker images | egrep "^popote" | grep ${module} | awk -F ' ' '{print $1}')
           echo "tag de l'image ${module}"
-          loginDocker=$(docker info | grep Username | cut -d':' -f 2)
+          loginDocker=$(docker info 2> /dev/null | grep Username | cut -d':' -f 2)
           echo "login docker = ${loginDocker}"
           docker image tag ${image}:latest ${loginDocker}/${image}:latest
           echo "push de l'image ${loginDocker}${module}"
