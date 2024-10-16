@@ -96,7 +96,7 @@ jobs:
           echo "on execute les commandes dans le repertorie $PWD"
           echo "build de l'image ${module}"
           docker compose build --no-cache ${module}
-          image=$(docker images | egrep "^popote" | grep ${module} | awk -F ' ' '{print $1}' | sed 's/ /\n/g' |sort | tail -1)
+          image=$(docker images | egrep "^popote" | grep ${module} | awk -F ' ' '{print $1}' | sed 's/ /\n/g' |sort -t '-' -k3 -n | tail -1)
           echo "tag de l'image ${module}"
           loginDocker=$(docker info 2> /dev/null | grep Username | cut -d':' -f 2)
           echo "login docker = ${loginDocker}"
@@ -116,7 +116,7 @@ jobs:
           echo "on execute les commandes dans le repertorie $PWD"
           echo "build de l'image ${module}"
           docker compose build --no-cache ${module}
-          image=$(docker images | egrep "^popote" | grep ${module} | awk -F ' ' '{print $1}' | sed 's/ /\n/g' |sort | tail -1)
+          image=$(docker images | egrep "^popote" | grep ${module} | awk -F ' ' '{print $1}' | sed 's/ /\n/g' |sort -t '-' -k3 -n | tail -1)
           echo "tag de l'image ${module}"
           loginDocker=$(docker info 2> /dev/null | grep Username | cut -d':' -f 2)
           echo "login docker = ${loginDocker}"
@@ -136,7 +136,7 @@ jobs:
           echo "on execute les commandes dans le repertorie $PWD"
           echo "build de l'image ${module}"
           docker compose build --no-cache ${module}
-          image=$(docker images | egrep "^popote" | grep ${module} | awk -F ' ' '{print $1}' | sed 's/ /\n/g' |sort | tail -1)
+          image=$(docker images | egrep "^popote" | grep ${module} | awk -F ' ' '{print $1}' | sed 's/ /\n/g' |sort -t '-' -k3 -n | tail -1)
           echo "tag de l'image ${module}"
           loginDocker=$(docker info 2> /dev/null | grep Username | cut -d':' -f 2)
           echo "login docker = ${loginDocker}"
@@ -156,7 +156,7 @@ jobs:
           echo "on execute les commandes dans le repertorie $PWD"
           echo "build de l'image ${module}"
           docker compose build --no-cache ${module}
-          image=$(docker images | egrep "^popote" | grep ${module} | awk -F ' ' '{print $1}' | sed 's/ /\n/g' |sort | tail -1)
+          image=$(docker images | egrep "^popote" | grep ${module} | awk -F ' ' '{print $1}' | sed 's/ /\n/g' |sort  -t '-' -k3 -n| tail -1)
           echo "tag de l'image ${module}"
           loginDocker=$(docker info 2> /dev/null | grep Username | cut -d':' -f 2)
           echo "login docker = ${loginDocker}"
