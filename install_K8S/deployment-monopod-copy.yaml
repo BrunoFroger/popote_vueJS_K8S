@@ -1,0 +1,96 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: popote
+  name: deployment-popote-monopod
+spec:
+  dnsPolicy: standard
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deployment-popote-monopod
+  template:
+    metadata:
+      labels:
+        app: deployment-popote-monopod
+    spec:
+      containers:
+      - name: popote-mariadb
+        #image: fbruno/popote_vuejs_k8s-tags-10-mariadb:latest
+        image: IMAGE-mariadb
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+          - containerPort: 3306
+            name: mariadb-port
+        env:
+          - name: MYSQL_ROOT_PASSWORD
+            value: root123
+          - name: MYSQL_DATABASE
+            value: popote
+          - name: MYSQL_USER
+            value: popote
+          - name: MYSQL_PASSWORD
+            value: popote123
+          
+      - name: popote-backend
+        #image: fbruno/popote_vuejs_k8s-tags-10-backend:latest
+        image: IMAGE-backend
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+          - containerPort: 3000
+            name: backend-port
+        env:
+          - name: IP_MARIADB
+            value: "127.0.0.1"
+      
+      - name: popote-frontend
+        #image: fbruno/popote_vuejs_k8s-tags-10-frontend:latest
+        image: IMAGE-frontend
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+          - containerPort: 8080
+            name: frontend-port
+        env:
+          - name: IP_BACKEND
+            value: "http://127.0.0.1/api"
+      
+      - name: popote-nginx
+        #image: fbruno/popote_vuejs_k8s-tags-10-nginx 
+        image: IMAGE-nginx
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+          - containerPort: 80
+            name: popote-http
+          # - containerPort: 443
+          #   name: https-port
+          # - containerPort: 3000
+          #   name: backend-port
+          # - containerPort: 3306
+          #   name: mariadb-port
+
+      restartPolicy: Always

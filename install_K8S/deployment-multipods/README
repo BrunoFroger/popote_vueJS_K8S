@@ -1,0 +1,21 @@
+
+liste des actions a automatiser
+
+
+- création du service (reseau)
+  kubectl apply -f popote-service.yaml
+
+
+- lancement de mariadb (base de données)
+  kubectl apply -f deployment-mariadb.yaml
+  - verifier que la base de donnée est bien initialisée
+    kubectl logs deployment-mariadb-xxxxxxxxxx
+    recommencer cette commande jusqu' ace que la derniere ligne indique que la base est opérationnelle (lignes ci dessous)  
+    2024-09-10 12:55:33 0 [Note] mariadbd: ready for connections.
+    Version: '11.5.2-MariaDB-ubu2404'  socket: '/run/mysqld/mysqld.sock'  port: 3306  mariadb.org binary distribution
+
+- lancement du backend
+  kubectl appl -f deployment-backend.yaml
+  - verifier que le backend est operationnel
+    kubectl logs deployment-backend-xxxxxxxxx
+    repeter plusieurs fois cette commande afin de verifier que le backend a bien reussi a se connecter a la base de données

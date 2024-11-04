@@ -1,0 +1,30 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: popote
+  name: deployment-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deployment-backend
+  template:
+    metadata:
+      labels:
+        app: deployment-backend
+        app.kubernetes.io/name: proxy
+    spec:
+      containers:
+      - name: popote-backend
+        #image: fbruno/popote_vuejs_k8s-tags-10-backend:latest
+        image: fbruno/popote_vuejs_k8s-tags-12-backend:latest
+        resources:
+        ports:
+          - containerPort: 3000
+            name: backend-svc
+        env:
+          - name: IP_MARIADB
+            value: {{IP_MARIADB}}
+
+      restartPolicy: Always

@@ -1,0 +1,25 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: popote
+  name: deployment-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deployment-frontend
+  template:
+    metadata:
+      labels:
+        app: deployment-frontend
+    spec:
+      containers:
+      - name: popote-frontend
+        #image: fbruno/popote_vuejs_k8s-tags-10-frontend:latest
+        image: fbruno/popote_vuejs_k8s-tags-12-frontend:latest
+        resources:
+        ports:
+          - containerPort: 8080
+            name: frontend-svc
+      restartPolicy: Always

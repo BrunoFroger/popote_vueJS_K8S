@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: popote-service
+  labels:
+    app: deployment-popote-monopod
+  namespace: popote
+spec:
+  selector:
+    app: deployment-popote-monopod
+  # type: NodePort
+  # type: ClusterIP
+  type: LoadBalancer
+  externalIPs:
+  - 192.168.1.17
+  ports:
+  - name: popote-http
+    port: 8080
+    targetPort: 80
+  

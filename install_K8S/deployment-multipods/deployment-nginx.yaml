@@ -1,0 +1,28 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: popote
+  name: deployment-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deployment-nginx
+  template:
+    metadata:
+      labels:
+        app: deployment-nginx
+    spec:
+      containers:
+      - name: popote-nginx
+        #image: fbruno/popote_vuejs_k8s-tags-10-nginx 
+        image: fbruno/popote_vuejs_k8s-tags-12-nginx 
+        resources:
+        ports:
+          - containerPort: 8080
+          - containerPort: 443
+          - containerPort: 3000
+          - containerPort: 3306
+
+      restartPolicy: Always

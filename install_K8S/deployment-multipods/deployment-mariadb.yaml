@@ -1,0 +1,36 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: popote
+  name: deployment-mariadb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deployment-mariadb
+  template:
+    metadata:
+      labels:
+        app: deployment-mariadb
+        app.kubernetes.io/name: proxy
+    spec:
+      containers:
+      - name: popote-mariadb
+        #image: fbruno/popote_vuejs_k8s-tags-10-mariadb:latest
+        image: fbruno/popote_vuejs_k8s-tags-12-mariadb:latest
+        resources:
+        ports:
+          - containerPort: 3306
+            name: mariadb-svc
+        env:
+          - name: MYSQL_ROOT_PASSWORD
+            value: root123
+          - name: MYSQL_DATABASE
+            value: Popote
+          - name: MYSQL_USER
+            value: popote
+          - name: MYSQL_PASSWORD
+            value: popote123
+
+      restartPolicy: Always
