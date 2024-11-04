@@ -120,8 +120,8 @@ do
     fi
 done
 
-echo "pwd = $(pwd)"
-#creation du persistant volume pour mariadb
+# echo "pwd = $(pwd)"
+#creation du persistant-volume pour mariadb
 kubectl apply -f mariadb-pv.yaml
 kubectl apply -f mariadb-pvc.yaml
 kubectl apply -f mariadb-config.yaml
